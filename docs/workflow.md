@@ -18,7 +18,9 @@ Similar to the commit messages, issue titles should clearly state what task they
 **Issue title example:** `Implement an activation function library.`
 
 ## Pull Requests
-Every pull request will have a title generally describing the changes done. All changes and tests will be stated in the description of the pull request. Issue keywords may also be included.
+Every pull request will have a title generally describing the changes done. All changes and tests will be stated in the description of the pull request. Issue keywords may also be included in the description (not in the title).
+
+**Pull request title example:** `Implement neural network ground work.`
 
 **Pull request description example:**
 ```
