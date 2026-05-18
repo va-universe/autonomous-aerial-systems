@@ -669,6 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31345df17f6ffe04f8d6dd73e478288b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstAircraftController
+  Thrust: 50
   LeftAileron: {fileID: 486354926791539290}
   RightAileron: {fileID: 5654000226828160296}
   LeftElevator: {fileID: 5718511245376071562}
@@ -728,7 +729,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685885736916155240}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -741,7 +742,7 @@ Transform:
   - {fileID: 8976701355537872634}
   - {fileID: 807241118528039227}
   m_Father: {fileID: 3189997271906053776}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1852104033282699981
 GameObject:
   m_ObjectHideFlags: 0

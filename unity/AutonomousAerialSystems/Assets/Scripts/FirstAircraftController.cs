@@ -6,11 +6,17 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class FirstAircraftController : MonoBehaviour
 {
+    private Rigidbody _rb;
     private AircraftInputActions _inputActions;
 
     private float _rollInput;
     private float _pitchInput;
     private float _yawInput;
+
+    private float _thrustInput;
+
+    [Header("Parameters")]
+    public float Thrust;
 
     [Header("Control Surfaces")]
     public ControlSurface LeftAileron;
@@ -22,12 +28,18 @@ public class FirstAircraftController : MonoBehaviour
     void Awake()
     {
         _inputActions = new AircraftInputActions();
+        _rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
         GetInput();
-        DeflectControlSurfaces(_rollInput, _pitchInput, _yawInput);
+    }
+
+    private void FixedUpdate()
+    {
+        DeflectControlSurfaces();
+        ApplyThrust();
     }
 
     void OnEnable()
@@ -44,23 +56,30 @@ public class FirstAircraftController : MonoBehaviour
         _pitchInput = _inputActions.Aircraft.Pitch.ReadValue<float>();
         _yawInput = _inputActions.Aircraft.Yaw.ReadValue<float>();
 
+        _thrustInput = _inputActions.Aircraft.Thrust.ReadValue<float>();
+
         //Debug.Log($"Roll: {_rollInput}, Pitch: {_pitchInput}, Yaw: {_yawInput}");
     }
 
     /// <summary>
     /// Deflect all control surfaces based on inputs
     /// </summary>
-    /// <param name="roll">The deflection of the ailerons</param>
-    /// <param name="pitch">The deflection of the elevators</param>
-    /// <param name="yaw">The deflection of the rudder</param>
-    private void DeflectControlSurfaces(float roll, float pitch, float yaw)
+    private void DeflectControlSurfaces()
     {
-        LeftAileron.DeflectSurface(roll);
-        RightAileron.DeflectSurface(-roll);
+        LeftAileron.DeflectSurface(_rollInput);
+        RightAileron.DeflectSurface(-_rollInput);
 
-        LeftElevator.DeflectSurface(pitch);
-        RightElevator.DeflectSurface(pitch);
+        LeftElevator.DeflectSurface(_pitchInput);
+        RightElevator.DeflectSurface(_pitchInput);
 
-        Rudder.DeflectSurface(yaw);
+        Rudder.DeflectSurface(_yawInput);
+    }
+
+    /// <summary>
+    /// Apply thrust to this aircraft based on inputs
+    /// </summary>
+    private void ApplyThrust()
+    {
+        _rb.AddForce(Vector3.forward * Thrust * _thrustInput, ForceMode.Force);
     }
 }

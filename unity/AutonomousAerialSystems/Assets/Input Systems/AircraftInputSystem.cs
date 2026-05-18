@@ -118,6 +118,15 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Thrust"",
+                    ""type"": ""Button"",
+                    ""id"": ""2aa321d1-0968-4f6e-8ef4-4eb436998a21"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -219,6 +228,17 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Yaw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c80e54a-5cef-4fce-8993-b6bfa58db236"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Thrust"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -230,6 +250,7 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         m_Aircraft_Roll = m_Aircraft.FindAction("Roll", throwIfNotFound: true);
         m_Aircraft_Pitch = m_Aircraft.FindAction("Pitch", throwIfNotFound: true);
         m_Aircraft_Yaw = m_Aircraft.FindAction("Yaw", throwIfNotFound: true);
+        m_Aircraft_Thrust = m_Aircraft.FindAction("Thrust", throwIfNotFound: true);
     }
 
     ~@AircraftInputActions()
@@ -313,6 +334,7 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Aircraft_Roll;
     private readonly InputAction m_Aircraft_Pitch;
     private readonly InputAction m_Aircraft_Yaw;
+    private readonly InputAction m_Aircraft_Thrust;
     /// <summary>
     /// Provides access to input actions defined in input action map "Aircraft".
     /// </summary>
@@ -336,6 +358,10 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Aircraft/Yaw".
         /// </summary>
         public InputAction @Yaw => m_Wrapper.m_Aircraft_Yaw;
+        /// <summary>
+        /// Provides access to the underlying input action "Aircraft/Thrust".
+        /// </summary>
+        public InputAction @Thrust => m_Wrapper.m_Aircraft_Thrust;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -371,6 +397,9 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
             @Yaw.started += instance.OnYaw;
             @Yaw.performed += instance.OnYaw;
             @Yaw.canceled += instance.OnYaw;
+            @Thrust.started += instance.OnThrust;
+            @Thrust.performed += instance.OnThrust;
+            @Thrust.canceled += instance.OnThrust;
         }
 
         /// <summary>
@@ -391,6 +420,9 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
             @Yaw.started -= instance.OnYaw;
             @Yaw.performed -= instance.OnYaw;
             @Yaw.canceled -= instance.OnYaw;
+            @Thrust.started -= instance.OnThrust;
+            @Thrust.performed -= instance.OnThrust;
+            @Thrust.canceled -= instance.OnThrust;
         }
 
         /// <summary>
@@ -452,5 +484,12 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnYaw(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Thrust" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnThrust(InputAction.CallbackContext context);
     }
 }

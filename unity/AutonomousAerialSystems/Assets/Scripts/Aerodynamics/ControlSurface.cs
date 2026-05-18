@@ -14,14 +14,9 @@ public class ControlSurface : MonoBehaviour
     public float Input;
     private Quaternion _initialLocalRotation;
 
-    void Start()
+    void Awake()
     {
         _initialLocalRotation = transform.localRotation;
-    }
-
-    void Update()
-    {
-        
     }
 
     /// <summary>
