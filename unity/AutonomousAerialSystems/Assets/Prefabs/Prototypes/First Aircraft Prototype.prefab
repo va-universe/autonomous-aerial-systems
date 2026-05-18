@@ -122,6 +122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8114690651066566419}
+  - component: {fileID: 486354926791539290}
   m_Layer: 0
   m_Name: Left Aileron Pivot
   m_TagString: Untagged
@@ -145,6 +146,22 @@ Transform:
   - {fileID: 3563358125435234167}
   m_Father: {fileID: 7007529388524428900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &486354926791539290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588147731636820060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1924120e4e93f0b47836b879fe69f677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
+  surfaceType: 0
+  RotationAxis: {x: 0, y: 0, z: 1}
+  MaxDeflection: 25
+  Input: 0
 --- !u!1 &992076533453358107
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,8 +194,8 @@ Transform:
   m_LocalScale: {x: 1.25, y: 0.7, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8975916529333482867}
   - {fileID: 4505377764510840349}
+  - {fileID: 8975916529333482867}
   - {fileID: 9034687787266273408}
   m_Father: {fileID: 7614157834901172243}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -269,6 +286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1875980644729100175}
+  - component: {fileID: 5718511245376071562}
   m_Layer: 0
   m_Name: Left Elevator Pivot
   m_TagString: Untagged
@@ -292,6 +310,22 @@ Transform:
   - {fileID: 2407767685284645438}
   m_Father: {fileID: 4505377764510840349}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5718511245376071562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184707666070429110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1924120e4e93f0b47836b879fe69f677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
+  surfaceType: 1
+  RotationAxis: {x: 0, y: 0, z: 1}
+  MaxDeflection: 25
+  Input: 0
 --- !u!1 &1269844011858325072
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4717653211299386771}
+  - component: {fileID: 1455688474318126532}
   m_Layer: 0
   m_Name: Right Elevator Pivot
   m_TagString: Untagged
@@ -548,6 +583,22 @@ Transform:
   - {fileID: 2362392890480474582}
   m_Father: {fileID: 8975916529333482867}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1455688474318126532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494611021359191677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1924120e4e93f0b47836b879fe69f677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
+  surfaceType: 1
+  RotationAxis: {x: 0, y: 0, z: 1}
+  MaxDeflection: 25
+  Input: 0
 --- !u!1 &1516320159491921542
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +609,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3189997271906053776}
   - component: {fileID: 6900556718585216286}
+  - component: {fileID: 3217133245196944172}
+  - component: {fileID: -2247994775280000264}
   m_Layer: 0
   m_Name: First Aircraft Prototype
   m_TagString: Untagged
@@ -608,6 +661,53 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3217133245196944172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516320159491921542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31345df17f6ffe04f8d6dd73e478288b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FirstAircraftController
+  LeftAileron: {fileID: 486354926791539290}
+  RightAileron: {fileID: 5654000226828160296}
+  LeftElevator: {fileID: 5718511245376071562}
+  RightElevator: {fileID: 1455688474318126532}
+  Rudder: {fileID: 5873259354992103455}
+--- !u!114 &-2247994775280000264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516320159491921542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 9e38b835ff03aa8418f9bc7551137cb8, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Aircraft
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &2734681025610397603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,6 +1347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3612219604682608210}
+  - component: {fileID: 5873259354992103455}
   m_Layer: 0
   m_Name: Rudder Pivot
   m_TagString: Untagged
@@ -1270,6 +1371,22 @@ Transform:
   - {fileID: 665661233213134262}
   m_Father: {fileID: 9034687787266273408}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5873259354992103455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4439308187841072038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1924120e4e93f0b47836b879fe69f677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
+  surfaceType: 2
+  RotationAxis: {x: 0, y: 1, z: 0}
+  MaxDeflection: 25
+  Input: 0
 --- !u!1 &4591281382722787672
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,6 +1734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3057321352102014122}
+  - component: {fileID: 5654000226828160296}
   m_Layer: 0
   m_Name: Right Aileron Pivot
   m_TagString: Untagged
@@ -1640,6 +1758,22 @@ Transform:
   - {fileID: 406920830183417076}
   m_Father: {fileID: 4455104408436923432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5654000226828160296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5685325418240900858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1924120e4e93f0b47836b879fe69f677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
+  surfaceType: 0
+  RotationAxis: {x: 0, y: 0, z: 1}
+  MaxDeflection: 25
+  Input: 0
 --- !u!1 &6223821170564747074
 GameObject:
   m_ObjectHideFlags: 0
