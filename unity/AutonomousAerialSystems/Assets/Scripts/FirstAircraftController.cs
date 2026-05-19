@@ -28,6 +28,10 @@ public class FirstAircraftController : MonoBehaviour
     void Awake()
     {
         _inputActions = new AircraftInputActions();
+    }
+
+    void Start()
+    {
         _rb = GetComponent<Rigidbody>();
     }
 
@@ -36,7 +40,7 @@ public class FirstAircraftController : MonoBehaviour
         GetInput();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         DeflectControlSurfaces();
         ApplyThrust();
