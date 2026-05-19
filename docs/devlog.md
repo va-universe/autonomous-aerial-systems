@@ -13,4 +13,4 @@ This aircraft prototype used simplified flight physics to takeoff. Moving into `
  - Added input handling for thrust and control surface deflection.
 
 ### Media
-[First Takeoff](media/FirstTakeoff.gif)
+![First Takeoff](media/FirstTakeoff.gif)
