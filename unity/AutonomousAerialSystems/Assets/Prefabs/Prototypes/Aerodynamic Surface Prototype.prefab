@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1381772490972569124}
   - component: {fileID: 7531759180143928475}
   - component: {fileID: 4162554260930610857}
+  - component: {fileID: 1007725209935248124}
   m_Layer: 0
   m_Name: Left Wing
   m_TagString: Untagged
@@ -112,6 +113,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1007725209935248124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291726543634399004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 0
+  LiftCoefficient: 5.3
+  LiftSurfaceArea: 4.5
+  DragCoefficient: 0.05
+  DragSurfaceArea: 0.3
 --- !u!1 &588147731636820060
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +464,7 @@ GameObject:
   - component: {fileID: 6245651238091954142}
   - component: {fileID: 6960304541956493664}
   - component: {fileID: 4169439920743841414}
+  - component: {fileID: 930082950936402068}
   m_Layer: 0
   m_Name: Left Aileron
   m_TagString: Untagged
@@ -546,6 +565,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &930082950936402068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388789532099766900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 0
+  LiftCoefficient: 5.3
+  LiftSurfaceArea: 2.25
+  DragCoefficient: 0.05
+  DragSurfaceArea: 2.25
 --- !u!1 &1494611021359191677
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,10 +642,9 @@ GameObject:
   - component: {fileID: 3189997271906053776}
   - component: {fileID: 6900556718585216286}
   - component: {fileID: 3217133245196944172}
-  - component: {fileID: 8379203323624802729}
   - component: {fileID: -2247994775280000264}
   m_Layer: 0
-  m_Name: First Aircraft Prototype
+  m_Name: Aerodynamic Surface Prototype
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -639,9 +674,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516320159491921542}
   serializedVersion: 5
-  m_Mass: 1400
+  m_Mass: 1300
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -670,30 +705,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31345df17f6ffe04f8d6dd73e478288b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstAircraftController
-  Thrust: 34500
+  Thrust: 40000
   AirDensityAtSeaLevel: 1.255
   LeftAileron: {fileID: 486354926791539290}
   RightAileron: {fileID: 5654000226828160296}
   LeftElevator: {fileID: 5718511245376071562}
   RightElevator: {fileID: 1455688474318126532}
   Rudder: {fileID: 5873259354992103455}
---- !u!114 &8379203323624802729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516320159491921542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9db59c44e6cf96d4d842fa61a55f9b51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlightPhysics
-  LiftCoefficient: 0.7
-  LiftSurfaceArea: 8.3
-  DragCoefficient: 0.42
-  DragSurfaceArea: 4.2
-  SeaLevelDensity: 1.255
 --- !u!114 &-2247994775280000264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1033,6 +1051,7 @@ GameObject:
   - component: {fileID: 2401126401853597273}
   - component: {fileID: 222552763621437273}
   - component: {fileID: 438482913455168023}
+  - component: {fileID: 9062281616914457195}
   m_Layer: 0
   m_Name: Right Wing
   m_TagString: Untagged
@@ -1133,6 +1152,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9062281616914457195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3696483585139411684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 0
+  LiftCoefficient: 5.3
+  LiftSurfaceArea: 4.5
+  DragCoefficient: 0.05
+  DragSurfaceArea: 0.3
 --- !u!1 &3849122686194026720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,6 +1214,7 @@ GameObject:
   - component: {fileID: 9215884943438592058}
   - component: {fileID: 1218474800433504013}
   - component: {fileID: 6602014441621464198}
+  - component: {fileID: 5270793171275646696}
   m_Layer: 0
   m_Name: Right Aileron
   m_TagString: Untagged
@@ -1278,6 +1315,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5270793171275646696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4103128835468348581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 0
+  LiftCoefficient: 5.3
+  LiftSurfaceArea: 2.25
+  DragCoefficient: 0.05
+  DragSurfaceArea: 2.25
 --- !u!1 &4172122540088203854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1290,6 +1344,7 @@ GameObject:
   - component: {fileID: 7155392697425031282}
   - component: {fileID: 3206530868756814599}
   - component: {fileID: 1885001073698529194}
+  - component: {fileID: 3682174197207043675}
   m_Layer: 0
   m_Name: Right Horizontal Stabilizer
   m_TagString: Untagged
@@ -1390,6 +1445,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3682174197207043675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4172122540088203854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 0
+  LiftCoefficient: 5.3
+  LiftSurfaceArea: 2
+  DragCoefficient: 0.05
+  DragSurfaceArea: 0.21
 --- !u!1 &4173829622817503205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,6 +1556,7 @@ GameObject:
   - component: {fileID: 6032625730083841685}
   - component: {fileID: 2631383390751681427}
   - component: {fileID: 233872353348459670}
+  - component: {fileID: 2268226371898923181}
   m_Layer: 0
   m_Name: Left Horizontal Stabilizer
   m_TagString: Untagged
@@ -1584,6 +1657,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2268226371898923181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4591281382722787672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 0
+  LiftCoefficient: 5.3
+  LiftSurfaceArea: 2
+  DragCoefficient: 0.05
+  DragSurfaceArea: 0.21
 --- !u!1 &4853549843785117622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,6 +1686,7 @@ GameObject:
   - component: {fileID: 6454768372462497401}
   - component: {fileID: 3142437518483686250}
   - component: {fileID: 6110397794425732333}
+  - component: {fileID: 1533510420203052996}
   m_Layer: 0
   m_Name: Right Elevator
   m_TagString: Untagged
@@ -1696,6 +1787,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1533510420203052996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853549843785117622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 0
+  LiftCoefficient: 5.3
+  LiftSurfaceArea: 1
+  DragCoefficient: 0.05
+  DragSurfaceArea: 1
 --- !u!1 &5220349851948988031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1741,6 +1849,7 @@ GameObject:
   - component: {fileID: 6144329132952144752}
   - component: {fileID: 2947249725483339118}
   - component: {fileID: 7684009611229145576}
+  - component: {fileID: 1156458096217197441}
   m_Layer: 0
   m_Name: Vertical Stabilizer
   m_TagString: Untagged
@@ -1841,6 +1950,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1156458096217197441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248027879420406051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 1
+  LiftCoefficient: 5.3
+  LiftSurfaceArea: 1.75
+  DragCoefficient: 0.05
+  DragSurfaceArea: 0.336
 --- !u!1 &5685325418240900858
 GameObject:
   m_ObjectHideFlags: 0
@@ -2227,6 +2353,7 @@ GameObject:
   - component: {fileID: 6871589818225752910}
   - component: {fileID: 4381233394027050642}
   - component: {fileID: 1782916041918872547}
+  - component: {fileID: 6245772847456165421}
   m_Layer: 0
   m_Name: Left Elevator
   m_TagString: Untagged
@@ -2327,6 +2454,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6245772847456165421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7573716641485028688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 0
+  LiftCoefficient: 5.3
+  LiftSurfaceArea: 1
+  DragCoefficient: 0.05
+  DragSurfaceArea: 1
 --- !u!1 &8095596530243185476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,6 +2516,7 @@ GameObject:
   - component: {fileID: 7835642107411597304}
   - component: {fileID: 2392686015648571828}
   - component: {fileID: 1706824561404145071}
+  - component: {fileID: 7689267259414179459}
   m_Layer: 0
   m_Name: Rudder
   m_TagString: Untagged
@@ -2472,6 +2617,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7689267259414179459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8218958040340247062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 1
+  LiftCoefficient: 5.3
+  LiftSurfaceArea: 0.875
+  DragCoefficient: 0.05
+  DragSurfaceArea: 0.875
 --- !u!1 &8332538310637929625
 GameObject:
   m_ObjectHideFlags: 0
