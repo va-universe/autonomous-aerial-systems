@@ -17,6 +17,7 @@ public class FirstAircraftController : MonoBehaviour
     [Header("Parameters")]
     public float Thrust;
     public float AirDensityAtSeaLevel;
+    public Transform CenterOfMass;
 
     [Header("Control Surfaces")]
     public ControlSurface LeftAileron;
@@ -33,7 +34,7 @@ public class FirstAircraftController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _rb.centerOfMass = new Vector3(0, 0, -0.25f);
+        _rb.centerOfMass = CenterOfMass.position;
     }
 
     void Update()

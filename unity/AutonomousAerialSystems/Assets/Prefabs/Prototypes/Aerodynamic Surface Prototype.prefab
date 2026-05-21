@@ -126,10 +126,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftCoefficient: 5.3
+  LiftCoefficient: 1
   LiftSurfaceArea: 4.5
   DragCoefficient: 0.05
   DragSurfaceArea: 0.3
+--- !u!1 &305186629138819258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1355539861291359767}
+  m_Layer: 0
+  m_Name: CenterOfMass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1355539861291359767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305186629138819258}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.09, z: -1.86}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3189997271906053776}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &588147731636820060
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftCoefficient: 5.3
+  LiftCoefficient: 1
   LiftSurfaceArea: 2.25
   DragCoefficient: 0.05
   DragSurfaceArea: 2.25
@@ -663,6 +694,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1355539861291359767}
   - {fileID: 7472684151410510951}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -675,8 +707,8 @@ Rigidbody:
   m_GameObject: {fileID: 1516320159491921542}
   serializedVersion: 5
   m_Mass: 1300
-  m_LinearDamping: 0
-  m_AngularDamping: 2
+  m_LinearDamping: 0.01
+  m_AngularDamping: 1.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -705,8 +737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31345df17f6ffe04f8d6dd73e478288b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstAircraftController
-  Thrust: 40000
+  Thrust: 28000
   AirDensityAtSeaLevel: 1.255
+  CenterOfMass: {fileID: 1355539861291359767}
   LeftAileron: {fileID: 486354926791539290}
   RightAileron: {fileID: 5654000226828160296}
   LeftElevator: {fileID: 5718511245376071562}
@@ -1165,7 +1198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftCoefficient: 5.3
+  LiftCoefficient: 1
   LiftSurfaceArea: 4.5
   DragCoefficient: 0.05
   DragSurfaceArea: 0.3
@@ -1328,7 +1361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftCoefficient: 5.3
+  LiftCoefficient: 1
   LiftSurfaceArea: 2.25
   DragCoefficient: 0.05
   DragSurfaceArea: 2.25
@@ -1458,7 +1491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftCoefficient: 5.3
+  LiftCoefficient: 0.7
   LiftSurfaceArea: 2
   DragCoefficient: 0.05
   DragSurfaceArea: 0.21
@@ -1670,7 +1703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftCoefficient: 5.3
+  LiftCoefficient: 0.7
   LiftSurfaceArea: 2
   DragCoefficient: 0.05
   DragSurfaceArea: 0.21
@@ -1800,7 +1833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftCoefficient: 5.3
+  LiftCoefficient: 0.8
   LiftSurfaceArea: 1
   DragCoefficient: 0.05
   DragSurfaceArea: 1
@@ -1963,7 +1996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 1
-  LiftCoefficient: 5.3
+  LiftCoefficient: 0
   LiftSurfaceArea: 1.75
   DragCoefficient: 0.05
   DragSurfaceArea: 0.336
@@ -2467,7 +2500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftCoefficient: 5.3
+  LiftCoefficient: 0.8
   LiftSurfaceArea: 1
   DragCoefficient: 0.05
   DragSurfaceArea: 1
@@ -2630,7 +2663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 1
-  LiftCoefficient: 5.3
+  LiftCoefficient: 0
   LiftSurfaceArea: 0.875
   DragCoefficient: 0.05
   DragSurfaceArea: 0.875

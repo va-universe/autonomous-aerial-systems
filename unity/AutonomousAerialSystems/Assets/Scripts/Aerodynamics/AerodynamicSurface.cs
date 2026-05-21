@@ -8,11 +8,11 @@ public class AerodynamicSurface : MonoBehaviour
 
     [Header("Lift")]
     public WingAxis LiftAxis;
-    public float LiftCoefficient = 5.3f; //temp
+    public float LiftCoefficient;
     public float LiftSurfaceArea;
 
     [Header("Drag")]
-    public float DragCoefficient = 0.02f; //temp
+    public float DragCoefficient;
     public float DragSurfaceArea;
 
     void Start()
@@ -33,12 +33,9 @@ public class AerodynamicSurface : MonoBehaviour
         float speed = velocity.magnitude;
 
         float dynamicPressure = GetDynamicPressure(speed);
-        float angleOfAttack = GetAngleOfAttack(airflowDirection);
 
-        float liftCoefficient = Mathf.Clamp(LiftCoefficient * angleOfAttack * Mathf.Deg2Rad, -1.6f, 1.6f);
-
-        Vector3 liftForce = GetLift(dynamicPressure, angleOfAttack, airflowDirection, liftCoefficient);
-        Vector3 dragForce = GetDrag(dynamicPressure, angleOfAttack, airflowDirection, liftCoefficient);
+        Vector3 liftForce = GetLift(dynamicPressure, airflowDirection);
+        Vector3 dragForce = GetDrag(dynamicPressure, airflowDirection);
 
         _rb.AddForceAtPosition(liftForce + dragForce, transform.position);
     }
@@ -53,30 +50,15 @@ public class AerodynamicSurface : MonoBehaviour
     private float GetAirDensity()
     {
         float altitude = Mathf.Max(0, transform.position.y);
-        float turningPoint = 9000f; //Derived from testing in Geogebra
+        float turningPoint = 9000f;
 
         float airDensity = _controller.AirDensityAtSeaLevel * Mathf.Exp(-altitude / turningPoint);
         return airDensity;
     }
 
-    private float GetAngleOfAttack(Vector3 airflowDirection)
+    private Vector3 GetLift(float dynamicPressure, Vector3 airflowDirection)
     {
-        float angleOfAttack = 0f;
-        if (LiftAxis == WingAxis.Horizontal)
-        {
-            angleOfAttack = Vector3.SignedAngle(transform.forward, airflowDirection, transform.right);
-        }
-        else if (LiftAxis == WingAxis.Vertical)
-        {
-            angleOfAttack = Vector3.SignedAngle(transform.forward, airflowDirection, transform.up);
-        }
-
-        return Mathf.Clamp(angleOfAttack, -20f, 20f); //temp
-    }
-
-    private Vector3 GetLift(float dynamicPressure, float angleOfAttack, Vector3 airflowDirection, float liftCoefficient)
-    {
-        float lift = dynamicPressure * LiftSurfaceArea * liftCoefficient;
+        float lift = dynamicPressure * LiftSurfaceArea * LiftCoefficient;
 
         Vector3 liftDirection = Vector3.zero;
         if (LiftAxis == WingAxis.Horizontal)
@@ -92,10 +74,9 @@ public class AerodynamicSurface : MonoBehaviour
 
         return liftForce;
     }
-    private Vector3 GetDrag(float dynamicPressure, float angleOfAttack, Vector3 airflowDirection, float liftCoefficient)
+    private Vector3 GetDrag(float dynamicPressure, Vector3 airflowDirection)
     {
-        float inducedDrag = liftCoefficient * liftCoefficient * 0.1f;
-        float drag = dynamicPressure * DragSurfaceArea * (DragCoefficient + inducedDrag);
+        float drag = dynamicPressure * DragSurfaceArea * DragCoefficient;
         Vector3 dragForce = drag * airflowDirection;
 
         return dragForce;
