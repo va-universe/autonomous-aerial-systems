@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor.Search;
 using UnityEngine;
 
@@ -28,11 +29,12 @@ public class AerodynamicSurface : MonoBehaviour
 
     private void ApplyForces()
     {
-        Vector3 velocity = _rb.GetPointVelocity(transform.position);
+        Vector3 velocity = Vector3.forward; // _rb.GetPointVelocity(transform.position);
         Vector3 airflowDirection = velocity.normalized * -1f;
         float speed = velocity.magnitude;
 
         float dynamicPressure = GetDynamicPressure(speed);
+        float angleOfAttack = GetAngleOfAttack(velocity);
 
         Vector3 liftForce = GetLift(dynamicPressure, airflowDirection);
         Vector3 dragForce = GetDrag(dynamicPressure, airflowDirection);
@@ -52,8 +54,29 @@ public class AerodynamicSurface : MonoBehaviour
         float altitude = Mathf.Max(0, transform.position.y);
         float turningPoint = 9000f;
 
-        float airDensity = _controller.AirDensityAtSeaLevel * Mathf.Exp(-altitude / turningPoint);
+        float airDensity = /*_controller.AirDensityAtSeaLevel*/ 1.255f * Mathf.Exp(-altitude / turningPoint);
         return airDensity;
+    }
+
+    private float GetAngleOfAttack(Vector3 velocity)
+    {
+        Vector3 chordLine = transform.forward;
+        Vector3 projectedVelocity = Vector3.zero;
+
+        float angleOfAttck = 0f;
+        if (LiftAxis == WingAxis.Horizontal)
+        {
+            projectedVelocity = Vector3.ProjectOnPlane(velocity.normalized, transform.right);
+            angleOfAttck = Vector3.SignedAngle(projectedVelocity, chordLine, transform.right);
+        }
+        else if (LiftAxis == WingAxis.Vertical)
+        {
+            projectedVelocity = Vector3.ProjectOnPlane(velocity.normalized, transform.up);
+            angleOfAttck = Vector3.SignedAngle(projectedVelocity, chordLine, transform.up);
+        }
+
+        Debug.Log(angleOfAttck);
+        return angleOfAttck;
     }
 
     private Vector3 GetLift(float dynamicPressure, Vector3 airflowDirection)

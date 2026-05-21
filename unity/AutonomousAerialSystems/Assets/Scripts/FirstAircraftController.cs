@@ -63,8 +63,6 @@ public class FirstAircraftController : MonoBehaviour
         _yawInput = _inputActions.Aircraft.Yaw.ReadValue<float>();
 
         _thrustInput = _inputActions.Aircraft.Thrust.ReadValue<float>();
-
-        //Debug.Log($"Roll: {_rollInput}, Pitch: {_pitchInput}, Yaw: {_yawInput}");
     }
 
     /// <summary>
@@ -86,6 +84,6 @@ public class FirstAircraftController : MonoBehaviour
     /// </summary>
     private void ApplyThrust()
     {
-        _rb.AddForce(transform.forward * Thrust * _thrustInput, ForceMode.Force);
+        _rb.AddForceAtPosition(transform.forward * Thrust * _thrustInput, CenterOfMass.position, ForceMode.Force);
     }
 }
