@@ -9,7 +9,6 @@ public class AerodynamicSurface : MonoBehaviour
 
     [Header("Lift")]
     public WingAxis LiftAxis;
-    public float LiftCoefficient;
     public float LiftSurfaceArea;
 
     [Header("Drag")]
@@ -29,17 +28,22 @@ public class AerodynamicSurface : MonoBehaviour
 
     private void ApplyForces()
     {
-        Vector3 velocity = Vector3.forward; // _rb.GetPointVelocity(transform.position);
-        Vector3 airflowDirection = velocity.normalized * -1f;
+        Vector3 velocity = _rb.GetPointVelocity(transform.position);
         float speed = velocity.magnitude;
 
-        float dynamicPressure = GetDynamicPressure(speed);
-        float angleOfAttack = GetAngleOfAttack(velocity);
+        if (speed > 1f)
+        {
+            Vector3 airflowDirection = velocity.normalized * -1f;
 
-        Vector3 liftForce = GetLift(dynamicPressure, airflowDirection);
-        Vector3 dragForce = GetDrag(dynamicPressure, airflowDirection);
+            float dynamicPressure = GetDynamicPressure(speed);
+            float angleOfAttack = GetAngleOfAttack(velocity);
+            float liftCoefficient = GetLiftCoefficient(angleOfAttack);
 
-        _rb.AddForceAtPosition(liftForce + dragForce, transform.position);
+            Vector3 liftForce = GetLift(dynamicPressure, airflowDirection, liftCoefficient);
+            Vector3 dragForce = GetDrag(dynamicPressure, airflowDirection);
+
+            _rb.AddForceAtPosition(liftForce + dragForce, transform.position);
+        }
     }
 
     private float GetDynamicPressure(float speed)
@@ -54,7 +58,7 @@ public class AerodynamicSurface : MonoBehaviour
         float altitude = Mathf.Max(0, transform.position.y);
         float turningPoint = 9000f;
 
-        float airDensity = /*_controller.AirDensityAtSeaLevel*/ 1.255f * Mathf.Exp(-altitude / turningPoint);
+        float airDensity = _controller.AirDensityAtSeaLevel * Mathf.Exp(-altitude / turningPoint);
         return airDensity;
     }
 
@@ -67,21 +71,28 @@ public class AerodynamicSurface : MonoBehaviour
         if (LiftAxis == WingAxis.Horizontal)
         {
             projectedVelocity = Vector3.ProjectOnPlane(velocity.normalized, transform.right);
-            angleOfAttck = Vector3.SignedAngle(projectedVelocity, chordLine, transform.right);
+            angleOfAttck = Vector3.SignedAngle(chordLine, projectedVelocity, transform.right);
         }
         else if (LiftAxis == WingAxis.Vertical)
         {
             projectedVelocity = Vector3.ProjectOnPlane(velocity.normalized, transform.up);
-            angleOfAttck = Vector3.SignedAngle(projectedVelocity, chordLine, transform.up);
+            angleOfAttck = Vector3.SignedAngle(chordLine, projectedVelocity, transform.up);
         }
 
-        Debug.Log(angleOfAttck);
+        //Debug.Log(angleOfAttck);
         return angleOfAttck;
     }
-
-    private Vector3 GetLift(float dynamicPressure, Vector3 airflowDirection)
+    private float GetLiftCoefficient(float angleOfAttack)
     {
-        float lift = dynamicPressure * LiftSurfaceArea * LiftCoefficient;
+        float radians = Mathf.Clamp(angleOfAttack, -25f, 25f) * Mathf.Deg2Rad;
+        float liftCoefficient = radians;
+
+        return liftCoefficient;
+    }
+
+    private Vector3 GetLift(float dynamicPressure, Vector3 airflowDirection, float liftCoefficient)
+    {
+        float lift = dynamicPressure * LiftSurfaceArea * liftCoefficient;
 
         Vector3 liftDirection = Vector3.zero;
         if (LiftAxis == WingAxis.Horizontal)
