@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 /// <summary>
 /// The controller of the first aircraft prototype
@@ -17,6 +16,8 @@ public class FirstAircraftController : MonoBehaviour
 
     [Header("Parameters")]
     public float Thrust;
+    public float AirDensityAtSeaLevel;
+    public Transform CenterOfMass;
 
     [Header("Control Surfaces")]
     public ControlSurface LeftAileron;
@@ -33,6 +34,7 @@ public class FirstAircraftController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _rb.centerOfMass = CenterOfMass.position;
     }
 
     void Update()
@@ -61,8 +63,6 @@ public class FirstAircraftController : MonoBehaviour
         _yawInput = _inputActions.Aircraft.Yaw.ReadValue<float>();
 
         _thrustInput = _inputActions.Aircraft.Thrust.ReadValue<float>();
-
-        //Debug.Log($"Roll: {_rollInput}, Pitch: {_pitchInput}, Yaw: {_yawInput}");
     }
 
     /// <summary>
@@ -84,6 +84,6 @@ public class FirstAircraftController : MonoBehaviour
     /// </summary>
     private void ApplyThrust()
     {
-        _rb.AddForce(Vector3.forward * Thrust * _thrustInput, ForceMode.Force);
+        _rb.AddForceAtPosition(transform.forward * Thrust * _thrustInput, CenterOfMass.position, ForceMode.Force);
     }
 }

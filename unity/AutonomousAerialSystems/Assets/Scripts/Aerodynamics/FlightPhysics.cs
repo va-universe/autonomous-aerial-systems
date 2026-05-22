@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Centralized physics model
+/// </summary>
 public class FlightPhysics : MonoBehaviour
 {
     private Rigidbody _rb;
