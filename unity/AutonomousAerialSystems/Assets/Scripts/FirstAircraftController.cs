@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -26,6 +28,10 @@ public class FirstAircraftController : MonoBehaviour
     public ControlSurface RightElevator;
     public ControlSurface Rudder;
 
+    [Header("Text")]
+    public TextMeshProUGUI SpeedText;
+    public TextMeshProUGUI AltitudeText;
+
     void Awake()
     {
         _inputActions = new AircraftInputActions();
@@ -40,6 +46,7 @@ public class FirstAircraftController : MonoBehaviour
     void Update()
     {
         GetInput();
+        UpdateText();
     }
 
     void FixedUpdate()
@@ -85,5 +92,22 @@ public class FirstAircraftController : MonoBehaviour
     private void ApplyThrust()
     {
         _rb.AddForceAtPosition(transform.forward * Thrust * _thrustInput, CenterOfMass.position, ForceMode.Force);
+    }
+
+    /// <summary>
+    /// Update display text during with current parameters
+    /// </summary>
+    private void UpdateText()
+    {
+        if (SpeedText != null)
+        {
+            float speed = (float)Math.Round(_rb.linearVelocity.magnitude, 1);
+            SpeedText.text = $"Speed: {speed} m/s";
+        }
+        if (AltitudeText != null)
+        {
+            float altitude = Mathf.Round(transform.position.y);
+            AltitudeText.text = $"Altitude: {altitude} m";
+        }
     }
 }
