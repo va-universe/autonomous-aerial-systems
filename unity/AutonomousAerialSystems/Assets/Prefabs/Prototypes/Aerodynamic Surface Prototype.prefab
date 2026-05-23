@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 291726543634399004}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 0.25, z: 2.5}
-  m_LocalScale: {x: 1, y: 0.3, z: 4.5}
+  m_LocalPosition: {x: 0.15, y: 0.25, z: 1.5}
+  m_LocalScale: {x: 1.5, y: 0.25, z: 2.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1763465460538612042}
@@ -126,9 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftSurfaceArea: 4.5
+  SurfaceArea: 3.375
   DragCoefficient: 0.05
-  DragSurfaceArea: 0.3
 --- !u!1 &305186629138819258
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,12 +185,12 @@ Transform:
   m_GameObject: {fileID: 588147731636820060}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.099999994, y: 0.25, z: 2.5}
-  m_LocalScale: {x: 1, y: 0.3, z: 4.5}
+  m_LocalPosition: {x: -0.49999994, y: 0, z: -0.49999982}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3563358125435234167}
-  m_Father: {fileID: 1763465460538612042}
+  m_Father: {fileID: 1054585987407760336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &486354926791539290
 MonoBehaviour:
@@ -209,6 +208,135 @@ MonoBehaviour:
   RotationAxis: {x: 0, y: 0, z: 1}
   MaxDeflection: 10
   Input: 0
+--- !u!1 &665467883605495042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7075765646859629896}
+  - component: {fileID: 1049978883438874230}
+  - component: {fileID: 3644166129509949030}
+  - component: {fileID: 2291333566392415372}
+  - component: {fileID: 3559162531844835155}
+  m_Layer: 0
+  m_Name: Right Wing Tip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7075765646859629896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665467883605495042}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.4, y: 0.25, z: -3.75}
+  m_LocalScale: {x: 1, y: 0.25, z: 2.25}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3057321352102014122}
+  m_Father: {fileID: 7812985078620026623}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1049978883438874230
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665467883605495042}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &3644166129509949030
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665467883605495042}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2291333566392415372
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665467883605495042}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3559162531844835155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665467883605495042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 0
+  SurfaceArea: 2.25
+  DragCoefficient: 0.05
 --- !u!1 &992076533453358107
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +475,7 @@ Transform:
   m_GameObject: {fileID: 1184707666070429110}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.4, y: 0.40499997, z: 1.2}
+  m_LocalPosition: {x: -5.4, y: 0.3, z: 1.35}
   m_LocalScale: {x: 1, y: 0.21000001, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -511,8 +639,8 @@ Transform:
   m_GameObject: {fileID: 1388789532099766900}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalPosition: {x: -0.25, y: 0, z: 0.25}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8114690651066566419}
@@ -608,9 +736,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftSurfaceArea: 2.25
+  SurfaceArea: 1.5
   DragCoefficient: 0.05
-  DragSurfaceArea: 2.25
 --- !u!1 &1494611021359191677
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,7 +764,7 @@ Transform:
   m_GameObject: {fileID: 1494611021359191677}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.41625, y: 0.7039, z: 0.011949897}
+  m_LocalPosition: {x: -5.4, y: 0.325, z: -1.35}
   m_LocalScale: {x: 1, y: 0.21000001, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -836,7 +963,7 @@ Transform:
   m_GameObject: {fileID: 1852104033282699981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.041100025, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1099,8 +1226,8 @@ Transform:
   m_GameObject: {fileID: 3696483585139411684}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 0.25, z: -2.5}
-  m_LocalScale: {x: 1, y: 0.3, z: 4.5}
+  m_LocalPosition: {x: 0.15, y: 0.25, z: -1.5}
+  m_LocalScale: {x: 1.5, y: 0.25, z: 2.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7812985078620026623}
@@ -1196,9 +1323,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftSurfaceArea: 4.5
+  SurfaceArea: 3.375
   DragCoefficient: 0.05
-  DragSurfaceArea: 0.3
 --- !u!1 &3849122686194026720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,8 +1387,8 @@ Transform:
   m_GameObject: {fileID: 4103128835468348581}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalPosition: {x: -0.25, y: 0, z: -0.25}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3057321352102014122}
@@ -1358,9 +1484,137 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftSurfaceArea: 2.25
+  SurfaceArea: 1.5
   DragCoefficient: 0.05
-  DragSurfaceArea: 2.25
+--- !u!1 &4107718852981862670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1054585987407760336}
+  - component: {fileID: 710413176705091057}
+  - component: {fileID: 3087314109594291347}
+  - component: {fileID: 1895588655293991267}
+  - component: {fileID: 6881982496554640937}
+  m_Layer: 0
+  m_Name: Left Wing Tip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1054585987407760336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107718852981862670}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.4, y: 0.25, z: 3.75}
+  m_LocalScale: {x: 1, y: 0.25, z: 2.25}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8114690651066566419}
+  m_Father: {fileID: 1763465460538612042}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &710413176705091057
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107718852981862670}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &3087314109594291347
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107718852981862670}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1895588655293991267
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107718852981862670}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6881982496554640937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107718852981862670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad116d6dcbecc84ab76136848ecd4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
+  LiftAxis: 0
+  SurfaceArea: 2.25
+  DragCoefficient: 0.05
 --- !u!1 &4172122540088203854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,8 +1644,8 @@ Transform:
   m_GameObject: {fileID: 4172122540088203854}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.9162502, y: 0.7039, z: 0.011949897}
-  m_LocalScale: {x: 1, y: 0.21000001, z: 2}
+  m_LocalPosition: {x: -5, y: 0.325, z: -1.35}
+  m_LocalScale: {x: 0.8, y: 0.21000001, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5227170586883629685}
@@ -1487,9 +1741,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftSurfaceArea: 2
+  SurfaceArea: 1.6
   DragCoefficient: 0.05
-  DragSurfaceArea: 0.21
 --- !u!1 &4173829622817503205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,8 +1854,8 @@ Transform:
   m_GameObject: {fileID: 4591281382722787672}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.9, y: 0.40499997, z: 1.2}
-  m_LocalScale: {x: 1, y: 0.21000001, z: 2}
+  m_LocalPosition: {x: -5, y: 0.3, z: 1.35}
+  m_LocalScale: {x: 0.8, y: 0.21000001, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1366697116310006917}
@@ -1698,9 +1951,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftSurfaceArea: 2
+  SurfaceArea: 1.6
   DragCoefficient: 0.05
-  DragSurfaceArea: 0.21
 --- !u!1 &4853549843785117622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,8 +1982,8 @@ Transform:
   m_GameObject: {fileID: 4853549843785117622}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalPosition: {x: -0.325, y: 0, z: 0}
+  m_LocalScale: {x: 0.65, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4717653211299386771}
@@ -1827,9 +2079,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftSurfaceArea: 1
+  SurfaceArea: 1.5
   DragCoefficient: 0.05
-  DragSurfaceArea: 1
 --- !u!1 &5220349851948988031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1855,7 +2106,7 @@ Transform:
   m_GameObject: {fileID: 5220349851948988031}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.98375, y: -0.34, z: -1.21195}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1989,9 +2240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 1
-  LiftSurfaceArea: 1.75
+  SurfaceArea: 2
   DragCoefficient: 0.05
-  DragSurfaceArea: 0.336
 --- !u!1 &5685325418240900858
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,12 +2268,12 @@ Transform:
   m_GameObject: {fileID: 5685325418240900858}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.099999994, y: 0.25, z: -2.5}
-  m_LocalScale: {x: 1, y: 0.3, z: 4.5}
+  m_LocalPosition: {x: -0.49999994, y: 0, z: 0.49999982}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 406920830183417076}
-  m_Father: {fileID: 7812985078620026623}
+  m_Father: {fileID: 7075765646859629896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5654000226828160296
 MonoBehaviour:
@@ -2328,8 +2578,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8451041924884420449}
-  - {fileID: 5227170586883629685}
   - {fileID: 1366697116310006917}
+  - {fileID: 5227170586883629685}
   - {fileID: 5815183226925036851}
   m_Father: {fileID: 7472684151410510951}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2363,7 +2613,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4455104408436923432}
-  - {fileID: 3057321352102014122}
+  - {fileID: 7075765646859629896}
   m_Father: {fileID: 7472684151410510951}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7573716641485028688
@@ -2395,8 +2645,8 @@ Transform:
   m_GameObject: {fileID: 7573716641485028688}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalPosition: {x: -0.325, y: 0, z: 0}
+  m_LocalScale: {x: 0.65, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1875980644729100175}
@@ -2492,9 +2742,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  LiftSurfaceArea: 1
+  SurfaceArea: 1.5
   DragCoefficient: 0.05
-  DragSurfaceArea: 1
 --- !u!1 &8095596530243185476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,7 +2774,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7007529388524428900}
-  - {fileID: 8114690651066566419}
+  - {fileID: 1054585987407760336}
   m_Father: {fileID: 7472684151410510951}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8218958040340247062
@@ -2654,9 +2903,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 1
-  LiftSurfaceArea: 0.875
+  SurfaceArea: 1.75
   DragCoefficient: 0.05
-  DragSurfaceArea: 0.875
 --- !u!1 &8332538310637929625
 GameObject:
   m_ObjectHideFlags: 0

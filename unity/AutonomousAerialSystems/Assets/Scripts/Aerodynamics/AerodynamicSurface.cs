@@ -8,13 +8,10 @@ public class AerodynamicSurface : MonoBehaviour
     private Rigidbody _rb;
     private FirstAircraftController _controller;
 
-    [Header("Lift")]
+    [Header("Parameters")]
     public WingAxis LiftAxis;
-    public float LiftSurfaceArea;
-
-    [Header("Drag")]
+    public float SurfaceArea;
     public float DragCoefficient;
-    public float DragSurfaceArea;
 
     void Start()
     {
@@ -124,7 +121,7 @@ public class AerodynamicSurface : MonoBehaviour
     /// <returns>The lift force</returns>
     private Vector3 GetLift(float dynamicPressure, Vector3 airflowDirection, float liftCoefficient)
     {
-        float lift = dynamicPressure * LiftSurfaceArea * liftCoefficient;
+        float lift = dynamicPressure * SurfaceArea * liftCoefficient;
 
         Vector3 liftDirection = Vector3.zero;
         if (LiftAxis == WingAxis.Horizontal)
@@ -149,7 +146,7 @@ public class AerodynamicSurface : MonoBehaviour
     /// <returns>The parasitic drag force</returns>
     private Vector3 GetDrag(float dynamicPressure, Vector3 airflowDirection)
     {
-        float drag = dynamicPressure * DragSurfaceArea * DragCoefficient;
+        float drag = dynamicPressure * SurfaceArea * DragCoefficient;
         Vector3 dragForce = drag * airflowDirection;
 
         return dragForce;
