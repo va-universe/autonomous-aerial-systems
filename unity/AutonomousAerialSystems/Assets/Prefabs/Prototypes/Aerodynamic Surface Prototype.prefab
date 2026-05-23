@@ -153,7 +153,7 @@ Transform:
   m_GameObject: {fileID: 305186629138819258}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0.27}
+  m_LocalPosition: {x: 0, y: 0, z: 0.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -736,7 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  SurfaceArea: 1.5
+  SurfaceArea: 3
   DragCoefficient: 0.05
 --- !u!1 &1494611021359191677
 GameObject:
@@ -831,7 +831,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516320159491921542}
   serializedVersion: 5
-  m_Mass: 700
+  m_Mass: 750
   m_LinearDamping: 0.02
   m_AngularDamping: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -862,7 +862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31345df17f6ffe04f8d6dd73e478288b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstAircraftController
-  Thrust: 9500
+  Thrust: 9600
   AirDensityAtSeaLevel: 1.255
   CenterOfMass: {fileID: 1355539861291359767}
   LeftAileron: {fileID: 486354926791539290}
@@ -1484,7 +1484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  SurfaceArea: 1.5
+  SurfaceArea: 3
   DragCoefficient: 0.05
 --- !u!1 &4107718852981862670
 GameObject:
@@ -2079,7 +2079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  SurfaceArea: 1.5
+  SurfaceArea: 3.5
   DragCoefficient: 0.05
 --- !u!1 &5220349851948988031
 GameObject:
@@ -2742,7 +2742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  SurfaceArea: 1.5
+  SurfaceArea: 3.5
   DragCoefficient: 0.05
 --- !u!1 &8095596530243185476
 GameObject:
