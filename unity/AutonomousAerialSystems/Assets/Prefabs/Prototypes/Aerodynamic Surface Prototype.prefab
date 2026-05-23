@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
   SurfaceArea: 3.375
+  LiftModifier: 0.8
   DragCoefficient: 0.05
 --- !u!1 &305186629138819258
 GameObject:
@@ -336,6 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
   SurfaceArea: 2.25
+  LiftModifier: 0.8
   DragCoefficient: 0.05
 --- !u!1 &992076533453358107
 GameObject:
@@ -736,7 +738,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  SurfaceArea: 3
+  SurfaceArea: 1.125
+  LiftModifier: 2.7
   DragCoefficient: 0.05
 --- !u!1 &1494611021359191677
 GameObject:
@@ -870,6 +873,8 @@ MonoBehaviour:
   LeftElevator: {fileID: 5718511245376071562}
   RightElevator: {fileID: 1455688474318126532}
   Rudder: {fileID: 5873259354992103455}
+  SpeedText: {fileID: 0}
+  AltitudeText: {fileID: 0}
 --- !u!114 &-2247994775280000264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1324,6 +1329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
   SurfaceArea: 3.375
+  LiftModifier: 0.8
   DragCoefficient: 0.05
 --- !u!1 &3849122686194026720
 GameObject:
@@ -1484,7 +1490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  SurfaceArea: 3
+  SurfaceArea: 1.125
+  LiftModifier: 2.7
   DragCoefficient: 0.05
 --- !u!1 &4107718852981862670
 GameObject:
@@ -1614,6 +1621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
   SurfaceArea: 2.25
+  LiftModifier: 0.8
   DragCoefficient: 0.05
 --- !u!1 &4172122540088203854
 GameObject:
@@ -1742,6 +1750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
   SurfaceArea: 1.6
+  LiftModifier: 0.9
   DragCoefficient: 0.05
 --- !u!1 &4173829622817503205
 GameObject:
@@ -1952,6 +1961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
   SurfaceArea: 1.6
+  LiftModifier: 0.9
   DragCoefficient: 0.05
 --- !u!1 &4853549843785117622
 GameObject:
@@ -2079,7 +2089,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  SurfaceArea: 3.5
+  SurfaceArea: 1.4625
+  LiftModifier: 2.75
   DragCoefficient: 0.05
 --- !u!1 &5220349851948988031
 GameObject:
@@ -2240,7 +2251,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 1
-  SurfaceArea: 2
+  SurfaceArea: 1.75
+  LiftModifier: 1.1
   DragCoefficient: 0.05
 --- !u!1 &5685325418240900858
 GameObject:
@@ -2742,7 +2754,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 0
-  SurfaceArea: 3.5
+  SurfaceArea: 1.4625
+  LiftModifier: 2.75
   DragCoefficient: 0.05
 --- !u!1 &8095596530243185476
 GameObject:
@@ -2903,7 +2916,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AerodynamicSurface
   LiftAxis: 1
-  SurfaceArea: 1.75
+  SurfaceArea: 1
+  LiftModifier: 1.75
   DragCoefficient: 0.05
 --- !u!1 &8332538310637929625
 GameObject:

@@ -11,6 +11,7 @@ public class AerodynamicSurface : MonoBehaviour
     [Header("Parameters")]
     public WingAxis LiftAxis;
     public float SurfaceArea;
+    public float LiftModifier;
     public float DragCoefficient;
 
     void Start()
@@ -107,7 +108,7 @@ public class AerodynamicSurface : MonoBehaviour
     private float GetLiftCoefficient(float angleOfAttack)
     {
         float radians = Mathf.Clamp(angleOfAttack, -25f, 25f) * Mathf.Deg2Rad;
-        float liftCoefficient = radians;
+        float liftCoefficient = radians * LiftModifier;
 
         return liftCoefficient;
     }
