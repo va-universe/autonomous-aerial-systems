@@ -1,5 +1,6 @@
+using System;
+using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 /// <summary>
 /// The controller of the first aircraft prototype
@@ -17,6 +18,8 @@ public class FirstAircraftController : MonoBehaviour
 
     [Header("Parameters")]
     public float Thrust;
+    public float AirDensityAtSeaLevel;
+    public Transform CenterOfMass;
 
     [Header("Control Surfaces")]
     public ControlSurface LeftAileron;
@@ -24,6 +27,10 @@ public class FirstAircraftController : MonoBehaviour
     public ControlSurface LeftElevator;
     public ControlSurface RightElevator;
     public ControlSurface Rudder;
+
+    [Header("Text")]
+    public TextMeshProUGUI SpeedText;
+    public TextMeshProUGUI AltitudeText;
 
     void Awake()
     {
@@ -33,11 +40,13 @@ public class FirstAircraftController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _rb.centerOfMass = CenterOfMass.position;
     }
 
     void Update()
     {
         GetInput();
+        UpdateText();
     }
 
     void FixedUpdate()
@@ -61,8 +70,6 @@ public class FirstAircraftController : MonoBehaviour
         _yawInput = _inputActions.Aircraft.Yaw.ReadValue<float>();
 
         _thrustInput = _inputActions.Aircraft.Thrust.ReadValue<float>();
-
-        //Debug.Log($"Roll: {_rollInput}, Pitch: {_pitchInput}, Yaw: {_yawInput}");
     }
 
     /// <summary>
@@ -84,6 +91,23 @@ public class FirstAircraftController : MonoBehaviour
     /// </summary>
     private void ApplyThrust()
     {
-        _rb.AddForce(Vector3.forward * Thrust * _thrustInput, ForceMode.Force);
+        _rb.AddForceAtPosition(transform.forward * Thrust * _thrustInput, CenterOfMass.position, ForceMode.Force);
+    }
+
+    /// <summary>
+    /// Update display text during with current parameters
+    /// </summary>
+    private void UpdateText()
+    {
+        if (SpeedText != null)
+        {
+            float speed = (float)Math.Round(_rb.linearVelocity.magnitude, 1);
+            SpeedText.text = $"Speed: {speed} m/s";
+        }
+        if (AltitudeText != null)
+        {
+            float altitude = Mathf.Round(transform.position.y);
+            AltitudeText.text = $"Altitude: {altitude} m";
+        }
     }
 }

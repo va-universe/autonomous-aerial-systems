@@ -671,6 +671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstAircraftController
   Thrust: 34500
+  AirDensityAtSeaLevel: 1.255
   LeftAileron: {fileID: 486354926791539290}
   RightAileron: {fileID: 5654000226828160296}
   LeftElevator: {fileID: 5718511245376071562}
