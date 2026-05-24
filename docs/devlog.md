@@ -1,6 +1,6 @@
 # Development Log
 
-## v0.1.0  First Aircraft Prototype
+## v0.1.0 First Aircraft Prototype
 
 **Date: 2026-05-24**
 
@@ -13,14 +13,14 @@ This aircraft prototype now flies using distributed aerodynamic forces, allowing
  - Added terrain in `TestScene`.
  - Added UI display for speed and altitude.
 
-### Challanges
+### Challenges
  - During the initial stages of production, the `AerodynamicSurface` script were overly complex making it difficult to adjust parameters and bugfix.
  - Incorrect positioning of `CenterOfMass` and low `Angular Damping` caused extreme instability during inital testing.
 
 ### Media
 ![First Maneuvering](media/FirstManeuvering.gif)
 
-## Pre-v0.1.0  First Takeoff
+## Pre-v0.1.0 First Takeoff
 
 **Date: 2026-05-19**
 
