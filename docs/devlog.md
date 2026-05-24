@@ -2,7 +2,7 @@
 
 ## v0.1.0  First Aircraft Prototype
 
-**Date: 2026-05-23**
+**Date: 2026-05-24**
 
 This aircraft prototype now flies using distributed aerodynamic forces, allowing the control surfaces to generate torque in order to maneuver. The goal moving into the making of the `Second Aircraft Prototype` is to implement stalling, flaps and wing camber. 
 
@@ -18,7 +18,7 @@ This aircraft prototype now flies using distributed aerodynamic forces, allowing
  - Incorrect positioning of `CenterOfMass` and low `Angular Damping` caused extreme instability during inital testing.
 
 ### Media
-![First Maneuvering](media/FirstPrototypeManeuvering.gif)
+![First Maneuvering](media/FirstManeuvering.gif)
 
 ## Pre-v0.1.0  First Takeoff
 
