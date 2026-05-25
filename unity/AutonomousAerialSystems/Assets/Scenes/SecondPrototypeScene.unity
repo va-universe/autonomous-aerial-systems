@@ -4330,6 +4330,63 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
+--- !u!1001 &5632097069312525678
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2216412742874314464, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: m_Name
+      value: Wing Camber Prototype
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4339,3 +4396,4 @@ SceneRoots:
   - {fileID: 137326829}
   - {fileID: 2053182987}
   - {fileID: 1267573795}
+  - {fileID: 5632097069312525678}
