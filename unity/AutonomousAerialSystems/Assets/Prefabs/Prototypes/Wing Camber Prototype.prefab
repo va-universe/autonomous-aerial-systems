@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 7044648152689672527}
   - component: {fileID: 6905382791496690886}
   - component: {fileID: 8687048420674656932}
+  - component: {fileID: 2154167104138780101}
   m_Layer: 0
   m_Name: Left Aileron Parent
   m_TagString: Untagged
@@ -316,6 +317,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2154167104138780101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301168971405957469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6298a4a1a8a18914faa008934f0735dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WingSurface
 --- !u!1 &310617365178276292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,6 +1099,7 @@ GameObject:
   - component: {fileID: 4427348627307796899}
   - component: {fileID: 9096046083823598106}
   - component: {fileID: 6014343113217344894}
+  - component: {fileID: 4907576157504674024}
   m_Layer: 0
   m_Name: Right Flap Parent
   m_TagString: Untagged
@@ -1165,6 +1179,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4907576157504674024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521960427796543605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6298a4a1a8a18914faa008934f0735dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WingSurface
 --- !u!1 &1610568264354354707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,6 +1599,7 @@ GameObject:
   - component: {fileID: 4709509596287131398}
   - component: {fileID: 2916646405763121457}
   - component: {fileID: 7744201586980817110}
+  - component: {fileID: 4663058342762108845}
   m_Layer: 0
   m_Name: Rudder Parent
   m_TagString: Untagged
@@ -1652,6 +1679,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4663058342762108845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2554218917604623425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6298a4a1a8a18914faa008934f0735dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WingSurface
 --- !u!1 &2589129979854849887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,6 +2057,7 @@ GameObject:
   - component: {fileID: 8060735777559738270}
   - component: {fileID: 5128449167261639109}
   - component: {fileID: 828005863766997508}
+  - component: {fileID: 7898742445233371358}
   m_Layer: 0
   m_Name: Right Elevator Parent
   m_TagString: Untagged
@@ -2097,6 +2137,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7898742445233371358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4944183136113427484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6298a4a1a8a18914faa008934f0735dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WingSurface
 --- !u!1 &5162943964526016971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2625,6 +2677,7 @@ GameObject:
   - component: {fileID: 4001028219312091344}
   - component: {fileID: 3856289146262814539}
   - component: {fileID: 665071233314357380}
+  - component: {fileID: 820530380202825830}
   m_Layer: 0
   m_Name: Right Aileron Parent
   m_TagString: Untagged
@@ -2704,6 +2757,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &820530380202825830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6462397691002998879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6298a4a1a8a18914faa008934f0735dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WingSurface
 --- !u!1 &6482727950000711790
 GameObject:
   m_ObjectHideFlags: 0
@@ -3326,6 +3391,7 @@ GameObject:
   - component: {fileID: 7310576142644579145}
   - component: {fileID: 8740252306149011605}
   - component: {fileID: 7344474864838874061}
+  - component: {fileID: 3626322453235583225}
   m_Layer: 0
   m_Name: Left Elevator Parent
   m_TagString: Untagged
@@ -3405,6 +3471,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3626322453235583225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7514994184259135289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6298a4a1a8a18914faa008934f0735dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WingSurface
 --- !u!1 &8229703463608920558
 GameObject:
   m_ObjectHideFlags: 0
@@ -3465,6 +3543,7 @@ GameObject:
   - component: {fileID: 7871438282615825572}
   - component: {fileID: 8246572125596019013}
   - component: {fileID: 8810394966847671138}
+  - component: {fileID: 6842278867656556317}
   m_Layer: 0
   m_Name: Left Flap Parent
   m_TagString: Untagged
@@ -3544,6 +3623,18 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6842278867656556317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8568872573825734740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6298a4a1a8a18914faa008934f0735dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WingSurface
 --- !u!1 &9108780225703631790
 GameObject:
   m_ObjectHideFlags: 0

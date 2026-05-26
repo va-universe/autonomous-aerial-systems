@@ -26,6 +26,16 @@ public class SecondAircraftController : MonoBehaviour
     private ControlSurface _rudder;
     #endregion
 
+    #region Wing Surfaces
+    private WingSurface _leftAileronParent;
+    private WingSurface _rightAileronParent;
+    private WingSurface _leftFlapParent;
+    private WingSurface _rightFlapParent;
+    private WingSurface _leftElevatorParent;
+    private WingSurface _rightElevatorParent;
+    private WingSurface _rudderParent;
+    #endregion
+
     [Header("Parameters")]
     public float Thrust;
     public float AirDensityAtSeaLevel;
@@ -47,6 +57,7 @@ public class SecondAircraftController : MonoBehaviour
         _rb.centerOfMass = _com.position;
 
         InitializeControlSurfaces();
+        InitializeWingSurfaces();
     }
 
     void Update()
@@ -66,6 +77,9 @@ public class SecondAircraftController : MonoBehaviour
         _inputActions.Enable();
     }
 
+    /// <summary>
+    /// Gets all control surfaces from prefab
+    /// </summary>
     private void InitializeControlSurfaces()
     {
         Transform pivots = transform.Find("Visual Components").Find("Pivots").transform;
@@ -77,6 +91,22 @@ public class SecondAircraftController : MonoBehaviour
         _leftElevator = pivots.Find("Left Elevator Pivot").GetComponent<ControlSurface>();
         _rightElevator = pivots.Find("Right Elevator Pivot").GetComponent<ControlSurface>();
         _rudder = pivots.Find("Rudder Pivot").GetComponent<ControlSurface>();
+    }
+
+    /// <summary>
+    /// Gets all wing surfaces from prefab
+    /// </summary>
+    private void InitializeWingSurfaces()
+    {
+        Transform wingSurfaces = transform.Find("Aerodynamics").Find("Wing Surfaces").transform;
+
+        _leftAileronParent = wingSurfaces.Find("Left Aileron Parent").GetComponent<WingSurface>();
+        _rightAileronParent = wingSurfaces.Find("Right Aileron Parent").GetComponent<WingSurface>();
+        _leftFlapParent = wingSurfaces.Find("Left Flap Parent").GetComponent<WingSurface>();
+        _rightFlapParent = wingSurfaces.Find("Right Flap Parent").GetComponent<WingSurface>();
+        _leftElevatorParent = wingSurfaces.Find("Left Elevator Parent").GetComponent<WingSurface>();
+        _rightElevatorParent = wingSurfaces.Find("Right Elevator Parent").GetComponent<WingSurface>();
+        _rudderParent = wingSurfaces.Find("Rudder Parent").GetComponent<WingSurface>();
     }
 
     /// <summary>
@@ -99,6 +129,10 @@ public class SecondAircraftController : MonoBehaviour
     {
         VisualizeControlSurfaces();
     }
+
+    /// <summary>
+    /// Visualize control surface deflection
+    /// </summary>
     private void VisualizeControlSurfaces()
     {
         _leftAileron.DeflectSurface(_rollInput);
