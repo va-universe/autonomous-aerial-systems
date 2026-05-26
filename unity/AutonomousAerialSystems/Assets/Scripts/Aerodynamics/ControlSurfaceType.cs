@@ -5,5 +5,6 @@ public enum ControlSurfaceType
 {
     Aileron,
     Elevator,
-    Rudder
+    Rudder,
+    Flap,
 }
