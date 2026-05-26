@@ -8,12 +8,23 @@ public class SecondAircraftController : MonoBehaviour
     private Transform _com; //Center of mass
     private AircraftInputActions _inputActions;
 
+    #region Inputs
     private float _rollInput;
     private float _pitchInput;
     private float _yawInput;
-
     private float _flapInput;
     private float _throttleInput;
+    #endregion
+
+    #region Control Surfaces
+    private ControlSurface _leftAileron;
+    private ControlSurface _rightAileron;
+    private ControlSurface _leftFlap;
+    private ControlSurface _rightFlap;
+    private ControlSurface _leftElevator;
+    private ControlSurface _rightElevator;
+    private ControlSurface _rudder;
+    #endregion
 
     [Header("Parameters")]
     public float Thrust;
@@ -34,6 +45,8 @@ public class SecondAircraftController : MonoBehaviour
         _com = transform.Find("Aerodynamics").Find("CenterOfMass").transform;
 
         _rb.centerOfMass = _com.position;
+
+        InitializeControlSurfaces();
     }
 
     void Update()
@@ -51,6 +64,19 @@ public class SecondAircraftController : MonoBehaviour
     void OnEnable()
     {
         _inputActions.Enable();
+    }
+
+    private void InitializeControlSurfaces()
+    {
+        Transform pivots = transform.Find("Visual Components").Find("Pivots").transform;
+
+        _leftAileron = pivots.Find("Left Aileron Pivot").GetComponent<ControlSurface>();
+        _rightAileron = pivots.Find("Right Aileron Pivot").GetComponent<ControlSurface>();
+        _leftFlap = pivots.Find("Left Flap Pivot").GetComponent<ControlSurface>();
+        _rightFlap = pivots.Find("Right Flap Pivot").GetComponent<ControlSurface>();
+        _leftElevator = pivots.Find("Left Elevator Pivot").GetComponent<ControlSurface>();
+        _rightElevator = pivots.Find("Right Elevator Pivot").GetComponent<ControlSurface>();
+        _rudder = pivots.Find("Rudder Pivot").GetComponent<ControlSurface>();
     }
 
     /// <summary>
@@ -71,7 +97,20 @@ public class SecondAircraftController : MonoBehaviour
     /// </summary>
     private void DeflectControlSurfaces()
     {
+        VisualizeControlSurfaces();
+    }
+    private void VisualizeControlSurfaces()
+    {
+        _leftAileron.DeflectSurface(_rollInput);
+        _rightAileron.DeflectSurface(-_rollInput);
 
+        _leftFlap.DeflectSurface(_flapInput);
+        _rightFlap.DeflectSurface(_flapInput);
+
+        _leftElevator.DeflectSurface(_pitchInput);
+        _rightElevator.DeflectSurface(_pitchInput);
+
+        _rudder.DeflectSurface(_yawInput);
     }
 
     /// <summary>
