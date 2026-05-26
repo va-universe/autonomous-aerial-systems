@@ -8,7 +8,11 @@ public class WingSurface : MonoBehaviour
     private Rigidbody _rb;
     private SecondAircraftController _controller;
 
-    public float _totalSurfaceArea;
+    [Header("Parameters")]
+    public WingAxis LiftAxis;
+    public float ControlSurfaceRatio;
+    public float ControlSurfaceDeflection;
+    private float _totalSurfaceArea;
 
     void Start()
     {
@@ -21,6 +25,16 @@ public class WingSurface : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void FixedUpdate()
+    {
+        ApplyForces();
+    }
+
+    private void ApplyForces()
+    {
+
     }
 
     /// <summary>

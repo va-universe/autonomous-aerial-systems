@@ -130,7 +130,25 @@ public class SecondAircraftController : MonoBehaviour
     /// </summary>
     private void DeflectControlSurfaces()
     {
+        UpdateWingSurfaceData();
         VisualizeControlSurfaces();
+    }
+
+    /// <summary>
+    /// Update the deflection angles in the wing surfaces
+    /// </summary>
+    private void UpdateWingSurfaceData()
+    {
+        _leftAileronParent.ControlSurfaceDeflection = _leftAileron.MaxDeflection * _rollInput;
+        _rightAileronParent.ControlSurfaceDeflection = _rightAileron.MaxDeflection * -_rollInput;
+
+        _leftFlapParent.ControlSurfaceDeflection = _leftFlap.MaxDeflection * _flapInput;
+        _rightFlapParent.ControlSurfaceDeflection = _rightFlap.MaxDeflection * _flapInput;
+
+        _leftElevatorParent.ControlSurfaceDeflection = _leftElevator.MaxDeflection * _pitchInput;
+        _rightElevatorParent.ControlSurfaceDeflection = _rightElevator.MaxDeflection * _pitchInput;
+
+        _rudderParent.ControlSurfaceDeflection = _rudder.MaxDeflection * _yawInput;
     }
 
     /// <summary>
