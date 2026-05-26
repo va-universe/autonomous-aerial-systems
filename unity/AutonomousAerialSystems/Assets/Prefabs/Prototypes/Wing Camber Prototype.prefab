@@ -1318,6 +1318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 94979071728452743}
   - component: {fileID: 7713285871083399189}
+  - component: {fileID: 6175243728980503700}
   - component: {fileID: 494219084907688259}
   m_Layer: 0
   m_Name: Wing Camber Prototype
@@ -1370,6 +1371,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6175243728980503700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2216412742874314464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7882592d5188e3843b5d643d4a37149f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SecondAircraftController
+  Thrust: 9600
+  AirDensityAtSeaLevel: 1.255
+  SpeedText: {fileID: 0}
+  AltitudeText: {fileID: 0}
 --- !u!114 &494219084907688259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1729,9 +1746,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1924120e4e93f0b47836b879fe69f677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
-  surfaceType: 0
+  surfaceType: 3
   RotationAxis: {x: 0, y: 0, z: 1}
-  MaxDeflection: 10
+  MaxDeflection: 25
   Input: 0
 --- !u!1 &3652960382976956677
 GameObject:
@@ -3070,9 +3087,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1924120e4e93f0b47836b879fe69f677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
-  surfaceType: 0
+  surfaceType: 3
   RotationAxis: {x: 0, y: 0, z: 1}
-  MaxDeflection: 10
+  MaxDeflection: 25
   Input: 0
 --- !u!1 &7051867099330601827
 GameObject:

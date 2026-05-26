@@ -2,31 +2,22 @@ using System;
 using TMPro;
 using UnityEngine;
 
-/// <summary>
-/// The controller of the first aircraft prototype
-/// </summary>
-public class FirstAircraftController : MonoBehaviour
+public class SecondAircraftController : MonoBehaviour
 {
     private Rigidbody _rb;
+    private Transform _com; //Center of mass
     private AircraftInputActions _inputActions;
 
     private float _rollInput;
     private float _pitchInput;
     private float _yawInput;
 
-    private float _thrustInput;
+    private float _flapInput;
+    private float _throttleInput;
 
     [Header("Parameters")]
     public float Thrust;
     public float AirDensityAtSeaLevel;
-    public Transform CenterOfMass;
-
-    [Header("Control Surfaces")]
-    public ControlSurface LeftAileron;
-    public ControlSurface RightAileron;
-    public ControlSurface LeftElevator;
-    public ControlSurface RightElevator;
-    public ControlSurface Rudder;
 
     [Header("UI Display")]
     public TextMeshProUGUI SpeedText;
@@ -40,7 +31,9 @@ public class FirstAircraftController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _rb.centerOfMass = CenterOfMass.position;
+        _com = transform.Find("Aerodynamics").Find("CenterOfMass").transform;
+
+        _rb.centerOfMass = _com.position;
     }
 
     void Update()
@@ -61,41 +54,38 @@ public class FirstAircraftController : MonoBehaviour
     }
 
     /// <summary>
-    /// Get the roll, pitch and yaw input from the input action system
+    /// Get the roll, pitch, yaw, flap and thrust input from the input action system
     /// </summary>
     private void GetInput()
     {
-        _rollInput = _inputActions.Aircraft.Roll.ReadValue<float>();
-        _pitchInput = _inputActions.Aircraft.Pitch.ReadValue<float>();
-        _yawInput = _inputActions.Aircraft.Yaw.ReadValue<float>();
+        _rollInput = _inputActions.AircraftWithFlaps.Roll.ReadValue<float>();
+        _pitchInput = _inputActions.AircraftWithFlaps.Pitch.ReadValue<float>();
+        _yawInput = _inputActions.AircraftWithFlaps.Yaw.ReadValue<float>();
 
-        _thrustInput = _inputActions.Aircraft.Thrust.ReadValue<float>();
+        _flapInput = _inputActions.AircraftWithFlaps.Flap.ReadValue<float>();
+        _throttleInput = _inputActions.Aircraft.Thrust.ReadValue<float>();
     }
 
     /// <summary>
-    /// Deflect all control surfaces based on inputs
+    /// Deflect all control surfaces visually and mathematically
     /// </summary>
     private void DeflectControlSurfaces()
     {
-        LeftAileron.DeflectSurface(_rollInput);
-        RightAileron.DeflectSurface(-_rollInput);
 
-        LeftElevator.DeflectSurface(_pitchInput);
-        RightElevator.DeflectSurface(_pitchInput);
-
-        Rudder.DeflectSurface(_yawInput);
     }
 
     /// <summary>
-    /// Apply thrust to this aircraft based on inputs
+    /// Apply thrust force at the center of mass
     /// </summary>
     private void ApplyThrust()
     {
-        _rb.AddForceAtPosition(transform.forward * Thrust * _thrustInput, CenterOfMass.position, ForceMode.Force);
+        Vector3 centerOfMass = _com.position;
+        Vector3 thrustForce = transform.forward * Thrust * _throttleInput;
+        _rb.AddForceAtPosition(thrustForce, centerOfMass, ForceMode.Force);
     }
 
     /// <summary>
-    /// Update display text with current parameters
+    /// Update UI display text
     /// </summary>
     private void UpdateText()
     {
