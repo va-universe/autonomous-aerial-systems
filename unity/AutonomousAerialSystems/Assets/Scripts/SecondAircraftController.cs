@@ -2,6 +2,9 @@ using System;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// The controller of the second aircraft prototype
+/// </summary>
 public class SecondAircraftController : MonoBehaviour
 {
     private Rigidbody _rb;
