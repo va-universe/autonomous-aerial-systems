@@ -3032,11 +3032,11 @@ Transform:
   m_GameObject: {fileID: 1267400117}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 12.9, z: -30.5}
+  m_LocalPosition: {x: 0, y: 8.9, z: -30.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1938329824}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1267400121
 MonoBehaviour:
@@ -4042,6 +4042,11 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
+--- !u!4 &1938329824 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+  m_PrefabInstance: {fileID: 5632097069312525678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2031835198
 GameObject:
   m_ObjectHideFlags: 0
@@ -4382,9 +4387,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wing Camber Prototype
       objectReference: {fileID: 0}
+    - target: {fileID: 6175243728980503700, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: SpeedText
+      value: 
+      objectReference: {fileID: 1027882374}
+    - target: {fileID: 6175243728980503700, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      propertyPath: AltitudeText
+      value: 
+      objectReference: {fileID: 1329290499}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 94979071728452743, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1267400120}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ace40f924fd3e5545838ccae2dbd9164, type: 3}
 --- !u!1660057539 &9223372036854775807
@@ -4392,7 +4408,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 292014839}
-  - {fileID: 1267400120}
   - {fileID: 137326829}
   - {fileID: 2053182987}
   - {fileID: 1267573795}
