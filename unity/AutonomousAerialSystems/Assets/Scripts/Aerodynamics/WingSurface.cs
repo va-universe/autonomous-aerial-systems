@@ -114,6 +114,7 @@ public class WingSurface : MonoBehaviour
     /// <param name="dynamicPressure">The dynamic pressure</param>
     /// <param name="airflowDirection">The direction of the airflow</param>
     /// <param name="liftCoefficient">The lift coefficient</param>
+    /// <param name="stallEffect">The stall effect</param>
     /// <returns>The parasitic and induced drag</returns>
     private Vector3 GetDrag(float dynamicPressure, Vector3 airflowDirection, float liftCoefficient, float stallEffect)
     {
@@ -126,6 +127,13 @@ public class WingSurface : MonoBehaviour
         return totalDrag;
     }
 
+    /// <summary>
+    /// Calculates the stall drag force for this surface
+    /// </summary>
+    /// <param name="dynamicPressure">The dynamic pressure</param>
+    /// <param name="airflowDirection">The direction of the airflow</param>
+    /// <param name="stallEffect">The stall effect</param>
+    /// <returns>The stall drag</returns>
     private Vector3 GetStallDrag(float dynamicPressure, Vector3 airflowDirection, float stallEffect)
     {
         float stallDragCoefficient = stallEffect * StallDragModifier;
@@ -223,6 +231,10 @@ public class WingSurface : MonoBehaviour
     private float GetZeroLiftAngle()
     {
         float deflection = (-ControlSurfaceDeflection * Mathf.Deg2Rad) * DeflectionCoefficient;
+        if (LiftAxis == WingAxis.Vertical)
+        {
+            deflection *= -1f;
+        }
         float zeroLiftAngle = (InitialZeroLiftAngle * Mathf.Deg2Rad) + deflection;
 
         return zeroLiftAngle;
