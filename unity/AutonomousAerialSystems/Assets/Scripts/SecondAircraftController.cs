@@ -42,10 +42,23 @@ public class SecondAircraftController : MonoBehaviour
     [Header("Parameters")]
     public float Thrust;
     public float AirDensityAtSeaLevel;
+    public float StallTextThreshold;
+    private float _totalStall;
 
     [Header("UI Display")]
     public TextMeshProUGUI SpeedText;
     public TextMeshProUGUI AltitudeText;
+    public TextMeshProUGUI StallingText;
+
+    public TextMeshProUGUI LeftAileronText;
+    public TextMeshProUGUI RightAileronText;
+    public TextMeshProUGUI LeftFlapText;
+    public TextMeshProUGUI RightFlapText;
+    public TextMeshProUGUI LeftElevatorText;
+    public TextMeshProUGUI RightElevatorText;
+    public TextMeshProUGUI RudderText;
+
+    private int _numWingText;
 
     void Awake()
     {
@@ -192,6 +205,125 @@ public class SecondAircraftController : MonoBehaviour
         {
             float altitude = Mathf.Round(transform.position.y);
             AltitudeText.text = $"Altitude: {altitude} m";
+        }
+        if (StallingText != null)
+        {
+            float numTextModifier = _numWingText / 7f;
+            if (_totalStall > StallTextThreshold * numTextModifier)
+            {
+                float stall = Mathf.Clamp01(_totalStall / (625f * numTextModifier));
+
+                StallingText.text = "STALLING";
+                StallingText.color = Color.Lerp(Color.white, Color.red, stall);
+            }
+            else
+            {
+                StallingText.text = "";
+            }
+        }
+
+        _totalStall = 0f;
+        _numWingText = 0;
+
+        if (LeftAileronText != null)
+        {
+            WingSurface surface = _leftAileronParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
+
+            LeftAileronText.text = $"Left Aileron | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
+            LeftAileronText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
+        }
+        if (LeftFlapText != null)
+        {
+            WingSurface surface = _leftFlapParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
+
+            LeftFlapText.text = $"Left Flap | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
+            LeftFlapText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
+        }
+        if (LeftElevatorText != null)
+        {
+            WingSurface surface = _leftElevatorParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
+
+            LeftElevatorText.text = $"Left Elevator | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
+            LeftElevatorText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
+        }
+
+        if (RudderText != null)
+        {
+            WingSurface surface = _rudderParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
+
+            RudderText.text = $"Rudder | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
+            RudderText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
+        }
+
+        if (RightAileronText != null)
+        {
+            WingSurface surface = _rightAileronParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
+
+            RightAileronText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Aileron";
+            RightAileronText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
+        }
+        if (RightFlapText != null)
+        {
+            WingSurface surface = _rightFlapParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
+
+            RightFlapText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Flap";
+            RightFlapText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
+        }
+        if (RightElevatorText != null)
+        {
+            WingSurface surface = _rightElevatorParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
+
+            RightElevatorText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Elevator";
+            RightElevatorText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
         }
     }
 }
