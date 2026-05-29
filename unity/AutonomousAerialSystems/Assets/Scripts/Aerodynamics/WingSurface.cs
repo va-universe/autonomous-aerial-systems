@@ -122,7 +122,7 @@ public class WingSurface : MonoBehaviour
         Vector3 inducedDrag = GetInducedDrag(dynamicPressure, airflowDirection, liftCoefficient);
         Vector3 stallDrag = GetStallDrag(dynamicPressure, airflowDirection, stallEffect);
 
-        Vector3 totalDrag = parasiticDrag + inducedDrag;
+        Vector3 totalDrag = parasiticDrag + inducedDrag + stallDrag;
 
         return totalDrag;
     }

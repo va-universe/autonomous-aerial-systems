@@ -43,6 +43,7 @@ public class SecondAircraftController : MonoBehaviour
     public float Thrust;
     public float AirDensityAtSeaLevel;
     public float StallTextThreshold;
+    public float StallTextRedness;
     private float _totalStall;
 
     [Header("G-Force")]
@@ -228,7 +229,7 @@ public class SecondAircraftController : MonoBehaviour
             float numTextModifier = _numWingText / 7f;
             if (_totalStall > StallTextThreshold * numTextModifier)
             {
-                float stall = Mathf.Clamp01(_totalStall / (625f * numTextModifier));
+                float stall = Mathf.Clamp01(_totalStall / (6f * numTextModifier * StallTextRedness));
 
                 StallingText.text = "STALLING";
                 StallingText.color = Color.Lerp(Color.white, Color.red, stall);
@@ -268,7 +269,7 @@ public class SecondAircraftController : MonoBehaviour
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
             LeftAileronText.text = $"Left Aileron | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            LeftAileronText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+            LeftAileronText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
@@ -282,7 +283,7 @@ public class SecondAircraftController : MonoBehaviour
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
             LeftFlapText.text = $"Left Flap | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            LeftFlapText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+            LeftFlapText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
@@ -296,7 +297,7 @@ public class SecondAircraftController : MonoBehaviour
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
             LeftElevatorText.text = $"Left Elevator | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            LeftElevatorText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+            LeftElevatorText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
@@ -311,7 +312,7 @@ public class SecondAircraftController : MonoBehaviour
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
             RudderText.text = $"Rudder | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            RudderText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+            RudderText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
@@ -326,7 +327,7 @@ public class SecondAircraftController : MonoBehaviour
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
             RightAileronText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Aileron";
-            RightAileronText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+            RightAileronText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
@@ -340,7 +341,7 @@ public class SecondAircraftController : MonoBehaviour
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
             RightFlapText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Flap";
-            RightFlapText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+            RightFlapText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
@@ -354,7 +355,7 @@ public class SecondAircraftController : MonoBehaviour
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
             RightElevatorText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Elevator";
-            RightElevatorText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+            RightElevatorText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;

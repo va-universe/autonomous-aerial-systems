@@ -337,7 +337,7 @@ MonoBehaviour:
   ControlSurfaceDeflection: 0
   StallAngle: 17.5
   MaxStallMultiplier: 0.25
-  StallDragModifier: 2
+  StallDragModifier: 0.27
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
   LiftData: 0
@@ -1214,7 +1214,7 @@ MonoBehaviour:
   ControlSurfaceDeflection: 0
   StallAngle: 16
   MaxStallMultiplier: 0.25
-  StallDragModifier: 2
+  StallDragModifier: 0.25
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
   LiftData: 0
@@ -1501,9 +1501,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7882592d5188e3843b5d643d4a37149f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecondAircraftController
-  Thrust: 10000
+  Thrust: 11700
   AirDensityAtSeaLevel: 1.255
-  StallTextThreshold: 250
+  StallTextThreshold: 115
+  StallTextRedness: 52
   GForce: 0
   SpeedText: {fileID: 0}
   AltitudeText: {fileID: 0}
@@ -1802,7 +1803,7 @@ MonoBehaviour:
   ControlSurfaceDeflection: 0
   StallAngle: 16.4
   MaxStallMultiplier: 0.25
-  StallDragModifier: 2
+  StallDragModifier: 0.28
   DragCoefficient: 0.07
   InducedDragModifier: 0.02
   LiftData: 0
@@ -2368,7 +2369,7 @@ MonoBehaviour:
   ControlSurfaceDeflection: 0
   StallAngle: 17.6
   MaxStallMultiplier: 0.25
-  StallDragModifier: 2
+  StallDragModifier: 0.26
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
   LiftData: 0
@@ -3003,7 +3004,7 @@ MonoBehaviour:
   ControlSurfaceDeflection: 0
   StallAngle: 17.5
   MaxStallMultiplier: 0.25
-  StallDragModifier: 2
+  StallDragModifier: 0.27
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
   LiftData: 0
@@ -3732,7 +3733,7 @@ MonoBehaviour:
   ControlSurfaceDeflection: 0
   StallAngle: 17.6
   MaxStallMultiplier: 0.25
-  StallDragModifier: 2
+  StallDragModifier: 0.26
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
   LiftData: 0
@@ -3930,7 +3931,7 @@ MonoBehaviour:
   ControlSurfaceDeflection: 0
   StallAngle: 16
   MaxStallMultiplier: 0.25
-  StallDragModifier: 2
+  StallDragModifier: 0.25
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
   LiftData: 0
