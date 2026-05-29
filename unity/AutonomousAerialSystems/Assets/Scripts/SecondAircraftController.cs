@@ -42,10 +42,13 @@ public class SecondAircraftController : MonoBehaviour
     [Header("Parameters")]
     public float Thrust;
     public float AirDensityAtSeaLevel;
+    public float StallTextThreshold;
+    private float _totalStall;
 
     [Header("UI Display")]
     public TextMeshProUGUI SpeedText;
     public TextMeshProUGUI AltitudeText;
+    public TextMeshProUGUI StallingText;
 
     public TextMeshProUGUI LeftAileronText;
     public TextMeshProUGUI RightAileronText;
@@ -54,6 +57,8 @@ public class SecondAircraftController : MonoBehaviour
     public TextMeshProUGUI LeftElevatorText;
     public TextMeshProUGUI RightElevatorText;
     public TextMeshProUGUI RudderText;
+
+    private int _numWingText;
 
     void Awake()
     {
@@ -201,6 +206,24 @@ public class SecondAircraftController : MonoBehaviour
             float altitude = Mathf.Round(transform.position.y);
             AltitudeText.text = $"Altitude: {altitude} m";
         }
+        if (StallingText != null)
+        {
+            float numTextModifier = _numWingText / 7f;
+            if (_totalStall > StallTextThreshold * numTextModifier)
+            {
+                float stall = Mathf.Clamp01(_totalStall / (625f * numTextModifier));
+
+                StallingText.text = "STALLING";
+                StallingText.color = Color.Lerp(Color.white, Color.red, stall);
+            }
+            else
+            {
+                StallingText.text = "";
+            }
+        }
+
+        _totalStall = 0f;
+        _numWingText = 0;
 
         if (LeftAileronText != null)
         {
@@ -212,6 +235,9 @@ public class SecondAircraftController : MonoBehaviour
 
             LeftAileronText.text = $"Left Aileron | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
             LeftAileronText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
         }
         if (LeftFlapText != null)
         {
@@ -223,6 +249,9 @@ public class SecondAircraftController : MonoBehaviour
 
             LeftFlapText.text = $"Left Flap | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
             LeftFlapText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
         }
         if (LeftElevatorText != null)
         {
@@ -234,6 +263,9 @@ public class SecondAircraftController : MonoBehaviour
 
             LeftElevatorText.text = $"Left Elevator | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
             LeftElevatorText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
         }
 
         if (RudderText != null)
@@ -246,6 +278,9 @@ public class SecondAircraftController : MonoBehaviour
 
             RudderText.text = $"Rudder | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
             RudderText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
         }
 
         if (RightAileronText != null)
@@ -258,6 +293,9 @@ public class SecondAircraftController : MonoBehaviour
 
             RightAileronText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Aileron";
             RightAileronText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
         }
         if (RightFlapText != null)
         {
@@ -269,6 +307,9 @@ public class SecondAircraftController : MonoBehaviour
 
             RightFlapText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Flap";
             RightFlapText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
         }
         if (RightElevatorText != null)
         {
@@ -280,6 +321,9 @@ public class SecondAircraftController : MonoBehaviour
 
             RightElevatorText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Elevator";
             RightElevatorText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+
+            _totalStall += stall;
+            _numWingText += 1;
         }
     }
 }

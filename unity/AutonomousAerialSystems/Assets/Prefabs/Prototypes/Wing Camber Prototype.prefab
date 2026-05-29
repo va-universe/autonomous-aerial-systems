@@ -340,6 +340,10 @@ MonoBehaviour:
   StallDragModifier: 2
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
+  LiftData: 0
+  DragData: 0
+  StallData: 0
+  AoAData: 0
 --- !u!1 &310617365178276292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,6 +1217,10 @@ MonoBehaviour:
   StallDragModifier: 2
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
+  LiftData: 0
+  DragData: 0
+  StallData: 0
+  AoAData: 0
 --- !u!1 &1610568264354354707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,8 +1503,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SecondAircraftController
   Thrust: 10000
   AirDensityAtSeaLevel: 1.255
+  StallTextThreshold: 250
   SpeedText: {fileID: 0}
   AltitudeText: {fileID: 0}
+  StallingText: {fileID: 0}
+  LeftAileronText: {fileID: 0}
+  RightAileronText: {fileID: 0}
+  LeftFlapText: {fileID: 0}
+  RightFlapText: {fileID: 0}
+  LeftElevatorText: {fileID: 0}
+  RightElevatorText: {fileID: 0}
+  RudderText: {fileID: 0}
 --- !u!114 &494219084907688259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1786,6 +1803,10 @@ MonoBehaviour:
   StallDragModifier: 2
   DragCoefficient: 0.07
   InducedDragModifier: 0.02
+  LiftData: 0
+  DragData: 0
+  StallData: 0
+  AoAData: 0
 --- !u!1 &2589129979854849887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,6 +2369,10 @@ MonoBehaviour:
   StallDragModifier: 2
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
+  LiftData: 0
+  DragData: 0
+  StallData: 0
+  AoAData: 0
 --- !u!1 &5162943964526016971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2979,6 +3004,10 @@ MonoBehaviour:
   StallDragModifier: 2
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
+  LiftData: 0
+  DragData: 0
+  StallData: 0
+  AoAData: 0
 --- !u!1 &6482727950000711790
 GameObject:
   m_ObjectHideFlags: 0
@@ -3704,6 +3733,10 @@ MonoBehaviour:
   StallDragModifier: 2
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
+  LiftData: 0
+  DragData: 0
+  StallData: 0
+  AoAData: 0
 --- !u!1 &7710219788746792985
 GameObject:
   m_ObjectHideFlags: 0
@@ -3898,6 +3931,10 @@ MonoBehaviour:
   StallDragModifier: 2
   DragCoefficient: 0.05
   InducedDragModifier: 0.02
+  LiftData: 0
+  DragData: 0
+  StallData: 0
+  AoAData: 0
 --- !u!1 &9011057473762358587
 GameObject:
   m_ObjectHideFlags: 0
