@@ -47,6 +47,14 @@ public class SecondAircraftController : MonoBehaviour
     public TextMeshProUGUI SpeedText;
     public TextMeshProUGUI AltitudeText;
 
+    public TextMeshProUGUI LeftAileronText;
+    public TextMeshProUGUI RightAileronText;
+    public TextMeshProUGUI LeftFlapText;
+    public TextMeshProUGUI RightFlapText;
+    public TextMeshProUGUI LeftElevatorText;
+    public TextMeshProUGUI RightElevatorText;
+    public TextMeshProUGUI RudderText;
+
     void Awake()
     {
         _inputActions = new AircraftInputActions();
@@ -192,6 +200,79 @@ public class SecondAircraftController : MonoBehaviour
         {
             float altitude = Mathf.Round(transform.position.y);
             AltitudeText.text = $"Altitude: {altitude} m";
+        }
+
+        if (LeftAileronText != null)
+        {
+            WingSurface surface = _leftAileronParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+
+            LeftAileronText.text = $"Left Aileron | Lift: {lift} kN | Drag: {drag} kN | Stall: {stall}%";
+            LeftAileronText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+        }
+        if (LeftFlapText != null)
+        {
+            WingSurface surface = _leftFlapParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+
+            LeftFlapText.text = $"Left Flap | Lift: {lift} kN | Drag: {drag} kN | Stall: {stall}%";
+            LeftFlapText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+        }
+        if (LeftElevatorText != null)
+        {
+            WingSurface surface = _leftElevatorParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+
+            LeftElevatorText.text = $"Left Elevator | Lift: {lift} kN | Drag: {drag} kN | Stall: {stall}%";
+            LeftElevatorText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+        }
+
+        if (RudderText != null)
+        {
+            WingSurface surface = _rudderParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+
+            RudderText.text = $"Rudder | Lift: {lift} kN | Drag: {drag} kN | Stall: {stall}%";
+            RudderText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+        }
+
+        if (RightAileronText != null)
+        {
+            WingSurface surface = _rightAileronParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+
+            RightAileronText.text = $"Stall: {stall}% | Drag: {drag} kN | Lift: {lift} kN | Right Aileron";
+            RightAileronText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+        }
+        if (RightFlapText != null)
+        {
+            WingSurface surface = _rightFlapParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+
+            RightFlapText.text = $"Stall: {stall}% | Drag: {drag} kN | Lift: {lift} kN | Right Flap";
+            RightFlapText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
+        }
+        if (RightElevatorText != null)
+        {
+            WingSurface surface = _rightElevatorParent;
+            float lift = (float)Math.Round(surface.LiftData, 1);
+            float drag = (float)Math.Round(surface.DragData, 1);
+            float stall = Mathf.Round(surface.StallData);
+
+            RightElevatorText.text = $"Stall: {stall}% | Drag: {drag} kN | Lift: {lift} kN | Right Elevator";
+            RightElevatorText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
         }
     }
 }

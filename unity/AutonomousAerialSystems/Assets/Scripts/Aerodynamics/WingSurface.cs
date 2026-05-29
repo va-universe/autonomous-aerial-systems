@@ -29,6 +29,11 @@ public class WingSurface : MonoBehaviour
     public float DragCoefficient;
     public float InducedDragModifier;
 
+    [Header("UI Display Data")]
+    public float LiftData;
+    public float DragData;
+    public float StallData;
+
     void Start()
     {
         _rb = GetComponentInParent<Rigidbody>();
@@ -58,7 +63,7 @@ public class WingSurface : MonoBehaviour
             float dynamicPressure = GetDynamicPressure(speed);
             float angleOfAttack = GetAngleOfAttack(velocity);
             float zeroLiftAngle = GetZeroLiftAngle();
-            float stallEffect = GetStallEffect(angleOfAttack);
+            float stallEffect = GetStallEffect(angleOfAttack, speed);
 
             float liftCoefficient = GetLiftCoefficient(angleOfAttack, zeroLiftAngle, stallEffect);
 
@@ -68,6 +73,10 @@ public class WingSurface : MonoBehaviour
             Debug.DrawRay(_orientation.transform.position, liftForce / 100f, Color.green);
             Debug.DrawRay(_orientation.transform.position, dragForce / 100f, Color.red);
             _rb.AddForceAtPosition(liftForce + dragForce, _orientation.transform.position);
+
+            LiftData = liftForce.magnitude / 1000f; //Lift in kN
+            DragData = dragForce.magnitude / 1000f; //Drag in kN
+            StallData = stallEffect * 100f; //Stall effect in %
         }
     }
 
@@ -233,11 +242,11 @@ public class WingSurface : MonoBehaviour
         return liftCoefficient;
     }
 
-    private float GetStallEffect(float angleOfAttack)
+    private float GetStallEffect(float angleOfAttack, float speed)
     {
         float absoluteAngleOfAttack = Mathf.Abs(angleOfAttack) * Mathf.Rad2Deg;
 
-        if (absoluteAngleOfAttack > StallAngle)
+        if (absoluteAngleOfAttack > StallAngle && speed > 5f)
         {
             float stallEffect = Mathf.Clamp01((absoluteAngleOfAttack - StallAngle) / 10f);
 
