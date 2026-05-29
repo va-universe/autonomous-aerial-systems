@@ -33,6 +33,7 @@ public class WingSurface : MonoBehaviour
     public float LiftData;
     public float DragData;
     public float StallData;
+    public float AoAData;
 
     void Start()
     {
@@ -77,6 +78,7 @@ public class WingSurface : MonoBehaviour
             LiftData = liftForce.magnitude / 1000f; //Lift in kN
             DragData = dragForce.magnitude / 1000f; //Drag in kN
             StallData = stallEffect * 100f; //Stall effect in %
+            AoAData = angleOfAttack * Mathf.Rad2Deg; //Angle of attack in °
         }
     }
 

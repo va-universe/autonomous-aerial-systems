@@ -208,8 +208,9 @@ public class SecondAircraftController : MonoBehaviour
             float lift = (float)Math.Round(surface.LiftData, 1);
             float drag = (float)Math.Round(surface.DragData, 1);
             float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            LeftAileronText.text = $"Left Aileron | Lift: {lift} kN | Drag: {drag} kN | Stall: {stall}%";
+            LeftAileronText.text = $"Left Aileron | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
             LeftAileronText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
         }
         if (LeftFlapText != null)
@@ -218,8 +219,9 @@ public class SecondAircraftController : MonoBehaviour
             float lift = (float)Math.Round(surface.LiftData, 1);
             float drag = (float)Math.Round(surface.DragData, 1);
             float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            LeftFlapText.text = $"Left Flap | Lift: {lift} kN | Drag: {drag} kN | Stall: {stall}%";
+            LeftFlapText.text = $"Left Flap | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
             LeftFlapText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
         }
         if (LeftElevatorText != null)
@@ -228,8 +230,9 @@ public class SecondAircraftController : MonoBehaviour
             float lift = (float)Math.Round(surface.LiftData, 1);
             float drag = (float)Math.Round(surface.DragData, 1);
             float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            LeftElevatorText.text = $"Left Elevator | Lift: {lift} kN | Drag: {drag} kN | Stall: {stall}%";
+            LeftElevatorText.text = $"Left Elevator | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
             LeftElevatorText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
         }
 
@@ -239,8 +242,9 @@ public class SecondAircraftController : MonoBehaviour
             float lift = (float)Math.Round(surface.LiftData, 1);
             float drag = (float)Math.Round(surface.DragData, 1);
             float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            RudderText.text = $"Rudder | Lift: {lift} kN | Drag: {drag} kN | Stall: {stall}%";
+            RudderText.text = $"Rudder | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
             RudderText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
         }
 
@@ -250,8 +254,9 @@ public class SecondAircraftController : MonoBehaviour
             float lift = (float)Math.Round(surface.LiftData, 1);
             float drag = (float)Math.Round(surface.DragData, 1);
             float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            RightAileronText.text = $"Stall: {stall}% | Drag: {drag} kN | Lift: {lift} kN | Right Aileron";
+            RightAileronText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Aileron";
             RightAileronText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
         }
         if (RightFlapText != null)
@@ -260,8 +265,9 @@ public class SecondAircraftController : MonoBehaviour
             float lift = (float)Math.Round(surface.LiftData, 1);
             float drag = (float)Math.Round(surface.DragData, 1);
             float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            RightFlapText.text = $"Stall: {stall}% | Drag: {drag} kN | Lift: {lift} kN | Right Flap";
+            RightFlapText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Flap";
             RightFlapText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
         }
         if (RightElevatorText != null)
@@ -270,8 +276,9 @@ public class SecondAircraftController : MonoBehaviour
             float lift = (float)Math.Round(surface.LiftData, 1);
             float drag = (float)Math.Round(surface.DragData, 1);
             float stall = Mathf.Round(surface.StallData);
+            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            RightElevatorText.text = $"Stall: {stall}% | Drag: {drag} kN | Lift: {lift} kN | Right Elevator";
+            RightElevatorText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Elevator";
             RightElevatorText.color = Color.Lerp(Color.white, Color.red, stall / 100f);
         }
     }
