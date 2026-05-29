@@ -45,10 +45,15 @@ public class SecondAircraftController : MonoBehaviour
     public float StallTextThreshold;
     private float _totalStall;
 
+    [Header("G-Force")]
+    public float GForce;
+    private Vector3 _previousVelocity;
+
     [Header("UI Display")]
     public TextMeshProUGUI SpeedText;
     public TextMeshProUGUI AltitudeText;
     public TextMeshProUGUI StallingText;
+    public TextMeshProUGUI GForceText;
 
     public TextMeshProUGUI LeftAileronText;
     public TextMeshProUGUI RightAileronText;
@@ -71,6 +76,7 @@ public class SecondAircraftController : MonoBehaviour
         _com = transform.Find("Aerodynamics").Find("CenterOfMass").transform;
 
         _rb.centerOfMass = _com.position;
+        _previousVelocity = _rb.linearVelocity;
 
         InitializeControlSurfaces();
         InitializeWingSurfaces();
@@ -86,6 +92,8 @@ public class SecondAircraftController : MonoBehaviour
     {
         DeflectControlSurfaces();
         ApplyThrust();
+
+        CalculateGForce();
     }
 
     void OnEnable()
@@ -191,6 +199,15 @@ public class SecondAircraftController : MonoBehaviour
         _rb.AddForceAtPosition(thrustForce, centerOfMass, ForceMode.Force);
     }
 
+    private void CalculateGForce()
+    {
+        Vector3 acceleration = (_rb.linearVelocity - _previousVelocity) / Time.fixedDeltaTime;
+        Vector3 accelerationWithoutGravity = acceleration - Physics.gravity;
+
+        GForce = Vector3.Dot(accelerationWithoutGravity, transform.up) / 9.81f;
+        _previousVelocity = _rb.linearVelocity;
+    }
+
     /// <summary>
     /// Update UI display text
     /// </summary>
@@ -220,6 +237,23 @@ public class SecondAircraftController : MonoBehaviour
             {
                 StallingText.text = "";
             }
+        }
+        if (GForceText != null)
+        {
+            float gForce = Mathf.Round(GForce);
+            GForceText.text = $"{gForce} G";
+
+            float gForceStrength = 0f;
+            if (GForce >= 0)
+            {
+                gForceStrength = Mathf.Clamp01((GForce - 1f) / 8f);
+            }
+            else
+            {
+                gForceStrength = Mathf.Clamp01(GForce / -4f);
+            }
+
+            GForceText.color = Color.Lerp(Color.white, Color.red, gForceStrength);
         }
 
         _totalStall = 0f;
