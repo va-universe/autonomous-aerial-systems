@@ -21,6 +21,10 @@ public class WingSurface : MonoBehaviour
     public float ControlSurfaceDeflection;
     private float _totalSurfaceArea;
 
+    [Header("Stalling")]
+    public float StallAngle;
+    public float EndStallMultiplier;
+
     void Start()
     {
         _rb = GetComponentInParent<Rigidbody>();
@@ -149,7 +153,7 @@ public class WingSurface : MonoBehaviour
             angleOfAttck = Vector3.SignedAngle(chordLine, projectedVelocity, _orientation.transform.up);
         }
 
-        return Mathf.Clamp(angleOfAttck, -25f, 25f) * Mathf.Deg2Rad;
+        return angleOfAttck * Mathf.Deg2Rad;
     }
 
     /// <summary>
@@ -173,6 +177,15 @@ public class WingSurface : MonoBehaviour
     private float GetLiftCoefficient(float angleOfAttack, float zeroLiftAngle)
     {
         float liftCoefficient = LiftModifier * (angleOfAttack - zeroLiftAngle);
+
+        float absoluteAngleOfAttack = Mathf.Abs(angleOfAttack) * Mathf.Rad2Deg;
+        if (absoluteAngleOfAttack > StallAngle)
+        {
+            float stall = Mathf.Clamp01((absoluteAngleOfAttack - StallAngle) / 10f);
+            float stallMultiplier = Mathf.Lerp(1f, EndStallMultiplier, stall);
+
+            liftCoefficient *= stallMultiplier;
+        }
 
         return liftCoefficient;
     }
