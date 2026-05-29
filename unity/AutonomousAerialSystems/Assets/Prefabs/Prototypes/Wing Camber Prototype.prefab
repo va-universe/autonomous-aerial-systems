@@ -333,9 +333,13 @@ MonoBehaviour:
   LiftAxis: 0
   InitialZeroLiftAngle: 0
   LiftModifier: 0.8
-  DragCoefficient: 0.05
   DeflectionCoefficient: 1.4
   ControlSurfaceDeflection: 0
+  StallAngle: 18.5
+  MaxStallMultiplier: 0.25
+  StallDragModifier: 2
+  DragCoefficient: 0.05
+  InducedDragModifier: 0.02
 --- !u!1 &310617365178276292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,9 +1206,13 @@ MonoBehaviour:
   LiftAxis: 0
   InitialZeroLiftAngle: 0
   LiftModifier: 1
-  DragCoefficient: 0.05
   DeflectionCoefficient: 0.8
   ControlSurfaceDeflection: 0
+  StallAngle: 17
+  MaxStallMultiplier: 0.25
+  StallDragModifier: 2
+  DragCoefficient: 0.05
+  InducedDragModifier: 0.02
 --- !u!1 &1610568264354354707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,9 +1779,13 @@ MonoBehaviour:
   LiftAxis: 1
   InitialZeroLiftAngle: 0
   LiftModifier: 0.9
-  DragCoefficient: 0.07
   DeflectionCoefficient: 1.35
   ControlSurfaceDeflection: 0
+  StallAngle: 17
+  MaxStallMultiplier: 0.25
+  StallDragModifier: 2
+  DragCoefficient: 0.07
+  InducedDragModifier: 0.02
 --- !u!1 &2589129979854849887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2329,9 +2341,13 @@ MonoBehaviour:
   LiftAxis: 0
   InitialZeroLiftAngle: 0
   LiftModifier: 1.2
-  DragCoefficient: 0.05
   DeflectionCoefficient: 1.3
   ControlSurfaceDeflection: 0
+  StallAngle: 18
+  MaxStallMultiplier: 0.25
+  StallDragModifier: 2
+  DragCoefficient: 0.05
+  InducedDragModifier: 0.02
 --- !u!1 &5162943964526016971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,9 +2972,13 @@ MonoBehaviour:
   LiftAxis: 0
   InitialZeroLiftAngle: 0
   LiftModifier: 0.8
-  DragCoefficient: 0.05
   DeflectionCoefficient: 1.4
   ControlSurfaceDeflection: 0
+  StallAngle: 18.5
+  MaxStallMultiplier: 0.25
+  StallDragModifier: 2
+  DragCoefficient: 0.05
+  InducedDragModifier: 0.02
 --- !u!1 &6482727950000711790
 GameObject:
   m_ObjectHideFlags: 0
@@ -3677,9 +3697,13 @@ MonoBehaviour:
   LiftAxis: 0
   InitialZeroLiftAngle: 0
   LiftModifier: 1.2
-  DragCoefficient: 0.05
   DeflectionCoefficient: 1.3
   ControlSurfaceDeflection: 0
+  StallAngle: 18
+  MaxStallMultiplier: 0.25
+  StallDragModifier: 2
+  DragCoefficient: 0.05
+  InducedDragModifier: 0.02
 --- !u!1 &7710219788746792985
 GameObject:
   m_ObjectHideFlags: 0
@@ -3867,9 +3891,13 @@ MonoBehaviour:
   LiftAxis: 0
   InitialZeroLiftAngle: 0
   LiftModifier: 1
-  DragCoefficient: 0.05
   DeflectionCoefficient: 0.8
   ControlSurfaceDeflection: 0
+  StallAngle: 17
+  MaxStallMultiplier: 0.25
+  StallDragModifier: 2
+  DragCoefficient: 0.05
+  InducedDragModifier: 0.02
 --- !u!1 &9011057473762358587
 GameObject:
   m_ObjectHideFlags: 0

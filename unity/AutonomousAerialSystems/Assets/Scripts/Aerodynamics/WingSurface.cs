@@ -14,12 +14,20 @@ public class WingSurface : MonoBehaviour
     public WingAxis LiftAxis;
     public float InitialZeroLiftAngle;
     public float LiftModifier;
-    public float DragCoefficient;
 
     [Header("Control Surface")]
     public float DeflectionCoefficient;
     public float ControlSurfaceDeflection;
     private float _totalSurfaceArea;
+
+    [Header("Stalling")]
+    public float StallAngle;
+    public float MaxStallMultiplier;
+    public float StallDragModifier;
+
+    [Header("Drag")]
+    public float DragCoefficient;
+    public float InducedDragModifier;
 
     void Start()
     {
@@ -50,10 +58,12 @@ public class WingSurface : MonoBehaviour
             float dynamicPressure = GetDynamicPressure(speed);
             float angleOfAttack = GetAngleOfAttack(velocity);
             float zeroLiftAngle = GetZeroLiftAngle();
-            float liftCoefficient = GetLiftCoefficient(angleOfAttack, zeroLiftAngle);
+            float stallEffect = GetStallEffect(angleOfAttack);
+
+            float liftCoefficient = GetLiftCoefficient(angleOfAttack, zeroLiftAngle, stallEffect);
 
             Vector3 liftForce = GetLift(dynamicPressure, airflowDirection, liftCoefficient);
-            Vector3 dragForce = GetParasiticDrag(dynamicPressure, airflowDirection);
+            Vector3 dragForce = GetDrag(dynamicPressure, airflowDirection, liftCoefficient, stallEffect);
 
             Debug.DrawRay(_orientation.transform.position, liftForce / 100f, Color.green);
             Debug.DrawRay(_orientation.transform.position, dragForce / 100f, Color.red);
@@ -88,6 +98,33 @@ public class WingSurface : MonoBehaviour
     }
 
     /// <summary>
+    /// Calculates the total drag force for this surface
+    /// </summary>
+    /// <param name="dynamicPressure">The dynamic pressure</param>
+    /// <param name="airflowDirection">The direction of the airflow</param>
+    /// <param name="liftCoefficient">The lift coefficient</param>
+    /// <returns>The parasitic and induced drag</returns>
+    private Vector3 GetDrag(float dynamicPressure, Vector3 airflowDirection, float liftCoefficient, float stallEffect)
+    {
+        Vector3 parasiticDrag = GetParasiticDrag(dynamicPressure, airflowDirection);
+        Vector3 inducedDrag = GetInducedDrag(dynamicPressure, airflowDirection, liftCoefficient);
+        Vector3 stallDrag = GetStallDrag(dynamicPressure, airflowDirection, stallEffect);
+
+        Vector3 totalDrag = parasiticDrag + inducedDrag;
+
+        return totalDrag;
+    }
+
+    private Vector3 GetStallDrag(float dynamicPressure, Vector3 airflowDirection, float stallEffect)
+    {
+        float stallDragCoefficient = stallEffect * StallDragModifier;
+        float stallDrag = dynamicPressure * _totalSurfaceArea * stallDragCoefficient;
+        Vector3 stallDragForce = stallDrag * airflowDirection;
+
+        return stallDragForce;
+    }
+
+    /// <summary>
     /// Calculates the parasitic drag force for this surface
     /// </summary>
     /// <param name="dynamicPressure">The dynamic pressure</param>
@@ -95,10 +132,26 @@ public class WingSurface : MonoBehaviour
     /// <returns>The parasitic drag force</returns>
     private Vector3 GetParasiticDrag(float dynamicPressure, Vector3 airflowDirection)
     {
-        float drag = dynamicPressure * _totalSurfaceArea * DragCoefficient;
-        Vector3 dragForce = drag * airflowDirection;
+        float parasiticDrag = dynamicPressure * _totalSurfaceArea * DragCoefficient;
+        Vector3 parasiticDragForce = parasiticDrag * airflowDirection;
 
-        return dragForce;
+        return parasiticDragForce;
+    }
+
+    /// <summary>
+    /// Calculates the induced drag force for this surface
+    /// </summary>
+    /// <param name="dynamicPressure">The dynamic pressure</param>
+    /// <param name="airflowDirection">The direction of the airflow</param>
+    /// <param name="liftCoefficient">The lift coefficient</param>
+    /// <returns>The induced drag force</returns>
+    private Vector3 GetInducedDrag(float dynamicPressure, Vector3 airflowDirection, float liftCoefficient)
+    {
+        float inducedDragCoefficient = liftCoefficient * liftCoefficient * InducedDragModifier;
+        float inducedDrag = dynamicPressure * _totalSurfaceArea * inducedDragCoefficient;
+        Vector3 inducedDragForce = inducedDrag * airflowDirection;
+
+        return inducedDragForce;
     }
 
     /// <summary>
@@ -149,7 +202,7 @@ public class WingSurface : MonoBehaviour
             angleOfAttck = Vector3.SignedAngle(chordLine, projectedVelocity, _orientation.transform.up);
         }
 
-        return Mathf.Clamp(angleOfAttck, -25f, 25f) * Mathf.Deg2Rad;
+        return angleOfAttck * Mathf.Deg2Rad;
     }
 
     /// <summary>
@@ -170,11 +223,28 @@ public class WingSurface : MonoBehaviour
     /// <param name="angleOfAttack">The angle of attack at this surface</param>
     /// <param name="zeroLiftAngle">The zero lift angle</param>
     /// <returns>The lift coefficient</returns>
-    private float GetLiftCoefficient(float angleOfAttack, float zeroLiftAngle)
+    private float GetLiftCoefficient(float angleOfAttack, float zeroLiftAngle, float stallEffect)
     {
         float liftCoefficient = LiftModifier * (angleOfAttack - zeroLiftAngle);
+        float stallMultiplier = Mathf.Lerp(1f, MaxStallMultiplier, stallEffect);
+
+        liftCoefficient *= stallMultiplier;
 
         return liftCoefficient;
+    }
+
+    private float GetStallEffect(float angleOfAttack)
+    {
+        float absoluteAngleOfAttack = Mathf.Abs(angleOfAttack) * Mathf.Rad2Deg;
+
+        if (absoluteAngleOfAttack > StallAngle)
+        {
+            float stallEffect = Mathf.Clamp01((absoluteAngleOfAttack - StallAngle) / 10f);
+
+            return stallEffect;
+        }
+
+        return 0f;
     }
 
     /// <summary>
