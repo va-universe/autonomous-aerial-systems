@@ -17,6 +17,7 @@ public class SecondAircraftController : MonoBehaviour
     private float _yawInput;
     private float _flapInput;
     private float _throttleInput;
+    public float WheelBrakeInput;
     #endregion
 
     #region Control Surfaces
@@ -144,7 +145,9 @@ public class SecondAircraftController : MonoBehaviour
         _yawInput = _inputActions.AircraftWithFlaps.Yaw.ReadValue<float>();
 
         _flapInput = _inputActions.AircraftWithFlaps.Flap.ReadValue<float>();
-        _throttleInput = _inputActions.Aircraft.Thrust.ReadValue<float>();
+        _throttleInput = _inputActions.AircraftWithFlaps.Thrust.ReadValue<float>();
+
+        WheelBrakeInput = _inputActions.AircraftWithFlaps.WheelBrake.ReadValue<float>();
     }
 
     /// <summary>

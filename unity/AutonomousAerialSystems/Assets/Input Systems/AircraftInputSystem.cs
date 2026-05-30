@@ -290,6 +290,15 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WheelBrake"",
+                    ""type"": ""Button"",
+                    ""id"": ""9949e86a-1e4c-46dd-9dfe-eda81d891674"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -404,6 +413,17 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""063232ff-63ab-4115-90ac-736c1c6c8d95"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WheelBrake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""1D Axis"",
                     ""id"": ""b8d493c6-677f-431e-bedd-4cf94c4378df"",
                     ""path"": ""1DAxis"",
@@ -454,6 +474,7 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         m_AircraftWithFlaps_Yaw = m_AircraftWithFlaps.FindAction("Yaw", throwIfNotFound: true);
         m_AircraftWithFlaps_Flap = m_AircraftWithFlaps.FindAction("Flap", throwIfNotFound: true);
         m_AircraftWithFlaps_Thrust = m_AircraftWithFlaps.FindAction("Thrust", throwIfNotFound: true);
+        m_AircraftWithFlaps_WheelBrake = m_AircraftWithFlaps.FindAction("WheelBrake", throwIfNotFound: true);
     }
 
     ~@AircraftInputActions()
@@ -669,6 +690,7 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_AircraftWithFlaps_Yaw;
     private readonly InputAction m_AircraftWithFlaps_Flap;
     private readonly InputAction m_AircraftWithFlaps_Thrust;
+    private readonly InputAction m_AircraftWithFlaps_WheelBrake;
     /// <summary>
     /// Provides access to input actions defined in input action map "AircraftWithFlaps".
     /// </summary>
@@ -700,6 +722,10 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "AircraftWithFlaps/Thrust".
         /// </summary>
         public InputAction @Thrust => m_Wrapper.m_AircraftWithFlaps_Thrust;
+        /// <summary>
+        /// Provides access to the underlying input action "AircraftWithFlaps/WheelBrake".
+        /// </summary>
+        public InputAction @WheelBrake => m_Wrapper.m_AircraftWithFlaps_WheelBrake;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -741,6 +767,9 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
             @Thrust.started += instance.OnThrust;
             @Thrust.performed += instance.OnThrust;
             @Thrust.canceled += instance.OnThrust;
+            @WheelBrake.started += instance.OnWheelBrake;
+            @WheelBrake.performed += instance.OnWheelBrake;
+            @WheelBrake.canceled += instance.OnWheelBrake;
         }
 
         /// <summary>
@@ -767,6 +796,9 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
             @Thrust.started -= instance.OnThrust;
             @Thrust.performed -= instance.OnThrust;
             @Thrust.canceled -= instance.OnThrust;
+            @WheelBrake.started -= instance.OnWheelBrake;
+            @WheelBrake.performed -= instance.OnWheelBrake;
+            @WheelBrake.canceled -= instance.OnWheelBrake;
         }
 
         /// <summary>
@@ -878,5 +910,12 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnThrust(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "WheelBrake" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWheelBrake(InputAction.CallbackContext context);
     }
 }

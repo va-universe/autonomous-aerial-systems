@@ -1,10 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 /// <summary>
 /// Landing gear for the Wing Camber Prototype
 /// </summary>
 public class LandingGear : MonoBehaviour
 {
+    private SecondAircraftController _controller;
+
     [Header("Colliders")]
     public WheelCollider LeftWheelCollider;
     public WheelCollider RightWheelCollider;
@@ -20,12 +24,18 @@ public class LandingGear : MonoBehaviour
     public float Damper;
     public float TargetPosition;
     public float SuspensionDistance;
-
     public float ForwardStiffness;
     public float SidewaysStiffness;
 
+    [Header("Braking")]
+    public float BrakeTorque;
+    public float BrakeRate;
+    private float _currentBrakeInput;
+
     void Start()
     {
+        _controller = GetComponent<SecondAircraftController>();
+
         InitializeWheel(LeftWheelCollider);
         InitializeWheel(RightWheelCollider);
         InitializeWheel(BackWheelCollider);
@@ -36,6 +46,11 @@ public class LandingGear : MonoBehaviour
         UpdateWheelVisual(LeftWheelCollider, LeftWheelVisual);
         UpdateWheelVisual(RightWheelCollider, RightWheelVisual);
         UpdateWheelVisual(BackWheelCollider, BackWheelVisual);
+    }
+
+    private void FixedUpdate()
+    {
+        ApplyBrake();
     }
 
     /// <summary>
@@ -75,5 +90,25 @@ public class LandingGear : MonoBehaviour
 
         wheelTransform.position = position;
         wheelTransform.rotation = rotation * initialRotation;
+    }
+
+    /// <summary>
+    /// Apply braking torque on main wheels
+    /// </summary>
+    private void ApplyBrake()
+    {
+        float targetBrakeInput = _controller.WheelBrakeInput;
+
+        _currentBrakeInput = Mathf.MoveTowards(_currentBrakeInput, targetBrakeInput, BrakeRate * Time.fixedDeltaTime);
+
+        float brakeTorque = _currentBrakeInput * BrakeTorque;
+
+        LeftWheelCollider.brakeTorque = brakeTorque;
+        RightWheelCollider.brakeTorque = brakeTorque;
+        BackWheelCollider.brakeTorque = 0f;
+
+        //Fixes a bug where the wheels lock in place from stopping completely after braking
+        LeftWheelCollider.motorTorque = 0.1f;
+        RightWheelCollider.motorTorque = 0.1f;
     }
 }
