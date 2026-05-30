@@ -1,10 +1,30 @@
 # Development Log
 
-## v0.1.0 First Aircraft Prototype
+## v0.2.0 Wing Camber Prototype
+
+**Date: 2026-05-30**
+
+This aircraft prototype introduces a new wing-camber-based aerodynamic model, where control surfaces no longer generate their own lift forces but instead alter the properties of the parent wing surfaces. This aircraft is capable of takeoff, maneuvering, and landing. It now includes wing specific stalling that reduces lift and increases drag at high angles of attack. 
+
+### Checklist
+ - Implemented wing-camber-based aerodynamics model.
+ - Implemented wing local stalling.
+ - Added landing gear with `Wheel Collider`s.
+ - Added flaps and wheel braking.
+ - Added wing specific UI data display.
+
+### Challenges
+ - A major challenge was adjusting the landing gear suspension, damping, wheel friction, and center of mass to achieve stable ground handling during takeoff, landing and braking.
+
+### Media
+![Stalling](media/Stalling.gif)
+![Landing](media/Landing.gif)
+
+## v0.1.0 Aerodynamic Surface Prototype
 
 **Date: 2026-05-24**
 
-This aircraft prototype now flies using distributed aerodynamic forces, allowing the control surfaces to generate torque in order to maneuver. The goal moving into the making of the `Second Aircraft Prototype` is to implement stalling, flaps and wing camber. 
+This aircraft prototype now flies using distributed aerodynamic forces, allowing the control surfaces to generate torque in order to maneuver. The goal moving into the making of the `Wing Camber Prototype` is to implement stalling, flaps and wing camber. 
 
 ### Checklist
  - Implemented distributed aerodynamic surfaces.

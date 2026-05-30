@@ -241,6 +241,222 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""AircraftWithFlaps"",
+            ""id"": ""791e50ce-a1f3-489c-ba1f-d9971dda3c5e"",
+            ""actions"": [
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Value"",
+                    ""id"": ""8d1631fc-8ef4-47ef-84b1-f6dc00333d61"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pitch"",
+                    ""type"": ""Value"",
+                    ""id"": ""2f5d09a3-eaea-4992-aa49-16ba8b94e481"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Yaw"",
+                    ""type"": ""Value"",
+                    ""id"": ""5bf4c800-2728-442f-936a-b99de30c2298"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Flap"",
+                    ""type"": ""Value"",
+                    ""id"": ""b10bf09c-14e2-4361-888f-ff5b67278a22"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Thrust"",
+                    ""type"": ""Button"",
+                    ""id"": ""a74ea02b-bd64-4880-984a-9aeb231bcbf7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WheelBrake"",
+                    ""type"": ""Button"",
+                    ""id"": ""9949e86a-1e4c-46dd-9dfe-eda81d891674"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""f7261337-91f7-43f7-838a-5e907fe2c462"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""9fd9f552-9f84-4b3f-b260-01a41c1ccabe"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""4965a983-aa44-4986-a111-dd5005b9ab60"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""7faacd1c-9213-4b23-8bf1-29c7a7f1fab1"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""03f1dc49-d9ec-42ec-bf45-01445e4af7a3"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""f235d1d3-3b84-4cfa-b4ef-e30476b2ba67"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""f158e301-d649-4820-96c3-7b0334c3338e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Yaw"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""6ab6ebac-91ca-4d6e-adcd-0dba16d6c32c"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Yaw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""5fcdbab6-4d77-45d3-a966-e55c8e9a8de1"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Yaw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d9e36c3-883d-4a60-9a6e-c5d3210cddbb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Thrust"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""063232ff-63ab-4115-90ac-736c1c6c8d95"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WheelBrake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""b8d493c6-677f-431e-bedd-4cf94c4378df"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flap"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""2a912053-1193-4152-8776-db42ddf60541"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""23108567-8f34-4f32-9a2d-79596b5f2ed1"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -251,11 +467,20 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         m_Aircraft_Pitch = m_Aircraft.FindAction("Pitch", throwIfNotFound: true);
         m_Aircraft_Yaw = m_Aircraft.FindAction("Yaw", throwIfNotFound: true);
         m_Aircraft_Thrust = m_Aircraft.FindAction("Thrust", throwIfNotFound: true);
+        // AircraftWithFlaps
+        m_AircraftWithFlaps = asset.FindActionMap("AircraftWithFlaps", throwIfNotFound: true);
+        m_AircraftWithFlaps_Roll = m_AircraftWithFlaps.FindAction("Roll", throwIfNotFound: true);
+        m_AircraftWithFlaps_Pitch = m_AircraftWithFlaps.FindAction("Pitch", throwIfNotFound: true);
+        m_AircraftWithFlaps_Yaw = m_AircraftWithFlaps.FindAction("Yaw", throwIfNotFound: true);
+        m_AircraftWithFlaps_Flap = m_AircraftWithFlaps.FindAction("Flap", throwIfNotFound: true);
+        m_AircraftWithFlaps_Thrust = m_AircraftWithFlaps.FindAction("Thrust", throwIfNotFound: true);
+        m_AircraftWithFlaps_WheelBrake = m_AircraftWithFlaps.FindAction("WheelBrake", throwIfNotFound: true);
     }
 
     ~@AircraftInputActions()
     {
         UnityEngine.Debug.Assert(!m_Aircraft.enabled, "This will cause a leak and performance issues, AircraftInputActions.Aircraft.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_AircraftWithFlaps.enabled, "This will cause a leak and performance issues, AircraftInputActions.AircraftWithFlaps.Disable() has not been called.");
     }
 
     /// <summary>
@@ -456,6 +681,157 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="AircraftActions" /> instance referencing this action map.
     /// </summary>
     public AircraftActions @Aircraft => new AircraftActions(this);
+
+    // AircraftWithFlaps
+    private readonly InputActionMap m_AircraftWithFlaps;
+    private List<IAircraftWithFlapsActions> m_AircraftWithFlapsActionsCallbackInterfaces = new List<IAircraftWithFlapsActions>();
+    private readonly InputAction m_AircraftWithFlaps_Roll;
+    private readonly InputAction m_AircraftWithFlaps_Pitch;
+    private readonly InputAction m_AircraftWithFlaps_Yaw;
+    private readonly InputAction m_AircraftWithFlaps_Flap;
+    private readonly InputAction m_AircraftWithFlaps_Thrust;
+    private readonly InputAction m_AircraftWithFlaps_WheelBrake;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "AircraftWithFlaps".
+    /// </summary>
+    public struct AircraftWithFlapsActions
+    {
+        private @AircraftInputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public AircraftWithFlapsActions(@AircraftInputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "AircraftWithFlaps/Roll".
+        /// </summary>
+        public InputAction @Roll => m_Wrapper.m_AircraftWithFlaps_Roll;
+        /// <summary>
+        /// Provides access to the underlying input action "AircraftWithFlaps/Pitch".
+        /// </summary>
+        public InputAction @Pitch => m_Wrapper.m_AircraftWithFlaps_Pitch;
+        /// <summary>
+        /// Provides access to the underlying input action "AircraftWithFlaps/Yaw".
+        /// </summary>
+        public InputAction @Yaw => m_Wrapper.m_AircraftWithFlaps_Yaw;
+        /// <summary>
+        /// Provides access to the underlying input action "AircraftWithFlaps/Flap".
+        /// </summary>
+        public InputAction @Flap => m_Wrapper.m_AircraftWithFlaps_Flap;
+        /// <summary>
+        /// Provides access to the underlying input action "AircraftWithFlaps/Thrust".
+        /// </summary>
+        public InputAction @Thrust => m_Wrapper.m_AircraftWithFlaps_Thrust;
+        /// <summary>
+        /// Provides access to the underlying input action "AircraftWithFlaps/WheelBrake".
+        /// </summary>
+        public InputAction @WheelBrake => m_Wrapper.m_AircraftWithFlaps_WheelBrake;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_AircraftWithFlaps; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="AircraftWithFlapsActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(AircraftWithFlapsActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="AircraftWithFlapsActions" />
+        public void AddCallbacks(IAircraftWithFlapsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_AircraftWithFlapsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_AircraftWithFlapsActionsCallbackInterfaces.Add(instance);
+            @Roll.started += instance.OnRoll;
+            @Roll.performed += instance.OnRoll;
+            @Roll.canceled += instance.OnRoll;
+            @Pitch.started += instance.OnPitch;
+            @Pitch.performed += instance.OnPitch;
+            @Pitch.canceled += instance.OnPitch;
+            @Yaw.started += instance.OnYaw;
+            @Yaw.performed += instance.OnYaw;
+            @Yaw.canceled += instance.OnYaw;
+            @Flap.started += instance.OnFlap;
+            @Flap.performed += instance.OnFlap;
+            @Flap.canceled += instance.OnFlap;
+            @Thrust.started += instance.OnThrust;
+            @Thrust.performed += instance.OnThrust;
+            @Thrust.canceled += instance.OnThrust;
+            @WheelBrake.started += instance.OnWheelBrake;
+            @WheelBrake.performed += instance.OnWheelBrake;
+            @WheelBrake.canceled += instance.OnWheelBrake;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="AircraftWithFlapsActions" />
+        private void UnregisterCallbacks(IAircraftWithFlapsActions instance)
+        {
+            @Roll.started -= instance.OnRoll;
+            @Roll.performed -= instance.OnRoll;
+            @Roll.canceled -= instance.OnRoll;
+            @Pitch.started -= instance.OnPitch;
+            @Pitch.performed -= instance.OnPitch;
+            @Pitch.canceled -= instance.OnPitch;
+            @Yaw.started -= instance.OnYaw;
+            @Yaw.performed -= instance.OnYaw;
+            @Yaw.canceled -= instance.OnYaw;
+            @Flap.started -= instance.OnFlap;
+            @Flap.performed -= instance.OnFlap;
+            @Flap.canceled -= instance.OnFlap;
+            @Thrust.started -= instance.OnThrust;
+            @Thrust.performed -= instance.OnThrust;
+            @Thrust.canceled -= instance.OnThrust;
+            @WheelBrake.started -= instance.OnWheelBrake;
+            @WheelBrake.performed -= instance.OnWheelBrake;
+            @WheelBrake.canceled -= instance.OnWheelBrake;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="AircraftWithFlapsActions.UnregisterCallbacks(IAircraftWithFlapsActions)" />.
+        /// </summary>
+        /// <seealso cref="AircraftWithFlapsActions.UnregisterCallbacks(IAircraftWithFlapsActions)" />
+        public void RemoveCallbacks(IAircraftWithFlapsActions instance)
+        {
+            if (m_Wrapper.m_AircraftWithFlapsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="AircraftWithFlapsActions.AddCallbacks(IAircraftWithFlapsActions)" />
+        /// <seealso cref="AircraftWithFlapsActions.RemoveCallbacks(IAircraftWithFlapsActions)" />
+        /// <seealso cref="AircraftWithFlapsActions.UnregisterCallbacks(IAircraftWithFlapsActions)" />
+        public void SetCallbacks(IAircraftWithFlapsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_AircraftWithFlapsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_AircraftWithFlapsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="AircraftWithFlapsActions" /> instance referencing this action map.
+    /// </summary>
+    public AircraftWithFlapsActions @AircraftWithFlaps => new AircraftWithFlapsActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Aircraft" which allows adding and removing callbacks.
     /// </summary>
@@ -491,5 +867,55 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnThrust(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "AircraftWithFlaps" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="AircraftWithFlapsActions.AddCallbacks(IAircraftWithFlapsActions)" />
+    /// <seealso cref="AircraftWithFlapsActions.RemoveCallbacks(IAircraftWithFlapsActions)" />
+    public interface IAircraftWithFlapsActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Roll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRoll(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pitch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPitch(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Yaw" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnYaw(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Flap" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFlap(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Thrust" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnThrust(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "WheelBrake" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWheelBrake(InputAction.CallbackContext context);
     }
 }

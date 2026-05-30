@@ -28,7 +28,7 @@ public class FirstAircraftController : MonoBehaviour
     public ControlSurface RightElevator;
     public ControlSurface Rudder;
 
-    [Header("Text")]
+    [Header("UI Display")]
     public TextMeshProUGUI SpeedText;
     public TextMeshProUGUI AltitudeText;
 
@@ -95,7 +95,7 @@ public class FirstAircraftController : MonoBehaviour
     }
 
     /// <summary>
-    /// Update display text during with current parameters
+    /// Update display text with current parameters
     /// </summary>
     private void UpdateText()
     {
