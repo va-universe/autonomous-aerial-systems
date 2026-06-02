@@ -77,8 +77,8 @@ public class SecondAircraftController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _com = transform.Find("Aerodynamics").Find("CenterOfMass").transform;
 
-        _rb.centerOfMass = _com.position;
         _previousVelocity = _rb.linearVelocity;
+        _rb.centerOfMass = _com.position;
 
         InitializeControlSurfaces();
         InitializeWingSurfaces();
