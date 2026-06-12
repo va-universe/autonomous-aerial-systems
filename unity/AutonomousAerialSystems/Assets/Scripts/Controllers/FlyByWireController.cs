@@ -52,18 +52,20 @@ public class FlyByWireController : Controller
     private Vector3 _previousVelocity;
 
     [Header("UI Display")]
-    public TextMeshProUGUI SpeedText;
-    public TextMeshProUGUI AltitudeText;
-    public TextMeshProUGUI StallingText;
-    public TextMeshProUGUI GForceText;
+    public Canvas UICanvas;
 
-    public TextMeshProUGUI LeftAileronText;
-    public TextMeshProUGUI RightAileronText;
-    public TextMeshProUGUI LeftFlapText;
-    public TextMeshProUGUI RightFlapText;
-    public TextMeshProUGUI LeftElevatorText;
-    public TextMeshProUGUI RightElevatorText;
-    public TextMeshProUGUI RudderText;
+    private TextMeshProUGUI SpeedText;
+    private TextMeshProUGUI AltitudeText;
+    private TextMeshProUGUI StallingText;
+    private TextMeshProUGUI GForceText;
+
+    private TextMeshProUGUI LeftAileronText;
+    private TextMeshProUGUI RightAileronText;
+    private TextMeshProUGUI LeftFlapText;
+    private TextMeshProUGUI RightFlapText;
+    private TextMeshProUGUI LeftElevatorText;
+    private TextMeshProUGUI RightElevatorText;
+    private TextMeshProUGUI RudderText;
 
     private int _numWingText;
 
@@ -82,6 +84,7 @@ public class FlyByWireController : Controller
 
         InitializeControlSurfaces();
         InitializeWingSurfaces();
+        InitializeTextDisplays();
     }
 
     void Update()
@@ -133,6 +136,28 @@ public class FlyByWireController : Controller
         _leftElevatorParent = wingSurfaces.Find("Left Elevator Parent").GetComponent<WingSurface>();
         _rightElevatorParent = wingSurfaces.Find("Right Elevator Parent").GetComponent<WingSurface>();
         _rudderParent = wingSurfaces.Find("Rudder Parent").GetComponent<WingSurface>();
+    }
+
+    /// <summary>
+    /// Gets all texts from canvas
+    /// </summary>
+    private void InitializeTextDisplays()
+    {
+        Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
+        Transform wingPanel = UICanvas.transform.Find("Wing Panel").transform;
+
+        SpeedText = aircraftPanel.transform.Find("SpeedText").GetComponent<TextMeshProUGUI>();
+        AltitudeText = aircraftPanel.transform.Find("AltitudeText").GetComponent<TextMeshProUGUI>();
+        StallingText = aircraftPanel.transform.Find("StallingText").GetComponent<TextMeshProUGUI>();
+        GForceText = aircraftPanel.transform.Find("GForceText").GetComponent<TextMeshProUGUI>();
+
+        LeftAileronText = wingPanel.Find("LeftAileronText").GetComponent<TextMeshProUGUI>();
+        RightAileronText = wingPanel.Find("RightAileronText").GetComponent<TextMeshProUGUI>();
+        LeftFlapText = wingPanel.Find("LeftFlapText").GetComponent<TextMeshProUGUI>();
+        RightFlapText = wingPanel.Find("RightFlapText").GetComponent<TextMeshProUGUI>();
+        LeftElevatorText = wingPanel.Find("LeftElevatorText").GetComponent<TextMeshProUGUI>();
+        RightElevatorText = wingPanel.Find("RightElevatorText").GetComponent<TextMeshProUGUI>();
+        RudderText = wingPanel.Find("RudderText").GetComponent<TextMeshProUGUI>();
     }
 
     /// <summary>

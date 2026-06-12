@@ -5684,6 +5684,10 @@ PrefabInstance:
       value: Fly-By-Wire Prototype
       objectReference: {fileID: 0}
     - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: UICanvas
+      value: 
+      objectReference: {fileID: 2053182986}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
       propertyPath: SpeedText
       value: 
       objectReference: {fileID: 1027882374}
