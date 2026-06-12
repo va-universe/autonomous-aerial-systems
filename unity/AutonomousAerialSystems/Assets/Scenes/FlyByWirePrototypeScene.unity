@@ -5683,6 +5683,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fly-By-Wire Prototype
       objectReference: {fileID: 0}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: SpeedText
+      value: 
+      objectReference: {fileID: 1027882374}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: GForceText
+      value: 
+      objectReference: {fileID: 1559844279}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: RudderText
+      value: 
+      objectReference: {fileID: 2089199994}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: AltitudeText
+      value: 
+      objectReference: {fileID: 1329290499}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: LeftFlapText
+      value: 
+      objectReference: {fileID: 264889266}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: StallingText
+      value: 
+      objectReference: {fileID: 994103621}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: RightFlapText
+      value: 
+      objectReference: {fileID: 89496078}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: LeftAileronText
+      value: 
+      objectReference: {fileID: 427313349}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: LeftElevatorText
+      value: 
+      objectReference: {fileID: 780473760}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: RightAileronText
+      value: 
+      objectReference: {fileID: 734236935}
+    - target: {fileID: 6436141379569861245, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
+      propertyPath: RightElevatorText
+      value: 
+      objectReference: {fileID: 1360924274}
     - target: {fileID: 6897620030578094780, guid: 3c45e0babbfd058449e9e6969b1bd91c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// The controller of the second aircraft prototype
 /// </summary>
-public class SecondAircraftController : MonoBehaviour
+public class SecondAircraftController : Controller
 {
     private Rigidbody _rb;
     private Transform _com; //Center of mass
@@ -17,7 +17,6 @@ public class SecondAircraftController : MonoBehaviour
     private float _yawInput;
     private float _flapInput;
     private float _throttleInput;
-    public float WheelBrakeInput;
     #endregion
 
     #region Control Surfaces
@@ -42,7 +41,6 @@ public class SecondAircraftController : MonoBehaviour
 
     [Header("Parameters")]
     public float Thrust;
-    public float AirDensityAtSeaLevel;
     public float StallTextThreshold;
     public float StallTextRedness;
     private float _totalStall;
