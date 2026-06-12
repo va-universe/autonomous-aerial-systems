@@ -7,10 +7,6 @@ using UnityEngine;
 /// </summary>
 public class SecondAircraftController : Controller
 {
-    private Rigidbody _rb;
-    private Transform _com; //Center of mass
-    private AircraftInputActions _inputActions;
-
     #region Inputs
     private float _rollInput;
     private float _pitchInput;
@@ -18,36 +14,6 @@ public class SecondAircraftController : Controller
     private float _flapInput;
     private float _throttleInput;
     #endregion
-
-    #region Control Surfaces
-    private ControlSurface _leftAileron;
-    private ControlSurface _rightAileron;
-    private ControlSurface _leftFlap;
-    private ControlSurface _rightFlap;
-    private ControlSurface _leftElevator;
-    private ControlSurface _rightElevator;
-    private ControlSurface _rudder;
-    #endregion
-
-    #region Wing Surfaces
-    private WingSurface _leftAileronParent;
-    private WingSurface _rightAileronParent;
-    private WingSurface _leftFlapParent;
-    private WingSurface _rightFlapParent;
-    private WingSurface _leftElevatorParent;
-    private WingSurface _rightElevatorParent;
-    private WingSurface _rudderParent;
-    #endregion
-
-    [Header("Parameters")]
-    public float Thrust;
-    public float StallTextThreshold;
-    public float StallTextRedness;
-    private float _totalStall;
-
-    [Header("G-Force")]
-    public float GForce;
-    private Vector3 _previousVelocity;
 
     [Header("UI Display")]
     public TextMeshProUGUI SpeedText;
@@ -65,21 +31,11 @@ public class SecondAircraftController : Controller
 
     private int _numWingText;
 
-    void Awake()
+    protected override void Start()
     {
-        _inputActions = new AircraftInputActions();
-    }
+        base.Start();
 
-    void Start()
-    {
-        _rb = GetComponent<Rigidbody>();
-        _com = transform.Find("Aerodynamics").Find("CenterOfMass").transform;
-
-        _previousVelocity = _rb.linearVelocity;
         _rb.centerOfMass = _com.position;
-
-        InitializeControlSurfaces();
-        InitializeWingSurfaces();
     }
 
     void Update()
@@ -91,46 +47,9 @@ public class SecondAircraftController : Controller
     void FixedUpdate()
     {
         DeflectControlSurfaces();
-        ApplyThrust();
+        ApplyThrust(_throttleInput);
 
         CalculateGForce();
-    }
-
-    void OnEnable()
-    {
-        _inputActions.Enable();
-    }
-
-    /// <summary>
-    /// Gets all control surfaces from prefab
-    /// </summary>
-    private void InitializeControlSurfaces()
-    {
-        Transform pivots = transform.Find("Visual Components").Find("Pivots").transform;
-
-        _leftAileron = pivots.Find("Left Aileron Pivot").GetComponent<ControlSurface>();
-        _rightAileron = pivots.Find("Right Aileron Pivot").GetComponent<ControlSurface>();
-        _leftFlap = pivots.Find("Left Flap Pivot").GetComponent<ControlSurface>();
-        _rightFlap = pivots.Find("Right Flap Pivot").GetComponent<ControlSurface>();
-        _leftElevator = pivots.Find("Left Elevator Pivot").GetComponent<ControlSurface>();
-        _rightElevator = pivots.Find("Right Elevator Pivot").GetComponent<ControlSurface>();
-        _rudder = pivots.Find("Rudder Pivot").GetComponent<ControlSurface>();
-    }
-
-    /// <summary>
-    /// Gets all wing surfaces from prefab
-    /// </summary>
-    private void InitializeWingSurfaces()
-    {
-        Transform wingSurfaces = transform.Find("Aerodynamics").Find("Wing Surfaces").transform;
-
-        _leftAileronParent = wingSurfaces.Find("Left Aileron Parent").GetComponent<WingSurface>();
-        _rightAileronParent = wingSurfaces.Find("Right Aileron Parent").GetComponent<WingSurface>();
-        _leftFlapParent = wingSurfaces.Find("Left Flap Parent").GetComponent<WingSurface>();
-        _rightFlapParent = wingSurfaces.Find("Right Flap Parent").GetComponent<WingSurface>();
-        _leftElevatorParent = wingSurfaces.Find("Left Elevator Parent").GetComponent<WingSurface>();
-        _rightElevatorParent = wingSurfaces.Find("Right Elevator Parent").GetComponent<WingSurface>();
-        _rudderParent = wingSurfaces.Find("Rudder Parent").GetComponent<WingSurface>();
     }
 
     /// <summary>
@@ -194,20 +113,11 @@ public class SecondAircraftController : Controller
     /// <summary>
     /// Apply thrust force at the center of mass
     /// </summary>
-    private void ApplyThrust()
+    protected override void ApplyThrust(float throttleInput)
     {
         Vector3 centerOfMass = _com.position;
-        Vector3 thrustForce = transform.forward * Thrust * _throttleInput;
+        Vector3 thrustForce = transform.forward * Thrust * throttleInput;
         _rb.AddForceAtPosition(thrustForce, centerOfMass, ForceMode.Force);
-    }
-
-    private void CalculateGForce()
-    {
-        Vector3 acceleration = (_rb.linearVelocity - _previousVelocity) / Time.fixedDeltaTime;
-        Vector3 accelerationWithoutGravity = acceleration - Physics.gravity;
-
-        GForce = Vector3.Dot(accelerationWithoutGravity, transform.up) / 9.81f;
-        _previousVelocity = _rb.linearVelocity;
     }
 
     /// <summary>

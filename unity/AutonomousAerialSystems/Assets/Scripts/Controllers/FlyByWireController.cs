@@ -7,12 +7,6 @@ using UnityEngine;
 /// </summary>
 public class FlyByWireController : Controller
 {
-    const float GRAVITY = 9.81f;
-
-    private Rigidbody _rb;
-    private Transform _com; //Center of mass
-    private AircraftInputActions _inputActions;
-
     #region Inputs
     private float _rollInput;
     private float _pitchInput;
@@ -21,69 +15,30 @@ public class FlyByWireController : Controller
     private float _throttleInput;
     #endregion
 
-    #region Control Surfaces
-    private ControlSurface _leftAileron;
-    private ControlSurface _rightAileron;
-    private ControlSurface _leftFlap;
-    private ControlSurface _rightFlap;
-    private ControlSurface _leftElevator;
-    private ControlSurface _rightElevator;
-    private ControlSurface _rudder;
-    #endregion
-
-    #region Wing Surfaces
-    private WingSurface _leftAileronParent;
-    private WingSurface _rightAileronParent;
-    private WingSurface _leftFlapParent;
-    private WingSurface _rightFlapParent;
-    private WingSurface _leftElevatorParent;
-    private WingSurface _rightElevatorParent;
-    private WingSurface _rudderParent;
-    #endregion
-
-    [Header("Parameters")]
-    public float Thrust;
-    public float StallTextThreshold;
-    public float StallTextRedness;
-    private float _totalStall;
-
-    [Header("G-Force")]
-    public float GForce;
-    private Vector3 _previousVelocity;
-
     [Header("UI Display")]
     public Canvas UICanvas;
 
-    private TextMeshProUGUI SpeedText;
-    private TextMeshProUGUI AltitudeText;
-    private TextMeshProUGUI StallingText;
-    private TextMeshProUGUI GForceText;
+    #region UI Display Text
+    private TextMeshProUGUI _speedText;
+    private TextMeshProUGUI _altitudeText;
+    private TextMeshProUGUI _stallingText;
+    private TextMeshProUGUI _gForceText;
 
-    private TextMeshProUGUI LeftAileronText;
-    private TextMeshProUGUI RightAileronText;
-    private TextMeshProUGUI LeftFlapText;
-    private TextMeshProUGUI RightFlapText;
-    private TextMeshProUGUI LeftElevatorText;
-    private TextMeshProUGUI RightElevatorText;
-    private TextMeshProUGUI RudderText;
+    private TextMeshProUGUI _leftAileronText;
+    private TextMeshProUGUI _rightAileronText;
+    private TextMeshProUGUI _leftFlapText;
+    private TextMeshProUGUI _rightFlapText;
+    private TextMeshProUGUI _leftElevatorText;
+    private TextMeshProUGUI _rightElevatorText;
+    private TextMeshProUGUI _rudderText;
 
     private int _numWingText;
+    #endregion
 
-    void Awake()
+    protected override void Start()
     {
-        _inputActions = new AircraftInputActions();
-    }
+        base.Start();
 
-    void Start()
-    {
-        _rb = GetComponent<Rigidbody>();
-        _com = transform.Find("Aerodynamics").Find("CenterOfMass").transform;
-
-        _previousVelocity = _rb.linearVelocity;
-        _rb.centerOfMass = _com.localPosition;
-
-        InitializeControlSurfaces();
-        InitializeWingSurfaces();
         InitializeTextDisplays();
     }
 
@@ -96,46 +51,9 @@ public class FlyByWireController : Controller
     void FixedUpdate()
     {
         DeflectControlSurfaces();
-        ApplyThrust();
+        ApplyThrust(_throttleInput);
 
         CalculateGForce();
-    }
-
-    void OnEnable()
-    {
-        _inputActions.Enable();
-    }
-
-    /// <summary>
-    /// Gets all control surfaces from prefab
-    /// </summary>
-    private void InitializeControlSurfaces()
-    {
-        Transform pivots = transform.Find("Visual Components").Find("Pivots").transform;
-
-        _leftAileron = pivots.Find("Left Aileron Pivot").GetComponent<ControlSurface>();
-        _rightAileron = pivots.Find("Right Aileron Pivot").GetComponent<ControlSurface>();
-        _leftFlap = pivots.Find("Left Flap Pivot").GetComponent<ControlSurface>();
-        _rightFlap = pivots.Find("Right Flap Pivot").GetComponent<ControlSurface>();
-        _leftElevator = pivots.Find("Left Elevator Pivot").GetComponent<ControlSurface>();
-        _rightElevator = pivots.Find("Right Elevator Pivot").GetComponent<ControlSurface>();
-        _rudder = pivots.Find("Rudder Pivot").GetComponent<ControlSurface>();
-    }
-
-    /// <summary>
-    /// Gets all wing surfaces from prefab
-    /// </summary>
-    private void InitializeWingSurfaces()
-    {
-        Transform wingSurfaces = transform.Find("Aerodynamics").Find("Wing Surfaces").transform;
-
-        _leftAileronParent = wingSurfaces.Find("Left Aileron Parent").GetComponent<WingSurface>();
-        _rightAileronParent = wingSurfaces.Find("Right Aileron Parent").GetComponent<WingSurface>();
-        _leftFlapParent = wingSurfaces.Find("Left Flap Parent").GetComponent<WingSurface>();
-        _rightFlapParent = wingSurfaces.Find("Right Flap Parent").GetComponent<WingSurface>();
-        _leftElevatorParent = wingSurfaces.Find("Left Elevator Parent").GetComponent<WingSurface>();
-        _rightElevatorParent = wingSurfaces.Find("Right Elevator Parent").GetComponent<WingSurface>();
-        _rudderParent = wingSurfaces.Find("Rudder Parent").GetComponent<WingSurface>();
     }
 
     /// <summary>
@@ -146,18 +64,18 @@ public class FlyByWireController : Controller
         Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
         Transform wingPanel = UICanvas.transform.Find("Wing Panel").transform;
 
-        SpeedText = aircraftPanel.transform.Find("SpeedText").GetComponent<TextMeshProUGUI>();
-        AltitudeText = aircraftPanel.transform.Find("AltitudeText").GetComponent<TextMeshProUGUI>();
-        StallingText = aircraftPanel.transform.Find("StallingText").GetComponent<TextMeshProUGUI>();
-        GForceText = aircraftPanel.transform.Find("GForceText").GetComponent<TextMeshProUGUI>();
+        _speedText = aircraftPanel.transform.Find("SpeedText").GetComponent<TextMeshProUGUI>();
+        _altitudeText = aircraftPanel.transform.Find("AltitudeText").GetComponent<TextMeshProUGUI>();
+        _stallingText = aircraftPanel.transform.Find("StallingText").GetComponent<TextMeshProUGUI>();
+        _gForceText = aircraftPanel.transform.Find("GForceText").GetComponent<TextMeshProUGUI>();
 
-        LeftAileronText = wingPanel.Find("LeftAileronText").GetComponent<TextMeshProUGUI>();
-        RightAileronText = wingPanel.Find("RightAileronText").GetComponent<TextMeshProUGUI>();
-        LeftFlapText = wingPanel.Find("LeftFlapText").GetComponent<TextMeshProUGUI>();
-        RightFlapText = wingPanel.Find("RightFlapText").GetComponent<TextMeshProUGUI>();
-        LeftElevatorText = wingPanel.Find("LeftElevatorText").GetComponent<TextMeshProUGUI>();
-        RightElevatorText = wingPanel.Find("RightElevatorText").GetComponent<TextMeshProUGUI>();
-        RudderText = wingPanel.Find("RudderText").GetComponent<TextMeshProUGUI>();
+        _leftAileronText = wingPanel.Find("LeftAileronText").GetComponent<TextMeshProUGUI>();
+        _rightAileronText = wingPanel.Find("RightAileronText").GetComponent<TextMeshProUGUI>();
+        _leftFlapText = wingPanel.Find("LeftFlapText").GetComponent<TextMeshProUGUI>();
+        _rightFlapText = wingPanel.Find("RightFlapText").GetComponent<TextMeshProUGUI>();
+        _leftElevatorText = wingPanel.Find("LeftElevatorText").GetComponent<TextMeshProUGUI>();
+        _rightElevatorText = wingPanel.Find("RightElevatorText").GetComponent<TextMeshProUGUI>();
+        _rudderText = wingPanel.Find("RudderText").GetComponent<TextMeshProUGUI>();
     }
 
     /// <summary>
@@ -219,61 +137,39 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Apply thrust force at the center of mass
-    /// </summary>
-    private void ApplyThrust()
-    {
-        Vector3 centerOfMass = transform.position + _rb.centerOfMass;
-        Vector3 thrustForce = transform.forward * Thrust * _throttleInput;
-        _rb.AddForceAtPosition(thrustForce, centerOfMass, ForceMode.Force);
-    }
-
-    /// <summary>
-    /// Calculate the current G Force 
-    /// </summary>
-    private void CalculateGForce()
-    {
-        Vector3 acceleration = (_rb.linearVelocity - _previousVelocity) / Time.fixedDeltaTime;
-        Vector3 accelerationWithoutGravity = acceleration - Physics.gravity;
-
-        GForce = Vector3.Dot(accelerationWithoutGravity, transform.up) / GRAVITY;
-        _previousVelocity = _rb.linearVelocity;
-    }
-
-    /// <summary>
     /// Update UI display text
     /// </summary>
     private void UpdateText()
     {
-        if (SpeedText != null)
+        if (_speedText != null)
         {
             float speed = (float)Math.Round(_rb.linearVelocity.magnitude, 1);
-            SpeedText.text = $"Speed: {speed} m/s";
+            _speedText.text = $"Speed: {speed} m/s";
         }
-        if (AltitudeText != null)
+        if (_altitudeText != null)
         {
             float altitude = Mathf.Round(transform.position.y);
-            AltitudeText.text = $"Altitude: {altitude} m";
+            _altitudeText.text = $"Altitude: {altitude} m";
         }
-        if (StallingText != null)
+        if (_stallingText != null)
         {
             float numTextModifier = _numWingText / 7f;
             if (_totalStall > StallTextThreshold * numTextModifier)
             {
                 float stall = Mathf.Clamp01(_totalStall / (6f * numTextModifier * StallTextRedness));
 
-                StallingText.text = "STALLING";
-                StallingText.color = Color.Lerp(Color.white, Color.red, stall);
+                _stallingText.text = "STALLING";
+                _stallingText.color = Color.Lerp(Color.white, Color.red, stall);
             }
             else
             {
-                StallingText.text = "";
+                _stallingText.text = "";
             }
         }
-        if (GForceText != null)
+        if (_gForceText != null)
         {
             float gForce = Mathf.Round(GForce);
-            GForceText.text = $"{gForce} G";
+            _gForceText.text = $"{gForce} G";
 
             float gForceStrength = 0f;
             if (GForce >= 0)
@@ -285,13 +181,13 @@ public class FlyByWireController : Controller
                 gForceStrength = Mathf.Clamp01(GForce / -4f);
             }
 
-            GForceText.color = Color.Lerp(Color.white, Color.red, gForceStrength);
+            _gForceText.color = Color.Lerp(Color.white, Color.red, gForceStrength);
         }
 
         _totalStall = 0f;
         _numWingText = 0;
 
-        if (LeftAileronText != null)
+        if (_leftAileronText != null)
         {
             WingSurface surface = _leftAileronParent;
             float lift = (float)Math.Round(surface.LiftData, 1);
@@ -299,13 +195,13 @@ public class FlyByWireController : Controller
             float stall = Mathf.Round(surface.StallData);
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            LeftAileronText.text = $"Left Aileron | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            LeftAileronText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
+            _leftAileronText.text = $"Left Aileron | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
+            _leftAileronText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
         }
-        if (LeftFlapText != null)
+        if (_leftFlapText != null)
         {
             WingSurface surface = _leftFlapParent;
             float lift = (float)Math.Round(surface.LiftData, 1);
@@ -313,13 +209,13 @@ public class FlyByWireController : Controller
             float stall = Mathf.Round(surface.StallData);
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            LeftFlapText.text = $"Left Flap | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            LeftFlapText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
+            _leftFlapText.text = $"Left Flap | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
+            _leftFlapText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
         }
-        if (LeftElevatorText != null)
+        if (_leftElevatorText != null)
         {
             WingSurface surface = _leftElevatorParent;
             float lift = (float)Math.Round(surface.LiftData, 1);
@@ -327,14 +223,14 @@ public class FlyByWireController : Controller
             float stall = Mathf.Round(surface.StallData);
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            LeftElevatorText.text = $"Left Elevator | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            LeftElevatorText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
+            _leftElevatorText.text = $"Left Elevator | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
+            _leftElevatorText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
         }
 
-        if (RudderText != null)
+        if (_rudderText != null)
         {
             WingSurface surface = _rudderParent;
             float lift = (float)Math.Round(surface.LiftData, 1);
@@ -342,14 +238,14 @@ public class FlyByWireController : Controller
             float stall = Mathf.Round(surface.StallData);
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            RudderText.text = $"Rudder | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            RudderText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
+            _rudderText.text = $"Rudder | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
+            _rudderText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
         }
 
-        if (RightAileronText != null)
+        if (_rightAileronText != null)
         {
             WingSurface surface = _rightAileronParent;
             float lift = (float)Math.Round(surface.LiftData, 1);
@@ -357,13 +253,13 @@ public class FlyByWireController : Controller
             float stall = Mathf.Round(surface.StallData);
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            RightAileronText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Aileron";
-            RightAileronText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
+            _rightAileronText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Aileron";
+            _rightAileronText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
         }
-        if (RightFlapText != null)
+        if (_rightFlapText != null)
         {
             WingSurface surface = _rightFlapParent;
             float lift = (float)Math.Round(surface.LiftData, 1);
@@ -371,13 +267,13 @@ public class FlyByWireController : Controller
             float stall = Mathf.Round(surface.StallData);
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            RightFlapText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Flap";
-            RightFlapText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
+            _rightFlapText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Flap";
+            _rightFlapText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
         }
-        if (RightElevatorText != null)
+        if (_rightElevatorText != null)
         {
             WingSurface surface = _rightElevatorParent;
             float lift = (float)Math.Round(surface.LiftData, 1);
@@ -385,8 +281,8 @@ public class FlyByWireController : Controller
             float stall = Mathf.Round(surface.StallData);
             float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
 
-            RightElevatorText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Elevator";
-            RightElevatorText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
+            _rightElevatorText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Elevator";
+            _rightElevatorText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
 
             _totalStall += stall;
             _numWingText += 1;
