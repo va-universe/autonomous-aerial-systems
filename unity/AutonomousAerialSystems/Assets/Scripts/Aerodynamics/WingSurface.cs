@@ -6,7 +6,7 @@ using UnityEngine;
 public class WingSurface : MonoBehaviour
 {
     private Rigidbody _rb;
-    private SecondAircraftController _controller;
+    private Controller _controller;
 
     private Transform _orientation;
 
@@ -38,7 +38,7 @@ public class WingSurface : MonoBehaviour
     void Start()
     {
         _rb = GetComponentInParent<Rigidbody>();
-        _controller = GetComponentInParent<SecondAircraftController>();
+        _controller = GetComponentInParent<Controller>();
         _orientation = transform.Find("Orientation").transform;
 
         SetSurfaceArea();

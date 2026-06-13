@@ -1645,7 +1645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6897620030578094780}
   - component: {fileID: 1300534123484158084}
-  - component: {fileID: 362040551660554232}
+  - component: {fileID: 6436141379569861245}
   - component: {fileID: 6708601862555293382}
   - component: {fileID: 1863508507095002009}
   m_Layer: 0
@@ -1701,7 +1701,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &362040551660554232
+--- !u!114 &6436141379569861245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1710,9 +1710,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2998195916871324884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7882592d5188e3843b5d643d4a37149f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5265a62cfc191344f99483ad7f136a6f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SecondAircraftController
+  m_EditorClassIdentifier: Assembly-CSharp::FlyByWireController
   WheelBrakeInput: 0
   Thrust: 10500
   AirDensityAtSeaLevel: 1.255
@@ -1783,7 +1783,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 791e50ce-a1f3-489c-ba1f-d9971dda3c5e
+  m_DefaultActionMap: AircraftWithFlaps
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &3061453472471730743

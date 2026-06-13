@@ -7,7 +7,7 @@ using UnityEngine.InputSystem.XR;
 /// </summary>
 public class LandingGear : MonoBehaviour
 {
-    private SecondAircraftController _controller;
+    private Controller _controller;
 
     [Header("Colliders")]
     public WheelCollider LeftWheelCollider;
@@ -34,7 +34,7 @@ public class LandingGear : MonoBehaviour
 
     void Start()
     {
-        _controller = GetComponent<SecondAircraftController>();
+        _controller = GetComponent<Controller>();
 
         InitializeWheel(LeftWheelCollider);
         InitializeWheel(RightWheelCollider);
