@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -7,15 +6,8 @@ using UnityEngine;
 /// </summary>
 public class SecondAircraftController : Controller
 {
-    #region Inputs
-    private float _rollInput;
-    private float _pitchInput;
-    private float _yawInput;
-    private float _flapInput;
-    private float _throttleInput;
-    #endregion
-
     [Header("UI Display")]
+
     public TextMeshProUGUI SpeedText;
     public TextMeshProUGUI AltitudeText;
     public TextMeshProUGUI StallingText;
@@ -29,8 +21,6 @@ public class SecondAircraftController : Controller
     public TextMeshProUGUI RightElevatorText;
     public TextMeshProUGUI RudderText;
 
-    private int _numWingText;
-
     protected override void Start()
     {
         base.Start();
@@ -38,238 +28,32 @@ public class SecondAircraftController : Controller
         _rb.centerOfMass = _com.position;
     }
 
-    void Update()
-    {
-        GetInput();
-        UpdateText();
-    }
-
-    void FixedUpdate()
-    {
-        DeflectControlSurfaces();
-        ApplyThrust(_throttleInput);
-
-        CalculateGForce();
-    }
-
     /// <summary>
-    /// Get the roll, pitch, yaw, flap and thrust input from the input action system
+    /// Initializes all texts directly
     /// </summary>
-    private void GetInput()
+    protected override void InitializeTextDisplays()
     {
-        _rollInput = _inputActions.AircraftWithFlaps.Roll.ReadValue<float>();
-        _pitchInput = _inputActions.AircraftWithFlaps.Pitch.ReadValue<float>();
-        _yawInput = _inputActions.AircraftWithFlaps.Yaw.ReadValue<float>();
+        _speedText = SpeedText;
+        _altitudeText = AltitudeText;
+        _stallingText = StallingText;
+        _gForceText = GForceText;
 
-        _flapInput = _inputActions.AircraftWithFlaps.Flap.ReadValue<float>();
-        _throttleInput = _inputActions.AircraftWithFlaps.Thrust.ReadValue<float>();
-
-        WheelBrakeInput = _inputActions.AircraftWithFlaps.WheelBrake.ReadValue<float>();
-    }
-
-    /// <summary>
-    /// Deflect all control surfaces visually and mathematically
-    /// </summary>
-    private void DeflectControlSurfaces()
-    {
-        UpdateWingSurfaceData();
-        VisualizeControlSurfaces();
-    }
-
-    /// <summary>
-    /// Update the deflection angles in the wing surfaces
-    /// </summary>
-    private void UpdateWingSurfaceData()
-    {
-        _leftAileronParent.ControlSurfaceDeflection = _leftAileron.MaxDeflection * _rollInput;
-        _rightAileronParent.ControlSurfaceDeflection = _rightAileron.MaxDeflection * -_rollInput;
-
-        _leftFlapParent.ControlSurfaceDeflection = _leftFlap.MaxDeflection * _flapInput;
-        _rightFlapParent.ControlSurfaceDeflection = _rightFlap.MaxDeflection * _flapInput;
-
-        _leftElevatorParent.ControlSurfaceDeflection = _leftElevator.MaxDeflection * _pitchInput;
-        _rightElevatorParent.ControlSurfaceDeflection = _rightElevator.MaxDeflection * _pitchInput;
-
-        _rudderParent.ControlSurfaceDeflection = _rudder.MaxDeflection * _yawInput;
-    }
-
-    /// <summary>
-    /// Visualize control surface deflection
-    /// </summary>
-    private void VisualizeControlSurfaces()
-    {
-        _leftAileron.DeflectSurface(_rollInput);
-        _rightAileron.DeflectSurface(-_rollInput);
-
-        _leftFlap.DeflectSurface(_flapInput);
-        _rightFlap.DeflectSurface(_flapInput);
-
-        _leftElevator.DeflectSurface(_pitchInput);
-        _rightElevator.DeflectSurface(_pitchInput);
-
-        _rudder.DeflectSurface(_yawInput);
+        _leftAileronText = LeftAileronText;
+        _rightAileronText = RightAileronText;
+        _leftFlapText = LeftFlapText;
+        _rightFlapText = RightFlapText;
+        _leftElevatorText = LeftElevatorText;
+        _rightElevatorText = RightElevatorText;
+        _rudderText = RudderText;
     }
 
     /// <summary>
     /// Apply thrust force at the center of mass
     /// </summary>
-    protected override void ApplyThrust(float throttleInput)
+    protected override void ApplyThrust()
     {
         Vector3 centerOfMass = _com.position;
-        Vector3 thrustForce = transform.forward * Thrust * throttleInput;
+        Vector3 thrustForce = transform.forward * Thrust * _throttleInput;
         _rb.AddForceAtPosition(thrustForce, centerOfMass, ForceMode.Force);
-    }
-
-    /// <summary>
-    /// Update UI display text
-    /// </summary>
-    private void UpdateText()
-    {
-        if (SpeedText != null)
-        {
-            float speed = (float)Math.Round(_rb.linearVelocity.magnitude, 1);
-            SpeedText.text = $"Speed: {speed} m/s";
-        }
-        if (AltitudeText != null)
-        {
-            float altitude = Mathf.Round(transform.position.y);
-            AltitudeText.text = $"Altitude: {altitude} m";
-        }
-        if (StallingText != null)
-        {
-            float numTextModifier = _numWingText / 7f;
-            if (_totalStall > StallTextThreshold * numTextModifier)
-            {
-                float stall = Mathf.Clamp01(_totalStall / (6f * numTextModifier * StallTextRedness));
-
-                StallingText.text = "STALLING";
-                StallingText.color = Color.Lerp(Color.white, Color.red, stall);
-            }
-            else
-            {
-                StallingText.text = "";
-            }
-        }
-        if (GForceText != null)
-        {
-            float gForce = Mathf.Round(GForce);
-            GForceText.text = $"{gForce} G";
-
-            float gForceStrength = 0f;
-            if (GForce >= 0)
-            {
-                gForceStrength = Mathf.Clamp01((GForce - 1f) / 8f);
-            }
-            else
-            {
-                gForceStrength = Mathf.Clamp01(GForce / -4f);
-            }
-
-            GForceText.color = Color.Lerp(Color.white, Color.red, gForceStrength);
-        }
-
-        _totalStall = 0f;
-        _numWingText = 0;
-
-        if (LeftAileronText != null)
-        {
-            WingSurface surface = _leftAileronParent;
-            float lift = (float)Math.Round(surface.LiftData, 1);
-            float drag = (float)Math.Round(surface.DragData, 1);
-            float stall = Mathf.Round(surface.StallData);
-            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
-
-            LeftAileronText.text = $"Left Aileron | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            LeftAileronText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
-
-            _totalStall += stall;
-            _numWingText += 1;
-        }
-        if (LeftFlapText != null)
-        {
-            WingSurface surface = _leftFlapParent;
-            float lift = (float)Math.Round(surface.LiftData, 1);
-            float drag = (float)Math.Round(surface.DragData, 1);
-            float stall = Mathf.Round(surface.StallData);
-            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
-
-            LeftFlapText.text = $"Left Flap | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            LeftFlapText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
-
-            _totalStall += stall;
-            _numWingText += 1;
-        }
-        if (LeftElevatorText != null)
-        {
-            WingSurface surface = _leftElevatorParent;
-            float lift = (float)Math.Round(surface.LiftData, 1);
-            float drag = (float)Math.Round(surface.DragData, 1);
-            float stall = Mathf.Round(surface.StallData);
-            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
-
-            LeftElevatorText.text = $"Left Elevator | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            LeftElevatorText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
-
-            _totalStall += stall;
-            _numWingText += 1;
-        }
-
-        if (RudderText != null)
-        {
-            WingSurface surface = _rudderParent;
-            float lift = (float)Math.Round(surface.LiftData, 1);
-            float drag = (float)Math.Round(surface.DragData, 1);
-            float stall = Mathf.Round(surface.StallData);
-            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
-
-            RudderText.text = $"Rudder | Lift: {lift} kN | Drag: {drag} kN | AoA: {angleOfAttack}° | Stall: {stall}%";
-            RudderText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
-
-            _totalStall += stall;
-            _numWingText += 1;
-        }
-
-        if (RightAileronText != null)
-        {
-            WingSurface surface = _rightAileronParent;
-            float lift = (float)Math.Round(surface.LiftData, 1);
-            float drag = (float)Math.Round(surface.DragData, 1);
-            float stall = Mathf.Round(surface.StallData);
-            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
-
-            RightAileronText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Aileron";
-            RightAileronText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
-
-            _totalStall += stall;
-            _numWingText += 1;
-        }
-        if (RightFlapText != null)
-        {
-            WingSurface surface = _rightFlapParent;
-            float lift = (float)Math.Round(surface.LiftData, 1);
-            float drag = (float)Math.Round(surface.DragData, 1);
-            float stall = Mathf.Round(surface.StallData);
-            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
-
-            RightFlapText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Flap";
-            RightFlapText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
-
-            _totalStall += stall;
-            _numWingText += 1;
-        }
-        if (RightElevatorText != null)
-        {
-            WingSurface surface = _rightElevatorParent;
-            float lift = (float)Math.Round(surface.LiftData, 1);
-            float drag = (float)Math.Round(surface.DragData, 1);
-            float stall = Mathf.Round(surface.StallData);
-            float angleOfAttack = (float)Math.Round(surface.AoAData, 1);
-
-            RightElevatorText.text = $"Stall: {stall}% | AoA: {angleOfAttack}° | Drag: {drag} kN | Lift: {lift} kN | Right Elevator";
-            RightElevatorText.color = Color.Lerp(Color.white, Color.red, stall / StallTextRedness);
-
-            _totalStall += stall;
-            _numWingText += 1;
-        }
     }
 }
