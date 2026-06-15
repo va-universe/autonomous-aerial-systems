@@ -1714,22 +1714,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyByWireController
   WheelBrakeInput: 0
-  Thrust: 10500
   AirDensityAtSeaLevel: 1.255
+  Thrust: 10500
   StallTextThreshold: 119
   StallTextRedness: 52
   GForce: 0
-  SpeedText: {fileID: 0}
-  AltitudeText: {fileID: 0}
-  StallingText: {fileID: 0}
-  GForceText: {fileID: 0}
-  LeftAileronText: {fileID: 0}
-  RightAileronText: {fileID: 0}
-  LeftFlapText: {fileID: 0}
-  RightFlapText: {fileID: 0}
-  LeftElevatorText: {fileID: 0}
-  RightElevatorText: {fileID: 0}
-  RudderText: {fileID: 0}
+  UICanvas: {fileID: 0}
+  MaxGForce: 6
+  MinGForce: -2
+  LimiterStrength: 1.8
 --- !u!114 &6708601862555293382
 MonoBehaviour:
   m_ObjectHideFlags: 0
