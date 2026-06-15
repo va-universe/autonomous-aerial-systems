@@ -22,10 +22,12 @@ public class FlyByWireController : Controller
     [Header("G-Force Limiter")]
     public float MaxGForce;
     public float MinGForce;
-    public float LimiterStrength;
+    public float MaxLimiterStrength;
+    public float MinLimiterStrength;
 
     [Header("Input Smoother")]
-    public float PitchSmoothingStrength;
+    public float UpPitchSmoothingStrength;
+    public float DownPitchSmoothingStrength;
     public float RollSmoothingStrength;
     public float YawSmoothingStrength;
     public float FlapSmoothingStrength;
@@ -36,21 +38,33 @@ public class FlyByWireController : Controller
         base.FixedUpdate();
     }
 
+    /// <summary>
+    /// Limits the input based on prefered G-force
+    /// </summary>
+    /// <param name="input">The input to be limited</param>
+    /// <returns>The input after being limited by G-force</returns>
     private float LimitGForce(float input)
     {
         float modifier = 1f;
         if (input < 0f && GForce > 0f)
         {
-            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / MaxGForce) + 1f) * LimiterStrength);
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / MaxGForce) + 1f) * MaxLimiterStrength);
         }
         else if (input > 0f && GForce < 0f)
         {
-            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / MinGForce) + 1f) * LimiterStrength);
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / MinGForce) + 1f) * MinLimiterStrength);
         }
 
         return input * modifier;
     }
 
+    /// <summary>
+    /// Smoothens the input to avoid oscillations and sharp movement
+    /// </summary>
+    /// <param name="targetInput">The currently requested input</param>
+    /// <param name="currentInput">The current input, also refered to as the previously commanded input</param>
+    /// <param name="strength">The rate at which the currentInput moves towards the targetInput</param>
+    /// <returns>The input after being smoothened</returns>
     private float Smoother(float targetInput, float currentInput, float strength)
     {
         return Mathf.MoveTowards(currentInput, targetInput, strength * Time.fixedDeltaTime);
@@ -87,8 +101,10 @@ public class FlyByWireController : Controller
     /// <returns>The pitch input</returns>
     private float GetPitchInput()
     {
+        float smoothingStrength = _pitchInput <= 0f ? UpPitchSmoothingStrength : DownPitchSmoothingStrength;
+
         float gLimitedInput = LimitGForce(_initialPitchInput);
-        float smoothedInput = Smoother(gLimitedInput, _previousPitchInput, PitchSmoothingStrength);
+        float smoothedInput = Smoother(gLimitedInput, _previousPitchInput, smoothingStrength);
 
         _previousPitchInput = smoothedInput;
 

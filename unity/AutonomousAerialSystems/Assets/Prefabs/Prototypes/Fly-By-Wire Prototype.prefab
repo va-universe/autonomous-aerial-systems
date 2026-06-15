@@ -583,7 +583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
   surfaceType: 1
   RotationAxis: {x: 0, y: 0, z: 1}
-  MaxDeflection: 18.5
+  MaxDeflection: 19.5
   Input: 0
 --- !u!1 &561062570329882801
 GameObject:
@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
   surfaceType: 2
   RotationAxis: {x: 0, y: 1, z: 0}
-  MaxDeflection: 15
+  MaxDeflection: 16
   Input: 0
 --- !u!1 &1658300410620824076
 GameObject:
@@ -1722,8 +1722,10 @@ MonoBehaviour:
   UICanvas: {fileID: 0}
   MaxGForce: 4
   MinGForce: -2
-  LimiterStrength: 1.8
-  PitchSmoothingStrength: 2.2
+  MaxLimiterStrength: 1.7
+  MinLimiterStrength: 1.9
+  UpPitchSmoothingStrength: 2.1
+  DownPitchSmoothingStrength: 0.85
   RollSmoothingStrength: 3.7
   YawSmoothingStrength: 2.9
   FlapSmoothingStrength: 1.4
@@ -1830,7 +1832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
   surfaceType: 1
   RotationAxis: {x: 0, y: 0, z: 1}
-  MaxDeflection: 18.5
+  MaxDeflection: 19.5
   Input: 0
 --- !u!1 &3791762857655618723
 GameObject:
