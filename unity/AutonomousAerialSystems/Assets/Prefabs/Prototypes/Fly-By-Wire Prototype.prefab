@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
   surfaceType: 0
   RotationAxis: {x: 0, y: 0, z: 1}
-  MaxDeflection: 15
+  MaxDeflection: 14
   Input: 0
 --- !u!1 &138657411974501941
 GameObject:
@@ -583,7 +583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
   surfaceType: 1
   RotationAxis: {x: 0, y: 0, z: 1}
-  MaxDeflection: 17
+  MaxDeflection: 19.5
   Input: 0
 --- !u!1 &561062570329882801
 GameObject:
@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
   surfaceType: 2
   RotationAxis: {x: 0, y: 1, z: 0}
-  MaxDeflection: 15
+  MaxDeflection: 16
   Input: 0
 --- !u!1 &1658300410620824076
 GameObject:
@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
   surfaceType: 0
   RotationAxis: {x: 0, y: 0, z: 1}
-  MaxDeflection: 15
+  MaxDeflection: 14
   Input: 0
 --- !u!1 &2388135242666139707
 GameObject:
@@ -1714,22 +1714,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyByWireController
   WheelBrakeInput: 0
-  Thrust: 10500
   AirDensityAtSeaLevel: 1.255
+  Thrust: 10500
   StallTextThreshold: 119
   StallTextRedness: 52
   GForce: 0
-  SpeedText: {fileID: 0}
-  AltitudeText: {fileID: 0}
-  StallingText: {fileID: 0}
-  GForceText: {fileID: 0}
-  LeftAileronText: {fileID: 0}
-  RightAileronText: {fileID: 0}
-  LeftFlapText: {fileID: 0}
-  RightFlapText: {fileID: 0}
-  LeftElevatorText: {fileID: 0}
-  RightElevatorText: {fileID: 0}
-  RudderText: {fileID: 0}
+  UICanvas: {fileID: 0}
+  MaxGForce: 4
+  MinGForce: -2
+  MaxLimiterStrength: 1.7
+  MinLimiterStrength: 1.9
+  UpPitchSmoothingStrength: 2.1
+  DownPitchSmoothingStrength: 0.85
+  RollSmoothingStrength: 3.7
+  YawSmoothingStrength: 2.9
+  FlapSmoothingStrength: 1.4
 --- !u!114 &6708601862555293382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1833,7 +1832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ControlSurface
   surfaceType: 1
   RotationAxis: {x: 0, y: 0, z: 1}
-  MaxDeflection: 17
+  MaxDeflection: 19.5
   Input: 0
 --- !u!1 &3791762857655618723
 GameObject:

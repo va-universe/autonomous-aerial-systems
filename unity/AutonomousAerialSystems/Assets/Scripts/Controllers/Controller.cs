@@ -100,7 +100,7 @@ public class Controller : MonoBehaviour
         GetInput();
     }
 
-    protected void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         DeflectControlSurfaces();
         ApplyThrust();
@@ -235,7 +235,7 @@ public class Controller : MonoBehaviour
     /// <summary>
     /// Get the roll, pitch, yaw, flap and thrust input from the input action system
     /// </summary>
-    private void GetInput()
+    protected virtual void GetInput()
     {
         _rollInput = _inputActions.AircraftWithFlaps.Roll.ReadValue<float>();
         _pitchInput = _inputActions.AircraftWithFlaps.Pitch.ReadValue<float>();
