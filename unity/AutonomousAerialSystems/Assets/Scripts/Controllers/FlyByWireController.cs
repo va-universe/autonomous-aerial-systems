@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -13,14 +12,27 @@ public class FlyByWireController : Controller
     private float _initialFlapInput;
     #endregion
 
+    #region Previous Inputs
+    private float _previousRollInput;
+    private float _previousYawInput;
+    private float _previousPitchInput;
+    private float _previousFlapInput;
+    #endregion
+
     [Header("G-Force Limiter")]
     public float MaxGForce;
     public float MinGForce;
     public float LimiterStrength;
 
+    [Header("Input Smoother")]
+    public float PitchSmoothingStrength;
+    public float RollSmoothingStrength;
+    public float YawSmoothingStrength;
+    public float FlapSmoothingStrength;
+
     protected override void FixedUpdate()
     {
-        ConvertInput();
+        ConvertInputs();
         base.FixedUpdate();
     }
 
@@ -39,6 +51,11 @@ public class FlyByWireController : Controller
         return input * modifier;
     }
 
+    private float Smoother(float targetInput, float currentInput, float strength)
+    {
+        return Mathf.MoveTowards(currentInput, targetInput, strength * Time.fixedDeltaTime);
+    }
+
     /// <summary>
     /// Get the roll, pitch, yaw, flap and thrust input from the input action system
     /// </summary>
@@ -53,12 +70,68 @@ public class FlyByWireController : Controller
         WheelBrakeInput = _inputActions.AircraftWithFlaps.WheelBrake.ReadValue<float>();
     }
 
-    private void ConvertInput()
+    /// <summary>
+    /// Converts raw user inputs into fly-by-wire-modified inputs
+    /// </summary>
+    private void ConvertInputs()
     {
-        _pitchInput = LimitGForce(_initialPitchInput);
-        _flapInput = -LimitGForce(-_initialFlapInput);
+        _pitchInput = GetPitchInput();
+        _rollInput = GetRollInput();
+        _yawInput = GetYawInput();
+        _flapInput = GetFlapInput();
+    }
 
-        _rollInput = _initialRollInput;
-        _yawInput = _initialYawInput;
+    /// <summary>
+    /// Get the fly-by-wire pitch input
+    /// </summary>
+    /// <returns>The pitch input</returns>
+    private float GetPitchInput()
+    {
+        float gLimitedInput = LimitGForce(_initialPitchInput);
+        float smoothedInput = Smoother(gLimitedInput, _previousPitchInput, PitchSmoothingStrength);
+
+        _previousPitchInput = smoothedInput;
+
+        return smoothedInput;
+    }
+
+    /// <summary>
+    /// Get the fly-by-wire roll input
+    /// </summary>
+    /// <returns>The roll input</returns>
+    private float GetRollInput()
+    {
+        float smoothedInput = Smoother(_initialRollInput, _previousRollInput, RollSmoothingStrength);
+
+        _previousRollInput = smoothedInput;
+
+        return smoothedInput;
+    }
+
+    /// <summary>
+    /// Get the fly-by-wire yaw input
+    /// </summary>
+    /// <returns>The yaw input</returns>
+    private float GetYawInput()
+    {
+        float smoothedInput = Smoother(_initialYawInput, _previousYawInput, YawSmoothingStrength);
+
+        _previousYawInput = smoothedInput;
+
+        return smoothedInput;
+    }
+
+    /// <summary>
+    /// Get the fly-by-wire flap input
+    /// </summary>
+    /// <returns>The flap input</returns>
+    private float GetFlapInput()
+    {
+        float gLimitedInput = -LimitGForce(-_initialFlapInput); //Input values are reversed in comparison to Pitch, that is why there is minuses.
+        float smoothedInput = Smoother(gLimitedInput, _previousFlapInput, FlapSmoothingStrength);
+
+        _previousFlapInput = smoothedInput;
+
+        return smoothedInput;
     }
 }
