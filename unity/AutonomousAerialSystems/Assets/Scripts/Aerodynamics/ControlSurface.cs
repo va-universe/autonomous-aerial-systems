@@ -22,11 +22,24 @@ public class ControlSurface : MonoBehaviour
     /// <summary>
     /// Rotates the control surface to the product of the input and max deflection
     /// </summary>
-    /// <param name="input">Rotation input (between -1 and 1)</param>
+    /// <param name="input">The rotation input (between -1 and 1)</param>
     public void DeflectSurface(float input)
     {
         float normalizedInput = Mathf.Clamp(input, -1f, 1f);
         float angle = input * MaxDeflection;
+
+        transform.localRotation = _initialLocalRotation * Quaternion.AngleAxis(angle, RotationAxis);
+    }
+
+    /// <summary>
+    /// Rotates the control surface to the product of the input and max deflection
+    /// </summary>
+    /// <param name="input">The rotation input (between -1 and 1)</param>
+    /// <param name="maxDeflection">The maximum deflection</param>
+    public void DeflectSurface(float input, float maxDeflection)
+    {
+        float normalizedInput = Mathf.Clamp(input, -1f, 1f);
+        float angle = input * maxDeflection;
 
         transform.localRotation = _initialLocalRotation * Quaternion.AngleAxis(angle, RotationAxis);
     }

@@ -21,20 +21,32 @@ public class FlyByWireController : Controller
     private float _previousFlapInput;
     #endregion
 
+    private bool _overrideInput;
+
+    [Header("Max Deflection Overrides")]
+    public float AileronDeflectionOverrideModifier;
+    public float FlapDeflectionOverrideModifier;
+    public float ElevatorDeflectionOverrideModifier;
+    public float RudderDeflectionOverrideModifier;
+
     [Header("Fly-By-Wire Systems")]
     public bool IsGForceLimited;
     public bool IsStallLimited;
     public bool IsInputSmoothened;
 
     [Header("G-Force Limiter")]
-    public float MaxGForce;
-    public float MinGForce;
+    public float MaxComfortGForce;
+    public float MinComfortGForce;
+    public float MaxOverrideGForce;
+    public float MinOverrideGForce;
     public float MaxLimiterStrength;
     public float MinLimiterStrength;
 
     [Header("Stall Protection")]
-    public float MaxStallPercentage;
-    public float MaxAngleOfAttack;
+    public float MaxComfortStallPercentage;
+    public float MaxComfortAngleOfAttack;
+    public float MaxOverrideStallPercentage;
+    public float MaxOverrideAngleOfAttack;
 
     [Header("Input Smoother")]
     public float UpPitchSmoothingStrength;
@@ -61,14 +73,17 @@ public class FlyByWireController : Controller
             return input;
         }
 
+        float maxGForce = _overrideInput ? MaxOverrideGForce : MaxComfortGForce;
+        float minGForce = _overrideInput ? MinOverrideGForce : MinComfortGForce;
+
         float modifier = 1f;
         if (input < 0f && GForce > 0f)
         {
-            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / MaxGForce) + 1f) * MaxLimiterStrength);
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / maxGForce) + 1f) * MaxLimiterStrength);
         }
         else if (input > 0f && GForce < 0f)
         {
-            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / MinGForce) + 1f) * MinLimiterStrength);
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / minGForce) + 1f) * MinLimiterStrength);
         }
 
         return input * modifier;
@@ -105,8 +120,8 @@ public class FlyByWireController : Controller
 
         float highestAbsoluteAngle = Mathf.Max(Mathf.Abs(highestAngleOfAttack), Mathf.Abs(lowestAngleOfAttack));
    
-        float stallModifier = 1f - Mathf.Clamp01(highestStall / MaxStallPercentage);
-        float angleOfAttackModifier = 1f - Mathf.Clamp01(highestAbsoluteAngle / MaxAngleOfAttack);
+        float stallModifier = 1f - Mathf.Clamp01(highestStall / MaxComfortStallPercentage);
+        float angleOfAttackModifier = 1f - Mathf.Clamp01(highestAbsoluteAngle / MaxComfortAngleOfAttack);
         float modifier = (stallModifier + angleOfAttackModifier) / 2f;
 
         int sign = (Mathf.Abs(highestAngleOfAttack) >= Mathf.Abs(lowestAngleOfAttack)) ? (int)Mathf.Sign(highestAngleOfAttack) : (int)Mathf.Sign(lowestAngleOfAttack);
@@ -140,13 +155,14 @@ public class FlyByWireController : Controller
     /// </summary>
     protected override void GetInput()
     {
-        _initialRollInput = _inputActions.AircraftWithFlaps.Roll.ReadValue<float>();
-        _initialPitchInput = _inputActions.AircraftWithFlaps.Pitch.ReadValue<float>();
-        _initialYawInput = _inputActions.AircraftWithFlaps.Yaw.ReadValue<float>();
-        _initialFlapInput = _inputActions.AircraftWithFlaps.Flap.ReadValue<float>();
+        _initialRollInput = _inputActions.FlyByWire.Roll.ReadValue<float>();
+        _initialPitchInput = _inputActions.FlyByWire.Pitch.ReadValue<float>();
+        _initialYawInput = _inputActions.FlyByWire.Yaw.ReadValue<float>();
+        _initialFlapInput = _inputActions.FlyByWire.Flap.ReadValue<float>();
 
-        _throttleInput = _inputActions.AircraftWithFlaps.Thrust.ReadValue<float>();
-        WheelBrakeInput = _inputActions.AircraftWithFlaps.WheelBrake.ReadValue<float>();
+        _overrideInput = _inputActions.FlyByWire.Override.ReadValue<float>() == 1 ? true : false;
+        _throttleInput = _inputActions.FlyByWire.Thrust.ReadValue<float>();
+        WheelBrakeInput = _inputActions.FlyByWire.WheelBrake.ReadValue<float>();
     }
 
     /// <summary>
@@ -217,5 +233,62 @@ public class FlyByWireController : Controller
         _previousFlapInput = smoothedInput;
 
         return smoothedInput;
+    }
+
+    /// <summary>
+    /// Update the deflection angles in the wing surfaces
+    /// </summary>
+    protected override void UpdateWingSurfaceData()
+    {
+        float maxAileronDeflection = GetDeflection(MaxAileronDeflection, AileronDeflectionOverrideModifier);
+        _leftAileronParent.ControlSurfaceDeflection = maxAileronDeflection * _rollInput;
+        _rightAileronParent.ControlSurfaceDeflection = maxAileronDeflection * -_rollInput;
+
+        float maxFlapDeflection = GetDeflection(MaxFlapDeflection, FlapDeflectionOverrideModifier);
+        _leftFlapParent.ControlSurfaceDeflection = maxFlapDeflection * _flapInput;
+        _rightFlapParent.ControlSurfaceDeflection = maxFlapDeflection * _flapInput;
+
+        float maxElevatorDeflection = GetDeflection(MaxElevatorDeflection, ElevatorDeflectionOverrideModifier);
+        _leftElevatorParent.ControlSurfaceDeflection = maxElevatorDeflection * _pitchInput;
+        _rightElevatorParent.ControlSurfaceDeflection = maxElevatorDeflection * _pitchInput;
+
+        float maxRudderDeflection = GetDeflection(MaxRudderDeflection, RudderDeflectionOverrideModifier);
+        _rudderParent.ControlSurfaceDeflection = maxRudderDeflection * _yawInput;
+    }
+
+    /// <summary>
+    /// Visualize control surface deflection
+    /// </summary>
+    protected override void VisualizeControlSurfaces()
+    {
+        float maxAileronDeflection = GetDeflection(MaxAileronDeflection, AileronDeflectionOverrideModifier);
+        _leftAileron.DeflectSurface(_rollInput, maxAileronDeflection);
+        _rightAileron.DeflectSurface(-_rollInput, maxAileronDeflection);
+
+        float maxFlapDeflection = GetDeflection(MaxFlapDeflection, FlapDeflectionOverrideModifier);
+        _leftFlap.DeflectSurface(_flapInput, maxFlapDeflection);
+        _rightFlap.DeflectSurface(_flapInput, maxFlapDeflection);
+
+        float maxElevatorDeflection = GetDeflection(MaxElevatorDeflection, ElevatorDeflectionOverrideModifier);
+        _leftElevator.DeflectSurface(_pitchInput, maxElevatorDeflection);
+        _rightElevator.DeflectSurface(_pitchInput, maxElevatorDeflection);
+
+        float maxRudderDeflection = GetDeflection(MaxRudderDeflection, RudderDeflectionOverrideModifier);
+        _rudder.DeflectSurface(_yawInput, maxRudderDeflection);
+    }
+
+    /// <summary>
+    /// Get the max deflection
+    /// </summary>
+    /// <param name="maxDeflection">The max deflection without override effect</param>
+    /// <param name="modifier">The override modifier</param>
+    /// <returns>The new max deflection</returns>
+    private float GetDeflection(float maxDeflection, float modifier)
+    {
+        if (_overrideInput)
+        {
+            return maxDeflection * modifier;
+        }
+        return maxDeflection;
     }
 }
