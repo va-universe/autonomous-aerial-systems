@@ -21,6 +21,8 @@ public class FlyByWireController : Controller
     private float _previousFlapInput;
     #endregion
 
+    private bool _overrideInput;
+
     [Header("Fly-By-Wire Systems")]
     public bool IsGForceLimited;
     public bool IsStallLimited;
@@ -47,6 +49,8 @@ public class FlyByWireController : Controller
     {
         ConvertInputs();
         base.FixedUpdate();
+
+        Debug.Log(_overrideInput);
     }
 
     /// <summary>
@@ -140,13 +144,14 @@ public class FlyByWireController : Controller
     /// </summary>
     protected override void GetInput()
     {
-        _initialRollInput = _inputActions.AircraftWithFlaps.Roll.ReadValue<float>();
-        _initialPitchInput = _inputActions.AircraftWithFlaps.Pitch.ReadValue<float>();
-        _initialYawInput = _inputActions.AircraftWithFlaps.Yaw.ReadValue<float>();
-        _initialFlapInput = _inputActions.AircraftWithFlaps.Flap.ReadValue<float>();
+        _initialRollInput = _inputActions.FlyByWire.Roll.ReadValue<float>();
+        _initialPitchInput = _inputActions.FlyByWire.Pitch.ReadValue<float>();
+        _initialYawInput = _inputActions.FlyByWire.Yaw.ReadValue<float>();
+        _initialFlapInput = _inputActions.FlyByWire.Flap.ReadValue<float>();
 
-        _throttleInput = _inputActions.AircraftWithFlaps.Thrust.ReadValue<float>();
-        WheelBrakeInput = _inputActions.AircraftWithFlaps.WheelBrake.ReadValue<float>();
+        _overrideInput = _inputActions.FlyByWire.Override.ReadValue<float>() == 1 ? true : false;
+        _throttleInput = _inputActions.FlyByWire.Thrust.ReadValue<float>();
+        WheelBrakeInput = _inputActions.FlyByWire.WheelBrake.ReadValue<float>();
     }
 
     /// <summary>
