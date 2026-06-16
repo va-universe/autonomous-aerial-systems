@@ -29,8 +29,10 @@ public class FlyByWireController : Controller
     public bool IsInputSmoothened;
 
     [Header("G-Force Limiter")]
-    public float MaxGForce;
-    public float MinGForce;
+    public float MaxComfortGForce;
+    public float MinComfortGForce;
+    public float MaxOverrideGForce;
+    public float MinOverrideGForce;
     public float MaxLimiterStrength;
     public float MinLimiterStrength;
 
@@ -49,8 +51,6 @@ public class FlyByWireController : Controller
     {
         ConvertInputs();
         base.FixedUpdate();
-
-        Debug.Log(_overrideInput);
     }
 
     /// <summary>
@@ -65,14 +65,17 @@ public class FlyByWireController : Controller
             return input;
         }
 
+        float maxGForce = _overrideInput ? MaxOverrideGForce : MaxComfortGForce;
+        float minGForce = _overrideInput ? MinOverrideGForce : MinComfortGForce;
+
         float modifier = 1f;
         if (input < 0f && GForce > 0f)
         {
-            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / MaxGForce) + 1f) * MaxLimiterStrength);
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / maxGForce) + 1f) * MaxLimiterStrength);
         }
         else if (input > 0f && GForce < 0f)
         {
-            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / MinGForce) + 1f) * MinLimiterStrength);
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10((GForce / minGForce) + 1f) * MinLimiterStrength);
         }
 
         return input * modifier;

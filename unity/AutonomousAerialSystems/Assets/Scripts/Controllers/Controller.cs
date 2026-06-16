@@ -59,22 +59,18 @@ public class Controller : MonoBehaviour
     private int _numWingText;
     #endregion
 
-    [Header("General Parameters")]
+    [Header("Misc")]
     public float WheelBrakeInput;
     public float AirDensityAtSeaLevel;
     public float Thrust;
-
-    [Header("Stall Text")]
-    public float StallTextThreshold;
-    public float StallTextRedness;
-    protected float _totalStall;
-
-    [Header("G-Force")]
     public float GForce;
     protected Vector3 _previousVelocity;
 
     [Header("UI Display")]
     public Canvas UICanvas;
+    public float StallTextThreshold;
+    public float StallTextRedness;
+    protected float _totalStall;
 
     protected void Awake()
     {

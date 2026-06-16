@@ -1700,7 +1700,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &6436141379569861245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1716,15 +1716,17 @@ MonoBehaviour:
   WheelBrakeInput: 0
   AirDensityAtSeaLevel: 1.255
   Thrust: 10500
-  StallTextThreshold: 119
-  StallTextRedness: 52
   GForce: 0
   UICanvas: {fileID: 0}
+  StallTextThreshold: 119
+  StallTextRedness: 52
   IsGForceLimited: 1
   IsStallLimited: 1
   IsInputSmoothened: 1
-  MaxGForce: 5
-  MinGForce: -2
+  MaxComfortGForce: 4.5
+  MinComfortGForce: -2
+  MaxOverrideGForce: 8
+  MinOverrideGForce: -3
   MaxLimiterStrength: 1.7
   MinLimiterStrength: 1.9
   MaxStallPercentage: 50
