@@ -1720,6 +1720,14 @@ MonoBehaviour:
   UICanvas: {fileID: 0}
   StallTextThreshold: 119
   StallTextRedness: 52
+  MaxAileronDeflection: 13
+  MaxFlapDeflection: 25
+  MaxElevatorDeflection: 19.5
+  MaxRudderDeflection: 16
+  AileronDeflectionOverrideModifier: 1.11
+  FlapDeflectionOverrideModifier: 1.15
+  ElevatorDeflectionOverrideModifier: 1.23
+  RudderDeflectionOverrideModifier: 1.14
   IsGForceLimited: 1
   IsStallLimited: 1
   IsInputSmoothened: 1

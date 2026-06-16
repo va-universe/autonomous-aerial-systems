@@ -72,6 +72,12 @@ public class Controller : MonoBehaviour
     public float StallTextRedness;
     protected float _totalStall;
 
+    [Header("Max Deflections")]
+    public float MaxAileronDeflection;
+    public float MaxFlapDeflection;
+    public float MaxElevatorDeflection;
+    public float MaxRudderDeflection;
+
     protected void Awake()
     {
         _inputActions = new AircraftInputActions();
@@ -143,35 +149,35 @@ public class Controller : MonoBehaviour
     /// <summary>
     /// Update the deflection angles in the wing surfaces
     /// </summary>
-    private void UpdateWingSurfaceData()
+    protected virtual void UpdateWingSurfaceData()
     {
-        _leftAileronParent.ControlSurfaceDeflection = _leftAileron.MaxDeflection * _rollInput;
-        _rightAileronParent.ControlSurfaceDeflection = _rightAileron.MaxDeflection * -_rollInput;
+        _leftAileronParent.ControlSurfaceDeflection = MaxAileronDeflection * _rollInput;
+        _rightAileronParent.ControlSurfaceDeflection = MaxAileronDeflection * -_rollInput;
 
-        _leftFlapParent.ControlSurfaceDeflection = _leftFlap.MaxDeflection * _flapInput;
-        _rightFlapParent.ControlSurfaceDeflection = _rightFlap.MaxDeflection * _flapInput;
+        _leftFlapParent.ControlSurfaceDeflection = MaxFlapDeflection * _flapInput;
+        _rightFlapParent.ControlSurfaceDeflection = MaxFlapDeflection * _flapInput;
 
-        _leftElevatorParent.ControlSurfaceDeflection = _leftElevator.MaxDeflection * _pitchInput;
-        _rightElevatorParent.ControlSurfaceDeflection = _rightElevator.MaxDeflection * _pitchInput;
+        _leftElevatorParent.ControlSurfaceDeflection = MaxElevatorDeflection * _pitchInput;
+        _rightElevatorParent.ControlSurfaceDeflection = MaxElevatorDeflection * _pitchInput;
 
-        _rudderParent.ControlSurfaceDeflection = _rudder.MaxDeflection * _yawInput;
+        _rudderParent.ControlSurfaceDeflection = MaxRudderDeflection * _yawInput;
     }
 
     /// <summary>
     /// Visualize control surface deflection
     /// </summary>
-    private void VisualizeControlSurfaces()
+    protected virtual void VisualizeControlSurfaces()
     {
-        _leftAileron.DeflectSurface(_rollInput);
-        _rightAileron.DeflectSurface(-_rollInput);
+        _leftAileron.DeflectSurface(_rollInput, MaxAileronDeflection);
+        _rightAileron.DeflectSurface(-_rollInput, MaxAileronDeflection);
 
-        _leftFlap.DeflectSurface(_flapInput);
-        _rightFlap.DeflectSurface(_flapInput);
+        _leftFlap.DeflectSurface(_flapInput, MaxFlapDeflection);
+        _rightFlap.DeflectSurface(_flapInput, MaxFlapDeflection);
 
-        _leftElevator.DeflectSurface(_pitchInput);
-        _rightElevator.DeflectSurface(_pitchInput);
+        _leftElevator.DeflectSurface(_pitchInput, MaxElevatorDeflection);
+        _rightElevator.DeflectSurface(_pitchInput, MaxElevatorDeflection);
 
-        _rudder.DeflectSurface(_yawInput);
+        _rudder.DeflectSurface(_yawInput, MaxRudderDeflection);
     }
 
     /// <summary>
