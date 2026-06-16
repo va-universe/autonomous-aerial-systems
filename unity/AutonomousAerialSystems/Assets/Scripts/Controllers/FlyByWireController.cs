@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 
 /// <summary>
 /// The controller of the fly-by-wire prototype
@@ -19,6 +20,11 @@ public class FlyByWireController : Controller
     private float _previousPitchInput;
     private float _previousFlapInput;
     #endregion
+
+    [Header("Fly-By-Wire Systems")]
+    public bool LimitingGForce;
+    public bool LimitingStall;
+    public bool SmootheningManeuvering;
 
     [Header("G-Force Limiter")]
     public float MaxGForce;
@@ -46,6 +52,9 @@ public class FlyByWireController : Controller
     /// <returns>The input after being limited by G-force</returns>
     private float LimitGForce(float input)
     {
+        if (!LimitingGForce)
+            return input;
+
         float modifier = 1f;
         if (input < 0f && GForce > 0f)
         {
@@ -67,6 +76,9 @@ public class FlyByWireController : Controller
     /// <returns>The input after being limited by stall percentage</returns>
     private float LimitStall(float input, WingAxis axis)
     {
+        if (!LimitingStall)
+            return input;
+
         float highestStall = 0f;
         if (axis == WingAxis.Horizontal)
         {
@@ -81,7 +93,6 @@ public class FlyByWireController : Controller
 
         // CHECK AOA FOR ANGLE
         // MAKE CHECKS FOR INPUT SIGN
-        // ADD DISABLE POSSIBILITY FOR EACH FBW INPUT MODIFIER
 
         return input * modifier;
     }
@@ -95,6 +106,9 @@ public class FlyByWireController : Controller
     /// <returns>The input after being smoothened</returns>
     private float Smoother(float targetInput, float currentInput, float strength)
     {
+        if (!SmootheningManeuvering)
+            return targetInput;
+
         return Mathf.MoveTowards(currentInput, targetInput, strength * Time.fixedDeltaTime);
     }
 
