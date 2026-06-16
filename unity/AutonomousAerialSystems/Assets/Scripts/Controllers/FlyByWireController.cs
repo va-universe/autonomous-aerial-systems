@@ -32,6 +32,9 @@ public class FlyByWireController : Controller
     public float MaxLimiterStrength;
     public float MinLimiterStrength;
 
+    [Header("Stall Protection")]
+    public float MaxStallPercentage;
+
     [Header("Input Smoother")]
     public float UpPitchSmoothingStrength;
     public float DownPitchSmoothingStrength;
@@ -53,7 +56,9 @@ public class FlyByWireController : Controller
     private float LimitGForce(float input)
     {
         if (!LimitingGForce)
+        {
             return input;
+        }
 
         float modifier = 1f;
         if (input < 0f && GForce > 0f)
@@ -77,7 +82,9 @@ public class FlyByWireController : Controller
     private float LimitStall(float input, WingAxis axis)
     {
         if (!LimitingStall)
+        {
             return input;
+        }
 
         float highestStall = 0f;
         if (axis == WingAxis.Horizontal)
@@ -89,12 +96,18 @@ public class FlyByWireController : Controller
             highestStall = _rudderParent.StallData;
         }
 
-        float modifier = 1f - Mathf.Clamp01(highestStall / 100f);
+        float highestAngleOfAttack = Mathf.Max(_leftAileronParent.AoAData, _rightAileronParent.AoAData, _leftFlapParent.AoAData, _rightFlapParent.AoAData, _leftElevatorParent.AoAData, _rightElevatorParent.AoAData);
+        float lowestAngleOfAttack = Mathf.Min(_leftAileronParent.AoAData, _rightAileronParent.AoAData, _leftFlapParent.AoAData, _rightFlapParent.AoAData, _leftElevatorParent.AoAData, _rightElevatorParent.AoAData);
+        int sign = (Mathf.Abs(highestAngleOfAttack) > Mathf.Abs(lowestAngleOfAttack)) ? 1 : -1;
 
-        // CHECK AOA FOR ANGLE
-        // MAKE CHECKS FOR INPUT SIGN
+        float modifier = 1f - Mathf.Clamp01(highestStall / MaxStallPercentage);
 
-        return input * modifier;
+        if (Mathf.Sign(input) == sign)
+        {
+            return input * modifier;
+        }
+
+        return input;
     }
 
     /// <summary>
@@ -107,7 +120,9 @@ public class FlyByWireController : Controller
     private float Smoother(float targetInput, float currentInput, float strength)
     {
         if (!SmootheningManeuvering)
+        {
             return targetInput;
+        }
 
         return Mathf.MoveTowards(currentInput, targetInput, strength * Time.fixedDeltaTime);
     }
@@ -146,7 +161,7 @@ public class FlyByWireController : Controller
         float smoothingStrength = _pitchInput <= 0f ? UpPitchSmoothingStrength : DownPitchSmoothingStrength;
 
         float gLimitedInput = LimitGForce(_initialPitchInput);
-        float stallLimitedInput = LimitStall(gLimitedInput, WingAxis.Horizontal);
+        float stallLimitedInput = -LimitStall(-gLimitedInput, WingAxis.Horizontal); //Input values are reversed in comparison to Flap, that is why there is minuses.
         float smoothedInput = Smoother(stallLimitedInput, _previousPitchInput, smoothingStrength);
 
         _previousPitchInput = smoothedInput;

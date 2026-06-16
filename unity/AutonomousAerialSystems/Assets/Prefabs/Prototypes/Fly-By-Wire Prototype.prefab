@@ -1727,6 +1727,7 @@ MonoBehaviour:
   MinGForce: -3
   MaxLimiterStrength: 1.7
   MinLimiterStrength: 1.9
+  MaxStallPercentage: 50
   UpPitchSmoothingStrength: 2.1
   DownPitchSmoothingStrength: 0.85
   RollSmoothingStrength: 3.7
