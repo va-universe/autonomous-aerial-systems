@@ -22,9 +22,9 @@ public class FlyByWireController : Controller
     #endregion
 
     [Header("Fly-By-Wire Systems")]
-    public bool LimitingGForce;
-    public bool LimitingStall;
-    public bool SmootheningManeuvering;
+    public bool IsGForceLimited;
+    public bool IsStallLimited;
+    public bool IsInputSmoothened;
 
     [Header("G-Force Limiter")]
     public float MaxGForce;
@@ -34,6 +34,7 @@ public class FlyByWireController : Controller
 
     [Header("Stall Protection")]
     public float MaxStallPercentage;
+    public float MaxAngleOfAttack;
 
     [Header("Input Smoother")]
     public float UpPitchSmoothingStrength;
@@ -55,7 +56,7 @@ public class FlyByWireController : Controller
     /// <returns>The input after being limited by G-force</returns>
     private float LimitGForce(float input)
     {
-        if (!LimitingGForce)
+        if (!IsGForceLimited)
         {
             return input;
         }
@@ -81,27 +82,34 @@ public class FlyByWireController : Controller
     /// <returns>The input after being limited by stall percentage</returns>
     private float LimitStall(float input, WingAxis axis)
     {
-        if (!LimitingStall)
+        if (!IsStallLimited)
         {
             return input;
         }
 
         float highestStall = 0f;
+        float highestAngleOfAttack = 0f;
+        float lowestAngleOfAttack = 0f;
         if (axis == WingAxis.Horizontal)
         {
             highestStall = Mathf.Max(_leftAileronParent.StallData, _rightAileronParent.StallData, _leftFlapParent.StallData, _rightFlapParent.StallData, _leftElevatorParent.StallData, _rightElevatorParent.StallData);
+            highestAngleOfAttack = Mathf.Max(_leftAileronParent.AoAData, _rightAileronParent.AoAData, _leftFlapParent.AoAData, _rightFlapParent.AoAData, _leftElevatorParent.AoAData, _rightElevatorParent.AoAData);
+            lowestAngleOfAttack = Mathf.Min(_leftAileronParent.AoAData, _rightAileronParent.AoAData, _leftFlapParent.AoAData, _rightFlapParent.AoAData, _leftElevatorParent.AoAData, _rightElevatorParent.AoAData);
         }
         else
         {
             highestStall = _rudderParent.StallData;
+            highestAngleOfAttack = _rudderParent.AoAData;
+            lowestAngleOfAttack = _rudderParent.AoAData;
         }
 
-        float highestAngleOfAttack = Mathf.Max(_leftAileronParent.AoAData, _rightAileronParent.AoAData, _leftFlapParent.AoAData, _rightFlapParent.AoAData, _leftElevatorParent.AoAData, _rightElevatorParent.AoAData);
-        float lowestAngleOfAttack = Mathf.Min(_leftAileronParent.AoAData, _rightAileronParent.AoAData, _leftFlapParent.AoAData, _rightFlapParent.AoAData, _leftElevatorParent.AoAData, _rightElevatorParent.AoAData);
-        int sign = (Mathf.Abs(highestAngleOfAttack) > Mathf.Abs(lowestAngleOfAttack)) ? 1 : -1;
+        float highestAbsoluteAngle = Mathf.Max(Mathf.Abs(highestAngleOfAttack), Mathf.Abs(lowestAngleOfAttack));
+   
+        float stallModifier = 1f - Mathf.Clamp01(highestStall / MaxStallPercentage);
+        float angleOfAttackModifier = 1f - Mathf.Clamp01(highestAbsoluteAngle / MaxAngleOfAttack);
+        float modifier = (stallModifier + angleOfAttackModifier) / 2f;
 
-        float modifier = 1f - Mathf.Clamp01(highestStall / MaxStallPercentage);
-
+        int sign = (Mathf.Abs(highestAngleOfAttack) >= Mathf.Abs(lowestAngleOfAttack)) ? (int)Mathf.Sign(highestAngleOfAttack) : (int)Mathf.Sign(lowestAngleOfAttack);
         if (Mathf.Sign(input) == sign)
         {
             return input * modifier;
@@ -119,7 +127,7 @@ public class FlyByWireController : Controller
     /// <returns>The input after being smoothened</returns>
     private float Smoother(float targetInput, float currentInput, float strength)
     {
-        if (!SmootheningManeuvering)
+        if (!IsInputSmoothened)
         {
             return targetInput;
         }
