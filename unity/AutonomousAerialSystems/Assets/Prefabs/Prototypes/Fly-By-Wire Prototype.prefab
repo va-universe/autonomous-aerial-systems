@@ -1729,8 +1729,10 @@ MonoBehaviour:
   MinOverrideGForce: -3
   MaxLimiterStrength: 1.7
   MinLimiterStrength: 1.9
-  MaxStallPercentage: 50
-  MaxAngleOfAttack: 32
+  MaxComfortStallPercentage: 50
+  MaxComfortAngleOfAttack: 32
+  MaxOverrideStallPercentage: 60
+  MaxOverrideAngleOfAttack: 37.5
   UpPitchSmoothingStrength: 1.6
   DownPitchSmoothingStrength: 0.8
   RollSmoothingStrength: 3.7

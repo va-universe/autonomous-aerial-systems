@@ -37,8 +37,10 @@ public class FlyByWireController : Controller
     public float MinLimiterStrength;
 
     [Header("Stall Protection")]
-    public float MaxStallPercentage;
-    public float MaxAngleOfAttack;
+    public float MaxComfortStallPercentage;
+    public float MaxComfortAngleOfAttack;
+    public float MaxOverrideStallPercentage;
+    public float MaxOverrideAngleOfAttack;
 
     [Header("Input Smoother")]
     public float UpPitchSmoothingStrength;
@@ -112,8 +114,8 @@ public class FlyByWireController : Controller
 
         float highestAbsoluteAngle = Mathf.Max(Mathf.Abs(highestAngleOfAttack), Mathf.Abs(lowestAngleOfAttack));
    
-        float stallModifier = 1f - Mathf.Clamp01(highestStall / MaxStallPercentage);
-        float angleOfAttackModifier = 1f - Mathf.Clamp01(highestAbsoluteAngle / MaxAngleOfAttack);
+        float stallModifier = 1f - Mathf.Clamp01(highestStall / MaxComfortStallPercentage);
+        float angleOfAttackModifier = 1f - Mathf.Clamp01(highestAbsoluteAngle / MaxComfortAngleOfAttack);
         float modifier = (stallModifier + angleOfAttackModifier) / 2f;
 
         int sign = (Mathf.Abs(highestAngleOfAttack) >= Mathf.Abs(lowestAngleOfAttack)) ? (int)Mathf.Sign(highestAngleOfAttack) : (int)Mathf.Sign(lowestAngleOfAttack);
