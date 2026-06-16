@@ -1720,10 +1720,11 @@ MonoBehaviour:
   StallTextRedness: 52
   GForce: 0
   UICanvas: {fileID: 0}
-  MaxGForce: 4
-  MinGForce: -2
+  MaxGForce: 8
+  MinGForce: -3
   MaxLimiterStrength: 1.7
   MinLimiterStrength: 1.9
+  temP: 0
   UpPitchSmoothingStrength: 2.1
   DownPitchSmoothingStrength: 0.85
   RollSmoothingStrength: 3.7

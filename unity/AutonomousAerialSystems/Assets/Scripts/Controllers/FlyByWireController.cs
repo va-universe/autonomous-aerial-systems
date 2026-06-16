@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -59,6 +60,33 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
+    /// Limits the input based on stall percentage
+    /// </summary>
+    /// <param name="input">The input to be limited</param>
+    /// <param name="axis">The axis of the wing surface</param>
+    /// <returns>The input after being limited by stall percentage</returns>
+    private float LimitStall(float input, WingAxis axis)
+    {
+        float highestStall = 0f;
+        if (axis == WingAxis.Horizontal)
+        {
+            highestStall = Mathf.Max(_leftAileronParent.StallData, _rightAileronParent.StallData, _leftFlapParent.StallData, _rightFlapParent.StallData, _leftElevatorParent.StallData, _rightElevatorParent.StallData);
+        }
+        else
+        {
+            highestStall = _rudderParent.StallData;
+        }
+
+        float modifier = 1f - Mathf.Clamp01(highestStall / 100f);
+
+        // CHECK AOA FOR ANGLE
+        // MAKE CHECKS FOR INPUT SIGN
+        // ADD DISABLE POSSIBILITY FOR EACH FBW INPUT MODIFIER
+
+        return input * modifier;
+    }
+
+    /// <summary>
     /// Smoothens the input to avoid oscillations and sharp movement
     /// </summary>
     /// <param name="targetInput">The currently requested input</param>
@@ -104,7 +132,8 @@ public class FlyByWireController : Controller
         float smoothingStrength = _pitchInput <= 0f ? UpPitchSmoothingStrength : DownPitchSmoothingStrength;
 
         float gLimitedInput = LimitGForce(_initialPitchInput);
-        float smoothedInput = Smoother(gLimitedInput, _previousPitchInput, smoothingStrength);
+        float stallLimitedInput = LimitStall(gLimitedInput, WingAxis.Horizontal);
+        float smoothedInput = Smoother(stallLimitedInput, _previousPitchInput, smoothingStrength);
 
         _previousPitchInput = smoothedInput;
 
@@ -130,7 +159,8 @@ public class FlyByWireController : Controller
     /// <returns>The yaw input</returns>
     private float GetYawInput()
     {
-        float smoothedInput = Smoother(_initialYawInput, _previousYawInput, YawSmoothingStrength);
+        float stallLimitedInput = LimitStall(_initialYawInput, WingAxis.Vertical);
+        float smoothedInput = Smoother(stallLimitedInput, _previousYawInput, YawSmoothingStrength);
 
         _previousYawInput = smoothedInput;
 
@@ -144,7 +174,8 @@ public class FlyByWireController : Controller
     private float GetFlapInput()
     {
         float gLimitedInput = -LimitGForce(-_initialFlapInput); //Input values are reversed in comparison to Pitch, that is why there is minuses.
-        float smoothedInput = Smoother(gLimitedInput, _previousFlapInput, FlapSmoothingStrength);
+        float stallLimitedInput = LimitStall(gLimitedInput, WingAxis.Horizontal);
+        float smoothedInput = Smoother(stallLimitedInput, _previousFlapInput, FlapSmoothingStrength);
 
         _previousFlapInput = smoothedInput;
 
