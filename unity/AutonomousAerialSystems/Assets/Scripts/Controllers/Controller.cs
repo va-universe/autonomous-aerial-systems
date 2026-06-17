@@ -217,21 +217,24 @@ public class Controller : MonoBehaviour
     /// </summary>
     protected virtual void InitializeTextDisplays()
     {
-        Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
-        Transform wingPanel = UICanvas.transform.Find("Wing Panel").transform;
+        if (UICanvas != null)
+        {
+            Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
+            Transform wingPanel = UICanvas.transform.Find("Wing Panel").transform;
 
-        _speedText = aircraftPanel.transform.Find("SpeedText").GetComponent<TextMeshProUGUI>();
-        _altitudeText = aircraftPanel.transform.Find("AltitudeText").GetComponent<TextMeshProUGUI>();
-        _stallingText = aircraftPanel.transform.Find("StallingText").GetComponent<TextMeshProUGUI>();
-        _gForceText = aircraftPanel.transform.Find("GForceText").GetComponent<TextMeshProUGUI>();
+            _speedText = aircraftPanel.transform.Find("SpeedText").GetComponent<TextMeshProUGUI>();
+            _altitudeText = aircraftPanel.transform.Find("AltitudeText").GetComponent<TextMeshProUGUI>();
+            _stallingText = aircraftPanel.transform.Find("StallingText").GetComponent<TextMeshProUGUI>();
+            _gForceText = aircraftPanel.transform.Find("GForceText").GetComponent<TextMeshProUGUI>();
 
-        _leftAileronText = wingPanel.Find("LeftAileronText").GetComponent<TextMeshProUGUI>();
-        _rightAileronText = wingPanel.Find("RightAileronText").GetComponent<TextMeshProUGUI>();
-        _leftFlapText = wingPanel.Find("LeftFlapText").GetComponent<TextMeshProUGUI>();
-        _rightFlapText = wingPanel.Find("RightFlapText").GetComponent<TextMeshProUGUI>();
-        _leftElevatorText = wingPanel.Find("LeftElevatorText").GetComponent<TextMeshProUGUI>();
-        _rightElevatorText = wingPanel.Find("RightElevatorText").GetComponent<TextMeshProUGUI>();
-        _rudderText = wingPanel.Find("RudderText").GetComponent<TextMeshProUGUI>();
+            _leftAileronText = wingPanel.Find("LeftAileronText").GetComponent<TextMeshProUGUI>();
+            _rightAileronText = wingPanel.Find("RightAileronText").GetComponent<TextMeshProUGUI>();
+            _leftFlapText = wingPanel.Find("LeftFlapText").GetComponent<TextMeshProUGUI>();
+            _rightFlapText = wingPanel.Find("RightFlapText").GetComponent<TextMeshProUGUI>();
+            _leftElevatorText = wingPanel.Find("LeftElevatorText").GetComponent<TextMeshProUGUI>();
+            _rightElevatorText = wingPanel.Find("RightElevatorText").GetComponent<TextMeshProUGUI>();
+            _rudderText = wingPanel.Find("RudderText").GetComponent<TextMeshProUGUI>();
+        }
     }
 
     /// <summary>
@@ -252,7 +255,7 @@ public class Controller : MonoBehaviour
     /// <summary>
     /// Update UI display text
     /// </summary>
-    private void UpdateDisplay()
+    protected virtual void UpdateDisplay()
     {
         if (_speedText != null)
         {

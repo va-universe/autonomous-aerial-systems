@@ -1799,7 +1799,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: AircraftWithFlaps
+  m_DefaultActionMap: fc0a78cd-e12b-4da7-b434-a5b7b4827db2
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &3061453472471730743
