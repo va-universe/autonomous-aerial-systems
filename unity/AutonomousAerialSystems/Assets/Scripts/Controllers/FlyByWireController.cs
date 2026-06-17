@@ -8,6 +8,8 @@ using UnityEngine.Windows;
 /// </summary>
 public class FlyByWireController : Controller
 {
+    #region Inputs
+
     #region Initial Inputs
     private float _initialRollInput;
     private float _initialYawInput;
@@ -23,9 +25,12 @@ public class FlyByWireController : Controller
     #endregion
 
     private bool _overrideInput;
+    #endregion
 
+    #region UI Display Text
     private TextMeshProUGUI _overrideText;
     private TextMeshProUGUI _brakingText;
+    #endregion
 
     [Header("Max Deflection Overrides")]
     public float AileronDeflectionOverrideModifier;
@@ -334,8 +339,11 @@ public class FlyByWireController : Controller
     {
         base.InitializeTextDisplays();
 
-        Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
-        _overrideText = aircraftPanel.transform.Find("OverrideText").GetComponent<TextMeshProUGUI>();
-        _brakingText = aircraftPanel.transform.Find("BrakingText").GetComponent<TextMeshProUGUI>();
+        if (UICanvas != null)
+        {
+            Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
+            _overrideText = aircraftPanel.transform.Find("OverrideText").GetComponent<TextMeshProUGUI>();
+            _brakingText = aircraftPanel.transform.Find("BrakingText").GetComponent<TextMeshProUGUI>();
+        }
     }
 }
