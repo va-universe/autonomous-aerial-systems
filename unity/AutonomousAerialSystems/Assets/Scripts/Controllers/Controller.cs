@@ -252,7 +252,7 @@ public class Controller : MonoBehaviour
     /// <summary>
     /// Update UI display text
     /// </summary>
-    private void UpdateDisplay()
+    protected virtual void UpdateDisplay()
     {
         if (_speedText != null)
         {

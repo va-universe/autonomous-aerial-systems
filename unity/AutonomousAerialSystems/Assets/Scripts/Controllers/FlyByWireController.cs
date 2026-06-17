@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows;
@@ -22,6 +23,9 @@ public class FlyByWireController : Controller
     #endregion
 
     private bool _overrideInput;
+
+    private TextMeshProUGUI _overrideText;
+    private TextMeshProUGUI _brakingText;
 
     [Header("Max Deflection Overrides")]
     public float AileronDeflectionOverrideModifier;
@@ -236,7 +240,7 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Update the deflection angles in the wing surfaces
+    /// Update the deflection angles in the wing surfaces, with deflection modifiers
     /// </summary>
     protected override void UpdateWingSurfaceData()
     {
@@ -257,7 +261,7 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Visualize control surface deflection
+    /// Visualize control surface deflection, with deflection modifiers
     /// </summary>
     protected override void VisualizeControlSurfaces()
     {
@@ -290,5 +294,48 @@ public class FlyByWireController : Controller
             return maxDeflection * modifier;
         }
         return maxDeflection;
+    }
+
+    /// <summary>
+    /// Update UI display text, including Override and Braking text
+    /// </summary>
+    protected override void UpdateDisplay()
+    {
+        base.UpdateDisplay();
+
+        if (_overrideText != null)
+        {
+            if (_overrideInput)
+            {
+                _overrideText.color = Color.red;
+            }
+            else
+            {
+                _overrideText.color = Color.gray;
+            }
+        }
+        if (_brakingText != null)
+        {
+            if (WheelBrakeInput != 0)
+            {
+                _brakingText.color = Color.red;
+            }
+            else
+            {
+                _brakingText.color = Color.gray;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets all texts from canvas, including Override and Braking text
+    /// </summary>
+    protected override void InitializeTextDisplays()
+    {
+        base.InitializeTextDisplays();
+
+        Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
+        _overrideText = aircraftPanel.transform.Find("OverrideText").GetComponent<TextMeshProUGUI>();
+        _brakingText = aircraftPanel.transform.Find("BrakingText").GetComponent<TextMeshProUGUI>();
     }
 }
