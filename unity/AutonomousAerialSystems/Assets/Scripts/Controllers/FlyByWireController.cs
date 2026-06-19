@@ -64,6 +64,11 @@ public class FlyByWireController : Controller
     public float YawSmoothingStrength;
     public float FlapSmoothingStrength;
 
+    [Header("Automatic Yaw")]
+    public float YawDampingStrength;
+    public float InputDampingModifier;
+    public float TurningYawStrength;
+
     protected override void FixedUpdate()
     {
         ConvertInputs();
@@ -221,7 +226,9 @@ public class FlyByWireController : Controller
     /// <returns>The yaw input</returns>
     private float GetYawInput()
     {
-        float stallLimitedInput = LimitStall(_initialYawInput, WingAxis.Vertical);
+        float yawDampedInput = Mathf.Clamp(_initialYawInput + GetYawDamping(), -1f, 1f);
+        float turningYawInput = Mathf.Clamp(yawDampedInput + GetTurningYaw(), -1f, 1f);
+        float stallLimitedInput = LimitStall(turningYawInput, WingAxis.Vertical);
         float smoothedInput = Smoother(stallLimitedInput, _previousYawInput, YawSmoothingStrength);
 
         _previousYawInput = smoothedInput;
@@ -345,5 +352,25 @@ public class FlyByWireController : Controller
             _overrideText = aircraftPanel.transform.Find("OverrideText").GetComponent<TextMeshProUGUI>();
             _brakingText = aircraftPanel.transform.Find("BrakingText").GetComponent<TextMeshProUGUI>();
         }
+    }
+
+    /// <summary>
+    /// Gets the yaw damping input.
+    /// </summary>
+    /// <returns>The yaw damping input</returns>
+    public float GetYawDamping()
+    {
+        float yawRate = Vector3.Dot(_rb.angularVelocity, transform.up);
+        float inputModifier = 1f - (Mathf.Abs(_initialYawInput) * InputDampingModifier);
+        float yawDamping = yawRate * YawDampingStrength * inputModifier;
+
+        return yawDamping;
+    }
+
+    public float GetTurningYaw()
+    {
+        float turningYaw = _rollInput * TurningYawStrength;
+
+        return turningYaw;
     }
 }

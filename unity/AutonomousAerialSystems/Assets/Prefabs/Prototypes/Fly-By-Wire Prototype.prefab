@@ -1723,7 +1723,7 @@ MonoBehaviour:
   MaxAileronDeflection: 13
   MaxFlapDeflection: 25
   MaxElevatorDeflection: 19.5
-  MaxRudderDeflection: 16
+  MaxRudderDeflection: 18.5
   AileronDeflectionOverrideModifier: 1.11
   FlapDeflectionOverrideModifier: 1.15
   ElevatorDeflectionOverrideModifier: 1.23
@@ -1746,6 +1746,9 @@ MonoBehaviour:
   RollSmoothingStrength: 3.7
   YawSmoothingStrength: 2.5
   FlapSmoothingStrength: 1
+  YawDampingStrength: 7.6
+  InputDampingModifier: 0.45
+  TurningYawStrength: 0.78
 --- !u!114 &6708601862555293382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1799,7 +1802,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: fc0a78cd-e12b-4da7-b434-a5b7b4827db2
+  m_DefaultActionMap: FlyByWire
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &3061453472471730743
