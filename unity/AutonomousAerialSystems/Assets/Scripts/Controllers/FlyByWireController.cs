@@ -64,9 +64,10 @@ public class FlyByWireController : Controller
     public float YawSmoothingStrength;
     public float FlapSmoothingStrength;
 
-    [Header("Yaw")]
+    [Header("Automatic Yaw")]
     public float YawDampingStrength;
     public float InputDampingModifier;
+    public float TurningYawStrength;
 
     protected override void FixedUpdate()
     {
@@ -226,7 +227,8 @@ public class FlyByWireController : Controller
     private float GetYawInput()
     {
         float yawDampedInput = Mathf.Clamp(_initialYawInput + GetYawDamping(), -1f, 1f);
-        float stallLimitedInput = LimitStall(yawDampedInput, WingAxis.Vertical);
+        float turningYawInput = Mathf.Clamp(yawDampedInput + GetTurningYaw(), -1f, 1f);
+        float stallLimitedInput = LimitStall(turningYawInput, WingAxis.Vertical);
         float smoothedInput = Smoother(stallLimitedInput, _previousYawInput, YawSmoothingStrength);
 
         _previousYawInput = smoothedInput;
@@ -363,5 +365,12 @@ public class FlyByWireController : Controller
         float yawDamping = yawRate * YawDampingStrength * inputModifier;
 
         return yawDamping;
+    }
+
+    public float GetTurningYaw()
+    {
+        float turningYaw = _rollInput * TurningYawStrength;
+
+        return turningYaw;
     }
 }

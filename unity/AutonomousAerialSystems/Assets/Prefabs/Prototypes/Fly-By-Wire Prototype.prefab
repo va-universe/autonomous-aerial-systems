@@ -1746,8 +1746,9 @@ MonoBehaviour:
   RollSmoothingStrength: 3.7
   YawSmoothingStrength: 2.5
   FlapSmoothingStrength: 1
-  YawDampingStrength: 8
-  InputDampingModifier: 0.5
+  YawDampingStrength: 7.6
+  InputDampingModifier: 0.45
+  TurningYawStrength: 0.78
 --- !u!114 &6708601862555293382
 MonoBehaviour:
   m_ObjectHideFlags: 0
