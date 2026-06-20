@@ -14,7 +14,7 @@ The purpose of this project is to explore how artificial neural networks can enh
 The latest release, `v0.3.0`, is the `Fly-By-Wire Prototype`. This release contains an enhanced `Wing Camber Prototype`, with a fly-by-wire system. This aircraft has G-force limiting, stall protection, yaw damping, rudder activation when rolling, and deflection smoothening. Beneath are details about all the current content:
  - There are currently `4` prototype prefabs and `3` scenes where some of these prototypes can be tested.
  - There are currently `3` physics models: a generalized unmaneuverable model, a distributed aerodynamic surface model, and a wing-camber-based model.
- - There are currently `1` flight assisting system: the first fly-by-wire system.
+ - There is currently `1` flight assisting system: the first fly-by-wire system.
 
 For more information about releases, check out the [Development Log](./docs/devlog.md) and [Releases](https://github.com/va-universe/Autonomous-Aerial-Systems/releases).
 
