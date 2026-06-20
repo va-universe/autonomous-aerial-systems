@@ -30,6 +30,12 @@ public class FlyByWireController : Controller
     #region UI Display Text
     private TextMeshProUGUI _overrideText;
     private TextMeshProUGUI _brakingText;
+
+    private TextMeshProUGUI _gLimitText;
+    private TextMeshProUGUI _stallProtectionText;
+    private TextMeshProUGUI _smootheningText;
+    private TextMeshProUGUI _yawDampText;
+    private TextMeshProUGUI _turnYawText;
     #endregion
 
     [Header("Max Deflection Overrides")]
@@ -344,7 +350,7 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Update UI display text, including Override and Braking text
+    /// Update UI display text, including Override and Braking text, as well as systems toggle indicators
     /// </summary>
     protected override void UpdateDisplay()
     {
@@ -372,6 +378,62 @@ public class FlyByWireController : Controller
                 _brakingText.color = Color.gray;
             }
         }
+
+        if (_gLimitText != null)
+        {
+            if (IsGForceLimited)
+            {
+                _gLimitText.color = Color.green;
+            }
+            else
+            {
+                _gLimitText.color = Color.red;
+            }
+        }
+        if (_stallProtectionText != null)
+        {
+            if (IsStallLimited)
+            {
+                _stallProtectionText.color = Color.green;
+            }
+            else
+            {
+                _stallProtectionText.color = Color.red;
+            }
+        }
+        if (_smootheningText != null)
+        {
+            if (IsInputSmoothened)
+            {
+                _smootheningText.color = Color.green;
+            }
+            else
+            {
+                _smootheningText.color = Color.red;
+            }
+        }
+        if (_yawDampText != null)
+        {
+            if (IsYawDampened)
+            {
+                _yawDampText.color = Color.green;
+            }
+            else
+            {
+                _yawDampText.color = Color.red;
+            }
+        }
+        if (_turnYawText != null)
+        {
+            if (IsTurnYawActivated)
+            {
+                _turnYawText.color = Color.green;
+            }
+            else
+            {
+                _turnYawText.color = Color.red;
+            }
+        }
     }
 
     /// <summary>
@@ -386,6 +448,12 @@ public class FlyByWireController : Controller
             Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
             _overrideText = aircraftPanel.transform.Find("OverrideText").GetComponent<TextMeshProUGUI>();
             _brakingText = aircraftPanel.transform.Find("BrakingText").GetComponent<TextMeshProUGUI>();
+
+            _gLimitText = aircraftPanel.transform.Find("GLimitText").GetComponent<TextMeshProUGUI>();
+            _stallProtectionText = aircraftPanel.transform.Find("StallProtectionText").GetComponent<TextMeshProUGUI>();
+            _smootheningText = aircraftPanel.transform.Find("SmootheningText").GetComponent<TextMeshProUGUI>();
+            _yawDampText = aircraftPanel.transform.Find("YawDampText").GetComponent<TextMeshProUGUI>();
+            _turnYawText = aircraftPanel.transform.Find("TurnYawText").GetComponent<TextMeshProUGUI>();
         }
     }
 
@@ -407,6 +475,10 @@ public class FlyByWireController : Controller
         return yawDamping;
     }
 
+    /// <summary>
+    /// Get the turning/rolling yaw activation
+    /// </summary>
+    /// <returns>The turning yaw input</returns>
     public float GetTurningYaw()
     {
         if (!IsTurnYawActivated)
