@@ -42,6 +42,8 @@ public class FlyByWireController : Controller
     public bool IsGForceLimited;
     public bool IsStallLimited;
     public bool IsInputSmoothened;
+    public bool IsYawDampened;
+    public bool IsTurnYawActivated;
 
     [Header("G-Force Limiter")]
     public float MaxComfortGForce;
@@ -360,6 +362,11 @@ public class FlyByWireController : Controller
     /// <returns>The yaw damping input</returns>
     public float GetYawDamping()
     {
+        if (!IsYawDampened)
+        {
+            return 0f;
+        }
+
         float yawRate = Vector3.Dot(_rb.angularVelocity, transform.up);
         float inputModifier = 1f - (Mathf.Abs(_initialYawInput) * InputDampingModifier);
         float yawDamping = yawRate * YawDampingStrength * inputModifier;
@@ -369,6 +376,11 @@ public class FlyByWireController : Controller
 
     public float GetTurningYaw()
     {
+        if (!IsTurnYawActivated)
+        {
+            return 0f;
+        }
+
         float turningYaw = _rollInput * TurningYawStrength;
 
         return turningYaw;

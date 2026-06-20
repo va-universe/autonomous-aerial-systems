@@ -1731,6 +1731,8 @@ MonoBehaviour:
   IsGForceLimited: 1
   IsStallLimited: 1
   IsInputSmoothened: 1
+  IsYawDampened: 1
+  IsTurnYawActivated: 1
   MaxComfortGForce: 4.5
   MinComfortGForce: -2
   MaxOverrideGForce: 8
