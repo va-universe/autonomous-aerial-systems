@@ -16,6 +16,8 @@ This prototype introduces a new fly-by-wire system, built on top of the wing-cam
  - Added runway and runway texture.
 
 ### Media
+![FlyByWireTakeoff](media/FlyByWireTakeoff.gif)
+![FlyByWireManeuvering](media/FlyByWireManeuvering.gif)
 
 ## v0.2.0 Wing Camber Prototype
 

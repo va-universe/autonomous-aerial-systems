@@ -42,6 +42,8 @@ For more information about maneuvering the aircraft, check out the [Manual](./do
 
 ## Media
 
+![FlyByWireTakeoff](./docs/media/FlyByWireTakeoff.gif)
+![FlyByWireManeuvering](./docs/media/FlyByWireManeuvering.gif)
 ![Stalling](./docs/media/Stalling.gif)
 ![Landing](./docs/media/Landing.gif)
 ![First Maneuvering](./docs/media/FirstManeuvering.gif)

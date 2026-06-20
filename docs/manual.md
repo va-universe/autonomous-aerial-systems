@@ -38,6 +38,8 @@ This prototype is a continuation of the `Wing Camber Prototype` with new flight 
  - Stall: Current stall percentage of the wing.
 
 #### Media
+![FlyByWireTakeoff](media/FlyByWireTakeoff.gif)
+![FlyByWireManeuvering](media/FlyByWireManeuvering.gif)
 
 ### Wing Camber Prototype (v0.2.0)
 This prototype introduces a new wing-camber-based aerodynamic model where control surfaces alter the properties of their parent wings, rather than generating their own forces. This prototype also has working landing gear which allows easier takeoff and landing.
