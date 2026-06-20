@@ -167,7 +167,7 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Get the roll, pitch, yaw, flap and thrust input from the input action system
+    /// Get the flight controls, thrust, braking, override and systems toggle inputs from the input action system
     /// </summary>
     protected override void GetInput()
     {
@@ -179,6 +179,39 @@ public class FlyByWireController : Controller
         _overrideInput = _inputActions.FlyByWire.Override.ReadValue<float>() == 1 ? true : false;
         _throttleInput = _inputActions.FlyByWire.Thrust.ReadValue<float>();
         WheelBrakeInput = _inputActions.FlyByWire.WheelBrake.ReadValue<float>();
+
+        ToggleSystemInputs();
+    }
+
+    /// <summary>
+    /// Toggles the fly-by-wire systems based on inputs from the input action system
+    /// </summary>
+    private void ToggleSystemInputs()
+    {
+        if (_inputActions.FlyByWire.ToggleGLimiting.WasPressedThisFrame())
+        {
+            IsGForceLimited = !IsGForceLimited;
+        }
+
+        if (_inputActions.FlyByWire.ToggleStallLimiting.WasPressedThisFrame())
+        {
+            IsStallLimited = !IsStallLimited;
+        }
+
+        if (_inputActions.FlyByWire.ToggleSmoothening.WasPressedThisFrame())
+        {
+            IsInputSmoothened = !IsInputSmoothened;
+        }
+
+        if (_inputActions.FlyByWire.ToggleYawDamping.WasPressedThisFrame())
+        {
+            IsYawDampened = !IsYawDampened;
+        }
+
+        if (_inputActions.FlyByWire.ToggleTurningYaw.WasPressedThisFrame())
+        {
+            IsTurnYawActivated = !IsTurnYawActivated;
+        }
     }
 
     /// <summary>

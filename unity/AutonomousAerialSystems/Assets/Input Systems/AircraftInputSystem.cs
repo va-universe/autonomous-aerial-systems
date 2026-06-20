@@ -524,6 +524,51 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleGLimiting"",
+                    ""type"": ""Button"",
+                    ""id"": ""1741ac7a-c53f-4f69-8e75-2089937894b8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleStallLimiting"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a996edb-daa4-4826-a1d6-7d24b1b52e85"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleSmoothening"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a0258fa-b2bc-4eec-8058-28ce4e1b2952"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleYawDamping"",
+                    ""type"": ""Button"",
+                    ""id"": ""280375a3-d782-492c-b643-5260e120af60"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleTurningYaw"",
+                    ""type"": ""Button"",
+                    ""id"": ""46265e52-fa25-4050-918c-1d2a1468e9fb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -639,6 +684,61 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""b1c95f20-f553-43fe-88a4-09e77383fcd5"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleGLimiting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b93c32db-9d83-4304-b8a3-4573d2be6ec3"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleStallLimiting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""645b7bb5-ac6a-4381-956e-d5f84b788c0b"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleSmoothening"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc36d06f-ee1c-43e4-aa78-154830ab3292"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleYawDamping"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3a128e6-b496-46ab-a322-5288ab5ca570"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleTurningYaw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""08e90f7a-12f3-4bb6-b7da-3b4c792e0047"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
@@ -720,6 +820,11 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         m_FlyByWire_Thrust = m_FlyByWire.FindAction("Thrust", throwIfNotFound: true);
         m_FlyByWire_Override = m_FlyByWire.FindAction("Override", throwIfNotFound: true);
         m_FlyByWire_WheelBrake = m_FlyByWire.FindAction("WheelBrake", throwIfNotFound: true);
+        m_FlyByWire_ToggleGLimiting = m_FlyByWire.FindAction("ToggleGLimiting", throwIfNotFound: true);
+        m_FlyByWire_ToggleStallLimiting = m_FlyByWire.FindAction("ToggleStallLimiting", throwIfNotFound: true);
+        m_FlyByWire_ToggleSmoothening = m_FlyByWire.FindAction("ToggleSmoothening", throwIfNotFound: true);
+        m_FlyByWire_ToggleYawDamping = m_FlyByWire.FindAction("ToggleYawDamping", throwIfNotFound: true);
+        m_FlyByWire_ToggleTurningYaw = m_FlyByWire.FindAction("ToggleTurningYaw", throwIfNotFound: true);
     }
 
     ~@AircraftInputActions()
@@ -1089,6 +1194,11 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_FlyByWire_Thrust;
     private readonly InputAction m_FlyByWire_Override;
     private readonly InputAction m_FlyByWire_WheelBrake;
+    private readonly InputAction m_FlyByWire_ToggleGLimiting;
+    private readonly InputAction m_FlyByWire_ToggleStallLimiting;
+    private readonly InputAction m_FlyByWire_ToggleSmoothening;
+    private readonly InputAction m_FlyByWire_ToggleYawDamping;
+    private readonly InputAction m_FlyByWire_ToggleTurningYaw;
     /// <summary>
     /// Provides access to input actions defined in input action map "FlyByWire".
     /// </summary>
@@ -1128,6 +1238,26 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "FlyByWire/WheelBrake".
         /// </summary>
         public InputAction @WheelBrake => m_Wrapper.m_FlyByWire_WheelBrake;
+        /// <summary>
+        /// Provides access to the underlying input action "FlyByWire/ToggleGLimiting".
+        /// </summary>
+        public InputAction @ToggleGLimiting => m_Wrapper.m_FlyByWire_ToggleGLimiting;
+        /// <summary>
+        /// Provides access to the underlying input action "FlyByWire/ToggleStallLimiting".
+        /// </summary>
+        public InputAction @ToggleStallLimiting => m_Wrapper.m_FlyByWire_ToggleStallLimiting;
+        /// <summary>
+        /// Provides access to the underlying input action "FlyByWire/ToggleSmoothening".
+        /// </summary>
+        public InputAction @ToggleSmoothening => m_Wrapper.m_FlyByWire_ToggleSmoothening;
+        /// <summary>
+        /// Provides access to the underlying input action "FlyByWire/ToggleYawDamping".
+        /// </summary>
+        public InputAction @ToggleYawDamping => m_Wrapper.m_FlyByWire_ToggleYawDamping;
+        /// <summary>
+        /// Provides access to the underlying input action "FlyByWire/ToggleTurningYaw".
+        /// </summary>
+        public InputAction @ToggleTurningYaw => m_Wrapper.m_FlyByWire_ToggleTurningYaw;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1175,6 +1305,21 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
             @WheelBrake.started += instance.OnWheelBrake;
             @WheelBrake.performed += instance.OnWheelBrake;
             @WheelBrake.canceled += instance.OnWheelBrake;
+            @ToggleGLimiting.started += instance.OnToggleGLimiting;
+            @ToggleGLimiting.performed += instance.OnToggleGLimiting;
+            @ToggleGLimiting.canceled += instance.OnToggleGLimiting;
+            @ToggleStallLimiting.started += instance.OnToggleStallLimiting;
+            @ToggleStallLimiting.performed += instance.OnToggleStallLimiting;
+            @ToggleStallLimiting.canceled += instance.OnToggleStallLimiting;
+            @ToggleSmoothening.started += instance.OnToggleSmoothening;
+            @ToggleSmoothening.performed += instance.OnToggleSmoothening;
+            @ToggleSmoothening.canceled += instance.OnToggleSmoothening;
+            @ToggleYawDamping.started += instance.OnToggleYawDamping;
+            @ToggleYawDamping.performed += instance.OnToggleYawDamping;
+            @ToggleYawDamping.canceled += instance.OnToggleYawDamping;
+            @ToggleTurningYaw.started += instance.OnToggleTurningYaw;
+            @ToggleTurningYaw.performed += instance.OnToggleTurningYaw;
+            @ToggleTurningYaw.canceled += instance.OnToggleTurningYaw;
         }
 
         /// <summary>
@@ -1207,6 +1352,21 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
             @WheelBrake.started -= instance.OnWheelBrake;
             @WheelBrake.performed -= instance.OnWheelBrake;
             @WheelBrake.canceled -= instance.OnWheelBrake;
+            @ToggleGLimiting.started -= instance.OnToggleGLimiting;
+            @ToggleGLimiting.performed -= instance.OnToggleGLimiting;
+            @ToggleGLimiting.canceled -= instance.OnToggleGLimiting;
+            @ToggleStallLimiting.started -= instance.OnToggleStallLimiting;
+            @ToggleStallLimiting.performed -= instance.OnToggleStallLimiting;
+            @ToggleStallLimiting.canceled -= instance.OnToggleStallLimiting;
+            @ToggleSmoothening.started -= instance.OnToggleSmoothening;
+            @ToggleSmoothening.performed -= instance.OnToggleSmoothening;
+            @ToggleSmoothening.canceled -= instance.OnToggleSmoothening;
+            @ToggleYawDamping.started -= instance.OnToggleYawDamping;
+            @ToggleYawDamping.performed -= instance.OnToggleYawDamping;
+            @ToggleYawDamping.canceled -= instance.OnToggleYawDamping;
+            @ToggleTurningYaw.started -= instance.OnToggleTurningYaw;
+            @ToggleTurningYaw.performed -= instance.OnToggleTurningYaw;
+            @ToggleTurningYaw.canceled -= instance.OnToggleTurningYaw;
         }
 
         /// <summary>
@@ -1382,5 +1542,40 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnWheelBrake(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ToggleGLimiting" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleGLimiting(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ToggleStallLimiting" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleStallLimiting(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ToggleSmoothening" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleSmoothening(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ToggleYawDamping" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleYawDamping(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ToggleTurningYaw" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleTurningYaw(InputAction.CallbackContext context);
     }
 }
