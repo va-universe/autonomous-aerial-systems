@@ -21,6 +21,26 @@ For more information about releases, check out the [Development Log](./docs/devl
 ### Future Content
 The next planned release, `v0.4.0`, is the `Rule-based AI Prototype`. This release will contain a fully autonomous aircraft, which utilizes a predetermined rule set in order to maneuver, track waypoints and avoid collisions. This prototype will be an extension of the `v0.3.0` prototype, `Fly-By-Wire Prototype`.
 
+### Roadmap
+There are currently `14` planned milestones/releases, where `4` of them have already been completed. These releases are NOT set in stone, and are susceptible for change. Beneath is a checklist of the currently planned releases:
+
+ - [x] Pre-v0.1.0 First Takeoff
+ - [x] v0.1.0 Aerodynamic Surface Prototype
+ - [x] v0.2.0 Wing Camber Prototype
+ - [x] v0.3.0 Fly-By-Wire Prototype
+ - [ ] v0.4.0 Rule-based AI Prototype
+ - [ ] v0.5.0 Gun Systems & Prototype
+ - [ ] Pre-v0.6.0 First Missile Launch
+ - [ ] v0.6.0 First Missile Prototype
+ - [ ] v0.7.0 Fly-By-Wire Combat Prototype
+ - [ ] v0.8.0 Rule-based Combat AI Prototype
+ - [ ] v0.9.0 Modular Network AI Prototype
+ - [ ] v0.10.0 MNN Combat AI Prototype
+ - [ ] v0.11.0 Curriculum Learning AI Prototype
+ - [ ] v1.0.0 JAS 39 Gripen E
+
+For more information about the roadmap and future releases, check out the [Roadmap](./docs/roadmap.md).
+
 ## Running Instructions
 To test the different prototypes, follow the steps below:
  1. On GitHub, click `Code` and then `Download ZIP`.
