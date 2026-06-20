@@ -1605,11 +1605,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecondAircraftController
   WheelBrakeInput: 0
-  Thrust: 10500
   AirDensityAtSeaLevel: 1.255
+  Thrust: 10500
+  GForce: 0
+  UICanvas: {fileID: 0}
   StallTextThreshold: 119
   StallTextRedness: 52
-  GForce: 0
+  MaxAileronDeflection: 15
+  MaxFlapDeflection: 25
+  MaxElevatorDeflection: 17
+  MaxRudderDeflection: 15
   SpeedText: {fileID: 0}
   AltitudeText: {fileID: 0}
   StallingText: {fileID: 0}
@@ -1674,7 +1679,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Aircraft
+  m_DefaultActionMap: AircraftWithFlaps
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &2408186680343956615

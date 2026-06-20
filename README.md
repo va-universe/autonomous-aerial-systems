@@ -11,14 +11,15 @@ The purpose of this project is to explore how artificial neural networks can enh
  - Larger neural networks trained using backpropagation.
 
 ### Current Progress
-The latest release, `v0.2.0`, is the `Wing Camber Prototype`. This release contains a fully functioning aircraft prototype that utilizes a wing-camber-based model, in order to fly and maneuver. Beneath are details about all the current content:
- - There are currently `3` prototype prefabs and `2` scenes where some of these prototypes can be tested.
+The latest release, `v0.3.0`, is the `Fly-By-Wire Prototype`. This release contains an enhanced `Wing Camber Prototype`, with a fly-by-wire system. This aircraft has G-force limiting, stall protection, yaw damping, rudder activation when rolling, and deflection smoothening. Beneath are details about all the current content:
+ - There are currently `4` prototype prefabs and `3` scenes where some of these prototypes can be tested.
  - There are currently `3` physics models: a generalized unmaneuverable model, a distributed aerodynamic surface model, and a wing-camber-based model.
+ - There are currently `1` flight assisting system: the first fly-by-wire system.
 
 For more information about releases, check out the [Development Log](./docs/devlog.md) and [Releases](https://github.com/va-universe/Autonomous-Aerial-Systems/releases).
 
 ### Future Content
-The next planned release, `v0.3.0`, is the `Fly-By-Wire Prototype`. This release will contain a fully functioning fly-by-wire system with a G force limiter, stall protection, and more flight-assisting features. This prototype will then be utilized in `v0.4.0` for the creation of the first rule-based AI prototype.
+The next planned release, `v0.4.0`, is the `Rule-based AI Prototype`. This release will contain a fully autonomous aircraft, which utilizes a predetermined rule set in order to maneuver, track waypoints and avoid collisions. This prototype will be an extension of the `v0.3.0` prototype, `Fly-By-Wire Prototype`.
 
 ## Running Instructions
 To test the different prototypes, follow the steps below:
@@ -29,8 +30,9 @@ To test the different prototypes, follow the steps below:
  5. In Unity Hub, go to `Projects` and click `Add` then `Add project from disk`, then select the downloaded project folder.
  6. Open the project and wait for Unity to finish importing all assets.
  7. In the `Scenes` folder in `Assets`, open one of the following scenes and click the play icon.
-    - `FirstPrototypeScene` to test the `AerodynamicSurfacePrototype`.
-    - `SecondPrototypeScene` to test the `WingCamberPrototype`.
+    - `AerodynamicSurfaceScene` to test the `AerodynamicSurfacePrototype`.
+    - `WingCamberScene` to test the `WingCamberPrototype`.
+    - `FlyByWireScene` to test the `FlyByWirePrototype`.
    
 For more information about maneuvering the aircraft, check out the [Manual](./docs/manual.md).
 
@@ -40,6 +42,8 @@ For more information about maneuvering the aircraft, check out the [Manual](./do
 
 ## Media
 
+![FlyByWireTakeoff](./docs/media/FlyByWireTakeoff.gif)
+![FlyByWireManeuvering](./docs/media/FlyByWireManeuvering.gif)
 ![Stalling](./docs/media/Stalling.gif)
 ![Landing](./docs/media/Landing.gif)
 ![First Maneuvering](./docs/media/FirstManeuvering.gif)

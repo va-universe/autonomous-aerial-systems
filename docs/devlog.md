@@ -1,5 +1,24 @@
 # Development Log
 
+## v0.3.0 Fly-By-Wire Prototype
+
+**Date: 2026-06-20**
+
+This prototype introduces a new fly-by-wire system, built on top of the wing-camber-based physics model. This aircraft utilizes a G-force limiter, stall protection, yaw damping, rudder activation during turns, and deflection smoothening, for smoother and safer flight. These systems has a comfort setting which can be overriden by the pilot, in order to maneuver faster.
+
+### Checklist
+ - Implemented a G-force limiter.
+ - Implemented stall protection.
+ - Implemented maneuver/deflection smoothening.
+ - Implemented yaw damping and rolling rudder.
+ - Reworked all wing-camber-based controllers, and created a unified `Controller` class.
+ - Added `Override` and `Braking` UI display.
+ - Added runway and runway texture.
+
+### Media
+![FlyByWireTakeoff](media/FlyByWireTakeoff.gif)
+![FlyByWireManeuvering](media/FlyByWireManeuvering.gif)
+
 ## v0.2.0 Wing Camber Prototype
 
 **Date: 2026-05-30**
