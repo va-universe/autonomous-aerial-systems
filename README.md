@@ -14,12 +14,32 @@ The purpose of this project is to explore how artificial neural networks can enh
 The latest release, `v0.3.0`, is the `Fly-By-Wire Prototype`. This release contains an enhanced `Wing Camber Prototype`, with a fly-by-wire system. This aircraft has G-force limiting, stall protection, yaw damping, rudder activation when rolling, and deflection smoothening. Beneath are details about all the current content:
  - There are currently `4` prototype prefabs and `3` scenes where some of these prototypes can be tested.
  - There are currently `3` physics models: a generalized unmaneuverable model, a distributed aerodynamic surface model, and a wing-camber-based model.
- - There are currently `1` flight assisting system: the first fly-by-wire system.
+ - There is currently `1` flight assisting system: the first fly-by-wire system.
 
 For more information about releases, check out the [Development Log](./docs/devlog.md) and [Releases](https://github.com/va-universe/Autonomous-Aerial-Systems/releases).
 
 ### Future Content
 The next planned release, `v0.4.0`, is the `Rule-based AI Prototype`. This release will contain a fully autonomous aircraft, which utilizes a predetermined rule set in order to maneuver, track waypoints and avoid collisions. This prototype will be an extension of the `v0.3.0` prototype, `Fly-By-Wire Prototype`.
+
+### Roadmap
+There are currently `14` planned milestones/releases, where `4` of them have already been completed. These releases are NOT set in stone, and are susceptible for change. Beneath is a checklist of the currently planned releases:
+
+ - [x] Pre-v0.1.0 First Takeoff
+ - [x] v0.1.0 Aerodynamic Surface Prototype
+ - [x] v0.2.0 Wing Camber Prototype
+ - [x] v0.3.0 Fly-By-Wire Prototype
+ - [ ] v0.4.0 Rule-based AI Prototype
+ - [ ] v0.5.0 Gun Systems & Prototype
+ - [ ] Pre-v0.6.0 First Missile Launch
+ - [ ] v0.6.0 First Missile Prototype
+ - [ ] v0.7.0 Fly-By-Wire Combat Prototype
+ - [ ] v0.8.0 Rule-based Combat AI Prototype
+ - [ ] v0.9.0 Modular Network AI Prototype
+ - [ ] v0.10.0 MNN Combat AI Prototype
+ - [ ] v0.11.0 Curriculum Learning AI Prototype
+ - [ ] v1.0.0 JAS 39 Gripen E
+
+For more information about the roadmap and future releases, check out the [Roadmap](./docs/roadmap.md).
 
 ## Running Instructions
 To test the different prototypes, follow the steps below:
