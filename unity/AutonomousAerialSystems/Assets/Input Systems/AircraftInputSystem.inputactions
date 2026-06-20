@@ -438,6 +438,51 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleGLimiting",
+                    "type": "Button",
+                    "id": "1741ac7a-c53f-4f69-8e75-2089937894b8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleStallLimiting",
+                    "type": "Button",
+                    "id": "7a996edb-daa4-4826-a1d6-7d24b1b52e85",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleSmoothening",
+                    "type": "Button",
+                    "id": "9a0258fa-b2bc-4eec-8058-28ce4e1b2952",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleYawDamping",
+                    "type": "Button",
+                    "id": "280375a3-d782-492c-b643-5260e120af60",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleTurningYaw",
+                    "type": "Button",
+                    "id": "46265e52-fa25-4050-918c-1d2a1468e9fb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -548,6 +593,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b1c95f20-f553-43fe-88a4-09e77383fcd5",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleGLimiting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b93c32db-9d83-4304-b8a3-4573d2be6ec3",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleStallLimiting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "645b7bb5-ac6a-4381-956e-d5f84b788c0b",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleSmoothening",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc36d06f-ee1c-43e4-aa78-154830ab3292",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleYawDamping",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3a128e6-b496-46ab-a322-5288ab5ca570",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleTurningYaw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
