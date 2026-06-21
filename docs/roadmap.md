@@ -21,6 +21,10 @@ Beneath are the already completed milestones/releases.
  - Automatic Yawing
  - Smoothened Deflection
 
+### v0.3.1 Fly-By-Wire Hotfix
+ - Toggleable Fly-By-Wire Systems
+ - Individual System Status UI Display
+
 ## Ahead
 Beneath are the upcoming milestones/releases.
 
