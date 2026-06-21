@@ -1,5 +1,19 @@
 # Development Log
 
+## v0.3.1 Fly-By-Wire Hotfix
+
+**Date: 2026-06-21**
+
+This hotfix introduces missing disableability for yaw damping and turning rudder. In addition to the fixes, there are new inputs for toggling individual fly-by-wire systems on and off. Each one of these systems have their own UI indicator.
+
+### Checklist
+ - Added booleans for yaw damping and turning rudder.
+ - Added inputs for toggling individual fly-by-wire systems.
+ - Added UI display on/off indicators for each system.
+
+### Media
+![FlyByWireDisplay](media/FlyByWireDisplay.png)
+
 ## v0.3.0 Fly-By-Wire Prototype
 
 **Date: 2026-06-20**
