@@ -3,17 +3,21 @@
 
 This project explores how advanced control systems, artificial intelligence and machine learning can be used to simulate air combat. Development moves forward through a series of prototypes, each introducing new aerodynamics, systems or autonomy.
 
+The project is developed as a solo engineering project with a focus on prototyping and experimentation.
+
 ![FlyByWireManeuvering](./docs/media/FlyByWireManeuvering.gif)
 
 ## Project Goals
+
 The long-term goal is to develop a complete autonomous air combat simulation, that includes:
- - Real-time and realistic aerodynamic flight simulations.
+ - Real-time aerodynamic flight simulation.
  - Control surface and wing-camber-based maneuvering.
  - Autonomous within visual range (WVR) combat.
  - Missile guidance and interception.
- - Aircrafts maneuvered through artificial neural networks.
+ - Aircraft maneuvered through artificial neural networks.
 
 ## Current Status
+
 The latest release, `v0.3.1`, is the `Fly-By-Wire Prototype`. This prototype extends the previous prototype, the `Wing Camber Prototype`, with a fly-by-wire system, that contains:
 
  - G-force limiting
