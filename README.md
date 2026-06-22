@@ -31,30 +31,40 @@ Current project content:
 
 For more information about recent releases, check out the [Development Log](./docs/devlog.md) and [Releases](https://github.com/va-universe/Autonomous-Aerial-Systems/releases).
 
+## Prototype Progression
+
+| Release | Prototype | Focus |
+|----------|----------|----------|
+| v0.1.0 | Aerodynamic Surface Prototype | Distributed aerodynamic forces |
+| v0.2.0 | Wing Camber Prototype | Wing-camber-based aerodynamics and stalling |
+| v0.3.0 | Fly-By-Wire Prototype | Flight assistance systems (FBW) |
+| v0.4.0 | Rule-Based AI Prototype | Autonomous flight without neural networks |
+
 ## Next Release
 
 The next planned release, `v0.4.0`, is the `Rule-based AI Prototype`. This release will introduce autonomous flight using rule-based systems, including waypoint and plane tracking, terrain avoidance and autonomous maneuvering. 
 
 ### Roadmap
-There are currently `15` planned milestones/releases, where `5` of them have already been completed. These releases are NOT set in stone, and are susceptible for change. Beneath is a checklist of the currently planned releases:
 
- - [x] Pre-v0.1.0 First Takeoff
- - [x] v0.1.0 Aerodynamic Surface Prototype
- - [x] v0.2.0 Wing Camber Prototype
- - [x] v0.3.0 Fly-By-Wire Prototype
- - [x] v0.3.1 Fly-By-Wire Hotfix
- - [ ] v0.4.0 Rule-based AI Prototype
- - [ ] v0.5.0 Gun Systems & Prototype
- - [ ] Pre-v0.6.0 First Missile Launch
- - [ ] v0.6.0 First Missile Prototype
- - [ ] v0.7.0 Fly-By-Wire Combat Prototype
- - [ ] v0.8.0 Rule-based Combat AI Prototype
- - [ ] v0.9.0 Modular Network AI Prototype
- - [ ] v0.10.0 MNN Combat AI Prototype
- - [ ] v0.11.0 Curriculum Learning AI Prototype
- - [ ] v1.0.0 JAS 39 Gripen E
+Current development path (subject to change):
 
-For more information about the roadmap and future releases, check out the [Roadmap](./docs/roadmap.md).
+ - [x] Aerodynamic Surface Prototype
+ - [x] Wing Camber Prototype
+ - [x] Fly-By-Wire Prototype
+ - [ ] Rule-based AI Prototype
+ - [ ] Weapon Systems Prototype
+ - [ ] Combat AI Prototype
+ - [ ] Neural Network Prototype
+ - [ ] Curriculum Learning Prototype
+ - [ ] JAS 39 Gripen E
+
+See the full roadmap in [Roadmap](./docs/roadmap.md).
+
+## Documentation
+ - [Manual](./docs/manual.md)
+ - [Development Log](./docs/devlog.md)
+ - [Roadmap](./docs/roadmap.md)
+ - [Release Notes](https://github.com/va-universe/Autonomous-Aerial-Systems/releases)
 
 ## Running Instructions
 To test the different prototypes, follow the steps below:
@@ -77,10 +87,21 @@ For more information about maneuvering the aircraft, check out the [Manual](./do
 
 ## Media
 
+### Fly-By-Wire Prototype
+
 ![FlyByWireDisplay](./docs/media/FlyByWireDisplay.png)
 ![FlyByWireTakeoff](./docs/media/FlyByWireTakeoff.gif)
 ![FlyByWireManeuvering](./docs/media/FlyByWireManeuvering.gif)
+
+## Wing Camber Prototype
+
 ![Stalling](./docs/media/Stalling.gif)
 ![Landing](./docs/media/Landing.gif)
+
+## Aerodynamic Surface Prototype
+
 ![First Maneuvering](./docs/media/FirstManeuvering.gif)
+
+## First Aircraft Prototype
+
 ![First Takeoff](./docs/media/FirstTakeoff.gif)
