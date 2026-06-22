@@ -1,20 +1,29 @@
 # Project Manual
 
-## Introduction
-The purpose of this project is to test and explore aircraft flight dynamics, fly-by-wire systems and autonomous flight in Unity. Each prototype focuses on a specific milestone and introduces new systems or aerodynamic models.
+## Contents
 
-## Future Prototypes
- - v0.4.0 Rule-based AI Prototype
+ - Fly-By-Wire Prototype
+ - Wing Camber Prototype
+ - Aerodynamic Surface Prototype
+ - First Aircraft Prototype
 
-## Aircraft Prototypes
-Below are all the current aircraft prototypes with descriptions, scene locations, and controls.
+## Prototype Overview
 
-### Fly-By-Wire Prototype (v0.3.1)
+| Prototype | Takeoff | Landing | Stalling | Fly-By-Wire | Autonomous |
+|------------|----------|----------|----------|----------|----------|
+| First Aircraft | Yes | No | No | No | No |
+| Aerodynamic Surface | Yes | Difficult | No | No | No |
+| Wing Camber | Yes | Yes | Yes | No | No |
+| Fly-By-Wire | Yes | Yes | Yes | Yes | No |
+
+## Fly-By-Wire Prototype
+**(Current Release: v0.3.1)**
+
 This prototype is a continuation of the `Wing Camber Prototype` with new flight assisting features. The fly-by-wire system includes a G-force limiter, stall protection, yaw damping, automatic rolling rudder, and deflection smoothening.
 
 **Scene:** `FlyByWireScene`
 
-#### Controls
+### Controls
  - W/S: Pitch
  - A/S: Roll
  - Q/E: Yaw
@@ -28,7 +37,7 @@ This prototype is a continuation of the `Wing Camber Prototype` with new flight 
  - 4: Toggle Yaw Damping
  - 5: Toggle Turning Yaw
 
-#### UI Display
+### UI Display
  - Speed: Current aircraft speed in meters per second.
  - Altitude: Current altitude above sea level in meters.
  - G-Force: Current aircraft G-Force.
@@ -36,60 +45,32 @@ This prototype is a continuation of the `Wing Camber Prototype` with new flight 
  - Override Alert: Indicates when you are overriding the fly-by-wire comfort settings.
  - Braking Alert: Indicates when you are activating the wheel brakes.
 
-#### Fly-By-Wire Systems UI Display
+### Fly-By-Wire Systems UI Display
  - G-Force Limiter: Indicates when the G-force limiter is turned on/off.
  - Stall Protection: Indicates when the stall protection is turned on/off.
  - Smoothening: Indicates when the input/deflection smoothening is turned on/off.
  - Yaw Damping: Indicates when the yaw damping is turned on/off.
  - Turning Rudder: Indicates when the turning yaw is turned on/off.
 
-#### Wing Specific UI Display
+### Wing Specific UI Display
  - Lift: The lift force generated in kilonewtons.
  - Drag: The drag force generated in kilonewtons.
  - AoA: Current angle of attack in degrees.
  - Stall: Current stall percentage of the wing.
 
-#### Media
+### Media
 ![FlyByWireDisplay](media/FlyByWireDisplay.png)
-
-### Fly-By-Wire Prototype (v0.3.0)
-This prototype is a continuation of the `Wing Camber Prototype` with new flight assisting features. The fly-by-wire system includes a G-force limiter, stall protection, yaw damping, automatic rolling rudder, and deflection smoothening.
-
-**Scene:** `FlyByWireScene`
-
-#### Controls
- - W/S: Pitch
- - A/S: Roll
- - Q/E: Yaw
- - R/F: Flap
- - Space: Thrust
- - Left Shift: Override
- - G: Wheel Brake
-
-#### UI Display
- - Speed: Current aircraft speed in meters per second.
- - Altitude: Current altitude above sea level in meters.
- - G-Force: Current aircraft G-Force.
- - Stalling Alert: Warns if most wings are stalling.
- - Override Alert: Indicates when you are overriding the fly-by-wire comfort settings.
- - Braking Alert: Indicates when you are activating the wheel brakes.
-
-#### Wing Specific UI Display
- - Lift: The lift force generated in kilonewtons.
- - Drag: The drag force generated in kilonewtons.
- - AoA: Current angle of attack in degrees.
- - Stall: Current stall percentage of the wing.
-
-#### Media
 ![FlyByWireTakeoff](media/FlyByWireTakeoff.gif)
 ![FlyByWireManeuvering](media/FlyByWireManeuvering.gif)
 
-### Wing Camber Prototype (v0.2.0)
+## Wing Camber Prototype
+**(Current Release: v0.2.0)**
+
 This prototype introduces a new wing-camber-based aerodynamic model where control surfaces alter the properties of their parent wings, rather than generating their own forces. This prototype also has working landing gear which allows easier takeoff and landing.
 
 **Scene:** `WingCamberScene`
 
-#### Controls
+### Controls
  - W/S: Pitch
  - A/S: Roll
  - Q/E: Yaw
@@ -97,47 +78,51 @@ This prototype introduces a new wing-camber-based aerodynamic model where contro
  - Space: Thrust
  - G: Wheel Brake
 
-#### UI Display
+### UI Display
  - Speed: Current aircraft speed in meters per second.
  - Altitude: Current altitude above sea level in meters.
  - G-Force: Current aircraft G-Force.
  - Stalling Alert: Warns if most wings are stalling.
 
-#### Wing Specific UI Display
+### Wing Specific UI Display
  - Lift: The lift force generated in kilonewtons.
  - Drag: The drag force generated in kilonewtons.
  - AoA: Current angle of attack in degrees.
  - Stall: Current stall percentage of the wing.
 
-#### Media
+### Media
 ![Landing](media/Landing.gif)
 ![Stalling](media/Stalling.gif)
 
-### Aerodynamic Surface Prototype (v0.1.0)
+## Aerodynamic Surface Prototype
+**(Current Release: v0.1.0)**
+
 This is the first maneuverable prototype. It demonstrates distributed aerodynamic surfaces where each wing and control surface generates its own local lift and drag.
 
 **Scene:** `AerodynamicSurfaceScene`
 
-#### Controls
+### Controls
  - W/S: Pitch
  - A/S: Roll
  - Q/E: Yaw
  - Space: Thrust
 
-#### UI Display
+### UI Display
  - Speed: Current aircraft speed in meters per second.
  - Altitude: Current altitude above sea level in meters.
 
-#### Media
+### Media
 ![First Maneuvering](media/FirstManeuvering.gif)
 
-### First Aircraft Prototype (Pre-v0.1.0)
+## First Aircraft Prototype
+**(Current Release: Pre-v0.1.0)**
+
 The first prototype of this project. It utilize a single physics model that generate forces at the center of mass. This prototype is therefore only capable of takeoff as it cannot generate any torque.
 
 **Scene:** None
 
-#### Controls
+### Controls
  - Space: Thrust
 
-#### Media
+### Media
 ![First Takeoff](media/FirstTakeoff.gif)
