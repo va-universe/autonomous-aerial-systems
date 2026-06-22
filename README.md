@@ -5,25 +5,35 @@ This project explores how advanced control systems, artificial intelligence and 
 
 ![FlyByWireManeuvering](./docs/media/FlyByWireManeuvering.gif)
 
-## Overview
-The purpose of this project is to explore how artificial neural networks can enhance simulated air combat in real-time flight dynamics. This project will include:
- - An aerodynamic flight simulation.
- - Control surface-based maneuvering.
+## Project Goals
+The long-term goal is to develop a complete autonomous air combat simulation, that includes:
+ - Real-time and realistic aerodynamic flight simulations.
+ - Control surface and wing-camber-based maneuvering.
  - Autonomous within visual range (WVR) combat.
- - AI-guided missile systems.
- - Artificial neural networks with evolving topologies.
- - Larger neural networks trained using backpropagation.
+ - Missile guidance and interception.
+ - Aircrafts maneuvered through artificial neural networks.
 
-### Current Progress
-The latest release, `v0.3.1`, is the `Fly-By-Wire Prototype`. This release contains an enhanced `Wing Camber Prototype`, with a fly-by-wire system. This aircraft has G-force limiting, stall protection, yaw damping, rudder activation when rolling, and deflection smoothening. Beneath are details about all the current content:
- - There are currently `4` prototype prefabs and `3` scenes where some of these prototypes can be tested.
- - There are currently `3` physics models: a generalized unmaneuverable model, a distributed aerodynamic surface model, and a wing-camber-based model.
- - There is currently `1` flight assisting system: the first fly-by-wire system.
+## Current Status
+The latest release, `v0.3.1`, is the `Fly-By-Wire Prototype`. This prototype extends the previous prototype, the `Wing Camber Prototype`, with a fly-by-wire system, that contains:
 
-For more information about releases, check out the [Development Log](./docs/devlog.md) and [Releases](https://github.com/va-universe/Autonomous-Aerial-Systems/releases).
+ - G-force limiting
+ - Stall protection
+ - Yaw damping
+ - Turn assistance
+ - Input/deflection smoothening
 
-### Future Content
-The next planned release, `v0.4.0`, is the `Rule-based AI Prototype`. This release will contain a fully autonomous aircraft, which utilizes a predetermined rule set in order to maneuver, track waypoints and avoid collisions. This prototype will be an extension of the `v0.3.0` prototype, `Fly-By-Wire Prototype`.
+Current project content:
+
+ - 4 aircraft prototypes
+ - 3 test scenes
+ - 3 aerodynamic models
+ - 1 fly-by-wire system
+
+For more information about recent releases, check out the [Development Log](./docs/devlog.md) and [Releases](https://github.com/va-universe/Autonomous-Aerial-Systems/releases).
+
+## Next Release
+
+The next planned release, `v0.4.0`, is the `Rule-based AI Prototype`. This release will introduce autonomous flight using rule-based systems, including waypoint and plane tracking, terrain avoidance and autonomous maneuvering. 
 
 ### Roadmap
 There are currently `15` planned milestones/releases, where `5` of them have already been completed. These releases are NOT set in stone, and are susceptible for change. Beneath is a checklist of the currently planned releases:
