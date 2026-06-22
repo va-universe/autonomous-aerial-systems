@@ -44,7 +44,7 @@ For more information about recent releases, check out the [Development Log](./do
 
 The next planned release, `v0.4.0`, is the `Rule-based AI Prototype`. This release will introduce autonomous flight using rule-based systems, including waypoint and plane tracking, terrain avoidance and autonomous maneuvering. 
 
-### Roadmap
+## Roadmap
 
 Current development path (subject to change):
 
@@ -61,29 +61,30 @@ Current development path (subject to change):
 See the full roadmap in [Roadmap](./docs/roadmap.md).
 
 ## Documentation
+
  - [Manual](./docs/manual.md)
+ - [Running Instructions](./docs/running-instructions.md)
  - [Development Log](./docs/devlog.md)
  - [Roadmap](./docs/roadmap.md)
  - [Release Notes](https://github.com/va-universe/Autonomous-Aerial-Systems/releases)
 
-## Running Instructions
-To test the different prototypes, follow the steps below:
- 1. On GitHub, click `Code` and then `Download ZIP`.
- 2. Extract the ZIP file to your computer, or clone the repository.
- 3. Install Unity Hub if it is not already installed.
- 4. In Unity Hub, go to `Installs` then click `Install Editor` and install Unity version `6000.3.12f1`.
- 5. In Unity Hub, go to `Projects` and click `Add` then `Add project from disk`, then select the downloaded project folder.
- 6. Open the project and wait for Unity to finish importing all assets.
- 7. In the `Scenes` folder in `Assets`, open one of the following scenes and click the play icon.
-    - `AerodynamicSurfaceScene` to test the `AerodynamicSurfacePrototype`.
-    - `WingCamberScene` to test the `WingCamberPrototype`.
-    - `FlyByWireScene` to test the `FlyByWirePrototype`.
-   
-For more information about maneuvering the aircraft, check out the [Manual](./docs/manual.md).
+## How To Run
 
 ### Requirements
- - Unity Editor `6000.3.12f1`.
- - Unity Hub.
+
+ - Unity Hub
+ - Unity `6000.3.12f1`
+
+### Running
+
+For a more in-depth guide, check out the [Running Instructions](./docs/running-instructions.md).
+
+ 1. Clone or download the repository.
+ 2. Open the project using Unity Hub.
+ 3. Open one of the prototype scenes located in `Assets/Scenes`.
+ 4. Press Play.
+
+See the [Manual](./docs/manual.md) for controls and prototype information.
 
 ## Media
 
