@@ -1,5 +1,9 @@
 # Autonomous Aerial Systems
-Real-time autonomous air combat and aerodynamics simulation in Unity.
+**Real-time flight simulation, autonomous controls and air combat research in Unity.**
+
+This project explores how advanced control systems, artificial intelligence and machine learning can be used to simulate air combat. Development moves forward through a series of prototypes, each introducing new aerodynamics, systems or autonomy.
+
+![FlyByWireManeuvering](./docs/media/FlyByWireManeuvering.gif)
 
 ## Overview
 The purpose of this project is to explore how artificial neural networks can enhance simulated air combat in real-time flight dynamics. This project will include:
