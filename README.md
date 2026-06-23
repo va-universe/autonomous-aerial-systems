@@ -7,7 +7,7 @@ The project is developed as a solo engineering project with a focus on prototypi
 
 ![FlyByWireManeuvering](./docs/media/FlyByWireManeuvering.gif)
 
-Checkout my ![LinkedIn](https://www.linkedin.com/in/vigor-andersson-bb346137b?utm_source=share_via&utm_content=profile&utm_medium=member_ios)!
+Checkout my [LinkedIn](https://www.linkedin.com/in/vigor-andersson-bb346137b?utm_source=share_via&utm_content=profile&utm_medium=member_ios)!
 
 ## Project Goals
 
