@@ -7,6 +7,8 @@ The project is developed as a solo engineering project with a focus on prototypi
 
 ![FlyByWireManeuvering](./docs/media/FlyByWireManeuvering.gif)
 
+Checkout my ![LinkedIn](https://www.linkedin.com/in/vigor-andersson-bb346137b?utm_source=share_via&utm_content=profile&utm_medium=member_ios)!
+
 ## Project Goals
 
 The long-term goal is to develop a complete autonomous air combat simulation, that includes:
@@ -70,6 +72,7 @@ See the full roadmap in [Roadmap](./docs/roadmap.md).
  - [Running Instructions](./docs/running-instructions.md)
  - [Development Log](./docs/devlog.md)
  - [Roadmap](./docs/roadmap.md)
+ - [Workflow](./docs/workflow.md)
  - [Release Notes](https://github.com/va-universe/Autonomous-Aerial-Systems/releases)
 
 ## How To Run
