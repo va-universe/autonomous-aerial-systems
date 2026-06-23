@@ -17,7 +17,7 @@
 | Fly-By-Wire | Yes | Yes | Very Easily | Yes | Yes | No |
 
 ## Fly-By-Wire Prototype
-**(Current Release: v0.3.1)**
+**(Release: v0.3.1)**
 
 This prototype is a continuation of the `Wing Camber Prototype` with new flight assisting features. The fly-by-wire system includes a G-force limiter, stall protection, yaw damping, automatic rolling rudder, and deflection smoothening.
 
@@ -38,6 +38,22 @@ This prototype is a continuation of the `Wing Camber Prototype` with new flight 
  - **4:** Toggle Yaw Damping
  - **5:** Toggle Turning Yaw
 
+### How To Fly
+
+ 1. Use the flaps and pitch up during takeoff.
+ 2. Apply thrust using Space.
+ 3. Maneuver the aircraft using pitch, roll and yaw.
+ 4. Apply wheel brakes during landing.
+ 5. Use Left Shift to temporarily override the fly-by-wire limits.
+
+### Fly-By-Wire Systems
+
+ - **G-Force Limiter:** Prevents the aircraft from exceeding predetermined positive and negative G-force limits.
+ - **Stall Protection:** Reduces elevator and flap controls to prevent stalling.
+ - **Input/Deflection Smoothening: Gradually changes the angle of the control surfaces to avoid oscillations and sharp movement.
+ - **Yaw Damping:** Reduces unwanted yaw drift and oscillations.
+ - **Turning Rudder:** Automatically applies rudder during rolls for reduced yaw drift.
+
 ### UI Display
 
  - **Speed:** Current aircraft speed in meters per second.
@@ -47,7 +63,7 @@ This prototype is a continuation of the `Wing Camber Prototype` with new flight 
  - **Override Alert:** Indicates when you are overriding the fly-by-wire comfort settings.
  - **Braking Alert:** Indicates when you are activating the wheel brakes.
 
-#### Fly-By-Wire Systems UI Display
+#### Fly-By-Wire Systems Display
 
  - **G-Force Limiter:** Indicates when the G-force limiter is turned on/off.
  - **Stall Protection:** Indicates when the stall protection is turned on/off.
@@ -55,7 +71,7 @@ This prototype is a continuation of the `Wing Camber Prototype` with new flight 
  - **Yaw Damping:** Indicates when the yaw damping is turned on/off.
  - **Turning Rudder:** Indicates when the turning yaw is turned on/off.
 
-#### Wing Specific UI Display
+#### Wing Specific Display
 
  - **Lift:** The lift force generated in kilonewtons.
  - **Drag:** The drag force generated in kilonewtons.
@@ -65,11 +81,9 @@ This prototype is a continuation of the `Wing Camber Prototype` with new flight 
 ### Media
 
 ![FlyByWireDisplay](media/FlyByWireDisplay.png)
-![FlyByWireTakeoff](media/FlyByWireTakeoff.gif)
-![FlyByWireManeuvering](media/FlyByWireManeuvering.gif)
 
 ## Wing Camber Prototype
-**(Current Release: v0.2.0)**
+**(Release: v0.2.0)**
 
 This prototype introduces a new wing-camber-based aerodynamic model where control surfaces alter the properties of their parent wings, rather than generating their own forces. This prototype also has working landing gear which allows easier takeoff and landing.
 
@@ -84,6 +98,13 @@ This prototype introduces a new wing-camber-based aerodynamic model where contro
  - **Space:** Thrust
  - **G:** Wheel Brake
 
+### How To Fly
+
+ 1. Use the flaps and pitch down during takeoff.
+ 2. Apply thrust using Space.
+ 3. Maneuver the aircraft using pitch, roll and yaw.
+ 4. Apply wheel brakes during landing.
+
 ### UI Display
 
  - **Speed:** Current aircraft speed in meters per second.
@@ -91,20 +112,15 @@ This prototype introduces a new wing-camber-based aerodynamic model where contro
  - **G-Force:** Current aircraft G-Force.
  - **Stalling Alert:** Warns if most wings are stalling.
 
-#### Wing Specific UI Display
+#### Wing Specific Display
 
  - **Lift:** The lift force generated in kilonewtons.
  - **Drag:** The drag force generated in kilonewtons.
  - **AoA:** Current angle of attack in degrees.
  - **Stall:** Current stall percentage of the wing.
 
-### Media
-
-![Landing](media/Landing.gif)
-![Stalling](media/Stalling.gif)
-
 ## Aerodynamic Surface Prototype
-**(Current Release: v0.1.0)**
+**(Release: v0.1.0)**
 
 This is the first maneuverable prototype. It demonstrates distributed aerodynamic surfaces where each wing and control surface generates its own local lift and drag.
 
@@ -117,17 +133,19 @@ This is the first maneuverable prototype. It demonstrates distributed aerodynami
  - **Q/E:** Yaw
  - **Space:** Thrust
 
+### How To Fly
+
+ 1. Adjust pitch carefully during takeoff.
+ 2. Apply thrust using Space.
+ 3. Maneuver the aircraft using pitch, roll and yaw.
+
 ### UI Display
 
  - **Speed:** Current aircraft speed in meters per second.
  - **Altitude:** Current altitude above sea level in meters.
 
-### Media
-
-![First Maneuvering](media/FirstManeuvering.gif)
-
 ## First Aircraft Prototype
-**(Current Release: Pre-v0.1.0)**
+**(Release: Pre-v0.1.0)**
 
 The first prototype of this project. It utilize a single physics model that generate forces at the center of mass. This prototype is therefore only capable of takeoff as it cannot generate any torque.
 
@@ -137,6 +155,6 @@ The first prototype of this project. It utilize a single physics model that gene
 
  - **Space:** Thrust
 
-### Media
+### How To Fly
 
-![First Takeoff](media/FirstTakeoff.gif)
+ 1. Hold space to apply thrust.
