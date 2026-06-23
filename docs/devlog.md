@@ -1,12 +1,17 @@
 # Development Log
 
+This document summarizes the major milestones and prototype progression of Autonomous Aerial Systems.
+
+For a more detailed feature lists, implementation notes, bug fixes, changes and testing information, see the official GitHub release page:
+https://github.com/va-universe/Autonomous-Aerial-Systems/releases.
+
 ## v0.3.1 Fly-By-Wire Hotfix
 
 **Date: 2026-06-21**
 
 This hotfix introduces missing disableability for yaw damping and turning rudder. In addition to the fixes, there are new inputs for toggling individual fly-by-wire systems on and off. Each one of these systems have their own UI indicator.
 
-### Checklist
+### Main Additions
  - Added booleans for yaw damping and turning rudder.
  - Added inputs for toggling individual fly-by-wire systems.
  - Added UI display on/off indicators for each system.
@@ -20,7 +25,7 @@ This hotfix introduces missing disableability for yaw damping and turning rudder
 
 This prototype introduces a new fly-by-wire system, built on top of the wing-camber-based physics model. This aircraft utilizes a G-force limiter, stall protection, yaw damping, rudder activation during turns, and deflection smoothening, for smoother and safer flight. These systems has a comfort setting which can be overriden by the pilot, in order to maneuver faster.
 
-### Checklist
+### Main Additions
  - Implemented a G-force limiter.
  - Implemented stall protection.
  - Implemented maneuver/deflection smoothening.
@@ -39,7 +44,7 @@ This prototype introduces a new fly-by-wire system, built on top of the wing-cam
 
 This aircraft prototype introduces a new wing-camber-based aerodynamic model, where control surfaces no longer generate their own lift forces but instead alter the properties of the parent wing surfaces. This aircraft is capable of takeoff, maneuvering, and landing. It now includes wing specific stalling that reduces lift and increases drag at high angles of attack. 
 
-### Checklist
+### Main Additions
  - Implemented wing-camber-based aerodynamics model.
  - Implemented wing local stalling.
  - Added landing gear with `Wheel Collider`s.
@@ -59,7 +64,7 @@ This aircraft prototype introduces a new wing-camber-based aerodynamic model, wh
 
 This aircraft prototype now flies using distributed aerodynamic forces, allowing the control surfaces to generate torque in order to maneuver. The goal moving into the making of the `Wing Camber Prototype` is to implement stalling, flaps and wing camber. 
 
-### Checklist
+### Main Additions
  - Implemented distributed aerodynamic surfaces.
  - Implemented angle of attack for the `liftCoefficient`.
  - Modified the wing structure and ailerons of the `First Aircraft Prototype`.
@@ -79,7 +84,7 @@ This aircraft prototype now flies using distributed aerodynamic forces, allowing
 
 This aircraft prototype used simplified flight physics to takeoff. Moving into `v0.1.0`, the goal is to switch from a centralized flight model to distributed aerodynamic surfaces with their own local forces applied.
 
-### Checklist
+### Main Additions
  - Created `First Aircraft Prototype` prefab.
  - Implemented simplified thrust, lift and drag.
  - Implemented simplified air density calculation.
