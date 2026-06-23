@@ -9,6 +9,8 @@
 
 ## Prototype Overview
 
+The table below summarizes the capabilities of each prototype.
+
 | Prototype | Takeoff | Landing | Maneuvering | Stalling | Fly-By-Wire | Autonomous |
 |------------|----------|----------|----------|----------|----------|------------|
 | First Aircraft | Yes | No | No | No | No | No |
@@ -26,11 +28,11 @@ This prototype is a continuation of the `Wing Camber Prototype` with new flight 
 ### Keybinds
 
  - **W/S:** Pitch
- - **A/S:** Roll
+ - **A/D:** Roll
  - **Q/E:** Yaw
  - **R/F:** Flap
  - **Space:** Thrust
- - **Left Shift:** Override
+ - **Left Shift:** Temporarily lighten fly-by-wire restrictions
  - **G:** Wheel Brake
  - **1:** Toggle G-Force Limiter
  - **2:** Toggle Stall Protection
@@ -40,8 +42,8 @@ This prototype is a continuation of the `Wing Camber Prototype` with new flight 
 
 ### How To Fly
 
- 1. Use the flaps and pitch up during takeoff.
- 2. Apply thrust using Space.
+ 1. Apply thrust using Space.
+ 2. Deploy flaps and pitch up during takeoff.
  3. Maneuver the aircraft using pitch, roll and yaw.
  4. Apply wheel brakes during landing.
  5. Use Left Shift to temporarily override the fly-by-wire limits.
@@ -50,7 +52,7 @@ This prototype is a continuation of the `Wing Camber Prototype` with new flight 
 
  - **G-Force Limiter:** Prevents the aircraft from exceeding predetermined positive and negative G-force limits.
  - **Stall Protection:** Reduces elevator and flap controls to prevent stalling.
- - **Input/Deflection Smoothening: Gradually changes the angle of the control surfaces to avoid oscillations and sharp movement.
+ - **Input/Deflection Smoothening:** Gradually changes the angle of the control surfaces to avoid oscillations and sharp movement.
  - **Yaw Damping:** Reduces unwanted yaw drift and oscillations.
  - **Turning Rudder:** Automatically applies rudder during rolls for reduced yaw drift.
 
@@ -92,7 +94,7 @@ This prototype introduces a new wing-camber-based aerodynamic model where contro
 ### Keybinds
 
  - **W/S:** Pitch
- - **A/S:** Roll
+ - **A/D:** Roll
  - **Q/E:** Yaw
  - **R/F:** Flap
  - **Space:** Thrust
@@ -100,8 +102,8 @@ This prototype introduces a new wing-camber-based aerodynamic model where contro
 
 ### How To Fly
 
- 1. Use the flaps and pitch down during takeoff.
- 2. Apply thrust using Space.
+ 1. Apply thrust using Space.
+ 2. Deploy flaps and pitch down during takeoff to avoid stalling.
  3. Maneuver the aircraft using pitch, roll and yaw.
  4. Apply wheel brakes during landing.
 
@@ -129,7 +131,7 @@ This is the first maneuverable prototype. It demonstrates distributed aerodynami
 ### Keybinds
 
  - **W/S:** Pitch
- - **A/S:** Roll
+ - **A/D:** Roll
  - **Q/E:** Yaw
  - **Space:** Thrust
 
@@ -147,7 +149,7 @@ This is the first maneuverable prototype. It demonstrates distributed aerodynami
 ## First Aircraft Prototype
 **(Release: Pre-v0.1.0)**
 
-The first prototype of this project. It utilize a single physics model that generate forces at the center of mass. This prototype is therefore only capable of takeoff as it cannot generate any torque.
+The first prototype of this project. It utilizes a single physics model that generate forces at the center of mass. This prototype is therefore only capable of takeoff as it cannot generate any torque.
 
 **Scene:** None
 
