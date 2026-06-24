@@ -23,10 +23,10 @@ Open one of the following scenes located in `Assets/Scenes` and press `Play`.
 
 | Scene | Prototype |
 |---------|---------|
-| `AerodynamicSurfaceScene` | Aerodynamic Surface Prototype |
-| `WingCamberScene` | Wing Camber Prototype |
-| `FlyByWireScene` | Fly-By-Wire Prototype (after hotfix) |
+| AerodynamicSurfaceScene | Aerodynamic Surface Prototype |
+| WingCamberScene | Wing Camber Prototype |
+| FlyByWireScene | Fly-By-Wire Prototype (after hotfix) |
 
 ## Controls
 
-For information about maneuvering the aircrafts, check out the [Manual](./docs/manual.md).
+Controls and prototype specific information can be found inside of the [Manual](./manual.md).
