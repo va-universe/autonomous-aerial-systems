@@ -1,6 +1,6 @@
 # Roadmap
 
-This roadmap outlines the major milestones planned for the project. Future releases are subject to change
+This roadmap outlines the major milestones planned for the project. Future releases are subject to change.
 
 # Milestones
 
