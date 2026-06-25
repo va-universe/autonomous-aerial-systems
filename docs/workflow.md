@@ -1,9 +1,29 @@
-# Naming Conventions
+# Development Workflow
+
+This document describes the workflow and naming conventions.
 
 ## Branches
-The names of all branches except for main, follow the format: `type/branch-title`. The type can for instance be `feature/`, `docs/`, `fix/` or `refactor/`.
 
-**Branch name example:** `feature/control-surfaces` or `docs/naming-conventions`.
+All branches expect main follow the format:
+```type/branch-title```
+
+**Common branch types:**
+| Type | Purpose |
+|---------|---------|
+| feature | New additions |
+| bugfix | Bug fixes |
+| hotfix | After release fixes |
+| docs | Documentation |
+| prototype | New prototype's dev branch |
+
+### Examples
+
+```
+feature/g-force-limiter
+prototype/wing-camber
+bugfix/center-of-mass
+docs/manual
+```
 
 ## Commits
 Commit messages may references issues using keywords such as `Fix #X` or `Close #X`. These will only close issues if merged into main. The message will describe what the commit did, for instance `Add (feature)`, `Implement (code feature)` or `Fix (bug)`.
