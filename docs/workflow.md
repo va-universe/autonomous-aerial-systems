@@ -5,7 +5,9 @@ This document describes the workflow and naming conventions.
 ## Branches
 
 All branches expect main follow the format:
-```type/branch-title```
+```
+type/branch-title
+```
 
 **Common branch types:**
 | Type | Purpose |
@@ -26,11 +28,24 @@ docs/manual
 ```
 
 ## Commits
-Commit messages may references issues using keywords such as `Fix #X` or `Close #X`. These will only close issues if merged into main. The message will describe what the commit did, for instance `Add (feature)`, `Implement (code feature)` or `Fix (bug)`.
 
-**Commit message example:** `Fix #8: Implement an activation function library.`
+Commit messages should describe the change being made. When possible, commits should reference issues using issue keywords.
 
-For squash merges, the final commit message is edited before merging. Keywords for closing issues (for example Fixes #X) should be included in the final squash commit message or pull request description so they are applied when merged into main.
+Commits should follow either format:
+```
+Fix #X: Description.
+Description.
+```
+
+### Examples
+
+```
+Fix #18: Implement wing stalling.
+Fix #54: Refactor the rule-based AI controller.
+Add fly-by-wire G-force limiter.
+```
+
+Keep in mind that `Fix #X` only take effect once the commit reaches the main branch.
 
 ## Issues
 Similar to the commit messages, issue titles should clearly state what task they are related to and should start with something such as `Create`, `Add`, `Implement` or `Fix`. Having a description for the issue is optional.
