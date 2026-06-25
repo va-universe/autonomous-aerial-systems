@@ -11,7 +11,7 @@ type/branch-title
 
 **Common branch types:**
 | Type | Purpose |
-|---------|---------|
+|-|-|
 | feature | New additions |
 | bugfix | Bug fixes |
 | hotfix | After release fixes |
@@ -33,8 +33,8 @@ Commit messages should describe the change being made. When possible, commits sh
 
 Commits should follow either format:
 ```
-Fix #X: Description.
-Description.
+Fix #X: Action & description.
+Action & description.
 ```
 
 ### Examples
@@ -48,28 +48,64 @@ Add fly-by-wire G-force limiter.
 Keep in mind that `Fix #X` only take effect once the commit reaches the main branch.
 
 ## Issues
-Similar to the commit messages, issue titles should clearly state what task they are related to and should start with something such as `Create`, `Add`, `Implement` or `Fix`. Having a description for the issue is optional.
 
-**Issue title example:** `Implement an activation function library.`
+Each issue represent an individual task, bug or planned feature. The title of each issue should clearly state the work being performed, similar to the commits. Issue descriptions are optional.
+
+### Examples
+
+```
+Implement wing stalling.
+Refactor the rule-based AI controller.
+Add fly-by-wire G-force limiter.
+```
 
 ## Pull Requests
-Every pull request will have a title generally describing the changes done. All changes and tests will be stated in the description of the pull request. Issue keywords may also be included in the description (not in the title).
 
-**Pull request title example:** `Implement neural network ground work.`
+Pull request are always used in order to merge into dev branches or `main`.
 
-**Pull request description example:**
+All pull requests should contain:
+ - A summary of all changes
+ - A summary of all testing
+ - Linked issues with closing keywords
+
+### Example
+
+#### Title
+
+```
+Implement fly-by-wire stall protection.
+```
+
+#### Description
 ```
 ## Changes
- - Created neural network classes.
- - Implemented network propagation.
- - Fixed network initialization issue.
+ - Implemented stall protection system.
+ - Added protection override capabilities.
+ - Added stall protection status UI display.
 
 ## Testing
- - Tested network propagation.
- - Verified network initialization working after fix.
+ - Verified stall protection working.
+ - Tested protection overriding.
 
-Fixes #4
-Fixes #12
+Fixes #18
+Fixes #29
 ```
 
-**NOTE:** Pull requests are merged using `squash and merge` to maintain a cleaner commit histroy.
+### Squash and Merge
+
+Always use `Squash and Merge` when merging a pull request into any branch. Review all commits, edit the commit message and make sure issue closing keywords are included.
+
+#### Commit Message Example
+
+```
+Changes
+ - Implemented stall protection.
+ - Added protection override.
+ - Added stall protection UI.
+
+Testing
+ - Verified stall protection working.
+
+Fixes #18
+Fixes #29
+```
