@@ -109,3 +109,21 @@ Testing
 Fixes #18
 Fixes #29
 ```
+
+## Milestones
+
+Milestones represent major goals and usually correspond to a future release and prototype. A milestone's description should contain a clear prototype or system goal, multiple issues, and should result in a releasable version. The milestone should be closed when all related issues are fixed or closed.
+
+### Example
+
+#### Title
+
+```
+Complete the rule-based AI prototype (v0.4.0)
+```
+
+#### Description
+
+```
+The goal with this milestone is to take the first step towards autonomous aircrafts, by creating the first prototype that utilize rules to fly, maneuver and avoid collisions. This prototype should also bne capable of tracking/following other aircrafts mid-air. Adding landing and takeoff may or may not be included in this milestone depending on difficulty.
+```
