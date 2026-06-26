@@ -127,3 +127,89 @@ Complete the rule-based AI prototype (v0.4.0)
 ```
 The goal with this milestone is to take the first step towards autonomous aircrafts, by creating the first prototype that utilize rules to fly, maneuver and avoid collisions. This prototype should also bne capable of tracking/following other aircrafts mid-air. Adding landing and takeoff may or may not be included in this milestone depending on difficulty.
 ```
+
+## Releases
+
+Releases are created after a milestone has been completed and merged into `main`.
+
+### Release Notes Structure
+
+Each release note should contain:
+
+ - Description & Media
+ - Major Changes
+ - Features
+ - Bugfixes & Improvements
+ - Testing & Verification
+ - Documentation
+ - Coming Next
+
+Optional sections:
+
+ - Coming In The Future
+
+### Example
+
+#### Title
+
+```
+Fly-By-Wire Prototype
+```
+
+#### Tag
+
+```
+v0.3.0
+```
+
+#### Description
+
+```
+# Release Notes v0.3.0
+
+This release contains a new aircraft prototype called `Fly-By-Wire Prototype`. This aircraft is an enhanced version of the `Wing Camber Prototype`, with a fly-by-wire system. This system includes a G-force limiter, stall protection, yaw damping and rolling rudder activation, as well as deflection smoothening. Both the G-force limiter and the stall protection can be decreased by holding `Left Shift` in order to "override" the fly-by-wire system. The `FlyByWireController` and the `SecondAircraftController` is now built on top of the `Controller` class, containing the wing-camber-based model.
+
+![FlyByWireManeuvering](docs/media/FlyByWireManeuvering.gif)
+
+## Major Changes
+ - Created a fly-by-wire system for the wing-camber-based aircraft.
+
+## Features
+ - Created `FlyByWireScene` and renamed the other prototype scenes.
+ - Created the `FlyByWirePrototype` prefab, by duplicating the `WingCamberPrototype`.
+ - Added a runway and runway texture to the `FlyByWireScene`.
+ - Implemented new unified `Controller` class and the `FlyByWireController`.
+ - Implemented a G-force limiter.
+ - Implemented maneuvering/deflection smoothening.
+ - Implemented stall protection.
+ - Added fly-by-wire override input, as well as `Override` and `Braking` UI display.
+ - Implemented yaw damping and rolling rudder activation.
+
+## Bugfixes & Improvements
+ - Discovered and fixed non-local `CenterOfMass` placement.
+ - Discovered and fixed inverted yaw damping.
+
+## Testing & Verification
+ - Verified functioning G-force limiting and stall protection.
+ - Verified enhanced and smoother flight.
+ - Verified that adverse yaw was fixed.
+ - Tested different fly-by-wire parameters.
+
+## Documentation
+ - Added prototype information to `manual.md`, `devlog.md` and `README.md`.
+ - Recorded and added `FlyByWireTakoff.gif` and `FlyByWireManeuvering.gif`.
+ 
+ ## Coming Next
+ - Rule-based AI prototype.
+ - Rule-based takeoff.
+ - Rule-based waypoint and plane tracking.
+ - Sensors and rule-based anti-crash system.
+```
+
+### Release Process
+
+ 1. Complete all milestone issues.
+ 3. Add development log and other documentation.
+ 2. Squash and Merge into `main`.
+ 3. Close the milestone.
+ 4. Create release notes and release.
