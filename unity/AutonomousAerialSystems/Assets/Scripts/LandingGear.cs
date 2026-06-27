@@ -1,9 +1,7 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 /// <summary>
-/// Landing gear for the Wing Camber Prototype
+/// Landing gear handler for the wing-camber-based prototypes
 /// </summary>
 public class LandingGear : MonoBehaviour
 {
@@ -43,9 +41,9 @@ public class LandingGear : MonoBehaviour
 
     void Update()
     {
-        UpdateWheelVisual(LeftWheelCollider, LeftWheelVisual);
-        UpdateWheelVisual(RightWheelCollider, RightWheelVisual);
-        UpdateWheelVisual(BackWheelCollider, BackWheelVisual);
+        UpdateWheelVisuals(LeftWheelCollider, LeftWheelVisual);
+        UpdateWheelVisuals(RightWheelCollider, RightWheelVisual);
+        UpdateWheelVisuals(BackWheelCollider, BackWheelVisual);
     }
 
     private void FixedUpdate()
@@ -54,7 +52,7 @@ public class LandingGear : MonoBehaviour
     }
 
     /// <summary>
-    /// Initialize wheel collider values
+    /// Initialize wheel collider parameters
     /// </summary>
     /// <param name="wheelCollider">The wheel collider</param>
     private void InitializeWheel(WheelCollider wheelCollider)
@@ -78,11 +76,11 @@ public class LandingGear : MonoBehaviour
     }
 
     /// <summary>
-    /// Update the wheel visuals
+    /// Update the wheel position and rotation
     /// </summary>
     /// <param name="wheelCollider">The wheel collider</param>
-    /// <param name="wheelTransform">The transform of the wheel visual</param>
-    private void UpdateWheelVisual(WheelCollider wheelCollider, Transform wheelTransform)
+    /// <param name="wheelTransform">The transform of the wheel visuals</param>
+    private void UpdateWheelVisuals(WheelCollider wheelCollider, Transform wheelTransform)
     {
         wheelCollider.GetWorldPose(out Vector3 position, out Quaternion rotation);
 
@@ -93,7 +91,7 @@ public class LandingGear : MonoBehaviour
     }
 
     /// <summary>
-    /// Apply braking torque on main wheels
+    /// Apply braking torque on main wheels, if braking
     /// </summary>
     private void ApplyBrake()
     {
@@ -107,7 +105,7 @@ public class LandingGear : MonoBehaviour
         RightWheelCollider.brakeTorque = brakeTorque;
         BackWheelCollider.brakeTorque = 0f;
 
-        //Fixes a bug where the wheels lock in place from stopping completely after braking
+        //Fixes a bug where the wheels get locked in place
         LeftWheelCollider.motorTorque = 0.1f;
         RightWheelCollider.motorTorque = 0.1f;
     }

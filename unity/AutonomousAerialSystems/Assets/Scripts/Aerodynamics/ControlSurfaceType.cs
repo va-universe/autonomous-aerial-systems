@@ -1,10 +1,10 @@
 /// <summary>
-/// All control surface types
+/// Types of control surfaces
 /// </summary>
 public enum ControlSurfaceType
 {
     Aileron,
     Elevator,
     Rudder,
-    Flap,
+    Flap
 }

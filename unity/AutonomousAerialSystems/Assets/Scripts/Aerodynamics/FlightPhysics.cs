@@ -31,9 +31,9 @@ public class FlightPhysics : MonoBehaviour
     }
 
     /// <summary>
-    /// Compute a global and simplified lift for the aircraft
+    /// Applies a global and simplified lift for the entire aircraft
     /// </summary>
-    /// <param name="airDensity">The current air density</param>
+    /// <param name="airDensity">The air density at the aircraft position</param>
     private void ApplyLift(float airDensity)
     {
         float speed = _rb.linearVelocity.magnitude;
@@ -43,9 +43,9 @@ public class FlightPhysics : MonoBehaviour
     }
 
     /// <summary>
-    /// Compute a global and simplified drag for the aircraft
+    /// Applies a global and simplified parasitic drag for the entire aircraft
     /// </summary>
-    /// <param name="airDensity">The current air density</param>
+    /// <param name="airDensity">The air density at the aircraft position</param>
     private void ApplyDrag(float airDensity)
     {
         Vector3 velocity = _rb.linearVelocity;
@@ -56,13 +56,13 @@ public class FlightPhysics : MonoBehaviour
     }
 
     /// <summary>
-    /// Extremly simplified air density calculator
+    /// Calculates and returns an approximation of the air density based on altitude
     /// </summary>
-    /// <returns>The air density at the current altitude</returns>
+    /// <returns>The air density at the surface position</returns>
     private float GetAirDensity()
     {
         float altitude = Mathf.Max(0, transform.position.y);
-        float turningPoint = 9000f; //Derived from testing in Geogebra
+        float turningPoint = 9000f;
 
         float airDensity = SeaLevelDensity * Mathf.Exp(-altitude / turningPoint);
         return airDensity;

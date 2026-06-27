@@ -1,10 +1,9 @@
 using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// The unified base for controllers using the wing-camber-based system
+/// The unified base for controllers using the wing-camber-based model
 /// </summary>
 public class Controller : MonoBehaviour
 {
@@ -116,7 +115,7 @@ public class Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Apply thrust force at the center of mass
+    /// Applies thrust force at the center of mass
     /// </summary>
     protected virtual void ApplyThrust()
     {
@@ -126,7 +125,7 @@ public class Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Calculate the current G Force 
+    /// Calculates the current G Force 
     /// </summary>
     protected void CalculateGForce()
     {
@@ -147,7 +146,7 @@ public class Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Update the deflection angles in the wing surfaces
+    /// Update the deflection in all the wing surfaces
     /// </summary>
     protected virtual void UpdateWingSurfaceData()
     {
@@ -181,7 +180,7 @@ public class Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets all control surfaces from prefab
+    /// Initializes all control surfaces
     /// </summary>
     protected void InitializeControlSurfaces()
     {
@@ -197,7 +196,7 @@ public class Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets all wing surfaces from prefab
+    /// Initializes all wing surfaces
     /// </summary>
     protected void InitializeWingSurfaces()
     {
@@ -213,7 +212,7 @@ public class Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets all texts from canvas
+    /// Initializes all texts from UI canvas
     /// </summary>
     protected virtual void InitializeTextDisplays()
     {
@@ -238,7 +237,7 @@ public class Controller : MonoBehaviour
     }
 
     /// <summary>
-    /// Get the roll, pitch, yaw, flap and thrust input from the input action system
+    /// Get the roll, pitch, yaw, flap, brake and thrust input from the input action system
     /// </summary>
     protected virtual void GetInput()
     {

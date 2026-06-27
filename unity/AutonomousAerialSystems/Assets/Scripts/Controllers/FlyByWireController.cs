@@ -1,7 +1,5 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Windows;
 
 /// <summary>
 /// The controller of the fly-by-wire prototype
@@ -84,10 +82,10 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Limits the input based on prefered G-force
+    /// Limits the input, based on prefered G-forces
     /// </summary>
     /// <param name="input">The input to be limited</param>
-    /// <returns>The input after being limited by G-force</returns>
+    /// <returns>The input after being limited based on G-force</returns>
     private float LimitGForce(float input)
     {
         if (!IsGForceLimited)
@@ -112,11 +110,11 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Limits the input based on stall percentage
+    /// Limits the input, based on stall percentage
     /// </summary>
     /// <param name="input">The input to be limited</param>
     /// <param name="axis">The axis of the wing surface</param>
-    /// <returns>The input after being limited by stall percentage</returns>
+    /// <returns>The input after being limited based on stall percentage</returns>
     private float LimitStall(float input, WingAxis axis)
     {
         if (!IsStallLimited)
@@ -160,20 +158,20 @@ public class FlyByWireController : Controller
     /// </summary>
     /// <param name="targetInput">The currently requested input</param>
     /// <param name="currentInput">The current input, also refered to as the previously commanded input</param>
-    /// <param name="strength">The rate at which the currentInput moves towards the targetInput</param>
+    /// <param name="rate">The rate at which the currentInput moves towards the targetInput</param>
     /// <returns>The input after being smoothened</returns>
-    private float Smoother(float targetInput, float currentInput, float strength)
+    private float Smoother(float targetInput, float currentInput, float rate)
     {
         if (!IsInputSmoothened)
         {
             return targetInput;
         }
 
-        return Mathf.MoveTowards(currentInput, targetInput, strength * Time.fixedDeltaTime);
+        return Mathf.MoveTowards(currentInput, targetInput, rate * Time.fixedDeltaTime);
     }
 
     /// <summary>
-    /// Get the flight controls, thrust, braking, override and systems toggle inputs from the input action system
+    /// Gets the flight controls, thrust, braking, override and systems toggle inputs from the input action system
     /// </summary>
     protected override void GetInput()
     {
@@ -232,7 +230,7 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Get the fly-by-wire pitch input
+    /// Gets the fly-by-wire pitch input
     /// </summary>
     /// <returns>The pitch input</returns>
     private float GetPitchInput()
@@ -249,7 +247,7 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Get the fly-by-wire roll input
+    /// Gets the fly-by-wire roll input
     /// </summary>
     /// <returns>The roll input</returns>
     private float GetRollInput()
@@ -262,7 +260,7 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Get the fly-by-wire yaw input
+    /// Gets the fly-by-wire yaw input
     /// </summary>
     /// <returns>The yaw input</returns>
     private float GetYawInput()
@@ -278,7 +276,7 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Get the fly-by-wire flap input
+    /// Gets the fly-by-wire flap input
     /// </summary>
     /// <returns>The flap input</returns>
     private float GetFlapInput()
@@ -293,7 +291,7 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Update the deflection angles in the wing surfaces, with deflection modifiers
+    /// Update the deflection in all wing surfaces, with deflection modifiers
     /// </summary>
     protected override void UpdateWingSurfaceData()
     {
@@ -476,7 +474,7 @@ public class FlyByWireController : Controller
     }
 
     /// <summary>
-    /// Get the turning/rolling yaw activation
+    /// Gets the turning/rolling yaw activation
     /// </summary>
     /// <returns>The turning yaw input</returns>
     public float GetTurningYaw()

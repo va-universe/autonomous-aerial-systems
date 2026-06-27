@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// This component is used on control surfaces in order to adjust deflection
+/// Control surface deflection handler
 /// </summary>
 public class ControlSurface : MonoBehaviour
 {
@@ -20,9 +20,9 @@ public class ControlSurface : MonoBehaviour
     }
 
     /// <summary>
-    /// Rotates the control surface to the product of the input and max deflection
+    /// Rotates the control surface to the desired deflection, based on input and max deflection
     /// </summary>
-    /// <param name="input">The rotation input (between -1 and 1)</param>
+    /// <param name="input">The deflection activation input (between -1 and 1)</param>
     public void DeflectSurface(float input)
     {
         float normalizedInput = Mathf.Clamp(input, -1f, 1f);
@@ -32,9 +32,9 @@ public class ControlSurface : MonoBehaviour
     }
 
     /// <summary>
-    /// Rotates the control surface to the product of the input and max deflection
+    /// Rotates the control surface to the desired deflection, based on input and max deflection
     /// </summary>
-    /// <param name="input">The rotation input (between -1 and 1)</param>
+    /// <param name="input">The deflection activation input (between -1 and 1)</param>
     /// <param name="maxDeflection">The maximum deflection</param>
     public void DeflectSurface(float input, float maxDeflection)
     {
