@@ -3,9 +3,9 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// The controller of the first aircraft prototype
+/// The controller of the aerodynamic surface prototype
 /// </summary>
-public class FirstAircraftController : MonoBehaviour
+public class AerodynamicSurfaceController : MonoBehaviour
 {
     private Rigidbody _rb;
     private AircraftInputActions _inputActions;
@@ -61,7 +61,7 @@ public class FirstAircraftController : MonoBehaviour
     }
 
     /// <summary>
-    /// Get the roll, pitch and yaw input from the input action system
+    /// Get the roll, pitch, yaw and thrust input from the input action system
     /// </summary>
     private void GetInput()
     {
@@ -73,7 +73,7 @@ public class FirstAircraftController : MonoBehaviour
     }
 
     /// <summary>
-    /// Deflect all control surfaces based on inputs
+    /// Deflects all control surfaces based on inputs
     /// </summary>
     private void DeflectControlSurfaces()
     {
@@ -87,7 +87,7 @@ public class FirstAircraftController : MonoBehaviour
     }
 
     /// <summary>
-    /// Apply thrust to this aircraft based on inputs
+    /// Applies thrust to the center of mass
     /// </summary>
     private void ApplyThrust()
     {

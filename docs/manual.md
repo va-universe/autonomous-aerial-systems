@@ -12,7 +12,7 @@
 The table below summarizes the capabilities of each prototype.
 
 | Prototype | Takeoff | Landing | Maneuvering | Stalling | Fly-By-Wire | Autonomous |
-|------------|----------|----------|----------|----------|----------|------------|
+|---|---|---|---|---|---|---|
 | First Aircraft | Yes | No | No | No | No | No |
 | Aerodynamic Surface | Yes | Difficult | Yes | No | No | No |
 | Wing Camber | Yes | Yes | Yes | Yes | No | No |

@@ -2,9 +2,9 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// The controller of the second aircraft prototype
+/// The controller of the wing camber prototype
 /// </summary>
-public class SecondAircraftController : Controller
+public class WingCamberController : Controller
 {
     [Header("UI Display")]
 
@@ -48,7 +48,7 @@ public class SecondAircraftController : Controller
     }
 
     /// <summary>
-    /// Apply thrust force at the center of mass
+    /// Applies thrust force at the center of mass (non-local position)
     /// </summary>
     protected override void ApplyThrust()
     {

@@ -22,7 +22,7 @@ This document explains how to download, open and run the project in Unity.
 Open one of the following scenes located in `Assets/Scenes` and press `Play`.
 
 | Scene | Prototype |
-|---------|---------|
+|---|---|
 | AerodynamicSurfaceScene | Aerodynamic Surface Prototype |
 | WingCamberScene | Wing Camber Prototype |
 | FlyByWireScene | Fly-By-Wire Prototype (after hotfix) |

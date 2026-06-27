@@ -11,7 +11,7 @@ type/branch-title
 
 **Common branch types:**
 | Type | Purpose |
-|-|-|
+|---|---|
 | feature | New additions |
 | bugfix | Bug fixes |
 | hotfix | After release fixes |

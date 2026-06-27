@@ -1,12 +1,12 @@
 using UnityEngine;
 
 /// <summary>
-/// Decentralized physics model where each surface apply their own force
+/// Decentralized physics model where each wing and control surface apply their individual forces
 /// </summary>
 public class AerodynamicSurface : MonoBehaviour
 {
     private Rigidbody _rb;
-    private FirstAircraftController _controller;
+    private AerodynamicSurfaceController _controller;
 
     [Header("Parameters")]
     public WingAxis LiftAxis;
@@ -17,7 +17,7 @@ public class AerodynamicSurface : MonoBehaviour
     void Start()
     {
         _rb = GetComponentInParent<Rigidbody>();
-        _controller = GetComponentInParent<FirstAircraftController>();
+        _controller = GetComponentInParent<AerodynamicSurfaceController>();
     }
 
     void FixedUpdate()
@@ -26,7 +26,7 @@ public class AerodynamicSurface : MonoBehaviour
     }
 
     /// <summary>
-    /// Apply lift and drag to this surface position
+    /// Apply lift and drag at the surface position
     /// </summary>
     private void ApplyForces()
     {
@@ -49,9 +49,9 @@ public class AerodynamicSurface : MonoBehaviour
     }
 
     /// <summary>
-    /// Calculates the dynamic pressure
+    /// Calculates and returns the dynamic pressure
     /// </summary>
-    /// <param name="speed">The current speed of this surface</param>
+    /// <param name="speed">The speed at the surface position</param>
     /// <returns>The dynamic pressure</returns>
     private float GetDynamicPressure(float speed)
     {
@@ -62,7 +62,7 @@ public class AerodynamicSurface : MonoBehaviour
     }
 
     /// <summary>
-    /// Calculates an approximation of the air density based on altitude
+    /// Calculates and returns an approximation of the air density based on altitude
     /// </summary>
     /// <returns>The air density at the surface position</returns>
     private float GetAirDensity()
@@ -75,7 +75,7 @@ public class AerodynamicSurface : MonoBehaviour
     }
 
     /// <summary>
-    /// Calculates the angle of attack
+    /// Calculates and returns the angle of attack
     /// </summary>
     /// <param name="velocity">The velocity at the surface position</param>
     /// <returns>The angle of attack</returns>
@@ -96,14 +96,13 @@ public class AerodynamicSurface : MonoBehaviour
             angleOfAttck = Vector3.SignedAngle(chordLine, projectedVelocity, transform.up);
         }
 
-        //Debug.Log(angleOfAttck);
         return angleOfAttck;
     }
 
     /// <summary>
-    /// Calculates an approximation of the lift coefficient based on angle of attack
+    /// Calculates and returns an approximation of the lift coefficient based on angle of attack
     /// </summary>
-    /// <param name="angleOfAttack">The angle of attack of this surface</param>
+    /// <param name="angleOfAttack">The angle of attack of the surface</param>
     /// <returns>The lift coefficient</returns>
     private float GetLiftCoefficient(float angleOfAttack)
     {
@@ -114,12 +113,12 @@ public class AerodynamicSurface : MonoBehaviour
     }
 
     /// <summary>
-    /// Calculates the lift force for this surface
+    /// Calculates and returns the lift force at the surface position
     /// </summary>
-    /// <param name="dynamicPressure">The dynamic pressure</param>
+    /// <param name="dynamicPressure">The dynamic pressure at the surface position</param>
     /// <param name="airflowDirection">The direction of the airflow</param>
     /// <param name="liftCoefficient">The lift coefficient</param>
-    /// <returns>The lift force</returns>
+    /// <returns>The lift force at the surface position</returns>
     private Vector3 GetLift(float dynamicPressure, Vector3 airflowDirection, float liftCoefficient)
     {
         float lift = dynamicPressure * SurfaceArea * liftCoefficient;
@@ -140,11 +139,11 @@ public class AerodynamicSurface : MonoBehaviour
     }
 
     /// <summary>
-    /// Calculates the parasitic drag force for this surface
+    /// Calculates and returns the parasitic drag force at the surface position
     /// </summary>
     /// <param name="dynamicPressure">The dynamic pressure</param>
     /// <param name="airflowDirection">The direction of the airflow</param>
-    /// <returns>The parasitic drag force</returns>
+    /// <returns>The parasitic drag force at the surface position</returns>
     private Vector3 GetDrag(float dynamicPressure, Vector3 airflowDirection)
     {
         float drag = dynamicPressure * SurfaceArea * DragCoefficient;

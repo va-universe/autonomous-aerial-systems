@@ -40,7 +40,7 @@ For more information about recent releases, check out the [Development Log](./do
 ## Prototype Progression
 
 | Release | Prototype | Focus |
-|----------|----------|----------|
+|---|---|---|
 | v0.1.0 | Aerodynamic Surface Prototype | Distributed aerodynamic forces |
 | v0.2.0 | Wing Camber Prototype | Wing-camber-based aerodynamics and stalling |
 | v0.3.0 | Fly-By-Wire Prototype | Flight assistance systems (FBW) |
