@@ -793,6 +793,34 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""RuleBasedAI"",
+            ""id"": ""b2d7c93e-30e1-48cb-935d-95d0e1b63caf"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleAI"",
+                    ""type"": ""Button"",
+                    ""id"": ""fec273cc-7cb7-473a-92e9-fd6a2a5f723d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b18ad679-3dbd-41af-888a-694ef27ef1ed"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleAI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -825,6 +853,9 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         m_FlyByWire_ToggleSmoothening = m_FlyByWire.FindAction("ToggleSmoothening", throwIfNotFound: true);
         m_FlyByWire_ToggleYawDamping = m_FlyByWire.FindAction("ToggleYawDamping", throwIfNotFound: true);
         m_FlyByWire_ToggleTurningYaw = m_FlyByWire.FindAction("ToggleTurningYaw", throwIfNotFound: true);
+        // RuleBasedAI
+        m_RuleBasedAI = asset.FindActionMap("RuleBasedAI", throwIfNotFound: true);
+        m_RuleBasedAI_ToggleAI = m_RuleBasedAI.FindAction("ToggleAI", throwIfNotFound: true);
     }
 
     ~@AircraftInputActions()
@@ -832,6 +863,7 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Aircraft.enabled, "This will cause a leak and performance issues, AircraftInputActions.Aircraft.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_AircraftWithFlaps.enabled, "This will cause a leak and performance issues, AircraftInputActions.AircraftWithFlaps.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_FlyByWire.enabled, "This will cause a leak and performance issues, AircraftInputActions.FlyByWire.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_RuleBasedAI.enabled, "This will cause a leak and performance issues, AircraftInputActions.RuleBasedAI.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1400,6 +1432,102 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="FlyByWireActions" /> instance referencing this action map.
     /// </summary>
     public FlyByWireActions @FlyByWire => new FlyByWireActions(this);
+
+    // RuleBasedAI
+    private readonly InputActionMap m_RuleBasedAI;
+    private List<IRuleBasedAIActions> m_RuleBasedAIActionsCallbackInterfaces = new List<IRuleBasedAIActions>();
+    private readonly InputAction m_RuleBasedAI_ToggleAI;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "RuleBasedAI".
+    /// </summary>
+    public struct RuleBasedAIActions
+    {
+        private @AircraftInputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public RuleBasedAIActions(@AircraftInputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "RuleBasedAI/ToggleAI".
+        /// </summary>
+        public InputAction @ToggleAI => m_Wrapper.m_RuleBasedAI_ToggleAI;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_RuleBasedAI; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="RuleBasedAIActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(RuleBasedAIActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="RuleBasedAIActions" />
+        public void AddCallbacks(IRuleBasedAIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_RuleBasedAIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_RuleBasedAIActionsCallbackInterfaces.Add(instance);
+            @ToggleAI.started += instance.OnToggleAI;
+            @ToggleAI.performed += instance.OnToggleAI;
+            @ToggleAI.canceled += instance.OnToggleAI;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="RuleBasedAIActions" />
+        private void UnregisterCallbacks(IRuleBasedAIActions instance)
+        {
+            @ToggleAI.started -= instance.OnToggleAI;
+            @ToggleAI.performed -= instance.OnToggleAI;
+            @ToggleAI.canceled -= instance.OnToggleAI;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="RuleBasedAIActions.UnregisterCallbacks(IRuleBasedAIActions)" />.
+        /// </summary>
+        /// <seealso cref="RuleBasedAIActions.UnregisterCallbacks(IRuleBasedAIActions)" />
+        public void RemoveCallbacks(IRuleBasedAIActions instance)
+        {
+            if (m_Wrapper.m_RuleBasedAIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="RuleBasedAIActions.AddCallbacks(IRuleBasedAIActions)" />
+        /// <seealso cref="RuleBasedAIActions.RemoveCallbacks(IRuleBasedAIActions)" />
+        /// <seealso cref="RuleBasedAIActions.UnregisterCallbacks(IRuleBasedAIActions)" />
+        public void SetCallbacks(IRuleBasedAIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_RuleBasedAIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_RuleBasedAIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="RuleBasedAIActions" /> instance referencing this action map.
+    /// </summary>
+    public RuleBasedAIActions @RuleBasedAI => new RuleBasedAIActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Aircraft" which allows adding and removing callbacks.
     /// </summary>
@@ -1577,5 +1705,20 @@ public partial class @AircraftInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnToggleTurningYaw(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "RuleBasedAI" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="RuleBasedAIActions.AddCallbacks(IRuleBasedAIActions)" />
+    /// <seealso cref="RuleBasedAIActions.RemoveCallbacks(IRuleBasedAIActions)" />
+    public interface IRuleBasedAIActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "ToggleAI" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleAI(InputAction.CallbackContext context);
     }
 }

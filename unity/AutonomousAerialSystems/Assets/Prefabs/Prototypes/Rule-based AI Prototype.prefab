@@ -2907,7 +2907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3735323480398415893}
   - component: {fileID: 9073016781102879196}
-  - component: {fileID: 134501295253600889}
+  - component: {fileID: 1525713730224152827}
   - component: {fileID: 1627116928655657030}
   - component: {fileID: 2592082723241210868}
   m_Layer: 0
@@ -2963,7 +2963,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &134501295253600889
+--- !u!114 &1525713730224152827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2972,9 +2972,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5476498646726024019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5265a62cfc191344f99483ad7f136a6f, type: 3}
+  m_Script: {fileID: 11500000, guid: c84d95562d4d3924d96ef6e28131aa86, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlyByWireController
+  m_EditorClassIdentifier: Assembly-CSharp::RuleBasedAIController
   WheelBrakeInput: 0
   AirDensityAtSeaLevel: 1.255
   Thrust: 10500
@@ -2995,16 +2995,16 @@ MonoBehaviour:
   IsInputSmoothened: 1
   IsYawDampened: 1
   IsTurnYawActivated: 1
-  MaxComfortGForce: 4.5
-  MinComfortGForce: -2
-  MaxOverrideGForce: 8
-  MinOverrideGForce: -3
+  MaxComfortGForce: 5.5
+  MinComfortGForce: -2.5
+  MaxOverrideGForce: 9
+  MinOverrideGForce: -4
   MaxLimiterStrength: 1.7
   MinLimiterStrength: 1.9
   MaxComfortStallPercentage: 50
-  MaxComfortAngleOfAttack: 32
-  MaxOverrideStallPercentage: 60
-  MaxOverrideAngleOfAttack: 37.5
+  MaxComfortAngleOfAttack: 33
+  MaxOverrideStallPercentage: 65
+  MaxOverrideAngleOfAttack: 38
   UpPitchSmoothingStrength: 1.6
   DownPitchSmoothingStrength: 0.8
   RollSmoothingStrength: 3.7
@@ -3046,7 +3046,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5476498646726024019}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -3066,7 +3066,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: FlyByWire
+  m_DefaultActionMap: RuleBasedAI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &5722741912045645625
