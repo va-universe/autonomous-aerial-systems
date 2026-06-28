@@ -5,21 +5,35 @@ using UnityEngine;
 /// </summary>
 public class RuleBasedAIController : FlyByWireController
 {
+    private bool _isAIActivated;
+
     /// <summary>
     /// Gets the flight controls, thrust, braking, override and systems toggle inputs from the rule-based AI
     /// </summary>
     protected override void GetInput()
+    {
+        GetControlInputs();
+        ToggleSystemInputs();
+
+        if (_inputActions.RuleBasedAI.ToggleAI.WasPressedThisFrame())
+        {
+            _isAIActivated = !_isAIActivated;
+        }
+    }
+
+    /// <summary>
+    /// Gets the flight controls, thrust, braking and override inputs from the rule-based AI
+    /// </summary>
+    private void GetControlInputs()
     {
         _initialRollInput = GetAIRequestedRoll();
         _initialPitchInput = GetAIRequestedPitch();
         _initialYawInput = GetAIRequestedYaw();
         _initialFlapInput = GetAIRequestedFlap();
 
-        _overrideInput = false;
         _throttleInput = GetAIRequestedThrottle();
-        WheelBrakeInput = 0f;
-
-        ToggleSystemInputs();
+        _overrideInput = false;
+        WheelBrakeInput = GetAIRequestedWheelBrake();
     }
 
     /// <summary>
@@ -63,6 +77,15 @@ public class RuleBasedAIController : FlyByWireController
     /// </summary>
     /// <returns>The requested throttle/thrust input</returns>
     private float GetAIRequestedThrottle()
+    {
+        return 0f;
+    }
+
+    /// <summary>
+    /// Gets the requested wheel braking input from the rule-based AI
+    /// </summary>
+    /// <returns>The requested wheel braking input</returns>
+    private float GetAIRequestedWheelBrake()
     {
         return 0f;
     }

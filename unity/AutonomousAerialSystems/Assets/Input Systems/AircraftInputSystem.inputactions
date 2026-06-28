@@ -707,6 +707,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "RuleBasedAI",
+            "id": "b2d7c93e-30e1-48cb-935d-95d0e1b63caf",
+            "actions": [
+                {
+                    "name": "ToggleAI",
+                    "type": "Button",
+                    "id": "fec273cc-7cb7-473a-92e9-fd6a2a5f723d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b18ad679-3dbd-41af-888a-694ef27ef1ed",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleAI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
