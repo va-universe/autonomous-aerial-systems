@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -6,6 +7,7 @@ using UnityEngine;
 public class RuleBasedAIController : FlyByWireController
 {
     private bool _isAIActivated;
+    private TextMeshProUGUI _autonomousText;
 
     /// <summary>
     /// Gets the flight controls, thrust, braking, override and systems toggle inputs from the rule-based AI
@@ -88,5 +90,36 @@ public class RuleBasedAIController : FlyByWireController
     private float GetAIRequestedWheelBrake()
     {
         return 0f;
+    }
+
+    /// <summary>
+    /// Update UI display text, including rule-based AI toggling indicator
+    /// </summary>
+    protected override void UpdateDisplay()
+    {
+        base.UpdateDisplay();
+
+        if (_autonomousText != null && _isAIActivated)
+        {
+            _autonomousText.color = Color.white;
+        }
+        else
+        {
+            _autonomousText.color = Color.gray;
+        }
+    }
+
+    /// <summary>
+    /// Gets all texts from canvas, including the autonomy text
+    /// </summary>
+    protected override void InitializeTextDisplays()
+    {
+        base.InitializeTextDisplays();
+
+        if (UICanvas != null)
+        {
+            Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
+            _autonomousText = aircraftPanel.transform.Find("AutonomousText").GetComponent<TextMeshProUGUI>();
+        }
     }
 }
