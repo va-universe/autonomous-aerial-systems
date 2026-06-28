@@ -9,10 +9,10 @@ public class FlyByWireController : Controller
     #region Inputs
 
     #region Initial Inputs
-    private float _initialRollInput;
-    private float _initialYawInput;
-    private float _initialPitchInput;
-    private float _initialFlapInput;
+    protected float _initialRollInput;
+    protected float _initialYawInput;
+    protected float _initialPitchInput;
+    protected float _initialFlapInput;
     #endregion
 
     #region Previous Inputs
@@ -22,7 +22,7 @@ public class FlyByWireController : Controller
     private float _previousFlapInput;
     #endregion
 
-    private bool _overrideInput;
+    protected bool _overrideInput;
     #endregion
 
     #region UI Display Text
@@ -190,7 +190,7 @@ public class FlyByWireController : Controller
     /// <summary>
     /// Toggles the fly-by-wire systems based on inputs from the input action system
     /// </summary>
-    private void ToggleSystemInputs()
+    protected void ToggleSystemInputs()
     {
         if (_inputActions.FlyByWire.ToggleGLimiting.WasPressedThisFrame())
         {

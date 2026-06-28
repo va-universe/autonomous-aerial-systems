@@ -3999,6 +3999,10 @@ PrefabInstance:
       propertyPath: UICanvas
       value: 
       objectReference: {fileID: 6875754306732957058}
+    - target: {fileID: 1525713730224152827, guid: 2a5bc3e3c5cf50742952c41cadb3b20f, type: 3}
+      propertyPath: UICanvas
+      value: 
+      objectReference: {fileID: 6875754306732957058}
     - target: {fileID: 3735323480398415893, guid: 2a5bc3e3c5cf50742952c41cadb3b20f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
