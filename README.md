@@ -1,5 +1,5 @@
 # Autonomous Aerial Systems
-**Real-time flight simulation, autonomous controls and air combat research in Unity.**
+**Real-time flight simulation, autonomous aircrafts and air combat research in Unity.**
 
 This project explores how advanced control systems, artificial intelligence and machine learning can be used to simulate air combat. Development moves forward through a series of prototypes, each introducing new aerodynamics, systems or autonomy.
 
@@ -101,15 +101,15 @@ See the [Manual](./docs/manual.md) for controls and prototype information.
 ![FlyByWireTakeoff](./docs/media/FlyByWireTakeoff.gif)
 ![FlyByWireManeuvering](./docs/media/FlyByWireManeuvering.gif)
 
-## Wing Camber Prototype
+### Wing Camber Prototype
 
 ![Stalling](./docs/media/Stalling.gif)
 ![Landing](./docs/media/Landing.gif)
 
-## Aerodynamic Surface Prototype
+### Aerodynamic Surface Prototype
 
 ![First Maneuvering](./docs/media/FirstManeuvering.gif)
 
-## First Aircraft Prototype
+### First Aircraft Prototype
 
 ![First Takeoff](./docs/media/FirstTakeoff.gif)
