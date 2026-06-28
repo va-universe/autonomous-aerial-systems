@@ -3013,6 +3013,7 @@ MonoBehaviour:
   YawDampingStrength: 7.6
   InputDampingModifier: 0.45
   TurningYawStrength: 0.78
+  IsTakingOff: 1
 --- !u!114 &1627116928655657030
 MonoBehaviour:
   m_ObjectHideFlags: 0

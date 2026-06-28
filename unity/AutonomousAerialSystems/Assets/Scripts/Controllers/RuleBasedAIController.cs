@@ -6,8 +6,15 @@ using UnityEngine;
 /// </summary>
 public class RuleBasedAIController : FlyByWireController
 {
+    #region Inputs & UI display texts
+
     private bool _isAIActivated;
     private TextMeshProUGUI _autonomousText;
+
+    #endregion
+
+    [Header("Rule-Based AI Systems")]
+    public bool IsTakingOff;
 
     /// <summary>
     /// Gets the flight controls, thrust, braking, override and systems toggle inputs from the rule-based AI
@@ -28,14 +35,28 @@ public class RuleBasedAIController : FlyByWireController
     /// </summary>
     private void GetControlInputs()
     {
-        _initialRollInput = GetAIRequestedRoll();
-        _initialPitchInput = GetAIRequestedPitch();
-        _initialYawInput = GetAIRequestedYaw();
-        _initialFlapInput = GetAIRequestedFlap();
+        if (_isAIActivated)
+        {
+            _initialRollInput = GetAIRequestedRoll();
+            _initialPitchInput = GetAIRequestedPitch();
+            _initialYawInput = GetAIRequestedYaw();
+            _initialFlapInput = GetAIRequestedFlap();
 
-        _throttleInput = GetAIRequestedThrottle();
-        _overrideInput = false;
-        WheelBrakeInput = GetAIRequestedWheelBrake();
+            _throttleInput = GetAIRequestedThrottle();
+            _overrideInput = false;
+            WheelBrakeInput = GetAIRequestedWheelBrake();
+        }
+        else
+        {
+            _initialRollInput = 0f;
+            _initialPitchInput = 0f;
+            _initialYawInput = 0f;
+            _initialFlapInput = 0f;
+
+            _throttleInput = 0f;
+            _overrideInput = false;
+            WheelBrakeInput = 1f;
+        }
     }
 
     /// <summary>
@@ -53,7 +74,14 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The requested pitch input</returns>
     private float GetAIRequestedPitch()
     {
-        return 0f;
+        float requestedInput = 0f;
+
+        if (IsTakingOff)
+        {
+            requestedInput = -1f;
+        }
+
+        return requestedInput;
     }
 
     /// <summary>
@@ -71,7 +99,14 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The requested flap input</returns>
     private float GetAIRequestedFlap()
     {
-        return 0f;
+        float requestedInput = 0f;
+
+        if (IsTakingOff)
+        {
+            requestedInput = 1f;
+        }
+
+        return requestedInput;
     }
 
     /// <summary>
@@ -80,7 +115,7 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The requested throttle/thrust input</returns>
     private float GetAIRequestedThrottle()
     {
-        return 0f;
+        return 1f;
     }
 
     /// <summary>
