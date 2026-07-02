@@ -48,7 +48,7 @@ For more information about recent releases, check out the [Development Log](./do
 
 ## Next Release
 
-The next planned release, `v0.4.0`, is the `Rule-based AI Prototype`. This release will introduce autonomous flight using rule-based systems, including waypoint and plane tracking, terrain avoidance and autonomous maneuvering. 
+The next planned release, `v0.4.0`, is the `Rule-Based AI Prototype`. This release will introduce autonomous flight using rule-based systems, including waypoint and plane tracking, terrain avoidance and autonomous maneuvering. 
 
 ## Roadmap
 
@@ -57,12 +57,12 @@ Current development path (subject to change):
  - [x] Aerodynamic Surface Prototype
  - [x] Wing Camber Prototype
  - [x] Fly-By-Wire Prototype
- - [ ] Rule-based AI Prototype
+ - [ ] Rule-Based AI Prototype
+ - [ ] Canards & Stabilators Prototypes
  - [ ] Weapon Systems Prototype
- - [ ] Combat AI Prototype
- - [ ] Neural Network Prototype
- - [ ] Curriculum Learning Prototype
- - [ ] JAS 39 Gripen E
+ - [ ] Rule-Based Combat AI Prototype
+ - [ ] Autonomous Interception Behavior
+ - [ ] Neural Network Prototypes
 
 See the full roadmap in [Roadmap](./docs/roadmap.md).
 
