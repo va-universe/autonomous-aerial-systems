@@ -20,7 +20,7 @@ public class RuleBasedAIController : FlyByWireController
 
     [Header("Takeoff")]
     public float EndTakeoffAltitude;
-
+    public float PitchDownInput;
     public float PitchTransitionRate;
     public float FlapTransitionRate;
     private float _pitchTransitionInput;
@@ -28,8 +28,8 @@ public class RuleBasedAIController : FlyByWireController
 
     [Header("Sensor Systems")]
     public bool IsGrounded;
-    public float AltitudeAboveGround;
     public float GroundSensorRange;
+    private float _altitudeAboveGround;
 
     protected override void Start()
     {
@@ -53,7 +53,7 @@ public class RuleBasedAIController : FlyByWireController
     {
         if (_isAIActivated)
         {
-            bool isTakeoffComplete = GetTakeoffCondition();
+            bool isTakeoffComplete = _altitudeAboveGround >= EndTakeoffAltitude;
 
             if (isTakeoffComplete)
             {
@@ -77,17 +77,13 @@ public class RuleBasedAIController : FlyByWireController
         }
     }
 
-    private bool GetTakeoffCondition()
-    {
-        return false;
-    }
-
     /// <summary>
     /// Run all sensor systems
     /// </summary>
     protected virtual void RunSensors()
     {
-        AltitudeAboveGround = GetAltitudeAboveGround();
+        _altitudeAboveGround = GetAltitudeAboveGround();
+        IsGrounded = _altitudeAboveGround < 1.5f;
     }
 
     /// <summary>
@@ -178,7 +174,7 @@ public class RuleBasedAIController : FlyByWireController
         else if (State == AircraftState.Transition)
         {
             requestedInput = _pitchTransitionInput;
-            _pitchTransitionInput = Mathf.Min(0, _pitchTransitionInput + PitchTransitionRate * Time.deltaTime);
+            _pitchTransitionInput = Mathf.Min(PitchDownInput, _pitchTransitionInput + PitchTransitionRate * Time.deltaTime);
         }
 
         return requestedInput;
@@ -249,9 +245,9 @@ public class RuleBasedAIController : FlyByWireController
 
         if (_altitudeGroundText != null)
         {
-            if (AltitudeAboveGround < Mathf.Infinity)
+            if (_altitudeAboveGround < Mathf.Infinity)
             {
-                float altitude = (float)Math.Round(AltitudeAboveGround, 1);
+                float altitude = (float)Math.Round(_altitudeAboveGround, 1);
                 _altitudeGroundText.text = $"Altitude Above Ground: {altitude} m";
             }
             else
