@@ -3014,9 +3014,12 @@ MonoBehaviour:
   InputDampingModifier: 0.45
   TurningYawStrength: 0.78
   State: 0
+  EndTakeoffAltitude: 200
   PitchTransitionRate: 3
   FlapTransitionRate: 5
   IsGrounded: 1
+  AltitudeAboveGround: 0
+  GroundSensorRange: 2000
 --- !u!114 &1627116928655657030
 MonoBehaviour:
   m_ObjectHideFlags: 0

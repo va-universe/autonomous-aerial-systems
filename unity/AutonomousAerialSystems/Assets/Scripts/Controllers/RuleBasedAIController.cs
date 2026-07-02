@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class RuleBasedAIController : FlyByWireController
     #region Inputs & UI display texts
 
     private bool _isAIActivated;
+    private TextMeshProUGUI _altitudeGroundText;
     private TextMeshProUGUI _autonomousText;
 
     #endregion
@@ -16,7 +18,9 @@ public class RuleBasedAIController : FlyByWireController
     [Header("Rule-Based AI")]
     public AircraftState State;
 
-    [Header("Takeoff Transition")]
+    [Header("Takeoff")]
+    public float EndTakeoffAltitude;
+
     public float PitchTransitionRate;
     public float FlapTransitionRate;
     private float _pitchTransitionInput;
@@ -24,6 +28,8 @@ public class RuleBasedAIController : FlyByWireController
 
     [Header("Sensor Systems")]
     public bool IsGrounded;
+    public float AltitudeAboveGround;
+    public float GroundSensorRange;
 
     protected override void Start()
     {
@@ -36,6 +42,7 @@ public class RuleBasedAIController : FlyByWireController
     {
         base.FixedUpdate();
 
+        RunSensors();
         HandleState();
     }
 
@@ -73,6 +80,34 @@ public class RuleBasedAIController : FlyByWireController
     private bool GetTakeoffCondition()
     {
         return false;
+    }
+
+    /// <summary>
+    /// Run all sensor systems
+    /// </summary>
+    protected virtual void RunSensors()
+    {
+        AltitudeAboveGround = GetAltitudeAboveGround();
+    }
+
+    /// <summary>
+    /// Gets the distance between the aircraft's center and the ground surface
+    /// </summary>
+    /// <returns>The altitude above ground</returns>
+    private float GetAltitudeAboveGround()
+    {
+        float altitudeAboveGround = Mathf.Infinity;
+
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down, GroundSensorRange);
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform.CompareTag("Ground") && hit.distance < altitudeAboveGround)
+            {
+                altitudeAboveGround = hit.distance;
+            }
+        }
+
+        return altitudeAboveGround;
     }
 
     /// <summary>
@@ -212,6 +247,19 @@ public class RuleBasedAIController : FlyByWireController
     {
         base.UpdateDisplay();
 
+        if (_altitudeGroundText != null)
+        {
+            if (AltitudeAboveGround < Mathf.Infinity)
+            {
+                float altitude = (float)Math.Round(AltitudeAboveGround, 1);
+                _altitudeGroundText.text = $"Altitude Above Ground: {altitude} m";
+            }
+            else
+            {
+                _altitudeGroundText.text = $"Altitude Above Ground: N/A";
+            }
+        }
+
         if (_autonomousText != null && _isAIActivated)
         {
             _autonomousText.color = Color.white;
@@ -232,6 +280,7 @@ public class RuleBasedAIController : FlyByWireController
         if (UICanvas != null)
         {
             Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
+            _altitudeGroundText = aircraftPanel.transform.Find("AltitudeGroundText").GetComponent<TextMeshProUGUI>();
             _autonomousText = aircraftPanel.transform.Find("AutonomousText").GetComponent<TextMeshProUGUI>();
         }
     }
