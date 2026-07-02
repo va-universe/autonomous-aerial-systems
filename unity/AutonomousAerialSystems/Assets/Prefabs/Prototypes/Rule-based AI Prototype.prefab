@@ -2911,7 +2911,7 @@ GameObject:
   - component: {fileID: 1627116928655657030}
   - component: {fileID: 2592082723241210868}
   m_Layer: 0
-  m_Name: Rule-based AI Prototype
+  m_Name: Rule-Based AI Prototype
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3013,6 +3013,13 @@ MonoBehaviour:
   YawDampingStrength: 7.6
   InputDampingModifier: 0.45
   TurningYawStrength: 0.78
+  State: 0
+  EndTakeoffAltitude: 100
+  PitchDownInput: 0.4
+  PitchTransitionRate: 1
+  FlapTransitionRate: 0.11
+  IsGrounded: 1
+  GroundSensorRange: 20000
 --- !u!114 &1627116928655657030
 MonoBehaviour:
   m_ObjectHideFlags: 0
