@@ -3895,7 +3895,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2059126086363837164, guid: b1e16e576909ef947b2754c76dea42d5, type: 3}
       propertyPath: m_Name
-      value: Rule-based AI Prototype Canvas
+      value: Rule-Based AI Prototype Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 5767918130845604348, guid: b1e16e576909ef947b2754c76dea42d5, type: 3}
       propertyPath: m_Pivot.x
@@ -4045,7 +4045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5476498646726024019, guid: 2a5bc3e3c5cf50742952c41cadb3b20f, type: 3}
       propertyPath: m_Name
-      value: Rule-based AI Prototype
+      value: Rule-Based AI Prototype
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

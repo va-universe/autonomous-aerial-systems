@@ -13,8 +13,67 @@ public class RuleBasedAIController : FlyByWireController
 
     #endregion
 
-    [Header("Rule-Based AI Systems")]
-    public bool IsTakingOff;
+    [Header("Rule-Based AI")]
+    public AircraftState State;
+
+    [Header("Takeoff Transition")]
+    public float PitchTransitionRate;
+    public float FlapTransitionRate;
+    private float _pitchTransitionInput;
+    private float _flapTransitionInput;
+
+    [Header("Sensor Systems")]
+    public bool IsGrounded;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        State = AircraftState.Grounded;
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        HandleState();
+    }
+
+    /// <summary>
+    /// The state handler for the rule-based AI aircraft
+    /// </summary>
+    private void HandleState()
+    {
+        if (_isAIActivated)
+        {
+            bool isTakeoffComplete = GetTakeoffCondition();
+
+            if (isTakeoffComplete)
+            {
+                if (_pitchTransitionInput >= 0 && _flapTransitionInput <= 0)
+                {
+                    State = AircraftState.Cruise;
+                }
+                else
+                {
+                    State = AircraftState.Transition;
+                }
+            }
+            else
+            {
+                State = AircraftState.Takeoff;
+            }
+        }
+        else if (IsGrounded)
+        {
+            State = AircraftState.Grounded;
+        }
+    }
+
+    private bool GetTakeoffCondition()
+    {
+        return false;
+    }
 
     /// <summary>
     /// Gets the flight controls, thrust, braking, override and systems toggle inputs from the rule-based AI
@@ -76,9 +135,15 @@ public class RuleBasedAIController : FlyByWireController
     {
         float requestedInput = 0f;
 
-        if (IsTakingOff)
+        if (State == AircraftState.Takeoff)
         {
-            requestedInput = -1f;
+            _pitchTransitionInput = -1f;
+            requestedInput = _pitchTransitionInput;
+        }
+        else if (State == AircraftState.Transition)
+        {
+            requestedInput = _pitchTransitionInput;
+            _pitchTransitionInput = Mathf.Min(0, _pitchTransitionInput + PitchTransitionRate * Time.deltaTime);
         }
 
         return requestedInput;
@@ -101,9 +166,15 @@ public class RuleBasedAIController : FlyByWireController
     {
         float requestedInput = 0f;
 
-        if (IsTakingOff)
+        if (State == AircraftState.Takeoff)
         {
-            requestedInput = 1f;
+            _flapTransitionInput = 1f;
+            requestedInput = _flapTransitionInput;
+        }
+        else if (State == AircraftState.Transition)
+        {
+            requestedInput = _flapTransitionInput;
+            _flapTransitionInput = Mathf.Max(0, _flapTransitionInput - FlapTransitionRate * Time.deltaTime);
         }
 
         return requestedInput;
@@ -115,7 +186,14 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The requested throttle/thrust input</returns>
     private float GetAIRequestedThrottle()
     {
-        return 1f;
+        float requestedInput = 1f;
+
+        if (State == AircraftState.Grounded)
+        {
+            requestedInput = 0f;
+        }
+
+        return requestedInput;
     }
 
     /// <summary>

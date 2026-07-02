@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 5889301388984511003}
   - component: {fileID: 7485272044053249262}
   m_Layer: 5
-  m_Name: Rule-based AI Prototype Canvas
+  m_Name: Rule-Based AI Prototype Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
