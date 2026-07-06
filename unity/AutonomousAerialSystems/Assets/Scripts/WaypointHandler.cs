@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class WaypointHandler : MonoBehaviour
 {
+    private WaypointController _currentWaypoint;
+
     [Header("Prefab")]
     public GameObject WaypointPrefab;
 
@@ -15,23 +17,40 @@ public class WaypointHandler : MonoBehaviour
 
     void Start()
     {
-        
+        _currentWaypoint = SpawnWaypoint();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        
+        UpdateWaypoint();
+    }
+
+    /// <summary>
+    /// Spawn new waypoints if previous waypoint was reached
+    /// </summary>
+    private void UpdateWaypoint()
+    {
+        if (_currentWaypoint.IsReached)
+        {
+            WaypointController newWaypoint = SpawnWaypoint();
+
+            Destroy(_currentWaypoint.gameObject);
+            _currentWaypoint = newWaypoint;
+        }
     }
 
     /// <summary>
     /// Spawn a new waypoint
     /// </summary>
-    private void SpawnWaypoint()
+    private WaypointController SpawnWaypoint()
     {
         float height = Random.Range(MinHeight, MaxHeight);
         Vector2 circle = Random.insideUnitCircle * CircleRadius;
         Vector3 position = new Vector3(circle.x, height, circle.y);
 
-        Instantiate(WaypointPrefab, position, Quaternion.identity);
+        GameObject waypointObj = Instantiate(WaypointPrefab, position, Quaternion.identity);
+        WaypointController waypoint = waypointObj.GetComponent<WaypointController>();
+
+        return waypoint;
     }
 }

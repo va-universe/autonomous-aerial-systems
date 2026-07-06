@@ -12,12 +12,7 @@ public class WaypointController : MonoBehaviour
         IsReached = false;
     }
 
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.transform.CompareTag("Aircraft"))
         {
