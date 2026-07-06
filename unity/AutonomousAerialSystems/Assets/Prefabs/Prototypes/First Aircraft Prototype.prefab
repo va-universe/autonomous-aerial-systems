@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4162554260930610857}
   m_Layer: 0
   m_Name: Left Wing
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 486354926791539290}
   m_Layer: 0
   m_Name: Left Aileron Pivot
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 1761371408941314287}
   m_Layer: 0
   m_Name: Tail
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 5718511245376071562}
   m_Layer: 0
   m_Name: Left Elevator Pivot
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 7254524764371019079}
   m_Layer: 0
   m_Name: Cockpit
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 4169439920743841414}
   m_Layer: 0
   m_Name: Left Aileron
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -558,7 +558,7 @@ GameObject:
   - component: {fileID: 1455688474318126532}
   m_Layer: 0
   m_Name: Right Elevator Pivot
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: -2247994775280000264}
   m_Layer: 0
   m_Name: First Aircraft Prototype
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -672,11 +672,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FirstAircraftController
   Thrust: 34500
   AirDensityAtSeaLevel: 1.255
+  CenterOfMass: {fileID: 0}
   LeftAileron: {fileID: 486354926791539290}
   RightAileron: {fileID: 5654000226828160296}
   LeftElevator: {fileID: 5718511245376071562}
   RightElevator: {fileID: 1455688474318126532}
   Rudder: {fileID: 5873259354992103455}
+  SpeedText: {fileID: 0}
+  AltitudeText: {fileID: 0}
 --- !u!114 &8379203323624802729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,7 +738,7 @@ GameObject:
   - component: {fileID: 7472684151410510951}
   m_Layer: 0
   m_Name: Fuselage Root
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -773,7 +776,7 @@ GameObject:
   - component: {fileID: 1366697116310006917}
   m_Layer: 0
   m_Name: Left Horizontal Stabilizer Root
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -809,7 +812,7 @@ GameObject:
   - component: {fileID: 7164081139394852615}
   m_Layer: 0
   m_Name: Left Leg
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -921,7 +924,7 @@ GameObject:
   - component: {fileID: 685164904741235416}
   m_Layer: 0
   m_Name: Right Wheel
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1035,7 +1038,7 @@ GameObject:
   - component: {fileID: 438482913455168023}
   m_Layer: 0
   m_Name: Right Wing
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1144,7 +1147,7 @@ GameObject:
   - component: {fileID: 807241118528039227}
   m_Layer: 0
   m_Name: Right Landing Gear Root
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1180,7 +1183,7 @@ GameObject:
   - component: {fileID: 6602014441621464198}
   m_Layer: 0
   m_Name: Right Aileron
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1292,7 +1295,7 @@ GameObject:
   - component: {fileID: 1885001073698529194}
   m_Layer: 0
   m_Name: Right Horizontal Stabilizer
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1401,7 +1404,7 @@ GameObject:
   - component: {fileID: 8976701355537872634}
   m_Layer: 0
   m_Name: Left Landing Gear Root
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1435,7 +1438,7 @@ GameObject:
   - component: {fileID: 5873259354992103455}
   m_Layer: 0
   m_Name: Rudder Pivot
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1486,7 +1489,7 @@ GameObject:
   - component: {fileID: 233872353348459670}
   m_Layer: 0
   m_Name: Left Horizontal Stabilizer
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1598,7 +1601,7 @@ GameObject:
   - component: {fileID: 6110397794425732333}
   m_Layer: 0
   m_Name: Right Elevator
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1707,7 +1710,7 @@ GameObject:
   - component: {fileID: 5227170586883629685}
   m_Layer: 0
   m_Name: Right Horizontal Stabilizer Root
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1743,7 +1746,7 @@ GameObject:
   - component: {fileID: 7684009611229145576}
   m_Layer: 0
   m_Name: Vertical Stabilizer
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1853,7 +1856,7 @@ GameObject:
   - component: {fileID: 5654000226828160296}
   m_Layer: 0
   m_Name: Right Aileron Pivot
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1904,7 +1907,7 @@ GameObject:
   - component: {fileID: 6432838507033582692}
   m_Layer: 0
   m_Name: Right Leg
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2013,7 +2016,7 @@ GameObject:
   - component: {fileID: 5815183226925036851}
   m_Layer: 0
   m_Name: Vertical Stabilizer Root
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2049,7 +2052,7 @@ GameObject:
   - component: {fileID: 218537153213472536}
   m_Layer: 0
   m_Name: Fuselage
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2158,7 +2161,7 @@ GameObject:
   - component: {fileID: 1975001715976486671}
   m_Layer: 0
   m_Name: Tail Root
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2193,7 +2196,7 @@ GameObject:
   - component: {fileID: 7812985078620026623}
   m_Layer: 0
   m_Name: Right Wing Root
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2229,7 +2232,7 @@ GameObject:
   - component: {fileID: 1782916041918872547}
   m_Layer: 0
   m_Name: Left Elevator
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2338,7 +2341,7 @@ GameObject:
   - component: {fileID: 1763465460538612042}
   m_Layer: 0
   m_Name: Left Wing Root
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2374,7 +2377,7 @@ GameObject:
   - component: {fileID: 1706824561404145071}
   m_Layer: 0
   m_Name: Rudder
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2486,7 +2489,7 @@ GameObject:
   - component: {fileID: 873711756523060155}
   m_Layer: 0
   m_Name: Left Wheel
-  m_TagString: Untagged
+  m_TagString: Aircraft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
