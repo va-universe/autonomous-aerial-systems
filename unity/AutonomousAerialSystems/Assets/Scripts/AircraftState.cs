@@ -6,5 +6,6 @@ public enum AircraftState
     Grounded,
     Takeoff,
     Transition,
-    Cruise
+    Cruise,
+    Tracking
 }

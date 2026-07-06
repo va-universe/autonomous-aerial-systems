@@ -26,6 +26,12 @@ public class RuleBasedAIController : FlyByWireController
     private float _pitchTransitionInput;
     private float _flapTransitionInput;
 
+    [Header("Tracking")]
+    public WaypointHandler SimulationHandler;
+    public float PitchTrackingStrength;
+    public float RollTrackingStregnth;
+    private GameObject _currentWaypoint;
+
     [Header("Sensor Systems")]
     public bool IsGrounded;
     public float GroundSensorRange;
@@ -40,10 +46,20 @@ public class RuleBasedAIController : FlyByWireController
 
     protected override void FixedUpdate()
     {
+        UpdateWaypoint();
+
         base.FixedUpdate();
 
         RunSensors();
         HandleState();
+    }
+
+    private void UpdateWaypoint()
+    {
+        if (SimulationHandler != null)
+        {
+            _currentWaypoint = SimulationHandler.CurrentWaypoint.gameObject;
+        }
     }
 
     /// <summary>
@@ -59,7 +75,14 @@ public class RuleBasedAIController : FlyByWireController
             {
                 if (_pitchTransitionInput >= 0 && _flapTransitionInput <= 0)
                 {
-                    State = AircraftState.Cruise;
+                    if (_currentWaypoint != null)
+                    {
+                        State = AircraftState.Tracking;
+                    }
+                    else
+                    {
+                        State = AircraftState.Cruise;
+                    }
                 }
                 else
                 {
@@ -155,7 +178,17 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The requested roll input</returns>
     private float GetAIRequestedRoll()
     {
-        return 0f;
+        float requestedInput = 0f;
+
+        if (State == AircraftState.Tracking)
+        {
+            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position);
+            Vector3 direction = localWaypoint.normalized;
+
+            requestedInput = Mathf.Clamp(direction.x * RollTrackingStregnth, -1f, 1f);
+        }
+
+        return requestedInput;
     }
 
     /// <summary>
@@ -175,6 +208,13 @@ public class RuleBasedAIController : FlyByWireController
         {
             requestedInput = _pitchTransitionInput;
             _pitchTransitionInput = Mathf.Min(PitchDownInput, _pitchTransitionInput + PitchTransitionRate * Time.deltaTime);
+        }
+        else if (State == AircraftState.Tracking)
+        {
+            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position);
+            Vector3 direction = localWaypoint.normalized;
+
+            requestedInput = Mathf.Clamp(direction.y * -PitchTrackingStrength, -1f, 1f);
         }
 
         return requestedInput;

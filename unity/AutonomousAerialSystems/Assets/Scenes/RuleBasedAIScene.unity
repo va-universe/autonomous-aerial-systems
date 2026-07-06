@@ -2857,6 +2857,7 @@ MonoBehaviour:
   CircleRadius: 2000
   MinHeight: 650
   MaxHeight: 1100
+  CurrentWaypoint: {fileID: 0}
 --- !u!1 &1267573792
 GameObject:
   m_ObjectHideFlags: 0
@@ -4051,6 +4052,10 @@ PrefabInstance:
       propertyPath: UICanvas
       value: 
       objectReference: {fileID: 6875754306732957058}
+    - target: {fileID: 1525713730224152827, guid: 2a5bc3e3c5cf50742952c41cadb3b20f, type: 3}
+      propertyPath: SimulationHandler
+      value: 
+      objectReference: {fileID: 1200867538}
     - target: {fileID: 3735323480398415893, guid: 2a5bc3e3c5cf50742952c41cadb3b20f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

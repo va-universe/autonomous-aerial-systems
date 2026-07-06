@@ -5,8 +5,6 @@ using UnityEngine;
 /// </summary>
 public class WaypointHandler : MonoBehaviour
 {
-    private WaypointController _currentWaypoint;
-
     [Header("Prefab")]
     public GameObject WaypointPrefab;
 
@@ -15,9 +13,12 @@ public class WaypointHandler : MonoBehaviour
     public float MinHeight;
     public float MaxHeight;
 
+    [Header("Waypoint")]
+    public WaypointController CurrentWaypoint;
+
     void Start()
     {
-        _currentWaypoint = SpawnWaypoint();
+        CurrentWaypoint = SpawnWaypoint();
     }
 
     void FixedUpdate()
@@ -30,12 +31,12 @@ public class WaypointHandler : MonoBehaviour
     /// </summary>
     private void UpdateWaypoint()
     {
-        if (_currentWaypoint.IsReached)
+        if (CurrentWaypoint.IsReached)
         {
             WaypointController newWaypoint = SpawnWaypoint();
 
-            Destroy(_currentWaypoint.gameObject);
-            _currentWaypoint = newWaypoint;
+            Destroy(CurrentWaypoint.gameObject);
+            CurrentWaypoint = newWaypoint;
         }
     }
 
