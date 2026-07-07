@@ -26,6 +26,13 @@ public class RuleBasedAIController : FlyByWireController
     private float _pitchTransitionInput;
     private float _flapTransitionInput;
 
+    [Header("Tracking")]
+    public WaypointHandler SimulationHandler;
+    public float PitchTrackingStrength;
+    public float RollTrackingStregnth;
+    public float FlapTrackingStrength;
+    private GameObject _currentWaypoint;
+
     [Header("Sensor Systems")]
     public bool IsGrounded;
     public float GroundSensorRange;
@@ -40,10 +47,20 @@ public class RuleBasedAIController : FlyByWireController
 
     protected override void FixedUpdate()
     {
+        UpdateWaypoint();
+
         base.FixedUpdate();
 
         RunSensors();
         HandleState();
+    }
+
+    private void UpdateWaypoint()
+    {
+        if (SimulationHandler != null)
+        {
+            _currentWaypoint = SimulationHandler.CurrentWaypoint.gameObject;
+        }
     }
 
     /// <summary>
@@ -59,7 +76,14 @@ public class RuleBasedAIController : FlyByWireController
             {
                 if (_pitchTransitionInput >= 0 && _flapTransitionInput <= 0)
                 {
-                    State = AircraftState.Cruise;
+                    if (_currentWaypoint != null)
+                    {
+                        State = AircraftState.Tracking;
+                    }
+                    else
+                    {
+                        State = AircraftState.Cruise;
+                    }
                 }
                 else
                 {
@@ -133,7 +157,7 @@ public class RuleBasedAIController : FlyByWireController
             _initialFlapInput = GetAIRequestedFlap();
 
             _throttleInput = GetAIRequestedThrottle();
-            _overrideInput = false;
+            _overrideInput = GetAIOverrideInput();
             WheelBrakeInput = GetAIRequestedWheelBrake();
         }
         else
@@ -150,12 +174,36 @@ public class RuleBasedAIController : FlyByWireController
     }
 
     /// <summary>
+    /// Gets the override input from the rule-based AI
+    /// </summary>
+    /// <returns>The override input</returns>
+    private bool GetAIOverrideInput()
+    {
+        if (State == AircraftState.Tracking)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
     /// Gets the requested roll input from the rule-based AI
     /// </summary>
     /// <returns>The requested roll input</returns>
     private float GetAIRequestedRoll()
     {
-        return 0f;
+        float requestedInput = 0f;
+
+        if (State == AircraftState.Tracking)
+        {
+            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position);
+            Vector3 direction = localWaypoint.normalized;
+
+            requestedInput = Mathf.Clamp(direction.x * RollTrackingStregnth, -1f, 1f);
+        }
+
+        return requestedInput;
     }
 
     /// <summary>
@@ -175,6 +223,13 @@ public class RuleBasedAIController : FlyByWireController
         {
             requestedInput = _pitchTransitionInput;
             _pitchTransitionInput = Mathf.Min(PitchDownInput, _pitchTransitionInput + PitchTransitionRate * Time.deltaTime);
+        }
+        else if (State == AircraftState.Tracking)
+        {
+            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position);
+            Vector3 direction = localWaypoint.normalized;
+
+            requestedInput = Mathf.Clamp(direction.y * -PitchTrackingStrength, -1f, 1f);
         }
 
         return requestedInput;
@@ -206,6 +261,13 @@ public class RuleBasedAIController : FlyByWireController
         {
             requestedInput = _flapTransitionInput;
             _flapTransitionInput = Mathf.Max(0, _flapTransitionInput - FlapTransitionRate * Time.deltaTime);
+        }
+        else if (State == AircraftState.Tracking)
+        {
+            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position);
+            Vector3 direction = localWaypoint.normalized;
+
+            requestedInput = Mathf.Clamp(direction.y * FlapTrackingStrength, -1f, 1f);
         }
 
         return requestedInput;

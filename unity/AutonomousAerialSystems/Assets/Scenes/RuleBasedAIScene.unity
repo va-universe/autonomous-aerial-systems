@@ -2809,6 +2809,55 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
+--- !u!1 &1200867536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1200867537}
+  - component: {fileID: 1200867538}
+  m_Layer: 0
+  m_Name: SimulationHandlerObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1200867537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200867536}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1200867538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200867536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e24ab62408f40479a59edc31ae46cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaypointHandler
+  WaypointPrefab: {fileID: 6601961342051391596, guid: f48b6e3a2c4e0e64aac0f594a872bbda, type: 3}
+  CircleRadius: 2000
+  MinHeight: 650
+  MaxHeight: 1100
+  CurrentWaypoint: {fileID: 0}
 --- !u!1 &1267573792
 GameObject:
   m_ObjectHideFlags: 0
@@ -4003,6 +4052,10 @@ PrefabInstance:
       propertyPath: UICanvas
       value: 
       objectReference: {fileID: 6875754306732957058}
+    - target: {fileID: 1525713730224152827, guid: 2a5bc3e3c5cf50742952c41cadb3b20f, type: 3}
+      propertyPath: SimulationHandler
+      value: 
+      objectReference: {fileID: 1200867538}
     - target: {fileID: 3735323480398415893, guid: 2a5bc3e3c5cf50742952c41cadb3b20f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4056,6 +4109,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1200867537}
   - {fileID: 292014839}
   - {fileID: 137326829}
   - {fileID: 7536512653382906694}
