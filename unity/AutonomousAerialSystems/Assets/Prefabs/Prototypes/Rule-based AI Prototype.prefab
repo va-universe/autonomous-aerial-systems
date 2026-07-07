@@ -3013,6 +3013,8 @@ MonoBehaviour:
   YawDampingStrength: 7.8
   InputDampingModifier: 0.45
   TurningYawStrength: 0.85
+  BankLimiterStrength: 1.7
+  MaxBankAngle: 45
   State: 0
   EndTakeoffAltitude: 100
   PitchDownInput: 0.5

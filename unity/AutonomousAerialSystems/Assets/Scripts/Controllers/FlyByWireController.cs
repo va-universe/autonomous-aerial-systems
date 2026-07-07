@@ -16,7 +16,7 @@ public class FlyByWireController : Controller
     #endregion
 
     #region Previous Inputs
-    private float _previousRollInput;
+    protected float _previousRollInput;
     private float _previousYawInput;
     private float _previousPitchInput;
     private float _previousFlapInput;
@@ -160,7 +160,7 @@ public class FlyByWireController : Controller
     /// <param name="currentInput">The current input, also refered to as the previously commanded input</param>
     /// <param name="rate">The rate at which the currentInput moves towards the targetInput</param>
     /// <returns>The input after being smoothened</returns>
-    private float Smoother(float targetInput, float currentInput, float rate)
+    protected float Smoother(float targetInput, float currentInput, float rate)
     {
         if (!IsInputSmoothened)
         {
@@ -250,7 +250,7 @@ public class FlyByWireController : Controller
     /// Gets the fly-by-wire roll input
     /// </summary>
     /// <returns>The roll input</returns>
-    private float GetRollInput()
+    protected virtual float GetRollInput()
     {
         float smoothedInput = Smoother(_initialRollInput, _previousRollInput, RollSmoothingStrength);
 

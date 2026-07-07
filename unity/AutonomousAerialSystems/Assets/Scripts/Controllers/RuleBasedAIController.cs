@@ -15,6 +15,10 @@ public class RuleBasedAIController : FlyByWireController
 
     #endregion
 
+    [Header("Bank Limiter")]
+    public float BankLimiterStrength;
+    public float MaxBankAngle;
+
     [Header("Rule-Based AI")]
     public AircraftState State;
 
@@ -341,5 +345,43 @@ public class RuleBasedAIController : FlyByWireController
             _altitudeGroundText = aircraftPanel.transform.Find("AltitudeGroundText").GetComponent<TextMeshProUGUI>();
             _autonomousText = aircraftPanel.transform.Find("AutonomousText").GetComponent<TextMeshProUGUI>();
         }
+    }
+
+    /// <summary>
+    /// Gets the roll input for the fly-by-wire system, with the bank limiter
+    /// </summary>
+    /// <returns>The roll input with bank limiting</returns>
+    protected override float GetRollInput()
+    {
+        float bankLimitedInput = LimitBank(_initialRollInput);
+        float smoothedInput = Smoother(bankLimitedInput, _previousRollInput, RollSmoothingStrength);
+
+        _previousRollInput = smoothedInput;
+
+        return smoothedInput;
+    }
+
+    /// <summary>
+    /// Limits the input, based on a desired maximum banking angle
+    /// </summary>
+    /// <param name="input">The roll input to be limited</param>
+    /// <returns>The roll input after being limited based on bank angle</returns>
+    private float LimitBank(float input)
+    {
+        float bankAngle = -Vector3.SignedAngle(Vector3.up, transform.up, transform.forward);
+        float modifier = 1f;
+
+        if (input > 0f && bankAngle > 0f)
+        {
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10(bankAngle / MaxBankAngle + 1f) * BankLimiterStrength);
+        }
+        else if (input < 0f && bankAngle < 0f)
+        {
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10(-bankAngle / MaxBankAngle + 1f) * BankLimiterStrength);
+        }
+
+        Debug.Log($"Input: {input}, Bank: {bankAngle}");
+
+        return input * modifier;
     }
 }
