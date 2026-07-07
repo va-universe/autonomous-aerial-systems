@@ -3019,7 +3019,7 @@ MonoBehaviour:
   PitchTransitionRate: 1
   FlapTransitionRate: 0.11
   SimulationHandler: {fileID: 0}
-  PitchTrackingStrength: 4
+  PitchTrackingStrength: 100
   RollTrackingStregnth: 1.2
   IsGrounded: 1
   GroundSensorRange: 20000
