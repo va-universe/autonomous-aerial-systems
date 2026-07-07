@@ -2977,50 +2977,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RuleBasedAIController
   WheelBrakeInput: 0
   AirDensityAtSeaLevel: 1.255
-  Thrust: 10500
+  Thrust: 11200
   GForce: 0
   UICanvas: {fileID: 0}
   StallTextThreshold: 119
   StallTextRedness: 52
-  MaxAileronDeflection: 13
-  MaxFlapDeflection: 25
-  MaxElevatorDeflection: 19.5
-  MaxRudderDeflection: 18.5
+  MaxAileronDeflection: 13.5
+  MaxFlapDeflection: 25.5
+  MaxElevatorDeflection: 20
+  MaxRudderDeflection: 19
   AileronDeflectionOverrideModifier: 1.11
-  FlapDeflectionOverrideModifier: 1.15
-  ElevatorDeflectionOverrideModifier: 1.23
-  RudderDeflectionOverrideModifier: 1.14
+  FlapDeflectionOverrideModifier: 1.17
+  ElevatorDeflectionOverrideModifier: 1.24
+  RudderDeflectionOverrideModifier: 1.15
   IsGForceLimited: 1
   IsStallLimited: 1
   IsInputSmoothened: 1
   IsYawDampened: 1
   IsTurnYawActivated: 1
-  MaxComfortGForce: 5.5
-  MinComfortGForce: -2.5
-  MaxOverrideGForce: 9
-  MinOverrideGForce: -4
+  MaxComfortGForce: 6.5
+  MinComfortGForce: -3
+  MaxOverrideGForce: 11
+  MinOverrideGForce: -5
   MaxLimiterStrength: 1.7
   MinLimiterStrength: 1.9
-  MaxComfortStallPercentage: 50
-  MaxComfortAngleOfAttack: 33
-  MaxOverrideStallPercentage: 65
-  MaxOverrideAngleOfAttack: 38
+  MaxComfortStallPercentage: 60
+  MaxComfortAngleOfAttack: 35
+  MaxOverrideStallPercentage: 68
+  MaxOverrideAngleOfAttack: 41
   UpPitchSmoothingStrength: 1.6
   DownPitchSmoothingStrength: 0.8
   RollSmoothingStrength: 3.7
   YawSmoothingStrength: 2.5
   FlapSmoothingStrength: 1
-  YawDampingStrength: 7.6
+  YawDampingStrength: 7.8
   InputDampingModifier: 0.45
-  TurningYawStrength: 0.78
+  TurningYawStrength: 0.85
   State: 0
   EndTakeoffAltitude: 100
-  PitchDownInput: 0.4
+  PitchDownInput: 0.5
   PitchTransitionRate: 1
-  FlapTransitionRate: 0.11
+  FlapTransitionRate: 0.2
   SimulationHandler: {fileID: 0}
-  PitchTrackingStrength: 100
-  RollTrackingStregnth: 1.2
+  PitchTrackingStrength: 4.5
+  RollTrackingStregnth: 2.8
+  FlapTrackingStrength: 4
   IsGrounded: 1
   GroundSensorRange: 20000
 --- !u!114 &1627116928655657030

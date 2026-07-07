@@ -30,6 +30,7 @@ public class RuleBasedAIController : FlyByWireController
     public WaypointHandler SimulationHandler;
     public float PitchTrackingStrength;
     public float RollTrackingStregnth;
+    public float FlapTrackingStrength;
     private GameObject _currentWaypoint;
 
     [Header("Sensor Systems")]
@@ -156,7 +157,7 @@ public class RuleBasedAIController : FlyByWireController
             _initialFlapInput = GetAIRequestedFlap();
 
             _throttleInput = GetAIRequestedThrottle();
-            _overrideInput = false;
+            _overrideInput = GetAIOverrideInput();
             WheelBrakeInput = GetAIRequestedWheelBrake();
         }
         else
@@ -170,6 +171,20 @@ public class RuleBasedAIController : FlyByWireController
             _overrideInput = false;
             WheelBrakeInput = 1f;
         }
+    }
+
+    /// <summary>
+    /// Gets the override input from the rule-based AI
+    /// </summary>
+    /// <returns>The override input</returns>
+    private bool GetAIOverrideInput()
+    {
+        if (State == AircraftState.Tracking)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -246,6 +261,13 @@ public class RuleBasedAIController : FlyByWireController
         {
             requestedInput = _flapTransitionInput;
             _flapTransitionInput = Mathf.Max(0, _flapTransitionInput - FlapTransitionRate * Time.deltaTime);
+        }
+        else if (State == AircraftState.Tracking)
+        {
+            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position);
+            Vector3 direction = localWaypoint.normalized;
+
+            requestedInput = Mathf.Clamp(direction.y * FlapTrackingStrength, -1f, 1f);
         }
 
         return requestedInput;
