@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -348,40 +349,40 @@ public class RuleBasedAIController : FlyByWireController
     }
 
     /// <summary>
-    /// Gets the roll input for the fly-by-wire system, with the bank limiter
+    /// Gets the roll input for the fly-by-wire system, with the bank limiter/stabilizer
     /// </summary>
     /// <returns>The roll input with bank limiting</returns>
     protected override float GetRollInput()
     {
-        float bankLimitedInput = LimitBank(_initialRollInput);
-        float smoothedInput = Smoother(bankLimitedInput, _previousRollInput, RollSmoothingStrength);
+        float bankCorrectedInput = Mathf.Clamp(_initialRollInput + GetBankCorrection(), -1f, 1f);
+        float smoothedInput = Smoother(bankCorrectedInput, _previousRollInput, RollSmoothingStrength);
 
         _previousRollInput = smoothedInput;
 
         return smoothedInput;
     }
 
-    /// <summary>
-    /// Limits the input, based on a desired maximum banking angle
-    /// </summary>
-    /// <param name="input">The roll input to be limited</param>
-    /// <returns>The roll input after being limited based on bank angle</returns>
-    private float LimitBank(float input)
+
+    private float GetBankCorrection()
     {
-        float bankAngle = -Vector3.SignedAngle(Vector3.up, transform.up, transform.forward);
-        float modifier = 1f;
+        float bankAngle = GetBankAngle();
 
-        if (input > 0f && bankAngle > 0f)
+        return 0f;
+    }
+
+    /// <summary>
+    /// Gets the bank/roll angle of the aircraft
+    /// </summary>
+    /// <returns>The bank angle</returns>
+    private float GetBankAngle()
+    {
+        float bankAngle = transform.eulerAngles.z;
+
+        if (bankAngle > 180f)
         {
-            modifier = 1f - Mathf.Clamp01(Mathf.Log10(bankAngle / MaxBankAngle + 1f) * BankLimiterStrength);
-        }
-        else if (input < 0f && bankAngle < 0f)
-        {
-            modifier = 1f - Mathf.Clamp01(Mathf.Log10(-bankAngle / MaxBankAngle + 1f) * BankLimiterStrength);
+            bankAngle -= 360f;
         }
 
-        Debug.Log($"Input: {input}, Bank: {bankAngle}");
-
-        return input * modifier;
+        return bankAngle;
     }
 }
