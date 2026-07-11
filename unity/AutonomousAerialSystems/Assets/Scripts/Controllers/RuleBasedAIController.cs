@@ -12,6 +12,7 @@ public class RuleBasedAIController : FlyByWireController
     private bool _isAIActivated;
     private TextMeshProUGUI _altitudeGroundText;
     private TextMeshProUGUI _autonomousText;
+    private TextMeshProUGUI _stateText;
 
     #endregion
 
@@ -337,6 +338,11 @@ public class RuleBasedAIController : FlyByWireController
         {
             _autonomousText.color = Color.gray;
         }
+
+        if (_stateText != null)
+        {
+            _stateText.text = State.ToString();
+        }
     }
 
     /// <summary>
@@ -351,6 +357,7 @@ public class RuleBasedAIController : FlyByWireController
             Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
             _altitudeGroundText = aircraftPanel.transform.Find("AltitudeGroundText").GetComponent<TextMeshProUGUI>();
             _autonomousText = aircraftPanel.transform.Find("AutonomousText").GetComponent<TextMeshProUGUI>();
+            _stateText = aircraftPanel.transform.Find("StateText").GetComponent<TextMeshProUGUI>();
         }
     }
 
