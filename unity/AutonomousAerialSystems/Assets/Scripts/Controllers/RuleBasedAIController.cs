@@ -366,8 +366,17 @@ public class RuleBasedAIController : FlyByWireController
     private float GetBankCorrection()
     {
         float bankAngle = GetBankAngle();
+        float error = Mathf.Abs(bankAngle) - MaxBankAngle;
+        float bankCorrectionInput = 0f;
 
-        return 0f;
+        if (error > 0f)
+        {
+            bankCorrectionInput = -Mathf.Sign(bankAngle) * Mathf.Clamp01(error * BankLimiterStrength);
+        }
+
+        Debug.Log($"Bank Angle: {bankAngle}° | Input Correction: {bankCorrectionInput} | Initial Input: {_initialRollInput} | Input: {_initialRollInput + bankCorrectionInput}");
+
+        return bankCorrectionInput;
     }
 
     /// <summary>
