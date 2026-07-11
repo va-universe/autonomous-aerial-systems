@@ -80,47 +80,91 @@ Beneath are the upcoming milestones/releases.
  - Waypoint Tracking
  - Ground Evasion & Sensors
 
-## v0.5.0 Canard & Stabilator Prototypes
- - Canards & Delta Wing Prototype
- - Classic Fighter Jet Prototype With Stabilators
+## v0.5.0 Conventional Fighter Prototype
+ - Massive Terrain & Trees
+ - Fighter Jet Model
+ - Stabilators & Fly-By-Wire System
 
-## v0.6.0 Gun Systems & Prototype
+## v0.6.0 Canard Delta Prototype
+ - Canard Delta Model
+ - Canards & Fly-By-Wire System
+
+## v0.7.0 Weather, Vortices & Deep Stalls
+ - Deep Stalls
+ - Canard Vortices
+ - The Ground Effect
+ - Wind Direction & Crosswind Landing
+ - Turbulence & Wind Gusts
+ - Temperature
+
+## v1.0.0 Damageable Prototype
+ - Distributed Damage System
+
+## v1.1.0 Gunner Prototype
  - Bullets
  - Guns
- - Damage
 
-## Pre-v0.7.0 First Missile Launch
+## Pre-v1.2.0 First Missile Launch
  - Missile Physics
 
-## v0.7.0 First Missile Prototype
+## v1.2.0 Heat-Seeking Missile Prototype
  - Missile Physics
- - Missile Guidance
+ - Heat-Seeking Missile Guidance
 
-## v0.8.0 Fly-By-Wire & AI Combat Prototypes
+## v1.3.0 Combat Prototypes
  - Camera Movement
- - Weaponized Fly-By-Wire Prototype
- - Weaponized Rule-Based AI Prototype
-   - Rule-Based Gunner
-   - Rule-Based Missile Launcher
+ - Gunner & Missiles
   
-## v0.9.0 Autonomous Interception
- - Grounded Radar System
- - Autonomous Takeoff & Target Locking
- - Manual Interception Confirmation
- - Destruction Of Target
+## v1.4.0 Flare Prototype
+ - Flares Against Heat-Seeking Missiles
+ - Flare Launch System
 
-## v0.10.0 Modular Network AI Prototype
- - ANN Takeoff System
- - ANN Ground Evasion System
- - ANN Plane Tracking
+## v1.5.0 Sensor Systems Prototype
+ - Sensors For Future AI
 
-## v0.11.0 Modular Network Combat AI Prototype
- - ANN Gunner
- - ANN Missile Launcher
+## v1.6.0 Rule-Based Combat AI Prototype
+ - Rule-Based AI Gunner
+ - Rule-Based AI Missile Launcher
 
-## v0.12.0 Curriculum Learning AI Prototype
- - Progressive Learning
-   - Takeoff Training
-   - Ground Evasion Training
-   - Plane Tracking Training
-   - Missile & Gun Training
+## v1.7.0 Radar Guided Missile Prototype
+ - Radar Guidance
+
+## v1.8.0 Chaff Prototype
+ - Chaff Against Radar Guided Missiles
+ - Chaff Release System
+
+## v1.9.0 FBW & AI Fighter Prototype
+ - Fully Weaponized Fly-By-Wire Prototype
+ - Fully Weaponized Rule-Based AI Prototype
+
+## v2.0.0 Network Tracking Prototype
+ - Neural Network Implementation
+ - Network Tracking
+
+## v2.1.0 Network Gunner Prototype
+ - Network Shooting
+ - Network Aiming
+
+## v2.2.0 Network Missile Guidance Prototype
+ - Network Missile Guidance
+
+## v2.3.0 Network Combat Prototype
+ - Network Missile Launching
+ - Fully Modular Network Prototype
+
+## v2.4.0 Autonomous Takeoff Learning
+ - Backpropagation Implementation
+ - Takeoff Curriculumn Learning
+
+## v2.5.0 Terrain Avoidance Learning
+ - Terrain Avoidance Curriculumn Learning
+
+## v2.6.0 Target Tracking Learning
+ - Tracking Curriculumn Learning
+
+## v2.7.0 Gunner & Aim Learning
+ - Shooting Curriculumn Learning
+ - Aiming Curriculumn Learning
+
+## v2.8.0 Missile Launch Learning
+ - Missile Launch Curriculumn Learning
