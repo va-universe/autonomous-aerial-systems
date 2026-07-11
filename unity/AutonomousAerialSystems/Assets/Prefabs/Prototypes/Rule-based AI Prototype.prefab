@@ -2982,13 +2982,13 @@ MonoBehaviour:
   UICanvas: {fileID: 0}
   StallTextThreshold: 119
   StallTextRedness: 52
-  MaxAileronDeflection: 13.5
+  MaxAileronDeflection: 13.4
   MaxFlapDeflection: 25.5
   MaxElevatorDeflection: 20
   MaxRudderDeflection: 19
-  AileronDeflectionOverrideModifier: 1.11
-  FlapDeflectionOverrideModifier: 1.17
-  ElevatorDeflectionOverrideModifier: 1.24
+  AileronDeflectionOverrideModifier: 1.1
+  FlapDeflectionOverrideModifier: 1.18
+  ElevatorDeflectionOverrideModifier: 1.25
   RudderDeflectionOverrideModifier: 1.15
   IsGForceLimited: 1
   IsStallLimited: 1
@@ -3007,21 +3007,28 @@ MonoBehaviour:
   MaxOverrideAngleOfAttack: 41
   UpPitchSmoothingStrength: 1.6
   DownPitchSmoothingStrength: 0.8
-  RollSmoothingStrength: 3.7
+  RollSmoothingStrength: 3.55
   YawSmoothingStrength: 2.5
   FlapSmoothingStrength: 1
   YawDampingStrength: 7.8
   InputDampingModifier: 0.45
-  TurningYawStrength: 0.85
+  TurningYawStrength: 0.87
+  BankLimiterStrength: 1.9
+  BankCorrectionModifier: 2.25
+  MaxCorrectionInput: 1.8
+  MaxBankLimit: 180
+  MinBankLimit: 30
+  BankLimitAltitudeCap: 510
   State: 0
-  EndTakeoffAltitude: 100
+  EndTakeoffAltitude: 90
   PitchDownInput: 0.5
   PitchTransitionRate: 1
   FlapTransitionRate: 0.2
   SimulationHandler: {fileID: 0}
-  PitchTrackingStrength: 4.5
-  RollTrackingStregnth: 2.8
-  FlapTrackingStrength: 4
+  TrackingOffset: 35.5
+  PitchTrackingStrength: 5.5
+  RollTrackingStregnth: 2.9
+  FlapTrackingStrength: 4.8
   IsGrounded: 1
   GroundSensorRange: 20000
 --- !u!114 &1627116928655657030

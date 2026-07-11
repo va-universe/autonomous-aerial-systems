@@ -15,6 +15,16 @@ public class RuleBasedAIController : FlyByWireController
 
     #endregion
 
+    [Header("Bank Limiter")]
+    public float BankLimiterStrength;
+    public float BankCorrectionModifier;
+    public float MaxCorrectionInput;
+
+    public float MaxBankLimit;
+    public float MinBankLimit;
+    public float BankLimitAltitudeCap;
+
+
     [Header("Rule-Based AI")]
     public AircraftState State;
 
@@ -28,6 +38,7 @@ public class RuleBasedAIController : FlyByWireController
 
     [Header("Tracking")]
     public WaypointHandler SimulationHandler;
+    public float TrackingOffset;
     public float PitchTrackingStrength;
     public float RollTrackingStregnth;
     public float FlapTrackingStrength;
@@ -197,7 +208,7 @@ public class RuleBasedAIController : FlyByWireController
 
         if (State == AircraftState.Tracking)
         {
-            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position);
+            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position + new Vector3(0f, TrackingOffset, 0f));
             Vector3 direction = localWaypoint.normalized;
 
             requestedInput = Mathf.Clamp(direction.x * RollTrackingStregnth, -1f, 1f);
@@ -226,7 +237,7 @@ public class RuleBasedAIController : FlyByWireController
         }
         else if (State == AircraftState.Tracking)
         {
-            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position);
+            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position + new Vector3(0f, TrackingOffset, 0f));
             Vector3 direction = localWaypoint.normalized;
 
             requestedInput = Mathf.Clamp(direction.y * -PitchTrackingStrength, -1f, 1f);
@@ -264,7 +275,7 @@ public class RuleBasedAIController : FlyByWireController
         }
         else if (State == AircraftState.Tracking)
         {
-            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position);
+            Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position + new Vector3(0f, TrackingOffset, 0f));
             Vector3 direction = localWaypoint.normalized;
 
             requestedInput = Mathf.Clamp(direction.y * FlapTrackingStrength, -1f, 1f);
@@ -341,5 +352,98 @@ public class RuleBasedAIController : FlyByWireController
             _altitudeGroundText = aircraftPanel.transform.Find("AltitudeGroundText").GetComponent<TextMeshProUGUI>();
             _autonomousText = aircraftPanel.transform.Find("AutonomousText").GetComponent<TextMeshProUGUI>();
         }
+    }
+
+    /// <summary>
+    /// Gets the roll input for the fly-by-wire system, with the bank limiter/stabilizer
+    /// </summary>
+    /// <returns>The roll input with bank limiting</returns>
+    protected override float GetRollInput()
+    {
+        float bankAngle = GetBankAngle();
+        float maxBankAngle = GetMaxBankAngle();
+
+        float bankLimitedInput = LimitBank(_initialRollInput, bankAngle, maxBankAngle);
+        float bankCorrectedInput = Mathf.Clamp(bankLimitedInput + GetBankCorrection(bankAngle, maxBankAngle), -1f, 1f);
+        float smoothedInput = Smoother(bankCorrectedInput, _previousRollInput, RollSmoothingStrength);
+
+        _previousRollInput = smoothedInput;
+
+        return smoothedInput;
+    }
+
+    /// <summary>
+    /// Gets the maximum bank/roll angle, based on altitude above ground
+    /// </summary>
+    /// <returns>The max bank angle</returns>
+    public float GetMaxBankAngle()
+    {
+        float strength = 1f - Mathf.Clamp01(_altitudeAboveGround / BankLimitAltitudeCap);
+        float maxBankAngle = MaxBankLimit - strength * (MaxBankLimit - MinBankLimit);
+
+        return maxBankAngle;
+    }
+
+    /// <summary>
+    /// Limits the input, based on a desired maximum banking angle
+    /// </summary>
+    /// <param name="input">The roll input to be limited</param>
+    /// <param name="bankAngle">The bank/roll angle</param>
+    /// <param name="maxBankAngle">The maximum bank/roll angle</param>
+    /// <returns>The roll input after being limited based on bank angle</returns>
+    private float LimitBank(float input, float bankAngle, float maxBankAngle)
+    {
+        float modifier = 1f;
+
+        if (input > 0f && bankAngle > 0f)
+        {
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10(bankAngle / maxBankAngle + 1f) * BankLimiterStrength);
+        }
+        else if (input < 0f && bankAngle < 0f)
+        {
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10(-bankAngle / maxBankAngle + 1f) * BankLimiterStrength);
+        }
+
+        return input * modifier;
+    }
+
+    /// <summary>
+    /// Gets the bank correction input
+    /// </summary>
+    /// <param name="bankAngle">The bank/roll angle</param>
+    /// <param name="maxBankAngle">The maximum bank/roll angle</param>
+    /// <returns>The roll correction input addition</returns>
+    private float GetBankCorrection(float bankAngle, float maxBankAngle)
+    {
+        float bankError = Mathf.Abs(bankAngle) - maxBankAngle;
+        float bankCorrectionInput = 0f;
+
+        if (bankError > 0f)
+        {
+            float correctionStrength = bankError / (180f - maxBankAngle);
+            float bankCorrection = correctionStrength * BankCorrectionModifier;
+
+            bankCorrectionInput = Mathf.Sign(bankAngle) * Mathf.Clamp(bankCorrection, 0f, MaxCorrectionInput);
+        }
+
+        Debug.Log($"Bank Angle: {Math.Round(bankAngle, 1)}° | Input Correction: {Math.Round(bankCorrectionInput, 3)} | Initial Input: {Math.Round(_initialRollInput, 3)} | Input: {Math.Round(_rollInput, 3)}");
+
+        return bankCorrectionInput;
+    }
+
+    /// <summary>
+    /// Gets the bank/roll angle of the aircraft
+    /// </summary>
+    /// <returns>The bank angle</returns>
+    private float GetBankAngle()
+    {
+        float bankAngle = transform.eulerAngles.z;
+
+        if (bankAngle > 180f)
+        {
+            bankAngle -= 360f;
+        }
+
+        return bankAngle;
     }
 }
