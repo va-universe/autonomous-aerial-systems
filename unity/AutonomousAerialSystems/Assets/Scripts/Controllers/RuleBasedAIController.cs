@@ -18,7 +18,9 @@ public class RuleBasedAIController : FlyByWireController
 
     [Header("Bank Limiter")]
     public float BankLimiterStrength;
+    public float BankCorrectionModifier;
     public float MaxBankAngle;
+    public float MaxCorrectionInput;
 
     [Header("Rule-Based AI")]
     public AircraftState State;
@@ -354,7 +356,10 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The roll input with bank limiting</returns>
     protected override float GetRollInput()
     {
-        float bankCorrectedInput = Mathf.Clamp(_initialRollInput + GetBankCorrection(), -1f, 1f);
+        float bankAngle = GetBankAngle();
+
+        float bankLimitedInput = LimitBank(_initialRollInput, bankAngle);
+        float bankCorrectedInput = Mathf.Clamp(bankLimitedInput + GetBankCorrection(bankAngle), -1f, 1f);
         float smoothedInput = Smoother(bankCorrectedInput, _previousRollInput, RollSmoothingStrength);
 
         _previousRollInput = smoothedInput;
@@ -362,19 +367,47 @@ public class RuleBasedAIController : FlyByWireController
         return smoothedInput;
     }
 
-
-    private float GetBankCorrection()
+    /// <summary>
+    /// Limits the input, based on a desired maximum banking angle
+    /// </summary>
+    /// <param name="input">The roll input to be limited</param>
+    /// <param name="bankAngle">The bank/roll angle</param>
+    /// <returns>The roll input after being limited based on bank angle</returns>
+    private float LimitBank(float input, float bankAngle)
     {
-        float bankAngle = GetBankAngle();
-        float error = Mathf.Abs(bankAngle) - MaxBankAngle;
-        float bankCorrectionInput = 0f;
+        float modifier = 1f;
 
-        if (error > 0f)
+        if (input > 0f && bankAngle > 0f)
         {
-            bankCorrectionInput = -Mathf.Sign(bankAngle) * Mathf.Clamp01(error * BankLimiterStrength);
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10(bankAngle / MaxBankAngle + 1f) * BankLimiterStrength);
+        }
+        else if (input < 0f && bankAngle < 0f)
+        {
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10(-bankAngle / MaxBankAngle + 1f) * BankLimiterStrength);
         }
 
-        Debug.Log($"Bank Angle: {bankAngle}° | Input Correction: {bankCorrectionInput} | Initial Input: {_initialRollInput} | Input: {_initialRollInput + bankCorrectionInput}");
+        return input * modifier;
+    }
+
+    /// <summary>
+    /// Gets the bank correction input
+    /// </summary>
+    /// <param name="bankAngle">The bank/roll angle</param>
+    /// <returns>The roll correction input addition</returns>
+    private float GetBankCorrection(float bankAngle)
+    {
+        float bankError = Mathf.Abs(bankAngle) - MaxBankAngle;
+        float bankCorrectionInput = 0f;
+
+        if (bankError > 0f)
+        {
+            float correctionStrength = bankError / (180f - MaxBankAngle);
+            float bankCorrection = correctionStrength * BankCorrectionModifier;
+
+            bankCorrectionInput = Mathf.Sign(bankAngle) * Mathf.Clamp(bankCorrection, 0f, MaxCorrectionInput);
+        }
+
+        Debug.Log($"Bank Angle: {bankAngle}° | Input Correction: {bankCorrectionInput} | Initial Input: {_initialRollInput} | Input: {_rollInput}");
 
         return bankCorrectionInput;
     }
