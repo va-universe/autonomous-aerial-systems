@@ -52,17 +52,15 @@ The next planned release, `v0.4.0`, is the `Rule-Based AI Prototype`. This relea
 
 ## Roadmap
 
-Current development path (subject to change):
+Current development path for the first phase (subject to change):
 
  - [x] Aerodynamic Surface Prototype
  - [x] Wing Camber Prototype
  - [x] Fly-By-Wire Prototype
  - [ ] Rule-Based AI Prototype
- - [ ] Canards & Stabilators Prototypes
- - [ ] Weapon Systems Prototype
- - [ ] Rule-Based Combat AI Prototype
- - [ ] Autonomous Interception Behavior
- - [ ] Neural Network Prototypes
+ - [ ] Conventional Fighter Prototype
+ - [ ] Canard Delta Prototype
+ - [ ] Weather, Vortices & Deep Stalls
 
 See the full roadmap in [Roadmap](./docs/roadmap.md).
 
