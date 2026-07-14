@@ -362,12 +362,12 @@ public class RuleBasedAIController : FlyByWireController
     }
 
     /// <summary>
-    /// Gets the roll input for the fly-by-wire system, with the bank limiter/stabilizer
+    /// Gets the roll input for the fly-by-wire system, with the bank limiter
     /// </summary>
     /// <returns>The roll input with bank limiting</returns>
     protected override float GetRollInput()
     {
-        float bankAngle = GetBankAngle();
+        float bankAngle = GetAngle(AircraftAxis.Roll);
         float maxBankAngle = GetMaxBankAngle();
 
         float bankLimitedInput = LimitBank(_initialRollInput, bankAngle, maxBankAngle);
@@ -375,6 +375,24 @@ public class RuleBasedAIController : FlyByWireController
         float smoothedInput = Smoother(bankCorrectedInput, _previousRollInput, RollSmoothingStrength);
 
         _previousRollInput = smoothedInput;
+
+        return smoothedInput;
+    }
+
+    /// <summary>
+    /// Gets the pitch input for the fly-by-wire system, with the pitch limiter
+    /// </summary>
+    /// <returns>The pitch input with pitch limiting</returns>
+    protected override float GetPitchInput()
+    {
+        float smoothingStrength = _pitchInput <= 0f ? UpPitchSmoothingStrength : DownPitchSmoothingStrength;
+        float pitchAngle = GetAngle(AircraftAxis.Pitch);
+
+        float gLimitedInput = LimitGForce(_initialPitchInput);
+        float stallLimitedInput = -LimitStall(-gLimitedInput, WingAxis.Horizontal);
+        float smoothedInput = Smoother(stallLimitedInput, _previousPitchInput, smoothingStrength);
+
+        _previousPitchInput = smoothedInput;
 
         return smoothedInput;
     }
@@ -439,18 +457,27 @@ public class RuleBasedAIController : FlyByWireController
     }
 
     /// <summary>
-    /// Gets the bank/roll angle of the aircraft
+    /// Gets the angle around a specific aircraft axis
     /// </summary>
-    /// <returns>The bank angle</returns>
-    private float GetBankAngle()
+    /// <param name="axis">The axis of the angle</param>
+    /// <returns>The angle of the specific aircraft axis</returns>
+    private float GetAngle(AircraftAxis axis)
     {
-        float bankAngle = transform.eulerAngles.z;
-
-        if (bankAngle > 180f)
+        float axisAngle = transform.eulerAngles.z; // Roll/Bank angle
+        if (axis == AircraftAxis.Pitch)
         {
-            bankAngle -= 360f;
+            axisAngle = transform.eulerAngles.x;
+        }
+        else if (axis == AircraftAxis.Yaw)
+        {
+            axisAngle = -transform.eulerAngles.y;
         }
 
-        return bankAngle;
+        if (axisAngle > 180f)
+        {
+            axisAngle -= 360f;
+        }
+
+        return axisAngle;
     }
 }

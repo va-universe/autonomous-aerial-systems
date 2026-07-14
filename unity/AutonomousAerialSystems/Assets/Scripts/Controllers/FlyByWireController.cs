@@ -17,8 +17,8 @@ public class FlyByWireController : Controller
 
     #region Previous Inputs
     protected float _previousRollInput;
+    protected float _previousPitchInput;
     private float _previousYawInput;
-    private float _previousPitchInput;
     private float _previousFlapInput;
     #endregion
 
@@ -86,7 +86,7 @@ public class FlyByWireController : Controller
     /// </summary>
     /// <param name="input">The input to be limited</param>
     /// <returns>The input after being limited based on G-force</returns>
-    private float LimitGForce(float input)
+    protected float LimitGForce(float input)
     {
         if (!IsGForceLimited)
         {
@@ -115,7 +115,7 @@ public class FlyByWireController : Controller
     /// <param name="input">The input to be limited</param>
     /// <param name="axis">The axis of the wing surface</param>
     /// <returns>The input after being limited based on stall percentage</returns>
-    private float LimitStall(float input, WingAxis axis)
+    protected float LimitStall(float input, WingAxis axis)
     {
         if (!IsStallLimited)
         {
@@ -233,7 +233,7 @@ public class FlyByWireController : Controller
     /// Gets the fly-by-wire pitch input
     /// </summary>
     /// <returns>The pitch input</returns>
-    private float GetPitchInput()
+    protected virtual float GetPitchInput()
     {
         float smoothingStrength = _pitchInput <= 0f ? UpPitchSmoothingStrength : DownPitchSmoothingStrength;
 
