@@ -393,7 +393,7 @@ public class RuleBasedAIController : FlyByWireController
 
         float pitchAngle = GetAngle(AircraftAxis.Pitch);
         float minPitchAngle = 0f;
-        //float pitchLimitedInput = LimitBank(_initialPitchInput, pitchAngle, minPitchAngle, PitchLimiterStrength);
+        float pitchLimitedInput = LimitPitchDown(_initialPitchInput, pitchAngle, minPitchAngle);
         //float pitchCorrectedInput = Mathf.Clamp(pitchLimitedInput + GetAngleCorrection(pitchAngle, minPitchAngle, PitchCorrectionModifier, MaxPitchCorrectionInput), -1f, 1f);
 
         float gLimitedInput = LimitGForce(pitchCorrectedInput);
@@ -403,6 +403,25 @@ public class RuleBasedAIController : FlyByWireController
         _previousPitchInput = smoothedInput;
 
         return smoothedInput;
+    }
+
+    /// <summary>
+    /// Limits the pitch down input, based on a desired minimum pitch angle
+    /// </summary>
+    /// <param name="pitchInput">The pitch input to be limited</param>
+    /// <param name="pitchAngle">The pitch angle</param>
+    /// <param name="minPitchAngle">The minimum pitch angle</param>
+    /// <returns>The pitch input after being limited based on the pitch angle</returns>
+    private float LimitPitchDown(float pitchInput, float pitchAngle, float minPitchAngle)
+    {
+        float modifier = 1f;
+
+        if (pitchInput > 0f && pitchAngle < 0f)
+        {
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10(pitchAngle / minPitchAngle + 1f) * PitchLimiterStrength);
+        }
+
+        return pitchInput * modifier;
     }
 
     /// <summary>
