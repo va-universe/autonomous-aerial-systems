@@ -42,6 +42,7 @@ public class RuleBasedAIController : FlyByWireController
     public float FlapTransitionRate;
     private float _pitchTransitionInput;
     private float _flapTransitionInput;
+    private bool _isTakeoffComplete;
 
     [Header("Tracking")]
     public WaypointHandler SimulationHandler;
@@ -88,9 +89,12 @@ public class RuleBasedAIController : FlyByWireController
     {
         if (_isAIActivated)
         {
-            bool isTakeoffComplete = _altitudeAboveGround >= EndTakeoffAltitude;
+            if (!_isTakeoffComplete)
+            {
+                _isTakeoffComplete = _altitudeAboveGround >= EndTakeoffAltitude;
+            }            
 
-            if (isTakeoffComplete)
+            if (_isTakeoffComplete)
             {
                 if (_pitchTransitionInput >= 0 && _flapTransitionInput <= 0)
                 {
@@ -115,6 +119,7 @@ public class RuleBasedAIController : FlyByWireController
         }
         else if (IsGrounded)
         {
+            _isTakeoffComplete = false;
             State = AircraftState.Grounded;
         }
     }
