@@ -3015,7 +3015,7 @@ MonoBehaviour:
   TurningYawStrength: 0.87
   BankLimiterStrength: 1.9
   BankCorrectionModifier: 2.25
-  MaxCorrectionInput: 1.8
+  MaxBankCorrectionInput: 1.8
   MaxBankLimit: 180
   MinBankLimit: 30
   BankLimitAltitudeCap: 510
