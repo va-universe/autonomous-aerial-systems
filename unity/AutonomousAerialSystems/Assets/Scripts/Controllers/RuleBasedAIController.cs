@@ -30,6 +30,8 @@ public class RuleBasedAIController : FlyByWireController
     public float PitchCorrectionModifier;
     public float MaxPitchCorrectionInput;
 
+    public float MinPitchAngle;
+
     [Header("Rule-Based AI")]
     public AircraftState State;
 
@@ -392,9 +394,9 @@ public class RuleBasedAIController : FlyByWireController
         float smoothingStrength = _pitchInput <= 0f ? UpPitchSmoothingStrength : DownPitchSmoothingStrength;
 
         float pitchAngle = GetAngle(AircraftAxis.Pitch);
-        float minPitchAngle = 0f;
+        float minPitchAngle = MinPitchAngle;
         float pitchLimitedInput = LimitPitchDown(_initialPitchInput, pitchAngle, minPitchAngle);
-        //float pitchCorrectedInput = Mathf.Clamp(pitchLimitedInput + GetAngleCorrection(pitchAngle, minPitchAngle, PitchCorrectionModifier, MaxPitchCorrectionInput), -1f, 1f);
+        float pitchCorrectedInput = Mathf.Clamp(pitchLimitedInput + GetPitchCorrection(pitchAngle, minPitchAngle), -1f, 1f);
 
         float gLimitedInput = LimitGForce(pitchCorrectedInput);
         float stallLimitedInput = -LimitStall(-gLimitedInput, WingAxis.Horizontal);
@@ -422,6 +424,31 @@ public class RuleBasedAIController : FlyByWireController
         }
 
         return pitchInput * modifier;
+    }
+
+    /// <summary>
+    /// Gets the pitch up correction input
+    /// </summary>
+    /// <param name="pitchAngle">The pitch angle</param>
+    /// <param name="minPitchAngle">The minimum pitch angle</param>
+    /// <returns>The pitch up correction input addition</returns>
+    private float GetPitchCorrection(float pitchAngle, float minPitchAngle)
+    {
+        float pitchCorrectionInput = 0f;
+
+        if (pitchAngle <= minPitchAngle)
+        {
+            float pitchError = Mathf.Abs(pitchAngle - minPitchAngle);
+
+            float correctionStrength = pitchError / (180.1f - minPitchAngle);
+            float pitchCorrection = correctionStrength * PitchCorrectionModifier;
+
+            pitchCorrectionInput = Mathf.Sign(pitchAngle) * Mathf.Clamp(pitchCorrection, 0f, MaxPitchCorrectionInput);
+        }
+
+        Debug.Log($"Pitch Angle: {Math.Round(pitchAngle, 1)}° | Input Correction: {Math.Round(pitchCorrectionInput, 3)} | Initial Input: {Math.Round(_initialPitchInput, 3)} | Input: {Math.Round(_pitchInput, 3)}");
+
+        return pitchCorrectionInput;
     }
 
     /// <summary>
@@ -472,7 +499,7 @@ public class RuleBasedAIController : FlyByWireController
 
         if (bankError > 0f)
         {
-            float correctionStrength = bankError / (180f - maxBankAngle);
+            float correctionStrength = bankError / (180.1f - maxBankAngle);
             float bankCorrection = correctionStrength * BankCorrectionModifier;
 
             bankCorrectionInput = Mathf.Sign(bankAngle) * Mathf.Clamp(bankCorrection, 0f, MaxBankCorrectionInput);
@@ -497,12 +524,17 @@ public class RuleBasedAIController : FlyByWireController
         }
         else if (axis == AircraftAxis.Yaw)
         {
-            axisAngle = -transform.eulerAngles.y;
+            axisAngle = transform.eulerAngles.y;
         }
 
         if (axisAngle > 180f)
         {
             axisAngle -= 360f;
+        }
+
+        if (axis == AircraftAxis.Pitch)
+        {
+            axisAngle *= -1f;
         }
 
         return axisAngle;

@@ -2855,8 +2855,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaypointHandler
   WaypointPrefab: {fileID: 6601961342051391596, guid: f48b6e3a2c4e0e64aac0f594a872bbda, type: 3}
   CircleRadius: 2000
-  MinHeight: 650
-  MaxHeight: 1100
+  MinHeight: 50
+  MaxHeight: 200
   CurrentWaypoint: {fileID: 0}
 --- !u!1 &1267573792
 GameObject:

@@ -3014,11 +3014,15 @@ MonoBehaviour:
   InputDampingModifier: 0.45
   TurningYawStrength: 0.87
   BankLimiterStrength: 1.9
-  BankCorrectionModifier: 2.25
-  MaxBankCorrectionInput: 1.8
+  BankCorrectionModifier: 3.4
+  MaxBankCorrectionInput: 1.9
   MaxBankLimit: 180
-  MinBankLimit: 30
+  MinBankLimit: 20
   BankLimitAltitudeCap: 510
+  PitchLimiterStrength: 2.5
+  PitchCorrectionModifier: 10
+  MaxPitchCorrectionInput: 3
+  MinPitchAngle: -10
   State: 0
   EndTakeoffAltitude: 90
   PitchDownInput: 0.5
