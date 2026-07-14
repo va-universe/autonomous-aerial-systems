@@ -25,6 +25,10 @@ public class RuleBasedAIController : FlyByWireController
     public float MinBankLimit;
     public float BankLimitAltitudeCap;
 
+    [Header("Pitch Limiter")]
+    public float PitchLimiterStrength;
+    public float PitchCorrectionModifier;
+    public float MaxPitchCorrectionInput;
 
     [Header("Rule-Based AI")]
     public AircraftState State;
@@ -369,9 +373,9 @@ public class RuleBasedAIController : FlyByWireController
     {
         float bankAngle = GetAngle(AircraftAxis.Roll);
         float maxBankAngle = GetMaxBankAngle();
+        float bankLimitedInput = LimitBank(_initialRollInput, bankAngle, maxBankAngle);
+        float bankCorrectedInput = Mathf.Clamp(bankLimitedInput + GetBankCorrection(bankAngle, maxBankAngle), -1f, 1f);
 
-        float bankLimitedInput = LimitAngle(_initialRollInput, bankAngle, maxBankAngle, BankLimiterStrength);
-        float bankCorrectedInput = Mathf.Clamp(bankLimitedInput + GetAngleCorrection(bankAngle, maxBankAngle, BankCorrectionModifier, MaxBankCorrectionInput), -1f, 1f);
         float smoothedInput = Smoother(bankCorrectedInput, _previousRollInput, RollSmoothingStrength);
 
         _previousRollInput = smoothedInput;
@@ -386,9 +390,13 @@ public class RuleBasedAIController : FlyByWireController
     protected override float GetPitchInput()
     {
         float smoothingStrength = _pitchInput <= 0f ? UpPitchSmoothingStrength : DownPitchSmoothingStrength;
-        float pitchAngle = GetAngle(AircraftAxis.Pitch);
 
-        float gLimitedInput = LimitGForce(_initialPitchInput);
+        float pitchAngle = GetAngle(AircraftAxis.Pitch);
+        float minPitchAngle = 0f;
+        //float pitchLimitedInput = LimitBank(_initialPitchInput, pitchAngle, minPitchAngle, PitchLimiterStrength);
+        //float pitchCorrectedInput = Mathf.Clamp(pitchLimitedInput + GetAngleCorrection(pitchAngle, minPitchAngle, PitchCorrectionModifier, MaxPitchCorrectionInput), -1f, 1f);
+
+        float gLimitedInput = LimitGForce(pitchCorrectedInput);
         float stallLimitedInput = -LimitStall(-gLimitedInput, WingAxis.Horizontal);
         float smoothedInput = Smoother(stallLimitedInput, _previousPitchInput, smoothingStrength);
 
@@ -410,45 +418,45 @@ public class RuleBasedAIController : FlyByWireController
     }
 
     /// <summary>
-    /// Limits the input, based on a desired maximum angle
+    /// Limits the roll input, based on a desired maximum banking angle
     /// </summary>
-    /// <param name="input">The input to be limited</param>
-    /// <param name="angle">The axis angle</param>
-    /// <param name="maxAngle">The maximum axis angle</param>
-    /// <returns>The input after being limited based on the specific axis angle</returns>
-    private float LimitAngle(float input, float angle, float maxAngle, float strength)
+    /// <param name="rollInput">The roll input to be limited</param>
+    /// <param name="bankAngle">The bank angle</param>
+    /// <param name="maxBankAngle">The maximum bank angle</param>
+    /// <returns>The roll input after being limited based on the bank angle</returns>
+    private float LimitBank(float rollInput, float bankAngle, float maxBankAngle)
     {
         float modifier = 1f;
 
-        if (input > 0f && angle > 0f)
+        if (rollInput > 0f && bankAngle > 0f)
         {
-            modifier = 1f - Mathf.Clamp01(Mathf.Log10(angle / maxAngle + 1f) * strength);
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10(bankAngle / maxBankAngle + 1f) * BankLimiterStrength);
         }
-        else if (input < 0f && angle < 0f)
+        else if (rollInput < 0f && bankAngle < 0f)
         {
-            modifier = 1f - Mathf.Clamp01(Mathf.Log10(-angle / maxAngle + 1f) * strength);
+            modifier = 1f - Mathf.Clamp01(Mathf.Log10(-bankAngle / maxBankAngle + 1f) * BankLimiterStrength);
         }
 
-        return input * modifier;
+        return rollInput * modifier;
     }
 
     /// <summary>
-    /// Gets the angle correction input
+    /// Gets the bank correction input
     /// </summary>
-    /// <param name="angle">The axis angle</param>
-    /// <param name="maxAngle">The maximum axis angle</param>
-    /// <returns>The axis correction input addition</returns>
-    private float GetAngleCorrection(float angle, float maxAngle, float correctionModifier, float maxCorrectionInput)
+    /// <param name="bankAngle">The bank angle</param>
+    /// <param name="maxBankAngle">The maximum bank angle</param>
+    /// <returns>The bank correction input addition</returns>
+    private float GetBankCorrection(float bankAngle, float maxBankAngle)
     {
-        float bankError = Mathf.Abs(angle) - maxAngle;
+        float bankError = Mathf.Abs(bankAngle) - maxBankAngle;
         float bankCorrectionInput = 0f;
 
         if (bankError > 0f)
         {
-            float correctionStrength = bankError / (180f - maxAngle);
-            float bankCorrection = correctionStrength * correctionModifier;
+            float correctionStrength = bankError / (180f - maxBankAngle);
+            float bankCorrection = correctionStrength * BankCorrectionModifier;
 
-            bankCorrectionInput = Mathf.Sign(angle) * Mathf.Clamp(bankCorrection, 0f, maxCorrectionInput);
+            bankCorrectionInput = Mathf.Sign(bankAngle) * Mathf.Clamp(bankCorrection, 0f, MaxBankCorrectionInput);
         }
 
         //Debug.Log($"Bank Angle: {Math.Round(angle, 1)}° | Input Correction: {Math.Round(bankCorrectionInput, 3)} | Initial Input: {Math.Round(_initialRollInput, 3)} | Input: {Math.Round(_rollInput, 3)}");
