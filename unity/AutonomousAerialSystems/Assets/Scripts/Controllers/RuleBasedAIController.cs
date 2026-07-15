@@ -64,6 +64,7 @@ public class RuleBasedAIController : FlyByWireController
     public bool IsGrounded;
     public float GroundSensorRange;
     private float _altitudeAboveGround;
+    private float _upcomingAltitude;
 
     protected override void Start()
     {
@@ -138,6 +139,7 @@ public class RuleBasedAIController : FlyByWireController
     protected virtual void RunSensors()
     {
         _altitudeAboveGround = GetAltitudeAboveGround();
+        _upcomingAltitude = GetUpcomingAltitude();
         IsGrounded = _altitudeAboveGround < 1.5f;
     }
 
@@ -157,6 +159,30 @@ public class RuleBasedAIController : FlyByWireController
                 altitudeAboveGround = hit.distance;
             }
         }
+
+        return altitudeAboveGround;
+    }
+
+    /// <summary>
+    /// Gets the upcoming altitude above ground, seen from a 45 degree down and forwards angled sensor
+    /// </summary>
+    /// <returns>The upcoming altitude above ground</returns>
+    private float GetUpcomingAltitude()
+    {
+        float distanceToGround = Mathf.Infinity;
+        Vector3 direction = (Vector3.down + Vector3.forward).normalized; //45 degrees forward and down
+
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, GroundSensorRange);
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform.CompareTag("Ground") && hit.distance < distanceToGround)
+            {
+                distanceToGround = hit.distance;
+            }
+        }
+
+        float cosine = 0.70710678118f; //cos(45)
+        float altitudeAboveGround = cosine * distanceToGround;
 
         return altitudeAboveGround;
     }
