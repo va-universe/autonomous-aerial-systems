@@ -3001,10 +3001,10 @@ MonoBehaviour:
   MinOverrideGForce: -5
   MaxLimiterStrength: 1.7
   MinLimiterStrength: 1.9
-  MaxComfortStallPercentage: 60
-  MaxComfortAngleOfAttack: 35
-  MaxOverrideStallPercentage: 68
-  MaxOverrideAngleOfAttack: 41
+  MaxComfortStallPercentage: 56
+  MaxComfortAngleOfAttack: 32
+  MaxOverrideStallPercentage: 62
+  MaxOverrideAngleOfAttack: 37
   UpPitchSmoothingStrength: 1.6
   DownPitchSmoothingStrength: 0.8
   RollSmoothingStrength: 3.55
@@ -3013,19 +3013,22 @@ MonoBehaviour:
   YawDampingStrength: 7.8
   InputDampingModifier: 0.45
   TurningYawStrength: 0.87
-  BankLimiterStrength: 1.9
-  BankCorrectionModifier: 3.4
-  MaxBankCorrectionInput: 1.9
+  BankLimiterStrength: 2.1
+  BankCorrectionModifier: 3.7
+  MaxBankCorrectionInput: 1.95
   MaxBankLimit: 180
   MinBankLimit: 20
-  BankLimitEndAltitude: 510
-  PitchLimiterStrength: 2.5
-  PitchCorrectionModifier: 10
+  BankLimitEndAltitude: 550
+  PitchLimiterStrength: 2.7
+  PitchCorrectionModifier: 11
   MaxPitchCorrectionInput: 3
   MaxPitchLimit: 30
   MinPitchLimit: -180
-  PitchLimitStartAltitude: 100
-  PitchLimitEndAltitude: 400
+  PitchLimitStartAltitude: 150
+  PitchLimitEndAltitude: 500
+  FlapIncreaseStartAltitude: 150
+  FlapIncreaseEndAltitude: 450
+  MaxFlapInputIncrease: 2
   State: 0
   EndTakeoffAltitude: 90
   PitchDownInput: 0.5

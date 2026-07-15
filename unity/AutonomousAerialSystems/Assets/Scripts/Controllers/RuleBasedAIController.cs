@@ -35,6 +35,11 @@ public class RuleBasedAIController : FlyByWireController
     public float PitchLimitStartAltitude;
     public float PitchLimitEndAltitude;
 
+    [Header("Flap Increase")]
+    public float FlapIncreaseStartAltitude;
+    public float FlapIncreaseEndAltitude;
+    public float MaxFlapInputIncrease;
+
     [Header("Rule-Based AI")]
     public AircraftState State;
 
@@ -294,6 +299,7 @@ public class RuleBasedAIController : FlyByWireController
             Vector3 direction = localWaypoint.normalized;
 
             requestedInput = Mathf.Clamp(direction.y * FlapTrackingStrength, -1f, 1f);
+            requestedInput = Mathf.Clamp(requestedInput + GetGroundEvasionFlap(), -1f, 1f);
         }
 
         return requestedInput;
@@ -413,6 +419,18 @@ public class RuleBasedAIController : FlyByWireController
         _previousPitchInput = smoothedInput;
 
         return smoothedInput;
+    }
+
+    /// <summary>
+    /// Gets the flap increase from being close to the ground
+    /// </summary>
+    /// <returns>The flap increase input addition</returns>
+    private float GetGroundEvasionFlap()
+    {
+        float strength = 1f - Mathf.Clamp01((_altitudeAboveGround - FlapIncreaseStartAltitude) / (FlapIncreaseEndAltitude - FlapIncreaseStartAltitude));
+        float flapIncrease = strength * MaxFlapInputIncrease;
+
+        return flapIncrease;
     }
 
     /// <summary>
