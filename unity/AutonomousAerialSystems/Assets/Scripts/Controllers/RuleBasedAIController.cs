@@ -468,7 +468,8 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The flap increase input addition</returns>
     private float GetGroundEvasionFlap()
     {
-        float strength = 1f - Mathf.Clamp01((_altitudeAboveGround - FlapIncreaseStartAltitude) / (FlapIncreaseEndAltitude - FlapIncreaseStartAltitude));
+        float altitude = Mathf.Min(_altitudeAboveGround, _upcomingAltitude);
+        float strength = 1f - Mathf.Clamp01((altitude - FlapIncreaseStartAltitude) / (FlapIncreaseEndAltitude - FlapIncreaseStartAltitude));
         float flapIncrease = strength * MaxFlapInputIncrease;
 
         return flapIncrease;
@@ -525,7 +526,8 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The minimum pitch angle</returns>
     public float GetMinPitchAngle()
     {
-        float strength = 1f - Mathf.Clamp01((_altitudeAboveGround - PitchLimitStartAltitude) / (PitchLimitEndAltitude - PitchLimitStartAltitude));
+        float altitude = Mathf.Min(_altitudeAboveGround, _upcomingAltitude);
+        float strength = 1f - Mathf.Clamp01((altitude - PitchLimitStartAltitude) / (PitchLimitEndAltitude - PitchLimitStartAltitude));
         float minPitchAngle = MinPitchLimit - strength * (MinPitchLimit - MaxPitchLimit);
 
         return minPitchAngle;
@@ -537,7 +539,8 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The maximum bank angle</returns>
     public float GetMaxBankAngle()
     {
-        float strength = 1f - Mathf.Clamp01(_altitudeAboveGround / BankLimitEndAltitude);
+        float altitude = Mathf.Min(_altitudeAboveGround, _upcomingAltitude);
+        float strength = 1f - Mathf.Clamp01(altitude / BankLimitEndAltitude);
         float maxBankAngle = MaxBankLimit - strength * (MaxBankLimit - MinBankLimit);
 
         return maxBankAngle;
