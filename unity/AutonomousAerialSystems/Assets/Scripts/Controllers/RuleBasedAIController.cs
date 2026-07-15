@@ -7,10 +7,12 @@ using UnityEngine;
 /// </summary>
 public class RuleBasedAIController : FlyByWireController
 {
-    #region Inputs & UI display texts
-
     private bool _isAIActivated;
+
+    #region UI display texts
+    
     private TextMeshProUGUI _altitudeGroundText;
+    private TextMeshProUGUI _upcomingAltitudeText;
     private TextMeshProUGUI _autonomousText;
     private TextMeshProUGUI _stateText;
 
@@ -64,6 +66,7 @@ public class RuleBasedAIController : FlyByWireController
     public bool IsGrounded;
     public float GroundSensorRange;
     private float _altitudeAboveGround;
+    private float _upcomingAltitude;
 
     protected override void Start()
     {
@@ -138,6 +141,7 @@ public class RuleBasedAIController : FlyByWireController
     protected virtual void RunSensors()
     {
         _altitudeAboveGround = GetAltitudeAboveGround();
+        _upcomingAltitude = GetUpcomingAltitude();
         IsGrounded = _altitudeAboveGround < 1.5f;
     }
 
@@ -157,6 +161,30 @@ public class RuleBasedAIController : FlyByWireController
                 altitudeAboveGround = hit.distance;
             }
         }
+
+        return altitudeAboveGround;
+    }
+
+    /// <summary>
+    /// Gets the upcoming altitude above ground, seen from a 45 degree down and forwards angled sensor
+    /// </summary>
+    /// <returns>The upcoming altitude above ground</returns>
+    private float GetUpcomingAltitude()
+    {
+        float distanceToGround = Mathf.Infinity;
+        Vector3 direction = (Vector3.down + Vector3.forward).normalized; //45 degrees forward and down
+
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, GroundSensorRange);
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform.CompareTag("Ground") && hit.distance < distanceToGround)
+            {
+                distanceToGround = hit.distance;
+            }
+        }
+
+        float cosine = 0.70710678118f; //cos(45)
+        float altitudeAboveGround = cosine * distanceToGround;
 
         return altitudeAboveGround;
     }
@@ -349,6 +377,18 @@ public class RuleBasedAIController : FlyByWireController
                 _altitudeGroundText.text = $"Altitude Above Ground: N/A";
             }
         }
+        if (_upcomingAltitudeText != null)
+        {
+            if (_upcomingAltitude < Mathf.Infinity)
+            {
+                float altitude = (float)Math.Round(_upcomingAltitude, 1);
+                _upcomingAltitudeText.text = $"Upcoming Altitude (AAG): {altitude} m";
+            }
+            else
+            {
+                _upcomingAltitudeText.text = $"Upcoming Altitude (AAG): N/A";
+            }
+        }
 
         if (_autonomousText != null && _isAIActivated)
         {
@@ -376,6 +416,7 @@ public class RuleBasedAIController : FlyByWireController
         {
             Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
             _altitudeGroundText = aircraftPanel.transform.Find("AltitudeGroundText").GetComponent<TextMeshProUGUI>();
+            _upcomingAltitudeText = aircraftPanel.transform.Find("UpcomingAltitudeText").GetComponent<TextMeshProUGUI>();
             _autonomousText = aircraftPanel.transform.Find("AutonomousText").GetComponent<TextMeshProUGUI>();
             _stateText = aircraftPanel.transform.Find("StateText").GetComponent<TextMeshProUGUI>();
         }
@@ -427,7 +468,8 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The flap increase input addition</returns>
     private float GetGroundEvasionFlap()
     {
-        float strength = 1f - Mathf.Clamp01((_altitudeAboveGround - FlapIncreaseStartAltitude) / (FlapIncreaseEndAltitude - FlapIncreaseStartAltitude));
+        float altitude = Mathf.Min(_altitudeAboveGround, _upcomingAltitude);
+        float strength = 1f - Mathf.Clamp01((altitude - FlapIncreaseStartAltitude) / (FlapIncreaseEndAltitude - FlapIncreaseStartAltitude));
         float flapIncrease = strength * MaxFlapInputIncrease;
 
         return flapIncrease;
@@ -484,7 +526,8 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The minimum pitch angle</returns>
     public float GetMinPitchAngle()
     {
-        float strength = 1f - Mathf.Clamp01((_altitudeAboveGround - PitchLimitStartAltitude) / (PitchLimitEndAltitude - PitchLimitStartAltitude));
+        float altitude = Mathf.Min(_altitudeAboveGround, _upcomingAltitude);
+        float strength = 1f - Mathf.Clamp01((altitude - PitchLimitStartAltitude) / (PitchLimitEndAltitude - PitchLimitStartAltitude));
         float minPitchAngle = MinPitchLimit - strength * (MinPitchLimit - MaxPitchLimit);
 
         return minPitchAngle;
@@ -496,7 +539,8 @@ public class RuleBasedAIController : FlyByWireController
     /// <returns>The maximum bank angle</returns>
     public float GetMaxBankAngle()
     {
-        float strength = 1f - Mathf.Clamp01(_altitudeAboveGround / BankLimitEndAltitude);
+        float altitude = Mathf.Min(_altitudeAboveGround, _upcomingAltitude);
+        float strength = 1f - Mathf.Clamp01(altitude / BankLimitEndAltitude);
         float maxBankAngle = MaxBankLimit - strength * (MaxBankLimit - MinBankLimit);
 
         return maxBankAngle;
