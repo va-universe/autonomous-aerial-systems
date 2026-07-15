@@ -3018,11 +3018,14 @@ MonoBehaviour:
   MaxBankCorrectionInput: 1.9
   MaxBankLimit: 180
   MinBankLimit: 20
-  BankLimitAltitudeCap: 510
+  BankLimitEndAltitude: 510
   PitchLimiterStrength: 2.5
   PitchCorrectionModifier: 10
   MaxPitchCorrectionInput: 3
-  MinPitchAngle: -10
+  MaxPitchLimit: 30
+  MinPitchLimit: -180
+  PitchLimitStartAltitude: 100
+  PitchLimitEndAltitude: 400
   State: 0
   EndTakeoffAltitude: 90
   PitchDownInput: 0.5

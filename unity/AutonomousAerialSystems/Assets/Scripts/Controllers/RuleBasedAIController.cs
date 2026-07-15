@@ -23,14 +23,17 @@ public class RuleBasedAIController : FlyByWireController
 
     public float MaxBankLimit;
     public float MinBankLimit;
-    public float BankLimitAltitudeCap;
+    public float BankLimitEndAltitude;
 
     [Header("Pitch Limiter")]
     public float PitchLimiterStrength;
     public float PitchCorrectionModifier;
     public float MaxPitchCorrectionInput;
 
-    public float MinPitchAngle;
+    public float MaxPitchLimit;
+    public float MinPitchLimit;
+    public float PitchLimitStartAltitude;
+    public float PitchLimitEndAltitude;
 
     [Header("Rule-Based AI")]
     public AircraftState State;
@@ -399,7 +402,7 @@ public class RuleBasedAIController : FlyByWireController
         float smoothingStrength = _pitchInput <= 0f ? UpPitchSmoothingStrength : DownPitchSmoothingStrength;
 
         float pitchAngle = GetAngle(AircraftAxis.Pitch);
-        float minPitchAngle = MinPitchAngle;
+        float minPitchAngle = GetMinPitchAngle();
         float pitchLimitedInput = LimitPitchDown(_initialPitchInput, pitchAngle, minPitchAngle);
         float pitchCorrectedInput = Mathf.Clamp(pitchLimitedInput + GetPitchCorrection(pitchAngle, minPitchAngle), -1f, 1f);
 
@@ -448,21 +451,34 @@ public class RuleBasedAIController : FlyByWireController
             float correctionStrength = pitchError / (180.1f - minPitchAngle);
             float pitchCorrection = correctionStrength * PitchCorrectionModifier;
 
-            pitchCorrectionInput = Mathf.Sign(pitchAngle) * Mathf.Clamp(pitchCorrection, 0f, MaxPitchCorrectionInput);
+            pitchCorrectionInput = -Mathf.Clamp(pitchCorrection, 0f, MaxPitchCorrectionInput);
         }
 
-        Debug.Log($"Pitch Angle: {Math.Round(pitchAngle, 1)}° | Input Correction: {Math.Round(pitchCorrectionInput, 3)} | Initial Input: {Math.Round(_initialPitchInput, 3)} | Input: {Math.Round(_pitchInput, 3)}");
+        Debug.Log($"Pitch Angle: {Math.Round(pitchAngle, 1)}° | Min Pitch Angle: {Math.Round(minPitchAngle, 1)}° | Input Correction: {Math.Round(pitchCorrectionInput, 3)} | Initial Input: {Math.Round(_initialPitchInput, 3)} | Input: {Math.Round(_pitchInput, 3)}");
 
         return pitchCorrectionInput;
+    }
+
+
+    /// <summary>
+    /// Gets the minimum pitch angle, based on altitude above ground
+    /// </summary>
+    /// <returns>The minimum pitch angle</returns>
+    public float GetMinPitchAngle()
+    {
+        float strength = 1f - Mathf.Clamp01((_altitudeAboveGround - PitchLimitStartAltitude) / (PitchLimitEndAltitude - PitchLimitStartAltitude));
+        float minPitchAngle = MinPitchLimit - strength * (MinPitchLimit - MaxPitchLimit);
+
+        return minPitchAngle;
     }
 
     /// <summary>
     /// Gets the maximum bank/roll angle, based on altitude above ground
     /// </summary>
-    /// <returns>The max bank angle</returns>
+    /// <returns>The maximum bank angle</returns>
     public float GetMaxBankAngle()
     {
-        float strength = 1f - Mathf.Clamp01(_altitudeAboveGround / BankLimitAltitudeCap);
+        float strength = 1f - Mathf.Clamp01(_altitudeAboveGround / BankLimitEndAltitude);
         float maxBankAngle = MaxBankLimit - strength * (MaxBankLimit - MinBankLimit);
 
         return maxBankAngle;
