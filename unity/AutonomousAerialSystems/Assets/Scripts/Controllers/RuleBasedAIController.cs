@@ -7,10 +7,12 @@ using UnityEngine;
 /// </summary>
 public class RuleBasedAIController : FlyByWireController
 {
-    #region Inputs & UI display texts
-
     private bool _isAIActivated;
+
+    #region UI display texts
+    
     private TextMeshProUGUI _altitudeGroundText;
+    private TextMeshProUGUI _upcomingAltitudeText;
     private TextMeshProUGUI _autonomousText;
     private TextMeshProUGUI _stateText;
 
@@ -375,6 +377,18 @@ public class RuleBasedAIController : FlyByWireController
                 _altitudeGroundText.text = $"Altitude Above Ground: N/A";
             }
         }
+        if (_upcomingAltitudeText != null)
+        {
+            if (_upcomingAltitude < Mathf.Infinity)
+            {
+                float altitude = (float)Math.Round(_upcomingAltitude, 1);
+                _upcomingAltitudeText.text = $"Upcoming Altitude (AAG): {altitude} m";
+            }
+            else
+            {
+                _upcomingAltitudeText.text = $"Upcoming Altitude (AAG): N/A";
+            }
+        }
 
         if (_autonomousText != null && _isAIActivated)
         {
@@ -402,6 +416,7 @@ public class RuleBasedAIController : FlyByWireController
         {
             Transform aircraftPanel = UICanvas.transform.Find("Aircraft Panel").transform;
             _altitudeGroundText = aircraftPanel.transform.Find("AltitudeGroundText").GetComponent<TextMeshProUGUI>();
+            _upcomingAltitudeText = aircraftPanel.transform.Find("UpcomingAltitudeText").GetComponent<TextMeshProUGUI>();
             _autonomousText = aircraftPanel.transform.Find("AutonomousText").GetComponent<TextMeshProUGUI>();
             _stateText = aircraftPanel.transform.Find("StateText").GetComponent<TextMeshProUGUI>();
         }
