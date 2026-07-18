@@ -256,10 +256,18 @@ public class RuleBasedAIController : FlyByWireController
 
         if (State == AircraftState.Tracking)
         {
+            //Waypoint Tracking
             Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position + new Vector3(0f, TrackingOffset, 0f));
             Vector3 direction = localWaypoint.normalized;
+            float trackingInput = Mathf.Clamp(direction.x * RollTrackingStregnth, -1f, 1f);
 
-            requestedInput = Mathf.Clamp(direction.x * RollTrackingStregnth, -1f, 1f);
+            //Bank Limiting & Correction
+            float bankAngle = GetAngle(AircraftAxis.Roll);
+            float maxBankAngle = GetMaxBankAngle();
+            float bankLimitedInput = LimitBank(trackingInput, bankAngle, maxBankAngle);
+            float bankCorrectedInput = Mathf.Clamp(bankLimitedInput + GetBankCorrection(bankAngle, maxBankAngle), -1f, 1f);
+
+            requestedInput = bankCorrectedInput;
         }
 
         return requestedInput;
@@ -285,10 +293,18 @@ public class RuleBasedAIController : FlyByWireController
         }
         else if (State == AircraftState.Tracking)
         {
+            //Waypoint Tracking
             Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position + new Vector3(0f, TrackingOffset, 0f));
             Vector3 direction = localWaypoint.normalized;
+            float trackingInput = Mathf.Clamp(direction.y * -PitchTrackingStrength, -1f, 1f);
 
-            requestedInput = Mathf.Clamp(direction.y * -PitchTrackingStrength, -1f, 1f);
+            //Pitch Limiting & Correction
+            float pitchAngle = GetAngle(AircraftAxis.Pitch);
+            float minPitchAngle = GetMinPitchAngle();
+            float pitchLimitedInput = LimitPitchDown(trackingInput, pitchAngle, minPitchAngle);
+            float pitchCorrectedInput = Mathf.Clamp(pitchLimitedInput + GetPitchCorrection(pitchAngle, minPitchAngle), -1f, 1f);
+
+            requestedInput = pitchCorrectedInput;
         }
 
         return requestedInput;
@@ -323,11 +339,13 @@ public class RuleBasedAIController : FlyByWireController
         }
         else if (State == AircraftState.Tracking)
         {
+            //Waypoint Tracking
             Vector3 localWaypoint = transform.InverseTransformPoint(_currentWaypoint.transform.position + new Vector3(0f, TrackingOffset, 0f));
             Vector3 direction = localWaypoint.normalized;
+            float trackingInput = Mathf.Clamp(direction.y * FlapTrackingStrength, -1f, 1f);
 
-            requestedInput = Mathf.Clamp(direction.y * FlapTrackingStrength, -1f, 1f);
-            requestedInput = Mathf.Clamp(requestedInput + GetGroundEvasionFlap(), -1f, 1f);
+            //Ground Evasion Flap
+            requestedInput = Mathf.Clamp(trackingInput + GetGroundEvasionFlap(), -1f, 1f);
         }
 
         return requestedInput;
@@ -420,46 +438,6 @@ public class RuleBasedAIController : FlyByWireController
             _autonomousText = aircraftPanel.transform.Find("AutonomousText").GetComponent<TextMeshProUGUI>();
             _stateText = aircraftPanel.transform.Find("StateText").GetComponent<TextMeshProUGUI>();
         }
-    }
-
-    /// <summary>
-    /// Gets the roll input for the fly-by-wire system, with the bank limiter
-    /// </summary>
-    /// <returns>The roll input with bank limiting</returns>
-    protected override float GetRollInput()
-    {
-        float bankAngle = GetAngle(AircraftAxis.Roll);
-        float maxBankAngle = GetMaxBankAngle();
-        float bankLimitedInput = LimitBank(_initialRollInput, bankAngle, maxBankAngle);
-        float bankCorrectedInput = Mathf.Clamp(bankLimitedInput + GetBankCorrection(bankAngle, maxBankAngle), -1f, 1f);
-
-        float smoothedInput = Smoother(bankCorrectedInput, _previousRollInput, RollSmoothingStrength);
-
-        _previousRollInput = smoothedInput;
-
-        return smoothedInput;
-    }
-
-    /// <summary>
-    /// Gets the pitch input for the fly-by-wire system, with the pitch limiter
-    /// </summary>
-    /// <returns>The pitch input with pitch limiting</returns>
-    protected override float GetPitchInput()
-    {
-        float smoothingStrength = _pitchInput <= 0f ? UpPitchSmoothingStrength : DownPitchSmoothingStrength;
-
-        float pitchAngle = GetAngle(AircraftAxis.Pitch);
-        float minPitchAngle = GetMinPitchAngle();
-        float pitchLimitedInput = LimitPitchDown(_initialPitchInput, pitchAngle, minPitchAngle);
-        float pitchCorrectedInput = Mathf.Clamp(pitchLimitedInput + GetPitchCorrection(pitchAngle, minPitchAngle), -1f, 1f);
-
-        float gLimitedInput = LimitGForce(pitchCorrectedInput);
-        float stallLimitedInput = -LimitStall(-gLimitedInput, WingAxis.Horizontal);
-        float smoothedInput = Smoother(stallLimitedInput, _previousPitchInput, smoothingStrength);
-
-        _previousPitchInput = smoothedInput;
-
-        return smoothedInput;
     }
 
     /// <summary>

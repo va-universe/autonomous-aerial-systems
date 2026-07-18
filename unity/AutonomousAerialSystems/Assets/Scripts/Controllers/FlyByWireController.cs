@@ -233,7 +233,7 @@ public class FlyByWireController : Controller
     /// Gets the fly-by-wire pitch input
     /// </summary>
     /// <returns>The pitch input</returns>
-    protected virtual float GetPitchInput()
+    private float GetPitchInput()
     {
         float smoothingStrength = _pitchInput <= 0f ? UpPitchSmoothingStrength : DownPitchSmoothingStrength;
 
@@ -250,7 +250,7 @@ public class FlyByWireController : Controller
     /// Gets the fly-by-wire roll input
     /// </summary>
     /// <returns>The roll input</returns>
-    protected virtual float GetRollInput()
+    private float GetRollInput()
     {
         float smoothedInput = Smoother(_initialRollInput, _previousRollInput, RollSmoothingStrength);
 
